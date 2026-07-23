@@ -1,0 +1,19 @@
+/* 
+* <576:     xs
+* 576-768:  sm
+* 768-992:  md
+* 992-1200: lg
+* 1200 -1400: xl
+* >= 1400:  xxl
+*/
+@media (max-width: 575px){
+
+}
+
+@media (min-width: 576px) and (max-width: 767px){
+
+}
+
+@media (max-width: 767px){ 
+
+}
