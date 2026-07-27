@@ -7,13 +7,335 @@
 * >= 1400:  xxl
 */
 @media (max-width: 575px){
+       
 
 }
 
-@media (min-width: 576px) and (max-width: 767px){
+
+@media (max-width: 768px){ 
+    .header-wrapper{
+        width: 100%;
+        padding: 10px;
+    }
+    .titles{
+        gap: 5px;
+    }
+
+    .title{
+        font-size: clamp(13px, 3.5vw, 1.5em);
+        font-weight: 600;
+    }
+
+    .title_line_lft, .title_line_rgt{
+        width: clamp(5px, 1.5vw, 2em);
+        height: 2em;
+    }
+
+    .title_line_lft::before {
+        display: none;
+    }
+    .title_line_rgt::before{
+        display: none;
+    }
+
+    .logos{
+        gap:0.5em;
+        height: clamp(18px, 5.5vw, 3em)
+    }
+
+    /* section 2 */
+    .section2_title > h2 {
+        font-size: clamp(10px, 2.5vw, 3em);
+    }
+
+    .section2-box{
+        height: 100%;
+    }
+
+    .sec2-line-top > img, .sec2-line-bottom > img{
+        width: 2vw;
+        height: 2vw;
+    }
+
+    .sec2-line-top::before, .sec2-line-top::after, .sec2-line-bottom::before,.sec2-line-bottom::after {
+        width: 55%;
+    }
+
+    .section2-contents{
+        background-image: url("../img/box-m.webp");
+        aspect-ratio: 827 / 971;
+        width: 75%;
+        left: 50%;
+        transform: translateX(-50%);
+        grid-template-columns: 1fr;
+        background-position: 1.5em 0;
+        align-items: center;
+        padding-top: 6%;
+        padding-bottom: 6%;
+    }
+    .sec2-time_title{
+       top:0;
+    }
+
+    .sec2-time_title{
+        aspect-ratio: 217 / 49;
+        width: 40%;
+        height: auto;
+    }
+    .sec2-time_title2{
+        aspect-ratio: 217 / 49;
+        width: 60%;
+        height: auto;        
+        top: -0.7em;
+    }
+
+    .sec2-time_title > span, .sec2-time_title2 > span{
+        font-size: clamp(12px, 2.4vw, 2.2em);
+    }
+
+    .sec2_info {   
+        padding-top: clamp(30px, 4vw, 50px);
+    }
+
+    .sec2_info > h4 {       
+        font-size: clamp(14px, 4vw, 30px);
+        margin-bottom: clamp(10px, 2.2vw, 40px);
+    }
+
+    .sec2_info > h5 {
+        font-size: clamp(12px, 2.5vw, 22px);
+    }
+
+    .sec2_info2{
+        padding: 3em 1em 1em 1em;
+    }
+    
+    .sec2_info2 > li > p {
+        font-size: clamp(10px, 2vw, 2em);
+    }
+
+    .btn-cta{
+        width: 55%;
+        bottom: -2em;
+    }
+
+    .btn-cta_link > strong {
+        font-size: clamp(14px, 3.5vw, 3.6em);
+    }
+    .btn-cta_link > span {
+        font-size: clamp(10px, 3vw, 2.5em);
+    }
 
 }
 
-@media (max-width: 767px){ 
+@media (max-width: 576px){
+    .section2_title {      
+        padding: 2em 0;
+    }
+    .section2_title > h2 {
+        font-size: clamp(10px, 3vw, 3em);
+        line-height: 1.5;
+    }
 
+    .sec2-line-top::before, .sec2-line-bottom::before {      
+        left: calc(50% + 2vw);       
+    }
+
+    .sec2-line-top::after,.sec2-line-bottom::after  {      
+        right: calc(50% + 2vw);        
+    }   
+
+    .section2_wrapper{
+        height: 95%;
+        gap:1em;
+    }
+
+    .section2-contents{
+        width: 85%;
+        padding-top: 6%;
+        padding-bottom: 6%;
+        background-position: 0.7em 0;
+    }
+   
+
+    .sec2-time_title2 {     
+        top: -9%;
+        width: 70%;
+    }
+
+    .sec2_info2 > li > p {
+        font-size: clamp(8px, 2.5vw, 12px);
+    }
+
+    .sec2_info {
+        width:90%;
+        padding-top: clamp(15px, 5.5vw, 30px);
+    }
+
+    .sec2_info > h4 {       
+        margin-bottom: clamp(8px, 2.5vw, 16px);
+    }
+
+    .sec2_info > h5 {
+        font-size: clamp(10px, 3vw, 14px);
+    }
+
+    .sec2_info2 > li { 
+        margin-bottom: 0.5em;
+    }
+
+    .sec2_info > p {
+        font-size: clamp(8px, 2.5vw, 12px);        
+    }
+
+    .sec2_info2 {
+        width:90%;
+    }
+
+    .sec2_info2 {
+        padding: 2em 5px 5px 5px;
+        padding-top: clamp(20px, 6vw, 30px);
+    }
+
+    .sec2_info2 > li{
+        padding-left: clamp(15px, 5vw, 20px);
+    }
+
+    .btn-cta_link > strong {
+        font-size: clamp(12px, 3.5vw, 3.6em);
+    }
+    
+    .btn-cta {
+        width: 60%;
+        bottom: -2em;
+    }
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1199px){
+    html{
+        font-size: 8px;
+    }
+
+    .header-wrapper{
+        width: 90%;
+        padding: 1em 0;
+    }
+    .section2-contents{
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-position: 0.65em 0;
+        height: 40em;
+    }
+
+    .section2_title{
+        margin-bottom: 0;
+    }
+
+    .section2_title > h2{
+        font-size: clamp(12px, 1.6vw, 2em);
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 991px){
+    .section2_title{
+        padding: 2.5em 0;
+        margin-bottom: clamp(20px, 2vw, 2.5em);
+    }
+
+    .section2_wrapper{
+        height: 90%;
+    }
+
+    .section2-contents {
+        width: 85%;
+        left: 50%;
+        transform: translateX(-50%); 
+        height: auto;      
+    }
+
+    .container.section2_wrapper{
+        max-width: 100% !important;
+        gap: 1em;
+    }
+    .section2-box{
+        height: 100%;
+    }
+    .sec2-time_title,.sec2-time_title2{
+        height: 4em;
+        top:11%;
+    }
+
+    .sec2_info > h4{
+        margin-bottom: 12px;
+    }
+
+    .sec2_info > p {       
+        font-size: clamp(10px, 1.1vw, 1.5em);        
+    }
+
+    .sec2_info2{
+        padding: 20px 5px 5px 5px;
+    }
+    .sec2_info2 > li{
+        margin-bottom: 1em;
+    }
+    .btn-cta_link > strong{
+        font-size: clamp(12px, 2.2vw, 3.6em);
+    }
+    .btn-cta_link > span{
+        font-size: 14px;
+    }
+    .btn-cta{
+        bottom: -3em;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){  
+    .section2_title > h2{
+        font-size: clamp(14px, 1.8vw, 2em);
+    }
+
+    .sec2_info2 > li > p{
+        font-size: clamp(14px, 1vw, 2em);
+    }    
+
+    .sec2-time_title, .sec2-time_title2{
+        top: 9%;
+    }
+
+    .sec2_info{
+        width: 94%;
+    }
+
+    .sec2_info2{
+        width: 94%;
+    }
+    .sec2_info > h4{
+        font-size: clamp(14px, 2vw, 2.2em);
+    }
+
+    .section2-contents{
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-position: 0.65em 0;
+        height: 40em;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1440px){
+    .sec2_info2 > li > p{
+        font-size: clamp(14px, 1.2vw, 2em);
+    }
+
+    .section2_wrapper{
+        height: 90%;
+    }
+
+    .section2_title{
+        margin-bottom: 0;
+    }
 }

@@ -2,16 +2,93 @@
     --bg3: #fff2dc;
     --red: #622b14;
 }
+/* ----- header ----- */
+.header-wrapper{
+    position: relative;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    padding: 1.5em 0;
+    height: clamp(60px, 8vw, 15em);
+}
 
+.logo-japan{
+    height: 100%;
+}
+.logo-japan > img{
+    height: 100%;
+}
+.logos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    height: clamp(30px, 4vw, 5em);
+}
+
+.logos > img {
+   height: 100%;  
+}
+
+.titles{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 1.2vw, 2em);
+}
+
+.title{
+    font-size: clamp(16px, 1.8vw ,3em);
+    font-weight: 500;
+    text-align: center;
+}
+
+.title_line_lft, .title_line_rgt{
+    position: relative;
+    width: 2em;
+    height: 2em;
+}
+.title_line_lft::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(-1 * (clamp(50px, 6vw, 10em) + 10px));
+    transform: translateY(-50%);
+    height: 1px;
+    width: clamp(50px, 6vw, 10em);
+    background-color: var(--black);
+}
+
+.title_line_rgt::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: clamp(25px, 1.5vw, 3em);
+    transform: translateY(-50%);
+    height: 1px;
+    width: clamp(50px, 6vw, 10em);
+    background-color: var(--black);
+}
+
+/* ------ banner ----- */
 .banner_img{
     width: 100%;
     height: 100%;
 }
+
+/* ---- section 2 ---- */
 .section2{
     position: relative;
     width: 100%;
     height: 100%;
-    margin-top: -5rem;
+    margin-top: -3rem;
     z-index: 4;
 }
 .bg2{
@@ -19,27 +96,42 @@
     height: 100%;
 }
 
-.section2_wrapper{
+/* .section2_wrapper{
     font-size: 1rem;
     position: absolute;
     width: 100%;
     top: 50%;
     left:50%;
     transform: translate(-50%, -50%);
+} */
+
+.section2_wrapper {
+    font-size: 1rem;
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
 }
 
 .section2_title{
     position: relative;
     font-size: 1em;   
     padding: 3em 0;
-    margin-bottom: 3em;
+    margin-bottom: clamp(20px, 3.5vw, 5em);
 }
 
-.section2_title >h2{
-    font-size: 2.2em;
+.section2_title > h2{
+    font-size: clamp(16px, 1.7vw, 2.2em);
     color: var(--red);
     font-weight: 500;
-    text-align: center;
+    text-align: center;   
 }
 
 .sec2-line-top{
@@ -53,6 +145,11 @@
     align-items: center;
     justify-content: center;
 }
+.sec2-line-top > img{
+    width: 2em;
+    height: 2em;
+}
+
 .sec2-line-top::before{
     content: "";
     position: absolute;
@@ -85,6 +182,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.sec2-line-bottom > img{
+    width: 2em;
+    height: 2em;
+}
+
 .sec2-line-bottom::before{
     content: "";
     position: absolute;
@@ -125,10 +228,14 @@
     font-size: 1rem;
     display: grid;
     grid-template-columns:  1fr 1fr;
-    gap: 4em;    
-    width: 100%;
-    height: 42em;
+    gap: 2em; 
+    width: 100%;  
+    aspect-ratio: 1482 / 528;   
     padding: 0 2em;
+    background-image: url("../img/bg2-box.webp");
+    background-position: 1em 0;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .sec2-time{
@@ -149,7 +256,7 @@
     width: 21.7em;
     height: 5.6em;
     position: absolute;
-    top: 11%;
+    top: 13%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -165,7 +272,7 @@
     width: 35em;
     height: 5.6em;
     position: absolute;
-    top: 11%;
+    top: 13%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -175,29 +282,30 @@
 
 
 .sec2-time_title > span,.sec2-time_title2 > span {
-    font-size: 2.2em;
+    font-size: clamp(14px,1.6vw,2.2em);;
     font-weight: 700;
     color: var(--white);
 }
 
 .sec2_info{
     font-size: 1rem;
-    background-image: url("../img/bg2-info-content.webp");
+    aspect-ratio: 52 / 28;
+    background-image: url("../img/thoigian-box.png");
     background-repeat: no-repeat;
     background-size: contain;
     width: 82%;
-    height: 27em;
-    padding-top: 5em;
+    padding-top: clamp(20px, 2.6vw, 5em);
 }
 
 .sec2_info > h4{
     color: #8c320e;
-    font-size: 2.8em;
+    font-size: clamp(14px, 2vw, 2.8em);
     text-align: center;
+    margin-bottom: clamp(10px, 2.1vw, 30px);
 }
 
 .sec2_info > h5{
-    font-size: 2.2em;
+    font-size: clamp(12px, 1.4vw, 2.2em);;
     font-weight: 500;
     text-align: center;
     color: #bd0202;
@@ -206,27 +314,33 @@
 
 .sec2_info > p{
     text-align: center;
-    font-size: 1.5em;
+    font-size: clamp(14px, 1.1vw, 1.5em);;
     color: #b00000;
 }
 
 .sec2_info2{
     list-style: none;
     font-size: 1rem;
-    background-image: url("../img/bg2-info-content.webp");
+    aspect-ratio: 52 / 28;
+    background-image: url("../img/doituongthamgia-box.png");
     background-repeat: no-repeat;
     background-size: contain;
-    width: 82%;
-    height: 27em;
-    padding: 5em 2em 2em 2em;
+    width: 82%;  
+    padding: 5em 2em 1em 2em;
 }
 
-.sec2_info2 >li{
-    font-size: 2em;
+.sec2_info2 > li{
+    font-size: 1rem;
+    font-weight: 500;
     position: relative;
-    padding-left: 2em;
-    margin-bottom: 1em;
+    padding-left: 2.5em;
+    margin-bottom: 2em;
     color: #b00000;
+}
+
+.sec2_info2 > li > p{
+    font-size: clamp(10px, 1.3vw, 2em);
+    word-spacing: 0.1em;
 }
 
 .sec2_info2 > li::before {
@@ -246,6 +360,7 @@
     transform: translateX(-50%);
     aspect-ratio: 713 / 158;
     width: 35%;
+    max-width: 50em;
     background-image: url("../img/btn-cta.webp");
     background-repeat: no-repeat;
     background-size: contain;
@@ -266,7 +381,7 @@
 }
 
 .btn-cta_link > strong{
-    font-size: 3.6em;
+    font-size: clamp(18px, 2.2vw, 3.6em);
 }
 
 .btn-cta_link > span{
@@ -284,7 +399,6 @@
 
 
 /* --- section 3 --- */
-
 .section3{
     position: relative;
     font-size: 1rem;
@@ -337,13 +451,20 @@
     background-size: contain;
     background-position: center;
     padding: 10em 2em 2em 2em;
-    border: 1px solid var(--);
+    border: 1px solid #e8dbdb;
 }
 
 .sec3-awards{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
     margin-bottom: 4em;
+}
+
+.sec3-award-img{
+    max-width: 100%;
 }
 
 .sec3-footer{
@@ -351,7 +472,7 @@
     width: 90%;
     margin: auto;
     padding-top: 2em;
-    border-top: 1px solid #dddddd;
+    border-top: 1px solid #5b0000;
 }
 
 .sec3-footer >p{
