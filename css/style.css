@@ -404,45 +404,47 @@
     font-size: 1rem;
     margin-top: -5em;
     width: 100%;
+    background-image: url("../img/bg/bg-giay-vang.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat-y;
+    padding-top: clamp(18em, 11vw, 21em);
+    padding-bottom: 10%;
+    overflow: hidden;
 }
 
-.sec3-img{
-    width: 100%;
-}
 
 .sec3-title{
     font-size: 1rem;
     aspect-ratio: 516 / 179;
     width: 25%;
-    position: absolute;
-    top: 8%;
-    left: 50%;
-    transform: translateX(-50%);
+    max-width: 51em;
     z-index: 6;
     background-image: url("../img/sec2-title.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    padding-top: 5.5em;
+    padding-top: clamp(5.5em, 3vw, 7em);
     text-align: center;
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .sec3-title > h2{
-    color: #d50d0f;
-    font-size: 2.7em;
+    color: #d50d0f;    
+    font-size: clamp(2.7em, 2vw, 3.7em);
     margin-bottom: 0.07em;
 }
 .sec3-title > h3{
     color: #5b0000;
     font-weight: 500;
-    font-size: 2em;
+    font-size: clamp(2em, 1.5vw, 3em);;
 }
 
 .sec3-contents{
-    position: absolute;
-    top: 12%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: auto;
     width: 75%;
     border-radius: 2em;
     overflow: hidden;
@@ -506,6 +508,20 @@
 .btn-join-now >span{
     font-size: 3em;
     font-weight: 700;
+}
+
+.nui-lft{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.nui-rgt{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
 }
 
 /* --- footer --- */
