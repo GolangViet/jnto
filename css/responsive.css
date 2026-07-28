@@ -265,7 +265,7 @@
 
     .btn-join-now {
         width: 62%;
-        bottom: 3%;
+        bottom: 2.5%;
     }
     .btn-join-now >span {
         font-size: clamp(12px, 5vw, 3em);
