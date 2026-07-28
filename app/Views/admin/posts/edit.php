@@ -1,0 +1,1 @@
+<div class="card"><h1>Edit post</h1><form method="post" action="/admin/posts/<?= (int)$post['id'] ?>"><?= csrf_field() ?><input type="hidden" name="_method" value="PUT"><?php require app()->basePath('app/Views/admin/posts/form.php'); ?><button class="btn">Update</button></form></div>
