@@ -171,6 +171,43 @@
         font-size: clamp(12px, 4vw, 3em);
     }
 
+    .footer-wrapper{
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+        gap: 3em;
+    }
+
+    .footer > .container{
+        max-width: 100% !important;       
+    }
+
+    .footer_socials_title{
+        text-align: center;
+    }
+
+    .footer_socials_title > span {
+        font-size: clamp(14px, 3.3vw, 2.5em);
+    }
+
+    .footer_social{
+        justify-content: center;
+    }
+
+    .footer_social_item {
+        font-size: 8px;
+    }
+
+    .footer_sponsors{
+        width: 85%;
+        margin: auto;
+    }
+
+    
+    .footer_links a{       
+        font-size: clamp(12px, 2.5vw, 1.8em);
+    }
+
 }
 
 @media (max-width: 576px){

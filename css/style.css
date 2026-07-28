@@ -335,7 +335,7 @@
     position: relative;
     padding-left: 2.5em;
     margin-bottom: 2em;
-    color: #b00000;
+    color: #8c320e;
 }
 
 .sec2_info2 > li > p{
@@ -445,7 +445,7 @@
 
 .sec3-contents{
     margin: auto;
-    width: 75%;
+    width: 60%;
     border-radius: 2em;
     overflow: hidden;
     background-image: url("../img/bg/bg3-content.webp");
@@ -478,7 +478,7 @@
 }
 
 .sec3-footer >p{
-    font-size: 1.7em;
+    font-size: clamp(12px, 1.2vw, 1.8em);
     color: #770202;
     margin-bottom: 0;
 }
@@ -506,7 +506,7 @@
 }
 
 .btn-join-now >span{
-    font-size: 3em;
+    font-size: clamp(12px, 1.5vw, 4em);
     font-weight: 700;
 }
 
@@ -524,16 +524,29 @@
     pointer-events: none;
 }
 
+.la-lft{
+    position: absolute;
+    pointer-events: none;
+    left: 16.5%;
+    bottom: 40%;
+}
+
+.la-rgt{
+    position: absolute;
+    pointer-events: none;
+    right: 18%;
+    top: 18%;
+}
+
 /* --- footer --- */
 .footer{
     font-size: 1rem;
-    aspect-ratio: 1920 / 324;
     width: 100%;
-    background-image: url("../img/bg/bg-footer.webp");
+    background-image: url("../img/footer/bg-footer.webp");
     background-size: contain;
     background-position: center;
-    background-repeat: no-repeat;
-    padding: 0.5em 0 1.2em 0;
+    background-repeat: repeat;
+    padding: 2em 0 1.2em 0;
 }
 
 .footer-wrapper{
@@ -548,7 +561,7 @@
     font-weight: 500;
 }
 .footer_socials_title > span{
-    font-size: 2.2em;
+    font-size: clamp(14px, 1.9vw ,2.5em);
 }
 
 .footer_social{
@@ -556,7 +569,7 @@
     display: flex;
     align-items: center;
     gap: 2em;
-    padding-top: 3em;
+    padding-top: 1.5em;
 }
 
 .footer_social_item{
@@ -579,7 +592,7 @@
 
 .footer_sponsor_title{
     font-size: 1rem;
-    background-color: rgba(235, 236, 235, 0.6);
+    background-color: rgba(228, 228, 228, 0.6);
     text-align: center;
     color: #152b79;
     padding: 1em 0;
@@ -588,7 +601,7 @@
 }
 
 .footer_sponsor_title > span{
-    font-size: 2.2em;
+    font-size: clamp(14px, 3.3vw, 2.5em);
     font-weight: 500;
 }
 
@@ -625,5 +638,5 @@
 }
 
 .footer_links a{
-    font-size: 1.6em;
+    font-size: clamp(12px, 2.5vw, 2.2em);
 }
