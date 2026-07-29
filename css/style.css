@@ -640,3 +640,10 @@
 .footer_links a{
     font-size: clamp(12px, 2.5vw, 2.2em);
 }
+
+/* ---- login ---- */
+.section-login{
+    font-size: 1rem;
+    aspect-ratio: 1920 / 900;
+    width: 100%;
+}
