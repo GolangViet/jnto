@@ -162,6 +162,11 @@
         margin-bottom: 1em;
     }
 
+    .sec3-footer{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .btn-join-now{
         width: 50%;
         bottom: 2%;
@@ -202,10 +207,13 @@
         width: 85%;
         margin: auto;
     }
-
     
     .footer_links a{       
         font-size: clamp(12px, 2.5vw, 1.8em);
+    }
+
+    .modal-close{       
+        background-color: rgba(255, 255, 255, 0.8);       
     }
 
 }
@@ -387,6 +395,9 @@
     }
     .btn-cta{
         bottom: -3em;
+    }
+    .footer_socials_title > span {
+        font-size: clamp(14px, 1.7vw, 2em);
     }
 }
 

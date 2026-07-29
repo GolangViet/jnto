@@ -2,6 +2,10 @@
     --bg3: #fff2dc;
     --red: #622b14;
 }
+
+body{
+    position: relative;
+}
 /* ----- header ----- */
 .header-wrapper{
     position: relative;
@@ -12,7 +16,7 @@
     width: 80%;
     margin: auto;
     padding: 1.5em 0;
-    height: clamp(60px, 8vw, 15em);
+    height: clamp(80px, 10vw, 15em);
 }
 
 .logo-japan{
@@ -601,7 +605,7 @@
 }
 
 .footer_sponsor_title > span{
-    font-size: clamp(14px, 3.3vw, 2.5em);
+    font-size: clamp(14px, 1.9vw ,2.5em);
     font-weight: 500;
 }
 
@@ -638,7 +642,102 @@
 }
 
 .footer_links a{
-    font-size: clamp(12px, 2.5vw, 2.2em);
+    font-size: clamp(14px, 1.9vw ,2.5em)
+}
+/* -------------modal ---------- */
+.modal{
+    position:fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black-opacity2);
+    z-index: 99;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
+.modal.modal-open{
+    display: flex;
+}
+
+.modal-lg{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    position: relative;
+}
+
+.modal-lg .img{
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.modal-close{
+    position: absolute;
+    top: 1%;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.15);
+    transition: background-color 0.2s ease;
+    z-index: 1000;
+}
+
+.modal-close:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+
+.modal-close{
+    position: absolute;
+    top: 1%;
+    right: 2em;
+    width: 4em;
+    height: 4em;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.9);
+    transition: background-color 0.2s ease;
+    z-index: 1000;
+}
+
+.modal-close:hover{
+    background-color: rgba(0,0,0,0.3);
+}
+
+.modal-close::before,
+.modal-close::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+.modal-close::before{
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.modal-close::after{
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+body.modal-open-body{
+    overflow: hidden;
 }
 
 /* ---- login ---- */
