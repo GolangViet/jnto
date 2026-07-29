@@ -1,7 +1,7 @@
 # JNTO
 - A website for tourism in Japan. It has a quiz feature and a blog feature.
 
-# Custom PHP MVC Docker Application
+# Requirements
 
 A small content management application built with:
 
@@ -10,19 +10,35 @@ A small content management application built with:
 - PostgreSQL 15
 - Docker Compose
 - PDO (with pgsql driver)
-- Custom PHP MVC framework (Core routing, controller, models, repositories, views, middleware, CSRF protection, session & validator helpers)
 
 ## Configuration
 
 Copy `.env.example` to `.env` and edit the values.
 
+## Setup Source Code:
+
+### 1. Initialize Docker:
+```bash
+$ docker compose up -d --build
+```
+
+### 2. Initialize Composer:
+```bash
+$ docker compose exec app
+$ composer install
+```
+
+- After initializing composer, open:
+    - Frontend: http://localhost:8086
+    - User Login: http://localhost:8086/login
+    - Admin Login: http://localhost:8086/admin/login
+    - Admin Dashboard: http://localhost:8086/admin/posts
+
 ## Setup Docker:
 
 ### 1. Run Docker
 
-- You need to install docker and docker compose on your machine.
-
-- The first time when setup source code need to run this:
+- The first time when setup source code need to run this, if you have already run this command, you can skip this step:
 ```bash
 $ docker compose up -d --build
 ```
@@ -31,12 +47,6 @@ $ docker compose up -d --build
 ```bash
 $ docker compose up -d
 ```
-
-- After setup docker, open:
-    - Frontend: http://localhost:8086
-    - User Login: http://localhost:8086/login
-    - Admin Login: http://localhost:8086/admin/login
-    - Admin Dashboard: http://localhost:8086/admin/posts
 
 ### 2. Access Docker Container
 
@@ -58,7 +68,7 @@ $ docker ps
 $ docker compose down
 ```
 
-## Run Composer
+## Setup Composer
 
 - To reload all packages from main source, or when you edit/add something in composer.json file, run this command:
 ```bash
