@@ -129,3 +129,17 @@ function decrypt(string $payload): string
     }
     return $encrypter->decrypt($payload);
 }
+
+/**
+ * Render a component view with isolated scope.
+ *
+ * @param string $name
+ * @param array $data
+ * @return void
+ */
+function component(string $name, array $data = []): void
+{
+    extract($data);
+    require Application::getInstance()->basePath('app/Views/components/' . $name . '.php');
+}
+

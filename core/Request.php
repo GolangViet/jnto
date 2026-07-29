@@ -28,6 +28,24 @@ final class Request
         return $path === '//' ? '/' : $path;
     }
 
+    private ?array $jsonParams = null;
+
+    private function getJsonParams(): array
+    {
+        if ($this->jsonParams === null) {
+            $this->jsonParams = [];
+            $contentType = $_SERVER['CONTENT_TYPE'] ?? $_SERVER['HTTP_CONTENT_TYPE'] ?? '';
+            if (stripos($contentType, 'application/json') !== false) {
+                $body = file_get_contents('php://input');
+                $data = json_decode($body, true);
+                if (is_array($data)) {
+                    $this->jsonParams = $data;
+                }
+            }
+        }
+        return $this->jsonParams;
+    }
+
     /**
      * Retrieve an input value from POST or GET data.
      *
@@ -37,7 +55,7 @@ final class Request
      */
     public function input(string $key, mixed $default = null): mixed
     {
-        return $_POST[$key] ?? $_GET[$key] ?? $default;
+        return $this->getJsonParams()[$key] ?? $_POST[$key] ?? $_GET[$key] ?? $default;
     }
 
     /**
@@ -47,7 +65,7 @@ final class Request
      */
     public function all(): array
     {
-        return array_merge($_GET, $_POST);
+        return array_merge($_GET, $_POST, $this->getJsonParams());
     }
 
     /**

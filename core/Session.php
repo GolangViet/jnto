@@ -11,7 +11,7 @@ final class Session
      */
     public function __construct()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
+        if (php_sapi_name() !== 'cli' && session_status() !== PHP_SESSION_ACTIVE && !headers_sent()) {
             session_start();
         }
     }

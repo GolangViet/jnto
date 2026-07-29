@@ -34,7 +34,7 @@ $ composer install
     - Admin Login: http://localhost:8086/admin/login
     - Admin Dashboard: http://localhost:8086/admin/posts
 
-## Setup Docker:
+## Docker:
 
 ### 1. Run Docker
 
@@ -68,7 +68,27 @@ $ docker ps
 $ docker compose down
 ```
 
-## Setup Composer
+## Composer
+
+- To reload all packages from main source, or when you edit/add something in composer.json file, run this command:
+```bash
+$ docker compose exec app
+$ composer dump-autoload
+```
+
+- Run composer install to install dependencies:
+```bash
+$ docker compose exec app
+$ composer install
+```
+
+- To update dependencies from the main source, run this command:
+```bash
+$ docker compose exec app
+$ composer update
+```
+
+## Migrations
 
 - To reload all packages from main source, or when you edit/add something in composer.json file, run this command:
 ```bash

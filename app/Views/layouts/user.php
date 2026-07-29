@@ -255,8 +255,9 @@
         </a>
         <div class="nav-actions">
             <?php if ($user = app()->session()->get('user')): ?>
+                <a href="/quizzes" style="margin-right: 15px;">Quizzes</a>
                 <?php if (($user['role'] ?? 'user') === 'admin'): ?>
-                    <a href="/admin/posts" style="margin-right: 10px;">Admin Panel</a>
+                    <a href="/admin/posts" style="margin-right: 15px;">Admin Panel</a>
                 <?php endif; ?>
                 <span class="muted" style="color: #94a3b8;">Hello, <strong style="color: #f1f5f9;"><?= e($user['name']) ?></strong></span>
                 <form action="/logout" method="post" style="display:inline">
@@ -288,5 +289,6 @@
     <?php endif; ?>
     <?= $content ?>
 </main>
+<script src="/js/app.js"></script>
 </body>
 </html>
