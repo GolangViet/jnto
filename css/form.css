@@ -278,7 +278,7 @@
 
 @media (max-width: 768px) {
     .survey-form {
-        font-size: 2.5vw;
+        font-size: 2.4vw;
     }
 
     .survey-section {
@@ -331,9 +331,15 @@
         font-size: 1.1em;
     }
 
+    .survey-question legend
+    {
+        margin-bottom: 1.1em;
+    }
+
     .survey-choice {
+        font-size: 0.95em;
         gap: 0.65em;
-        margin: 0 0 1.1em;
+        margin: 0 0 1.2em;
     }
 
     .survey-choice > input[type="radio"],
@@ -384,7 +390,7 @@
     .survey-panel--visited,
     .survey-panel--large {
         font-size: 1em;
-        padding: 3.65em 2.2em 2.5em;
+        padding: 3.65em 1.5em 2.5em;
     }
 
     .survey-button {
