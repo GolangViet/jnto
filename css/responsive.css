@@ -216,6 +216,23 @@
         background-color: rgba(255, 255, 255, 0.8);       
     }
 
+    /* ---- login ---- */
+    .login{
+        background-position: 1em 0;
+    }
+    .login-box {
+        width: 75%;
+    }
+    .line-decor {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .login-footer {
+        bottom: -20%;
+    }
+
+   
+
 }
 
 @media (max-width: 576px){
@@ -316,6 +333,25 @@
         font-size: clamp(12px, 5vw, 3em);
     }
 
+    /* ----- login ----- */
+    .login{
+        width: 50%;
+        top:5px;
+        transform: translate(-50%, 0);
+    }
+
+    .login-footer {
+        gap: 5px;
+    }
+    .login-title {    
+        padding-top: clamp(5px, 1.2vw, 1.9em);
+    }
+    .login-footer >h3 {
+        font-size: 8px;
+    }
+    .login-footer {
+        bottom: -17%;
+    }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1199px){

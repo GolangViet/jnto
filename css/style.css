@@ -754,7 +754,7 @@ body.modal-open-body{
 
 .login{   
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     aspect-ratio: 766 / 581;
@@ -833,13 +833,13 @@ body.modal-open-body{
     position: absolute;
     top:0;
     right: 0;
-    width: 8em;
+    width: 15%;
     height: 100%;
     background-color: #fcf6e8;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.3em;
+    padding: clamp(5px, 0.2vw, 1em);
     border: none;
 }
 .pass_icon{
