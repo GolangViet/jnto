@@ -803,6 +803,7 @@ body.modal-open-body{
     border-radius: 0.7em;
     padding-left: 1em;
     padding-right: 1em;
+    border: none;
 }
 
 .line-decor{
@@ -850,23 +851,56 @@ body.modal-open-body{
 .login-footer{
     font-size: 1rem;
     position: absolute;
-    bottom: -6%;
+    bottom: -15%;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3em;
+    gap: 1em;
 }
 
 .btn-login{
+    font-size: 1rem;
     border: none;   
     aspect-ratio: 507 / 94;
-    width: 50%;
-    background-image: url("../img/login/button-dangky.webp");
+    width: 60%;
+    background-image: url("../img/login/button-dangnhap.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    background-color: transparent;
+    background-color: transparent;   
+    color: #ffffff;
+}
+
+.btn-login > span{
+    font-size: clamp(10px, 1.8vw, 3.2em);
+    font-weight: 600;
+}
+
+.btn-login:hover{
+    background-image: url("../img/login/button-dangnhap-hover.webp");
+}
+
+.login-footer >h3{
+    font-size: clamp(10px, 1.8vw, 2.2em);
+    font-weight: 500;
+    color: #152b79;
+}
+
+.login-footer >h3 >a{
+    font-weight: 600;
+    position: relative;
+}
+
+.login-footer >h3 >a::before{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #152b79;
 }
