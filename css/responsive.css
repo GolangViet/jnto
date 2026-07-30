@@ -342,6 +342,18 @@
     .section2_title > h2{
         font-size: clamp(12px, 1.6vw, 2em);
     }
+
+    .login-footer {
+        bottom: -17%;
+    }
+
+    .login-footer > h3 {
+        font-size: clamp(10px, 1.2vw, 2.2em);
+    }
+
+    .pass_eye {    
+        width: 6em;
+    }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 991px){
