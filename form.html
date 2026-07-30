@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Câu hỏi khảo sát - JNTO</title>
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body class="survey-page">
+    <header class="header">
+        <div class="header-wrapper">
+            <div class="logo-japan">
+                <img src="img/campaign-nhat-ban.png" alt="Logo chiến dịch Nhật Bản">
+            </div>
+            <div class="logos">
+                <img src="img/jed-logo.png" alt="Logo Japan Endless Discovery">
+                <img src="img/jnto-logo.png" alt="Logo JNTO">
+            </div>
+            <div class="titles">
+                <div class="title_line_lft">
+                    <img class="img" src="img/hoa-b.png" alt="">
+                </div>
+                <h1 class="title">
+                    VẺ ĐẸP VÔ TẬN <br> ĐI ĐỂ TRỞ VỀ
+                </h1>
+                <div class="title_line_rgt">
+                    <img class="img" src="img/hoa-b.png" alt="">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="banner">
+        <picture>
+            <source media="(max-width: 768px)" srcset="img/banner-m.webp">
+            <img class="banner_img" src="img/banner.webp" alt="Nhật Bản - Vẻ đẹp vô tận, đi để trở về">
+        </picture>
+    </section>
+
+    <main>
+        <section class="survey-section" aria-labelledby="survey-title">
+            <form class="survey-form" id="survey-form" action="#" method="post">
+                <h1 class="survey-title" id="survey-title">CÂU HỎI KHẢO SÁT</h1>
+
+                <div class="survey-panel survey-panel--intro is-active" data-survey-panel="intro">
+                    <fieldset class="survey-question">
+                        <legend><span class="question-number">1.</span> Tuổi</legend>
+                        <label class="survey-choice">
+                            <input type="radio" name="age" value="under-20" required>
+                            <span>Dưới 20</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="age" value="20-30">
+                            <span>Từ 20 – 30</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="age" value="30-40">
+                            <span>Từ 30 – 40</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="age" value="40-50">
+                            <span>Từ 40 – 50</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="age" value="50-60">
+                            <span>Từ 50 – 60</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="age" value="over-60">
+                            <span>60 trở lên</span>
+                        </label>
+                    </fieldset>
+
+                    <fieldset class="survey-question">
+                        <legend><span class="question-number">2.</span> Khu vực</legend>
+                        <label class="survey-choice">
+                            <input type="radio" name="region" value="ha-noi" required>
+                            <span>Hà Nội</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="region" value="da-nang">
+                            <span>Đà Nẵng</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="region" value="ho-chi-minh">
+                            <span>TP.HCM</span>
+                        </label>
+                        <label class="survey-choice survey-choice--other">
+                            <input type="radio" name="region" value="other">
+                            <span>Khác (ghi rõ):</span>
+                            <input class="survey-other-input" type="text" name="region_other" aria-label="Khu vực khác">
+                        </label>
+                    </fieldset>
+
+                    <fieldset class="survey-question">
+                        <legend>
+                            <span class="question-number">3.</span>
+                            Kinh nghiệm du lịch Nhật Bản và kế hoạch tương lai
+                            <em>(Không tính đi công tác/việc công)</em>
+                        </legend>
+                        <label class="survey-choice">
+                            <input type="radio" name="travel_experience" value="visited-return" data-travel-status="visited" required>
+                            <span>Đã từng đi và muốn đi lại</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="travel_experience" value="visited-no-plan" data-travel-status="visited">
+                            <span>Đã từng đi nhưng hiện chưa có kế hoạch quay lại</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="travel_experience" value="not-visited-plan" data-travel-status="not-visited">
+                            <span>Chưa từng đi nhưng có kế hoạch đi trong tương lai</span>
+                        </label>
+                        <label class="survey-choice">
+                            <input type="radio" name="travel_experience" value="not-visited-no-plan" data-travel-status="not-visited">
+                            <span>Chưa từng đi và chưa có kế hoạch</span>
+                        </label>
+                    </fieldset>
+
+                    <div class="survey-actions">
+                        <button class="survey-button" type="button" id="survey-next"><span>Tiếp theo</span></button>
+                    </div>
+                </div>
+
+                <div class="survey-panel survey-panel--visited" data-survey-panel="visited" hidden>
+                    <fieldset class="survey-question">
+                        <legend>
+                            <span class="question-number">4.</span> Các vùng của Nhật Bản bạn quan tâm:
+                            <em>(Có thể chọn nhiều đáp án)</em>
+                        </legend>
+                        <div data-region-options></div>
+                    </fieldset>
+
+                    <fieldset class="survey-question">
+                        <legend><span class="question-number">5.</span> Bạn muốn đi du lịch Nhật Bản theo hình thức nào?</legend>
+                        <div data-travel-style-options></div>
+                    </fieldset>
+
+                    <fieldset class="survey-question">
+                        <legend>
+                            <span class="question-number">6.</span> Khi tìm hiểu du lịch Nhật Bản, bạn thường lấy thông tin từ đâu?
+                            <em>(Có thể chọn nhiều đáp án)</em>
+                        </legend>
+                        <div data-information-options></div>
+                    </fieldset>
+
+                    <div class="survey-actions">
+                        <button class="survey-button survey-button--finish" type="submit"><span>Nộp bài</span></button>
+                    </div>
+                </div>
+
+                <div class="survey-panel survey-panel--not-visited survey-panel--large" data-survey-panel="not-visited" hidden>
+                    <fieldset class="survey-question">
+                        <legend>
+                            <span class="question-number">4.</span> Các vùng bạn đã từng đến:
+                            <em>(Có thể chọn nhiều đáp án)</em>
+                        </legend>
+                        <div data-region-options></div>
+                    </fieldset>
+
+                    <fieldset class="survey-question">
+                        <legend>
+                            <span class="question-number">5.</span> Các vùng bạn chưa từng đến nhưng muốn đi trong tương lai:
+                            <em>(Có thể chọn nhiều đáp án)</em>
+                        </legend>
+                        <div data-region-options></div>
+                    </fieldset>
+
+                    <fieldset class="survey-question">
+                        <legend><span class="question-number">6.</span> Bạn muốn đi du lịch Nhật Bản theo hình thức nào?</legend>
+                        <div data-travel-style-options></div>
+                    </fieldset>
+
+                    <fieldset class="survey-question">
+                        <legend>
+                            <span class="question-number">7.</span> Khi tìm hiểu du lịch Nhật Bản, bạn thường lấy thông tin từ đâu?
+                            <em>(Có thể chọn nhiều đáp án)</em>
+                        </legend>
+                        <div data-information-options></div>
+                    </fieldset>
+
+                    <div class="survey-actions">
+                        <button class="survey-button survey-button--finish" type="submit"><span>Nộp bài</span></button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-wrapper">
+                <div class="footer_socials">
+                    <h2 class="footer_socials_title">
+                        <span>JNTO - Cơ quan Xúc tiến Du Lịch Nhật Bản</span>
+                    </h2>
+                    <ul class="footer_social">
+                        <li>
+                            <a class="footer_social_item" href="https://www.facebook.com/camnhannhatban" title="Facebook" target="_blank" rel="noopener noreferrer">
+                                <svg class="mb_social_icon" aria-hidden="true"><use href="#facebook-icon"></use></svg>
+                                <span class="visually-hidden">Facebook</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="footer_social_item" href="https://www.instagram.com/visitjapan_vn" title="Instagram" target="_blank" rel="noopener noreferrer">
+                                <svg class="mb_social_icon" aria-hidden="true"><use href="#instagram-icon"></use></svg>
+                                <span class="visually-hidden">Instagram</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="footer_social_item" href="https://www.youtube.com/user/visitjapan/featured" title="YouTube" target="_blank" rel="noopener noreferrer">
+                                <svg class="mb_social_icon" aria-hidden="true"><use href="#youtube-icon"></use></svg>
+                                <span class="visually-hidden">YouTube</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_sponsors">
+                    <h2 class="footer_sponsor_title"><span>Nhà tài trợ</span></h2>
+                    <div class="footer_sponser_brands">
+                        <a href="https://www.vietnamairlines.com/dk/vi/lotusmiles" title="Vietnam Airlines" target="_blank" rel="noopener noreferrer">
+                            <img src="img/brand-1.webp" alt="Vietnam Airlines">
+                        </a>
+                        <a href="https://travelcontentsapp.com/en/" title="Travel Contents" target="_blank" rel="noopener noreferrer">
+                            <img src="img/brand-2.webp" alt="Travel Contents">
+                        </a>
+                        <a href="https://www.traveloka.com/vi-vn/destination/country/japan-20001756" title="Traveloka" target="_blank" rel="noopener noreferrer">
+                            <img src="img/brand-3.webp" alt="Traveloka">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-private">
+                <ul class="footer_links">
+                    <li><a href="https://www.japan.travel/vi/vn/privacy-policy" target="_blank" rel="noopener noreferrer">Chính sách Quyền riêng tư</a></li>
+                    <li><a href="https://www.japan.travel/vi/vn/cookie-policy" target="_blank" rel="noopener noreferrer">Chính sách Cookie</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <template id="region-options-template">
+        <label class="survey-choice"><input type="checkbox" value="hokkaido"><span>Hokkaido</span></label>
+        <label class="survey-choice"><input type="checkbox" value="chubu"><span>Chubu (Nagoya, Takayama, núi Phú Sĩ...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="kanto"><span>Kanto (Tokyo, Ibaraki, Chiba,...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="chugoku"><span>Chugoku (Hiroshima, Okayama...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="kyushu"><span>Kyushu (Fukuoka, Kumamoto, Beppu...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="tohoku"><span>Tohoku (Sendai, Aomori...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="kansai"><span>Kansai (Osaka, Kyoto, Wakayama,...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="shikoku"><span>Shikoku (Takamatsu, Matsuyama...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="okinawa"><span>Okinawa</span></label>
+        <label class="survey-choice survey-choice--other">
+            <input type="checkbox" value="other">
+            <span>Khác:</span>
+            <input class="survey-other-input" type="text" aria-label="Vùng khác">
+        </label>
+    </template>
+
+    <template id="travel-style-options-template">
+        <label class="survey-choice"><input type="radio" value="package-tour"><span>Mua tour trọn gói của công ty lữ hành</span></label>
+        <label class="survey-choice"><input type="radio" value="custom-tour"><span>Đặt tour thiết kế riêng qua công ty lữ hành</span></label>
+        <label class="survey-choice"><input type="radio" value="self-guided"><span>Du lịch tự túc, tự đặt vé máy bay, khách sạn và các dịch vụ qua OTA (Traveloka, Booking, Agoda,...)</span></label>
+        <label class="survey-choice"><input type="radio" value="undecided"><span>Chưa quyết định</span></label>
+    </template>
+
+    <template id="information-options-template">
+        <label class="survey-choice"><input type="checkbox" value="jnto-social"><span>Các kênh SNS (Cảm Nhận Nhật Bản và visitjapan_vn) và website của JNTO Việt Nam</span></label>
+        <label class="survey-choice"><input type="checkbox" value="kol"><span>Các kênh SNS của những người có tầm ảnh hưởng (KOL)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="tiktok"><span>TikTok</span></label>
+        <label class="survey-choice"><input type="checkbox" value="facebook"><span>Facebook</span></label>
+        <label class="survey-choice"><input type="checkbox" value="youtube"><span>YouTube</span></label>
+        <label class="survey-choice"><input type="checkbox" value="threads-instagram"><span>Threads/Instagram</span></label>
+        <label class="survey-choice"><input type="checkbox" value="travel-company"><span>Tư vấn với công ty du lịch</span></label>
+        <label class="survey-choice"><input type="checkbox" value="ota-blog"><span>Các bài blog du lịch trên các trang OTA (Traveloka, Agoda, Klook,...)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="print"><span>Sách du lịch, cẩm nang, tạp chí, tờ rơi,...</span></label>
+        <label class="survey-choice"><input type="checkbox" value="word-of-mouth"><span>Truyền miệng (từ bạn bè, người quen)</span></label>
+        <label class="survey-choice survey-choice--other">
+            <input type="checkbox" value="other">
+            <span>Khác:</span>
+            <input class="survey-other-input" type="text" aria-label="Nguồn thông tin khác">
+        </label>
+    </template>
+
+    <svg aria-hidden="true" class="survey-svg-sprite" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <symbol id="facebook-icon" viewBox="0 0 32 32">
+                <path d="M22.912 10.485 22.33 16h-4.409v16h-6.622V16H8v-5.515h3.3v-3.32c0-4.486 1.865-7.164 7.168-7.164h4.407v5.515h-2.758c-2.058 0-2.195.777-2.195 2.214v2.756h4.99z"></path>
+            </symbol>
+            <symbol id="youtube-icon" viewBox="0 0 32 32">
+                <path d="M31.331 7.52c-.368-1.386-1.452-2.477-2.829-2.847C26.006 4 16 4 16 4S5.993 4 3.498 4.673C2.121 5.043 1.037 6.135.669 7.52 0 10.032 0 15.272 0 15.272s0 5.24.669 7.752c.368 1.386 1.452 2.432 2.829 2.802 2.496.673 12.502.673 12.502.673s10.007 0 12.502-.673c1.377-.37 2.461-1.416 2.829-2.802.669-2.512.669-7.752.669-7.752s0-5.241-.669-7.752zM12.727 20.031v-9.516l8.364 4.758-8.364 4.758z"></path>
+            </symbol>
+            <symbol id="instagram-icon" viewBox="0 0 32 32">
+                <path d="M22.3 8.4a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"></path>
+                <path d="M16 10.2a5.9 5.9 0 1 0 0 11.8 5.9 5.9 0 0 0 0-11.8zm0 9.7a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6z"></path>
+                <path d="M20.8 4h-9.5A7.2 7.2 0 0 0 4 11.2v9.5a7.2 7.2 0 0 0 7.2 7.2h9.5a7.2 7.2 0 0 0 7.2-7.2v-9.5A7.2 7.2 0 0 0 20.8 4zm4.9 16.8a5 5 0 0 1-5 5h-9.5a5 5 0 0 1-5-5v-9.5a5 5 0 0 1 5-5h9.5a5 5 0 0 1 5 5z"></path>
+            </symbol>
+        </defs>
+    </svg>
+
+    <script src="js/form.js"></script>
+</body>
+</html>
