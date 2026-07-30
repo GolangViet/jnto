@@ -1,0 +1,353 @@
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.page4-svg-sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.region-map {
+    width: 192em;
+    max-width: 100%;
+    aspect-ratio: 1920 / 1084;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    background: url("../img/page-4/bg-map.webp") center / 100% 100% no-repeat;
+    color: #713017;
+    font-size: 1rem;
+}
+
+.region-map__guide {
+    width: 50.4em;
+    position: absolute;
+    top: 16.25em;
+    left: 45.8em;
+    text-align: center;
+}
+
+.region-map__guide img {
+    width: 100%;
+    display: block;
+}
+
+.region-map__guide p {
+    width: max-content;
+    position: relative;
+    left: 50%;
+    margin: 0.45em 0 0.65em;
+    transform: translateX(-50%);
+    color: #713017;
+    font-size: 2.4em;
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.region-card {
+    width: 34.2em;
+    aspect-ratio: 342 / 256;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    color: #fff;
+    transition: filter 180ms ease, transform 180ms ease;
+}
+
+.region-card:hover {
+    filter: brightness(1.08);
+    transform: translateY(-0.5em);
+}
+
+.region-card:focus-visible {
+    outline: 0.2em solid #fff;
+    outline-offset: 0.25em;
+}
+
+.region-card > img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.region-card--kyushu {
+    top: 45.4em;
+    left: 28.8em;
+}
+
+.region-card--hokuriku {
+    top: 26em;
+    left: 123.9em;
+}
+
+.region-card--tokai {
+    top: 65.5em;
+    left: 108.8em;
+}
+
+.region-card__label {
+    position: absolute;
+    right: 0.8em;
+    bottom: 1.05em;
+    left: 0.8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2.6em;
+    font-weight: 700;
+    line-height: 1.05;
+    text-align: center;
+    text-shadow: 0 0.1em 0.25em rgba(0, 0, 0, 0.95);
+}
+
+.region-card__label strong {
+    font: inherit;
+}
+
+.region-card__label small {
+    font-size: 0.82em;
+    font-weight: 650;
+}
+
+.region-card--kyushu .region-card__label {
+    bottom: 1.15em;
+}
+
+@media (max-width: 1919px) {
+    .region-map {
+        font-size: 0.520833vw;
+    }
+}
+
+.knowledge-section {
+    width: 192rem;
+    max-width: 100%;
+    aspect-ratio: 1920 / 1634;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    background: url("../img/page-4/section-3/bg-giay.webp") center / 100% 100% no-repeat;
+    color: #7b351b;
+    font-size: 1rem;
+}
+
+.knowledge-form {
+    width: 145.8em;
+    aspect-ratio: 1458 / 1369;
+    position: relative;
+    margin: 18.8em auto 0;
+    padding: 7.9em 7.4em 0;
+    background: url("../img/page-4/section-3/box.webp") center / 100% 100% no-repeat;
+}
+
+.knowledge-part {
+    position: relative;
+}
+
+.knowledge-title {
+    width: 55.1em;
+    aspect-ratio: 551 / 113;
+    position: absolute;
+    z-index: 2;
+    top: -5.4em;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding-bottom: 0.08em;
+    transform: translateX(-50%);
+    background: url("../img/page-4/section-3/box-title.webp") center / 100% 100% no-repeat;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.knowledge-title > span {
+    font-size: 4.3em;
+}
+
+.knowledge-part__title {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0 0.7em 0.08em;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.knowledge-part__title > span {
+    font-size: 3.8em;
+}
+
+.knowledge-part__title--quiz {
+    width: 30.4em;
+    aspect-ratio: 304 / 80;
+    margin-left: 0.7em;
+    background-image: url("../img/page-4/section-3/box-tracnghiem.webp");
+}
+
+.knowledge-part__title--essay {
+    width: 25.3em;
+    aspect-ratio: 253 / 67;
+    justify-content: center;
+    margin-left: 1.7em;
+    padding-right: 0;
+    padding-left: 0;
+    background-image: url("../img/page-4/section-3/box-tuluan.webp");
+}
+
+.knowledge-quiz-list {
+    position: relative;
+    margin: 3.9em 5.9em 0 5.1em;
+}
+
+.knowledge-question {
+    min-width: 0;
+    margin: 0 0 1.7em;
+    padding: 0;
+    border: 0;
+    font-size: 2.4em;
+}
+
+.knowledge-question legend {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55em;
+    margin-bottom: 0.45em;
+    color: #7b351b;
+    font-size: 1em;
+    font-weight: 650;
+    line-height: 1.25;
+}
+
+.knowledge-question__number {
+    flex: 0 0 auto;
+}
+
+.knowledge-question__copy {
+    min-width: 0;
+    display: block;
+}
+
+.knowledge-choice {
+    min-width: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8em;
+    margin: 0 0 0.45em 2.1em;
+    color: #7b351b;
+    font-size: 0.95em;
+    line-height: 1.2;
+}
+
+.knowledge-choice > input {
+    width: 1.2em;
+    min-width: 1.2em;
+    height: 1.2em;
+    flex: 0 0 1.2em;
+    margin: 0;
+    appearance: none;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.knowledge-choice > input:checked {
+    background: #f12613 url("../img/form/mark-stick.png") center / 100% 100% no-repeat;
+}
+
+.knowledge-choice > input:focus-visible {
+    outline: 0.12em solid #a7542d;
+    outline-offset: 0.12em;
+}
+
+.knowledge-choice > span {
+    min-width: 0;
+    display: block;
+}
+
+.knowledge-essay-list {
+    position: relative;
+    margin: 3.3em 5.8em 0 5.7em;
+    color: #fff;
+}
+
+.knowledge-part--essay {
+    margin-top: 3.5em;
+}
+
+.knowledge-essay {
+    display: block;
+    margin-bottom: 1.55em;
+    font-size: 2.4em;
+}
+
+.knowledge-essay__heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55em;
+    margin-bottom: 0.55em;
+    font-weight: 600;
+    line-height: 1.28;
+}
+
+.knowledge-essay__heading strong {
+    flex: 0 0 auto;
+}
+
+.knowledge-essay textarea {
+    width: 100%;
+    height: 3.65em;
+    display: block;
+    resize: vertical;
+    padding: 0.55em 0.7em;
+    border: 0;
+    border-radius: 0.5em;
+    background-color: #faf2e7;
+    color: #7b351b;
+    font: inherit;
+    line-height: 1.3;
+}
+
+.knowledge-essay textarea:focus {
+    outline: 0.12em solid rgba(123, 53, 27, 0.55);
+    outline-offset: 0.1em;
+}
+
+.knowledge-arrow {
+    width: 2.6em;
+    height: 1.8em;
+    position: absolute;
+    bottom: 2.8em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (max-width: 1919px) {
+    .knowledge-section {
+        font-size: 0.520833vw;
+    }
+}
