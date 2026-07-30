@@ -91,7 +91,7 @@
     transform: translateX(-50%);
     background: url("../img/form/bg-title-form.webp") center / contain no-repeat;
     color: #91411e;
-    font-size: clamp(20px, 2.3vw, 34px);
+    font-size: clamp(18px, 1.8vw, 30px);
     font-weight: 600;
     white-space: nowrap;
 }
@@ -308,7 +308,7 @@
     .survey-title {
         width: min(73vw, 420px);
         top: 22px;
-        font-size: clamp(18px, 5vw, 28px);
+        font-size: clamp(16px, 4.6vw, 22px);
     }
 
     .survey-choice {
