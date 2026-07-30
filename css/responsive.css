@@ -218,6 +218,7 @@
 
     /* ---- login ---- */
     .login{
+        width: 50%;
         background-position: 1em 0;
     }
     .login-box {
@@ -230,9 +231,6 @@
     .login-footer {
         bottom: -20%;
     }
-
-   
-
 }
 
 @media (max-width: 576px){
@@ -335,16 +333,18 @@
 
     /* ----- login ----- */
     .login{
-        width: 50%;
-        top:5px;
-        transform: translate(-50%, 0);
+        width: 90%;
+    }
+
+    .login-title > span {
+        font-size: clamp(18px, 5vw, 3.8em);
     }
 
     .login-footer {
         gap: 5px;
     }
     .login-title {    
-        padding-top: clamp(5px, 1.2vw, 1.9em);
+        padding-top: clamp(5px, 1.7vw, 1.9em);
     }
     .login-footer >h3 {
         font-size: 8px;

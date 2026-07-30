@@ -752,11 +752,12 @@ body.modal-open-body{
     position: relative;
     font-size: 1rem;
     aspect-ratio: 1920 / 900;
+    height: 100vh;
     width: 100%;
     background-image: url("../img/login/login-bg.webp");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
 }
 
 .login{   
@@ -782,7 +783,7 @@ body.modal-open-body{
 }
 
 .login-title > span{
-    font-size: clamp(12px, 1.8vw, 3.8em);
+    font-size: clamp(12px, 2.2vw, 3.8em);
 }
 
 .login-box{
@@ -795,7 +796,7 @@ body.modal-open-body{
 }
 
 .login-label{
-    font-size: clamp(10px, 1vw, 2.2em);
+    font-size: clamp(14px, 1.2vw, 2.2em);
     color: #91592b;
     font-weight: 600;
     width: 100%;
@@ -805,7 +806,7 @@ body.modal-open-body{
 .login-input{
     font-size: 2em;
     width: 100%;
-    height: clamp(20px, 3.6vw, 7.2rem);
+    height: clamp(40px, 3.6vw, 7.2rem);
     background-color: #ffffff;
     border-radius: 5px;
     padding-left: 1rem;
@@ -823,7 +824,7 @@ body.modal-open-body{
     position: relative;
     background-color: #ffffff;
     border-radius: 5px;
-    height: clamp(20px, 3.6vw, 7.2rem); 
+    height: clamp(40px, 3.6vw, 7.2rem); 
     overflow: hidden;   
 }
 
@@ -883,7 +884,7 @@ body.modal-open-body{
 }
 
 .btn-login > span{
-    font-size: clamp(10px, 1.8vw, 3.2em);
+    font-size: clamp(14px, 1.8vw, 3.2em);
     font-weight: 600;
 }
 
