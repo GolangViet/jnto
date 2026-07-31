@@ -132,6 +132,48 @@
     }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+    .region-map {
+        width: 192rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .region-map {
+        width: 108rem;
+        aspect-ratio: 1080 / 1540;
+        background-image: url("../img/page-4/bg-map-mobile.webp");
+        font-size: 0.925926vw;
+    }
+
+    .region-map__guide {
+        width: 61.2em;
+        top: 9.8em;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .region-map__guide p {
+        font-size: 2.8em;
+        line-height: 1.4;
+    }
+
+    .region-card--kyushu {
+        top: 44.1em;
+        left: 8.1em;
+    }
+
+    .region-card--hokuriku {
+        top: 86em;
+        left: 66em;
+    }
+
+    .region-card--tokai {
+        top: 115.2em;
+        left: 37.4em;
+    }
+}
+
 .knowledge-section {
     width: 192rem;
     max-width: 100%;
@@ -349,5 +391,368 @@
 @media (max-width: 1919px) {
     .knowledge-section {
         font-size: 0.520833vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .knowledge-section {
+        width: 108rem;
+        aspect-ratio: 1080 / 2845;
+        background-image: url("../img/page-4/section-3/bg-giay-mobile.webp");
+        font-size: 0.925926vw;
+    }
+
+    .knowledge-form {
+        width: 99.7em;
+        aspect-ratio: 997 / 2559;
+        margin-top: 12.3em;
+        padding: 11.6em 7.4em 0;
+        background-image: url("../img/page-4/section-3/box-text-mobile.webp");
+    }
+
+    .knowledge-part--quiz {
+        font-size: 1.05em;
+    }
+
+    .knowledge-part__title--quiz,
+    .knowledge-part__title--essay {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .knowledge-part__title--essay {
+        top: 1.9em;
+        font-size: 1.25em;
+    }
+
+    .knowledge-quiz-list {
+        margin: 3.9em 5.9em 8em 5.1em;
+    }
+
+    .knowledge-question {
+        margin-bottom: 1.25em;
+        font-size: 2.8em;
+    }
+
+    .knowledge-question legend {
+        margin-bottom: 1.1em;
+    }
+
+    .knowledge-choice {
+        margin: 0 0 1.2em;
+    }
+
+    .knowledge-question:first-child .knowledge-choice > span {
+        white-space: nowrap;
+    }
+
+    .knowledge-choice > input {
+        width: 1.3em;
+        min-width: 1.3em;
+        height: 1.3em;
+        flex-basis: 1.3em;
+    }
+
+    .knowledge-part--essay {
+        margin-top: 0;
+        top: 13.5em;
+    }
+
+    .knowledge-essay-list {
+        margin: 8em 0 0;
+    }
+
+    .knowledge-essay {
+        margin-bottom: 2.6em;
+        font-size: 3.4em;
+    }
+
+    .knowledge-essay textarea {
+        width: calc(100% - 2em);
+        height: 5.1em;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 575px) {
+    .knowledge-part--essay {
+        margin-top: 0;
+        top: 2.5em;
+    }
+}
+
+@media (max-width: 420px) {
+    .knowledge-part--essay {
+        margin-top: 0;
+        top: 0;
+    }
+}
+
+@media (max-width: 325px) {
+    .knowledge-part--essay {
+        margin-top: 0;
+        top: -8em;
+    }
+
+    .knowledge-essay textarea {
+        width: calc(100% - 2em);
+        height: 4.6em;
+    }
+}
+
+.open-question-section {
+    width: 192rem;
+    max-width: 100%;
+    aspect-ratio: 1920 / 915;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: hidden;
+    background: url("../img/page-4/section-4/bg-landscape.webp") center / 100% 100% no-repeat;
+    color: #7b351b;
+    font-size: 1rem;
+}
+
+.open-question-form {
+    width: 135.7em;
+    aspect-ratio: 1357 / 683;
+    position: relative;
+    margin: 0;
+    padding: 12.4em 27.5em 0;
+    background: url("../img/page-4/section-4/box-text-1.webp") center / 100% 100% no-repeat;
+}
+
+.open-question-title {
+    width: 40.3em;
+    aspect-ratio: 403 / 108;
+    position: absolute;
+    z-index: 2;
+    top: -2em;
+    left: calc(50% - 1.7em);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0 0 0.08em;
+    transform: translateX(-50%);
+    background: url("../img/page-4/section-4/box-title.webp") center / 100% 100% no-repeat;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.open-question-title > span {
+    position: relative;
+    left: 0.425em;
+    top: 0.225em;
+    font-size: 4em;
+}
+
+.open-question-list {
+    position: relative;
+}
+
+.open-question {
+    min-width: 0;
+    position: relative;
+    margin: 0;
+    font-size: 2.4em;
+}
+
+.open-question + .open-question {
+    margin-top: 1.25em;
+}
+
+.open-question__heading {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55em;
+    margin: 0 0 0.45em;
+    color: #7b351b;
+    font-size: 1em;
+    font-weight: 650;
+    line-height: 1.25;
+}
+
+.open-question__number {
+    flex: 0 0 auto;
+}
+
+.open-question__copy {
+    min-width: 0;
+    display: block;
+}
+
+.open-question-choice {
+    min-width: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8em;
+    margin: 0 0 0.45em 2.1em;
+    color: #7b351b;
+    font-size: 0.95em;
+    line-height: 1.2;
+}
+
+.open-question-choice > input {
+    width: 1.2em;
+    min-width: 1.2em;
+    height: 1.2em;
+    flex: 0 0 1.2em;
+    margin: 0;
+    appearance: none;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.open-question-choice > input:checked {
+    background: #f12613 url("../img/form/mark-stick.png") center / 100% 100% no-repeat;
+}
+
+.open-question-choice > input:focus-visible {
+    outline: 0.12em solid #fff;
+    outline-offset: 0.12em;
+}
+
+.open-question-choice > span {
+    min-width: 0;
+    display: block;
+}
+
+.open-question-arrow {
+    width: 2.6em;
+    height: 1.8em;
+    position: absolute;
+    bottom: 4.6em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.page4-next-section {
+    width: 192rem;
+    max-width: 100%;
+    aspect-ratio: 1920 / 301;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 auto;
+    padding-top: 6.4em;
+    background: url("../img/page-4/section-5/bg-giay.webp") center / 100% 100% no-repeat;
+    font-size: 1rem;
+}
+
+.page4-next-button {
+    width: 46.4em;
+    aspect-ratio: 464 / 108;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0.08em;
+    border: 0;
+    background: transparent url("../img/page-4/section-5/button-tieptheo-vang.webp") center / 100% 100% no-repeat;
+    color: #b5000b;
+    font: inherit;
+}
+
+.page4-next-button:hover,
+.page4-next-button:focus-visible {
+    background-image: url("../img/page-4/section-5/button-tieptheo-xanh.webp");
+    color: #fff;
+}
+
+.page4-next-button:focus-visible {
+    outline: 0.25em solid #fff;
+    outline-offset: 0.3em;
+}
+
+.page4-next-button > span {
+    font-size: 5em;
+    font-weight: 700;
+    line-height: 1;
+}
+
+@media (max-width: 1919px) {
+    .open-question-section,
+    .page4-next-section {
+        font-size: 0.520833vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .open-question-section {
+        width: 108rem;
+        aspect-ratio: 1080 / 1544;
+        align-items: flex-start;
+        background-image: url("../img/page-4/section-4/bg-landscape-mobile.webp");
+        font-size: 0.925926vw;
+    }
+
+    .open-question-form {
+        width: 104.6em;
+        aspect-ratio: 1046 / 1344;
+        margin-top: 17.3em;
+        padding: 12.1em 12.8em 0;
+        background-image: url("../img/page-4/section-4/box-text-mobile.webp");
+    }
+
+    .open-question-title {
+        width: 45.3em;
+        top: -3em;
+        left: calc(50% - 1.7em);
+    }
+
+    .open-question-title > span {
+        left: 0.38em;
+        font-size: 4.5em;
+    }
+
+    .open-question {
+        font-size: 3.2em;
+    }
+
+    .open-question + .open-question {
+        margin-top: 2em;
+    }
+
+    .open-question__heading {
+        margin-bottom: 1.325em;
+    }
+
+    .open-question-choice {
+        gap: 0.65em;
+        margin: 0 0 1.2em;
+        font-size: 0.95em;
+        line-height: 1.25;
+    }
+
+    .open-question-choice > span {
+        white-space: nowrap;
+    }
+
+    .open-question-choice > input {
+        width: 1.3em;
+        min-width: 1.3em;
+        height: 1.3em;
+        flex-basis: 1.3em;
+        margin-top: -0.025em;
+    }
+
+    .open-question-arrow {
+        display: none;
+    }
+
+    .page4-next-section {
+        width: 108rem;
+        aspect-ratio: 1080 / 390;
+        padding-top: 13.5em;
+        background-image: url("../img/page-4/section-5/bg-giay-mobile.webp");
+        font-size: 0.925926vw;
     }
 }
