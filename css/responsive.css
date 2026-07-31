@@ -162,6 +162,11 @@
         margin-bottom: 1em;
     }
 
+    .sec3-footer{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .btn-join-now{
         width: 50%;
         bottom: 2%;
@@ -202,12 +207,30 @@
         width: 85%;
         margin: auto;
     }
-
     
     .footer_links a{       
         font-size: clamp(12px, 2.5vw, 1.8em);
     }
 
+    .modal-close{       
+        background-color: rgba(255, 255, 255, 0.8);       
+    }
+
+    /* ---- login ---- */
+    .login{
+        width: 50%;
+        background-position: 1em 0;
+    }
+    .login-box {
+        width: 75%;
+    }
+    .line-decor {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .login-footer {
+        bottom: -20%;
+    }
 }
 
 @media (max-width: 576px){
@@ -308,6 +331,27 @@
         font-size: clamp(12px, 5vw, 3em);
     }
 
+    /* ----- login ----- */
+    .login{
+        width: 90%;
+    }
+
+    .login-title > span {
+        font-size: clamp(18px, 5vw, 3.8em);
+    }
+
+    .login-footer {
+        gap: 5px;
+    }
+    .login-title {    
+        padding-top: clamp(5px, 1.7vw, 1.9em);
+    }
+    .login-footer >h3 {
+        font-size: 8px;
+    }
+    .login-footer {
+        bottom: -17%;
+    }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1199px){
@@ -333,6 +377,18 @@
 
     .section2_title > h2{
         font-size: clamp(12px, 1.6vw, 2em);
+    }
+
+    .login-footer {
+        bottom: -17%;
+    }
+
+    .login-footer > h3 {
+        font-size: clamp(10px, 1.2vw, 2.2em);
+    }
+
+    .pass_eye {    
+        width: 6em;
     }
 }
 
@@ -387,6 +443,9 @@
     }
     .btn-cta{
         bottom: -3em;
+    }
+    .footer_socials_title > span {
+        font-size: clamp(14px, 1.7vw, 2em);
     }
 }
 

@@ -2,6 +2,17 @@
     --bg3: #fff2dc;
     --red: #622b14;
 }
+
+body{
+    position: relative;
+}
+
+html,
+body,
+body * {
+    cursor: url("../img/form/custom-cursor.png") 4 2, auto;
+}
+
 /* ----- header ----- */
 .header-wrapper{
     position: relative;
@@ -12,7 +23,7 @@
     width: 80%;
     margin: auto;
     padding: 1.5em 0;
-    height: clamp(60px, 8vw, 15em);
+    height: clamp(80px, 10vw, 15em);
 }
 
 .logo-japan{
@@ -601,7 +612,7 @@
 }
 
 .footer_sponsor_title > span{
-    font-size: clamp(14px, 3.3vw, 2.5em);
+    font-size: clamp(14px, 1.9vw ,2.5em);
     font-weight: 500;
 }
 
@@ -638,5 +649,266 @@
 }
 
 .footer_links a{
-    font-size: clamp(12px, 2.5vw, 2.2em);
+    font-size: clamp(14px, 1.9vw ,2.5em)
+}
+/* -------------modal ---------- */
+.modal{
+    position:fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black-opacity2);
+    z-index: 99;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
+.modal.modal-open{
+    display: flex;
+}
+
+.modal-lg{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    position: relative;
+}
+
+.modal-lg .img{
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.modal-close{
+    position: absolute;
+    top: 1%;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.15);
+    transition: background-color 0.2s ease;
+    z-index: 1000;
+}
+
+.modal-close:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+
+.modal-close{
+    position: absolute;
+    top: 1%;
+    right: 2em;
+    width: 4em;
+    height: 4em;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.9);
+    transition: background-color 0.2s ease;
+    z-index: 1000;
+}
+
+.modal-close:hover{
+    background-color: rgba(0,0,0,0.3);
+}
+
+.modal-close::before,
+.modal-close::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+.modal-close::before{
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.modal-close::after{
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+body.modal-open-body{
+    overflow: hidden;
+}
+
+/* ---- login ---- */
+.section-login{
+    position: relative;
+    font-size: 1rem;
+    aspect-ratio: 1920 / 900;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../img/login/login-bg.webp");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.login{   
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 766 / 581;
+    width: 40%;
+    max-width: 76.6em;
+    background-image: url("../img/login/login-box.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 2em 0;
+}
+
+.login-title{
+    font-size: 1rem;
+    text-align: center;
+    color: #a76f42;
+    padding-top: clamp(10px, 1.2vw, 1.9em);
+    font-weight: 600;
+}
+
+.login-title > span{
+    font-size: clamp(12px, 2.2vw, 3.8em);
+}
+
+.login-box{
+    font-size: 1rem;
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-label{
+    font-size: clamp(14px, 1.2vw, 2.2em);
+    color: #91592b;
+    font-weight: 600;
+    width: 100%;
+    margin-bottom: 0.2em;
+}
+
+.login-input{
+    font-size: 2em;
+    width: 100%;
+    height: clamp(40px, 3.6vw, 7.2rem);
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: none;
+}
+
+.line-decor{
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.login-input-pass{
+    font-size: 1rem;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: clamp(40px, 3.6vw, 7.2rem); 
+    overflow: hidden;   
+}
+
+.password-input{
+    font-size: clamp(12px, 1.5vw, 2em);
+    width: 100%;
+    height: 100%;
+    padding-left: 1rem;
+    border: none;
+}
+
+.pass_eye{
+    font-size: 1rem;
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 15%;
+    height: 100%;
+    background-color: #fcf6e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(5px, 0.2vw, 1em);
+    border: none;
+}
+.pass_icon{
+    width: 100%;
+    height: 100%;
+    stroke:#a76f42;
+}
+
+.login-footer{
+    font-size: 1rem;
+    position: absolute;
+    bottom: -15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.btn-login{
+    font-size: 1rem;
+    border: none;   
+    aspect-ratio: 507 / 94;
+    width: 60%;
+    background-image: url("../img/login/button-dangnhap.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.btn-login > span{
+    font-size: clamp(14px, 1.8vw, 3.2em);
+    font-weight: 600;
+}
+
+.btn-login:hover{
+    background-image: url("../img/login/button-dangnhap-hover.webp");
+}
+
+.login-footer >h3{
+    font-size: clamp(10px, 1.8vw, 2.2em);
+    font-weight: 500;
+    color: #152b79;
+}
+
+.login-footer >h3 >a{
+    font-weight: 600;
+    position: relative;
+}
+
+.login-footer >h3 >a::before{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #152b79;
 }
