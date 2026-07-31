@@ -1,0 +1,405 @@
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.page6-svg-sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.success-section {
+    width: 192rem;
+    max-width: 100%;
+    aspect-ratio: 1920 / 1047;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    background: url("../img/page-6/bg-giay.webp") center / 100% 100% no-repeat;
+    color: #682913;
+    font-size: 1rem;
+}
+
+.success-panel {
+    width: 90em;
+    aspect-ratio: 900 / 324;
+    position: absolute;
+    top: 10.8em;
+    left: 50%;
+    padding: 6.5em 5em 2em;
+    transform: translateX(-50%);
+    background: url("../img/page-6/box-text.webp") center / 100% 100% no-repeat;
+    text-align: center;
+}
+
+.success-title {
+    width: 78.4em;
+    aspect-ratio: 784 / 86;
+    position: absolute;
+    top: -4.3em;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding-bottom: 0.08em;
+    transform: translateX(-50%);
+    background: url("../img/page-6/box-title.webp") center / 100% 100% no-repeat;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.success-title > span {
+    font-size: 3.8em;
+}
+
+.success-copy p {
+    margin: 0;
+}
+
+.success-thanks {
+    font-size: 3.15em;
+    font-weight: 450;
+    line-height: 1.45;
+}
+
+.success-thanks strong {
+    font-weight: 700;
+}
+
+.success-decor {
+    width: 50.4em;
+    display: block;
+    margin: 1.15em auto 1.7em;
+}
+
+.success-result {
+    color: #d12b18;
+    font-size: 3.1em;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.success-result strong {
+    font-weight: 750;
+}
+
+.success-banners {
+    position: absolute;
+    top: 49.2em;
+    left: 50%;
+    display: flex;
+    align-items: flex-start;
+    gap: 3.8em;
+    transform: translateX(-50%);
+}
+
+.success-banner-link {
+    display: block;
+    flex: 0 0 auto;
+    transition: filter 180ms ease, transform 180ms ease;
+}
+
+.success-banner-link:first-child {
+    width: 62.7em;
+}
+
+.success-banner-link:last-child {
+    width: 62.2em;
+}
+
+.success-banner-link img {
+    width: 100%;
+    display: block;
+}
+
+.success-banner-link:hover {
+    filter: brightness(1.06);
+    transform: translateY(-0.5em);
+}
+
+.success-banner-link:focus-visible {
+    outline: 0.3em solid #c92714;
+    outline-offset: 0.4em;
+}
+
+@media (max-width: 1919px) {
+    .success-section {
+        font-size: 0.520833vw;
+    }
+}
+
+.explore-section {
+    width: 192rem;
+    max-width: 100%;
+    min-height: 62em;
+    position: relative;
+    margin: 0 auto;
+    padding: 4.8em 0 4em;
+    overflow: hidden;
+    border-top: 0.7em solid #d8a069;
+    background: #fff;
+    color: #cf2e1f;
+    font-size: 1rem;
+}
+
+.explore-title {
+    width: 80.5em;
+    aspect-ratio: 805 / 92;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2.7em;
+    padding-bottom: 0.05em;
+    background: url("../img/page-6/section-3/box-title.webp") center / 100% 100% no-repeat;
+    font-size: 1em;
+    font-weight: 650;
+    text-align: center;
+}
+
+.explore-title > span {
+    font-size: 3.2em;
+    white-space: nowrap;
+}
+
+.region-swiper {
+    width: 145em;
+    max-width: calc(100% - 8em);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.region-swiper__track {
+    display: flex;
+    gap: 3em;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+    touch-action: pan-x;
+}
+
+.region-swiper__track::-webkit-scrollbar {
+    display: none;
+}
+
+.region-swiper__slide {
+    width: 33.9em;
+    aspect-ratio: 339 / 261;
+    position: relative;
+    flex: 0 0 33.9em;
+    display: block;
+    overflow: hidden;
+    border-radius: 1.1em;
+    scroll-snap-align: start;
+    color: #fff;
+    cursor: grab;
+    isolation: isolate;
+}
+
+.region-swiper__slide:active {
+    cursor: grabbing;
+}
+
+.region-swiper__slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 350ms ease;
+}
+
+.region-swiper__slide::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 38%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.62), transparent);
+    pointer-events: none;
+}
+
+.region-swiper__slide strong {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 0.5em;
+    bottom: auto;
+    left: 0.5em;
+    transform: translateY(-50%);
+    font-size: 3.1em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-shadow: 0 0.08em 0.22em rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+}
+
+.region-swiper__slide:hover img,
+.region-swiper__slide:focus-visible img {
+    transform: scale(1.1);
+}
+
+.region-swiper__slide:focus-visible {
+    outline: 0.35em solid #cf2e1f;
+    outline-offset: -0.35em;
+}
+
+.region-swiper__slide.is-selected {
+    box-shadow: inset 0 0 0 0.45em #cf2e1f;
+}
+
+.explore-home-button {
+    width: 19.9em;
+    aspect-ratio: 199 / 63;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3.2em auto 0;
+    padding-bottom: 0.05em;
+    background: url("../img/page-6/section-3/button-trangchu.webp") center / 100% 100% no-repeat;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 650;
+    transition: filter 180ms ease, transform 180ms ease;
+}
+
+.explore-home-button > span {
+    font-size: 2.8em;
+}
+
+.explore-home-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-0.25em);
+}
+
+.explore-home-button:focus-visible {
+    outline: 0.3em solid #cf2e1f;
+    outline-offset: 0.35em;
+}
+
+@media (max-width: 1919px) {
+    .explore-section {
+        font-size: 0.520833vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .success-section {
+        width: 108rem;
+        aspect-ratio: 1080 / 2200;
+        background-image: url("../img/page-6/bg-giay-mobile.webp");
+        font-size: 0.925926vw;
+    }
+
+    .success-panel {
+        width: 82.5em;
+        aspect-ratio: 825 / 346;
+        top: 20.5em;
+        padding: 7.4em 3em 1.5em;
+        background-image: url("../img/page-6/box-text-mobile.webp");
+    }
+
+    .success-title {
+        width: 78.4em;
+        top: -3.2em;
+    }
+
+    .success-title > span {
+        font-size: 3.55em;
+    }
+
+    .success-thanks {
+        font-size: 3.05em;
+        line-height: 1.35;
+    }
+
+    .success-decor {
+        margin-top: 1.2em;
+        margin-bottom: 1.5em;
+    }
+
+    .success-result {
+        font-size: 3em;
+        line-height: 1.3;
+    }
+
+    .success-banners {
+        top: 63.8em;
+        flex-direction: column;
+        align-items: center;
+        gap: 3em;
+    }
+
+    .success-banner-link:first-child,
+    .success-banner-link:last-child {
+        width: 80.5em;
+    }
+
+    .explore-section {
+        width: 108rem;
+        min-height: 101em;
+        padding: 5.5em 0 8em;
+        border-top-width: 0.2em;
+        font-size: 0.925926vw;
+    }
+
+    .explore-title {
+        width: 94em;
+        height: 9.2em;
+        aspect-ratio: auto;
+        margin-bottom: 2.9em;
+    }
+
+    .explore-title > span {
+        font-size: 3.8em;
+    }
+
+    .region-swiper {
+        width: 81.4em;
+        max-width: none;
+        overflow: visible;
+    }
+
+    .region-swiper__track {
+        display: grid;
+        grid-template-columns: repeat(2, 39em);
+        gap: 4em 3.4em;
+        overflow: visible;
+        padding: 0;
+        scroll-snap-type: none;
+    }
+
+    .region-swiper__slide {
+        width: 39em;
+        flex-basis: auto;
+    }
+
+    .region-swiper__slide strong {
+        font-size: 3.4em;
+    }
+
+    .explore-home-button {
+        width: 23em;
+        margin-top: 4em;
+        font-size: 1.25em;
+    }
+
+    .explore-home-button > span {
+        font-size: 3.5em;
+    }
+}
