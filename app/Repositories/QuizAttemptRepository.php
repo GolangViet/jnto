@@ -153,9 +153,10 @@ final class QuizAttemptRepository extends BaseRepository
      *
      * @param int $attemptAnswerId
      * @param array $optionIds
+     * @param array $optionCustomTexts
      * @return void
      */
-    public function saveAttemptAnswerOptions(int $attemptAnswerId, array $optionIds): void
+    public function saveAttemptAnswerOptions(int $attemptAnswerId, array $optionIds, array $optionCustomTexts = []): void
     {
         $db = Database::connection();
         
@@ -167,11 +168,16 @@ final class QuizAttemptRepository extends BaseRepository
             return;
         }
 
-        $insertStmt = $db->prepare("INSERT INTO cms.quiz_attempt_answer_options (attempt_answer_id, option_id) VALUES (:attempt_answer_id, :option_id)");
+        $insertStmt = $db->prepare("INSERT INTO cms.quiz_attempt_answer_options (attempt_answer_id, option_id, custom_text) VALUES (:attempt_answer_id, :option_id, :custom_text)");
         foreach ($optionIds as $optionId) {
+            $customText = $optionCustomTexts[(string) $optionId] ?? $optionCustomTexts[(int) $optionId] ?? null;
+            if ($customText !== null && trim((string)$customText) === '') {
+                $customText = null;
+            }
             $insertStmt->execute([
                 'attempt_answer_id' => $attemptAnswerId,
                 'option_id' => (int) $optionId,
+                'custom_text' => $customText,
             ]);
         }
     }
@@ -189,7 +195,12 @@ final class QuizAttemptRepository extends BaseRepository
                 COALESCE(
                     (SELECT json_agg(option_id) FROM cms.quiz_attempt_answer_options WHERE attempt_answer_id = qaa.id),
                     '[]'::json
-                ) as selected_option_ids
+                ) as selected_option_ids,
+                COALESCE(
+                    (SELECT json_object_agg(option_id::text, custom_text) FILTER (WHERE custom_text IS NOT NULL)
+                     FROM cms.quiz_attempt_answer_options WHERE attempt_answer_id = qaa.id),
+                    '{}'::json
+                ) as option_custom_texts
                 FROM cms.quiz_attempt_answers qaa
                 WHERE qaa.attempt_id = :attempt_id";
 
@@ -199,6 +210,7 @@ final class QuizAttemptRepository extends BaseRepository
 
         foreach ($rows as &$row) {
             $row['selected_option_ids'] = json_decode((string) $row['selected_option_ids'], true) ?: [];
+            $row['option_custom_texts'] = json_decode((string) ($row['option_custom_texts'] ?? '{}'), true) ?: [];
         }
 
         return $rows;

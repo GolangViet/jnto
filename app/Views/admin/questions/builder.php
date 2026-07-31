@@ -295,26 +295,53 @@ function handleTypeChange() {
 }
 
 // Options Builder helpers
-function addOptionRow(text = '', key = '', isCorrect = false, optionId = '') {
+function addOptionRow(text = '', key = '', isCorrect = false, optionId = '', allowCustomText = false, relatedQuestionIds = []) {
     const div = document.createElement('div');
     div.className = 'option-row';
     div.dataset.optionId = optionId;
     div.style.display = 'flex';
-    div.style.alignItems = 'center';
+    div.style.flexDirection = 'column';
     div.style.gap = '8px';
-    div.style.marginBottom = '6px';
+    div.style.padding = '12px';
+    div.style.border = '1px solid #e5e7eb';
+    div.style.borderRadius = '8px';
+    div.style.background = '#f9fafb';
+    div.style.marginBottom = '8px';
 
     const type = qType.value;
     const inputType = type === 'multiple_choice' ? 'checkbox' : 'radio';
+    
+    // Build options for related questions dropdown
+    const currentQId = editIdInput.value ? parseInt(editIdInput.value) : null;
+    let relatedOptionsHtml = '';
+    questions.forEach((q, idx) => {
+        if (currentQId && q.id === currentQId) return;
+        const isSelected = relatedQuestionIds.includes(q.id) ? 'selected' : '';
+        relatedOptionsHtml += `<option value="${q.id}" ${isSelected}>Q${idx + 1}: ${escapeHtml(q.question_text)}</option>`;
+    });
 
     div.innerHTML = `
-        <input type="text" placeholder="Key (e.g. A, B)" class="opt-key" value="${key}" style="width: 80px; margin: 0;">
-        <input type="text" placeholder="Option Text *" class="opt-text" value="${escapeHtml(text)}" required style="flex-grow: 1; margin: 0;">
-        <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; cursor: pointer; white-space: nowrap;">
-            <input type="${inputType}" name="is_correct_option" class="opt-correct" ${isCorrect ? 'checked' : ''} style="width: auto; margin: 0;">
-            Correct
-        </label>
-        ${type !== 'true_false' ? `<button type="button" onclick="this.parentElement.remove()" class="btn danger" style="padding: 8px 12px; margin: 0;">Remove</button>` : ''}
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <input type="text" placeholder="Key (e.g. A, B)" class="opt-key" value="${key}" style="width: 80px; margin: 0;">
+            <input type="text" placeholder="Option Text *" class="opt-text" value="${escapeHtml(text)}" required style="flex-grow: 1; margin: 0;">
+            <label style="display: inline-flex; align-items: center; gap: 4px; margin: 0; cursor: pointer; white-space: nowrap;">
+                <input type="${inputType}" name="is_correct_option" class="opt-correct" ${isCorrect ? 'checked' : ''} style="width: auto; margin: 0;">
+                Correct
+            </label>
+            ${type !== 'true_false' ? `<button type="button" onclick="this.parentElement.parentElement.remove()" class="btn danger" style="padding: 8px 12px; margin: 0;">Remove</button>` : ''}
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-top: 4px; padding-left: 88px; flex-wrap: wrap;">
+            <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; margin: 0; font-size: 0.85rem; color: #4b5563;">
+                <input type="checkbox" class="opt-allow-custom" ${allowCustomText ? 'checked' : ''} style="width: auto; margin: 0;">
+                Allow text input when chosen
+            </label>
+            <div style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #4b5563;">
+                <span>Show Related Questions:</span>
+                <select class="opt-related-questions" multiple style="width: 250px; margin: 0; padding: 2px 4px; font-size: 0.8rem; height: 50px;">
+                    ${relatedOptionsHtml}
+                </select>
+            </div>
+        </div>
     `;
     optionsContainer.appendChild(div);
 }
@@ -381,7 +408,7 @@ async function loadQuestionIntoEditor(id) {
             handleTypeChange();
         } else {
             q.options.forEach((opt, idx) => {
-                addOptionRow(opt.option_text, opt.option_key || '', opt.is_correct ? true : false, opt.id);
+                addOptionRow(opt.option_text, opt.option_key || '', opt.is_correct ? true : false, opt.id, opt.allow_custom_text ? true : false, opt.related_question_ids || []);
             });
             handleTypeChange();
         }
@@ -434,13 +461,18 @@ async function saveQuestion(event) {
             const key = row.querySelector('.opt-key').value;
             const text = row.querySelector('.opt-text').value;
             const isCorrect = row.querySelector('.opt-correct').checked;
+            const allowCustomText = row.querySelector('.opt-allow-custom').checked;
+            const relatedSelect = row.querySelector('.opt-related-questions');
+            const relatedQuestionIds = Array.from(relatedSelect.selectedOptions).map(o => parseInt(o.value));
             
             payload.options.push({
                 id: idVal ? parseInt(idVal) : null,
                 option_key: key,
                 option_text: text,
                 is_correct: isCorrect,
-                display_order: idx + 1
+                display_order: idx + 1,
+                allow_custom_text: allowCustomText,
+                related_question_ids: relatedQuestionIds
             });
         });
     } else if (type === 'open_text') {

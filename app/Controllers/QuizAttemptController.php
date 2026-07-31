@@ -189,11 +189,20 @@ final class QuizAttemptController extends Controller
                 $answersMap[(int) $ans['question_id']] = $ans;
             }
 
-            foreach ($questions as &$question) {
+            $questionsWithDetails = [];
+            $triggerOptionsMap = [];
+
+            foreach ($questions as $question) {
                 $details = $this->questionService->getQuestionById((int) $question['id']);
                 
-                // Only load correct options / accepted answers if configured
                 $options = $details['options'] ?? [];
+                foreach ($options as $opt) {
+                    $rqIds = $opt['related_question_ids'] ?? [];
+                    foreach ($rqIds as $rqId) {
+                        $triggerOptionsMap[(int) $rqId][] = (int) $opt['id'];
+                    }
+                }
+
                 if (!filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDATE_BOOL)) {
                     foreach ($options as &$opt) {
                         unset($opt['is_correct']);
@@ -206,7 +215,30 @@ final class QuizAttemptController extends Controller
                     : [];
 
                 $question['user_answer'] = $answersMap[(int) $question['id']] ?? null;
+                $questionsWithDetails[] = $question;
             }
+
+            $visibleQuestions = [];
+            foreach ($questionsWithDetails as $q) {
+                $qId = (int) $q['id'];
+                $isVisible = false;
+                if (!isset($triggerOptionsMap[$qId])) {
+                    $isVisible = true;
+                } else {
+                    foreach ($triggerOptionsMap[$qId] as $triggerOptId) {
+                        foreach ($savedAnswers as $ans) {
+                            if (in_array($triggerOptId, $ans['selected_option_ids'])) {
+                                $isVisible = true;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+                if ($isVisible) {
+                    $visibleQuestions[] = $q;
+                }
+            }
+            $questions = $visibleQuestions;
         }
 
         return $this->view('quiz/result', [
@@ -361,10 +393,20 @@ final class QuizAttemptController extends Controller
                 $answersMap[(int) $ans['question_id']] = $ans;
             }
 
-            foreach ($questions as &$question) {
+            $questionsWithDetails = [];
+            $triggerOptionsMap = [];
+
+            foreach ($questions as $question) {
                 $details = $this->questionService->getQuestionById((int) $question['id']);
                 
                 $options = $details['options'] ?? [];
+                foreach ($options as $opt) {
+                    $rqIds = $opt['related_question_ids'] ?? [];
+                    foreach ($rqIds as $rqId) {
+                        $triggerOptionsMap[(int) $rqId][] = (int) $opt['id'];
+                    }
+                }
+
                 if (!filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDATE_BOOL)) {
                     foreach ($options as &$opt) {
                         unset($opt['is_correct']);
@@ -377,7 +419,30 @@ final class QuizAttemptController extends Controller
                     : [];
 
                 $question['user_answer'] = $answersMap[(int) $question['id']] ?? null;
+                $questionsWithDetails[] = $question;
             }
+
+            $visibleQuestions = [];
+            foreach ($questionsWithDetails as $q) {
+                $qId = (int) $q['id'];
+                $isVisible = false;
+                if (!isset($triggerOptionsMap[$qId])) {
+                    $isVisible = true;
+                } else {
+                    foreach ($triggerOptionsMap[$qId] as $triggerOptId) {
+                        foreach ($savedAnswers as $ans) {
+                            if (in_array($triggerOptId, $ans['selected_option_ids'])) {
+                                $isVisible = true;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+                if ($isVisible) {
+                    $visibleQuestions[] = $q;
+                }
+            }
+            $questions = $visibleQuestions;
 
             $result['questions'] = $questions;
         }

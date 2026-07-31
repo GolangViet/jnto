@@ -169,7 +169,11 @@ final class QuizAttemptService
 
             // Save selected options if choice-based
             if (in_array($type, ['single_choice', 'multiple_choice', 'true_false'], true)) {
-                $this->attemptRepository->saveAttemptAnswerOptions($attemptAnswerId, $selectedOptionIds);
+                $optionCustomTexts = $payload['option_custom_texts'] ?? [];
+                if (!is_array($optionCustomTexts)) {
+                    $optionCustomTexts = [];
+                }
+                $this->attemptRepository->saveAttemptAnswerOptions($attemptAnswerId, $selectedOptionIds, $optionCustomTexts);
             }
 
             $db->commit();
@@ -218,6 +222,40 @@ final class QuizAttemptService
                 $answersMap[(int) $ans['question_id']] = $ans;
             }
 
+            // Build trigger options map
+            $triggerOptionsMap = [];
+            foreach ($questions as $q) {
+                $options = $this->questionRepository->getOptionsForQuestion((int) $q['id']);
+                foreach ($options as $opt) {
+                    $rqIds = $opt['related_question_ids'] ?? [];
+                    foreach ($rqIds as $rqId) {
+                        $triggerOptionsMap[(int) $rqId][] = (int) $opt['id'];
+                    }
+                }
+            }
+
+            // Determine visible questions
+            $visibleQuestionIds = [];
+            foreach ($questions as $q) {
+                $qId = (int) $q['id'];
+                if (!isset($triggerOptionsMap[$qId])) {
+                    $visibleQuestionIds[] = $qId;
+                } else {
+                    $isVisible = false;
+                    foreach ($triggerOptionsMap[$qId] as $triggerOptId) {
+                        foreach ($savedAnswers as $ans) {
+                            if (in_array($triggerOptId, $ans['selected_option_ids'])) {
+                                $isVisible = true;
+                                break 2;
+                            }
+                        }
+                    }
+                    if ($isVisible) {
+                        $visibleQuestionIds[] = $qId;
+                    }
+                }
+            }
+
             $totalScore = 0.0;
             $awardedScore = 0.0;
             $correctCount = 0;
@@ -225,6 +263,12 @@ final class QuizAttemptService
 
             foreach ($questions as $question) {
                 $qId = (int) $question['id'];
+                
+                // If the question is not visible, skip it completely
+                if (!in_array($qId, $visibleQuestionIds, true)) {
+                    continue;
+                }
+
                 $qScore = (float) ($question['score'] ?? 1.0);
                 $totalScore += $qScore;
 

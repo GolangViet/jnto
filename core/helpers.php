@@ -29,6 +29,31 @@ function config(string $key, mixed $default = null): mixed
 }
 
 /**
+ * Get a system setting value from the settings table.
+ *
+ * @param string $key
+ * @param mixed|null $default
+ * @return mixed
+ */
+function setting(string $key, mixed $default = null): mixed
+{
+    static $settings = null;
+    if ($settings === null) {
+        $settings = [];
+        try {
+            $db = \Core\Database::connection();
+            $stmt = $db->query("SELECT key, value FROM cms.settings");
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                $settings[$row['key']] = $row['value'];
+            }
+        } catch (\Throwable $e) {
+            // Table might not exist yet during migrations
+        }
+    }
+    return $settings[$key] ?? $default;
+}
+
+/**
  * Get the application instance.
  *
  * @return Application

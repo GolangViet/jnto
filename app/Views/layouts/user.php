@@ -97,6 +97,7 @@
         }
 
         .card {
+            position: relative;
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
@@ -110,6 +111,11 @@
         .card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            z-index: 5;
+        }
+
+        .card:has(.dropdown-menu[style*="display: block"]) {
+            z-index: 10;
         }
 
         input, textarea, select {
@@ -256,10 +262,19 @@
         <div class="nav-actions">
             <?php if ($user = app()->session()->get('user')): ?>
                 <a href="/quizzes" style="margin-right: 15px;">Quizzes</a>
+                <?php if ($mainQuizId = setting('main_quiz_quiz_id')): ?>
+                    <a href="/quizzes/<?= (int)$mainQuizId ?>" style="margin-right: 15px; color: #818cf8; font-weight: 600;">★ Main Quiz</a>
+                <?php endif; ?>
+                <?php if ($mainSurveyId = setting('main_survey_quiz_id')): ?>
+                    <a href="/quizzes/<?= (int)$mainSurveyId ?>" style="margin-right: 15px; color: #fb7185; font-weight: 600;">📋 Main Survey</a>
+                <?php endif; ?>
+                <?php if ($mainOpenId = setting('main_open_quiz_id')): ?>
+                    <a href="/quizzes/<?= (int)$mainOpenId ?>" style="margin-right: 15px; color: #2dd4bf; font-weight: 600;">💬 Open Questions</a>
+                <?php endif; ?>
                 <?php if (($user['role'] ?? 'user') === 'admin'): ?>
                     <a href="/admin/posts" style="margin-right: 15px;">Admin Panel</a>
                 <?php endif; ?>
-                <span class="muted" style="color: #94a3b8;">Hello, <strong style="color: #f1f5f9;"><?= e($user['name']) ?></strong></span>
+                <span class="muted" style="color: #94a3b8; margin-left: 10px;">Hello, <strong style="color: #f1f5f9;"><?= e($user['name']) ?></strong></span>
                 <form action="/logout" method="post" style="display:inline">
                     <?= csrf_field() ?>
                     <button class="btn btn-nav-logout" type="submit">Logout</button>
@@ -289,6 +304,6 @@
     <?php endif; ?>
     <?= $content ?>
 </main>
-<script src="/js/app.js"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>

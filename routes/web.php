@@ -40,7 +40,12 @@ $router->delete('/admin/posts/{id}', [PostController::class, 'destroy'], [AuthMi
 
 use App\Controllers\Admin\QuizController as AdminQuizController;
 use App\Controllers\Admin\QuestionController as AdminQuestionController;
+use App\Controllers\Admin\SettingController as AdminSettingController;
 use App\Controllers\QuizAttemptController;
+
+// Admin Settings Routes
+$router->get('/admin/settings', [AdminSettingController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->post('/admin/settings', [AdminSettingController::class, 'update'], [AuthMiddleware::class, AdminMiddleware::class]);
 
 // Admin Quiz HTML Routes
 $router->get('/admin/quizzes', [AdminQuizController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);

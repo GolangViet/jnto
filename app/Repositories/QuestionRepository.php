@@ -99,9 +99,28 @@ final class QuestionRepository extends BaseRepository
     public function getOptionsForQuestion(int $questionId): array
     {
         $db = Database::connection();
-        $stmt = $db->prepare("SELECT * FROM cms.question_options WHERE question_id = :question_id ORDER BY display_order ASC, id ASC");
+        $stmt = $db->prepare("
+            SELECT qo.*, 
+            COALESCE(
+                (SELECT json_agg(related_question_id) FROM cms.option_related_questions WHERE option_id = qo.id),
+                '[]'::json
+            ) as related_question_ids
+            FROM cms.question_options qo
+            WHERE qo.question_id = :question_id 
+            ORDER BY qo.display_order ASC, qo.id ASC
+        ");
         $stmt->execute(['question_id' => $questionId]);
-        return $stmt->fetchAll();
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['allow_custom_text'] = filter_var($row['allow_custom_text'] ?? false, FILTER_VALIDATE_BOOL);
+            if (isset($row['related_question_ids'])) {
+                $row['related_question_ids'] = json_decode((string) $row['related_question_ids'], true) ?: [];
+                $row['related_question_ids'] = array_map('intval', $row['related_question_ids']);
+            } else {
+                $row['related_question_ids'] = [];
+            }
+        }
+        return $rows;
     }
 
     /**
@@ -143,16 +162,17 @@ final class QuestionRepository extends BaseRepository
 
         // Insert or update remaining options
         $insertSql = "INSERT INTO cms.question_options (
-            question_id, option_key, option_text, image_url, is_correct, display_order
+            question_id, option_key, option_text, image_url, is_correct, display_order, allow_custom_text
         ) VALUES (
-            :question_id, :option_key, :option_text, :image_url, :is_correct, :display_order
-        )";
+            :question_id, :option_key, :option_text, :image_url, :is_correct, :display_order, :allow_custom_text
+        ) RETURNING id";
         $updateSql = "UPDATE cms.question_options SET
             option_key = :option_key,
             option_text = :option_text,
             image_url = :image_url,
             is_correct = :is_correct,
             display_order = :display_order,
+            allow_custom_text = :allow_custom_text,
             updated_at = CURRENT_TIMESTAMP
             WHERE id = :id AND question_id = :question_id";
 
@@ -161,6 +181,7 @@ final class QuestionRepository extends BaseRepository
 
         foreach ($options as $option) {
             $isCorrect = filter_var($option['is_correct'] ?? false, FILTER_VALIDATE_BOOL);
+            $allowCustomText = filter_var($option['allow_custom_text'] ?? false, FILTER_VALIDATE_BOOL);
             $params = [
                 'question_id' => $questionId,
                 'option_key' => !empty($option['option_key']) ? $option['option_key'] : null,
@@ -168,13 +189,31 @@ final class QuestionRepository extends BaseRepository
                 'image_url' => $option['image_url'] ?? null,
                 'is_correct' => $isCorrect ? 1 : 0, // bind parameter as int/bool compatibility
                 'display_order' => isset($option['display_order']) ? (int) $option['display_order'] : 0,
+                'allow_custom_text' => $allowCustomText ? 1 : 0,
             ];
 
             if (!empty($option['id'])) {
                 $params['id'] = (int) $option['id'];
                 $updateStmt->execute($params);
+                $optId = (int) $option['id'];
             } else {
                 $insertStmt->execute($params);
+                $optId = (int) $insertStmt->fetchColumn();
+            }
+
+            // Sync option-related questions (many-to-many)
+            $db->prepare("DELETE FROM cms.option_related_questions WHERE option_id = :option_id")
+               ->execute(['option_id' => $optId]);
+
+            $relatedQuestionIds = $option['related_question_ids'] ?? [];
+            if (!empty($relatedQuestionIds) && is_array($relatedQuestionIds)) {
+                $relStmt = $db->prepare("INSERT INTO cms.option_related_questions (option_id, related_question_id) VALUES (:option_id, :related_question_id)");
+                foreach ($relatedQuestionIds as $rqId) {
+                    $relStmt->execute([
+                        'option_id' => $optId,
+                        'related_question_id' => (int) $rqId,
+                    ]);
+                }
             }
         }
     }

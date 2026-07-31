@@ -11,7 +11,7 @@
     </a>
 </div>
 
-<div class="card" style="padding: 0; overflow: hidden; border: 1px solid #e5e7eb; border-radius: 10px; animation: fadeIn 0.4s ease-out;">
+<div class="card" style="padding: 0; border: 1px solid #e5e7eb; border-radius: 10px; animation: fadeIn 0.4s ease-out;">
     <?php if (empty($quizzes)): ?>
         <div style="text-align: center; padding: 48px; color: #6b7280;">
             <svg style="width: 48px; height: 48px; margin: 0 auto 16px; opacity: 0.4;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +24,7 @@
         <table style="width: 100%; border-collapse: collapse;">
             <thead>
                 <tr style="background: #f9fafb;">
-                    <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">ID</th>
+                    <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; border-top-left-radius: 10px;">ID</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">Title</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">Status</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: center;">Questions</th>
@@ -32,7 +32,7 @@
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: center;">Pass Score</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">Duration</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">Validity</th>
-                    <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: right;">Actions</th>
+                    <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: right; border-top-right-radius: 10px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
