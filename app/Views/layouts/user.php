@@ -11,13 +11,36 @@
     <?= render_styles() ?>
 </head>
 <body>
+    <header class="header">
+        <div class="header-wrapper">
+            <div class="logo-japan">
+                <a href="/" style="font-size: 0;">
+                    <img src="<?= assets('images/campaign-nhat-ban.png') ?>" alt="logo Campaign nhật bản">
+                </a>
+            </div>
+            <div class="logos">
+                <img src="<?= assets('images/jed-logo.png') ?>" alt="logo jed">
+                <img src="<?= assets('images/jnto-logo.png') ?>" alt="logo jnto">
+            </div>
+            <div class="titles">
+                <div class="title_line_lft">
+                    <img class="img" src="<?= assets('images/hoa-b.png') ?>" alt="icon hoa">
+                </div>
+                <h1 class="title">
+                    VẺ ĐẸP VÔ TẬN <br> ĐI ĐỂ TRỞ VỀ
+                </h1>
+                <div class="title_line_rgt">
+                    <img class="img" src="<?= assets('images/hoa-b.png') ?>" alt="icon hoa">
+                </div>
+            </div>
+        </div>
+    </header>
+
     <main>
         <section class="banner">
             <picture>
-                <a href="/">
-                    <source media="(max-width: 768px)" srcset="<?= assets('images/banner-m.webp') ?>">
-                    <img class="banner_img" src="<?= assets('images/banner.webp') ?>" alt="banner">
-                </a>
+                <source media="(max-width: 768px)" srcset="<?= assets('images/banner-m.webp') ?>">
+                <img class="banner_img" src="<?= assets('images/banner.webp') ?>" alt="banner">
             </picture>
         </section>
 
