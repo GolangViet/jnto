@@ -19,6 +19,17 @@ final class UserService
     }
 
     /**
+     * Find a user by their username.
+     *
+     * @param string $username
+     * @return array|null The user record or null if not found.
+     */
+    public function findByUsername(string $username): ?array
+    {
+        return $this->userRepository->findByUsername($username);
+    }
+
+    /**
      * Find a user by their email address.
      *
      * @param string $email
@@ -32,7 +43,7 @@ final class UserService
     /**
      * Create a new user, hashing their password.
      *
-     * @param array $data Contains name, email, password.
+     * @param array $data Contains username, name, email, password.
      * @return bool True on success, false on failure.
      */
     public function createUser(array $data): bool

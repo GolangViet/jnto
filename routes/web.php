@@ -13,15 +13,17 @@ $router = app()->router();
 
 $router->get('/', [HomeController::class, 'index']);
 
+$router->get('/thank-you', [HomeController::class, 'detailThankYou']);
+
 $router->get('/login', [AuthController::class, 'showLogin'], [GuestMiddleware::class]);
 
 $router->post('/login', [AuthController::class, 'login'], [GuestMiddleware::class]);
 
+$router->post('/logout', [AuthController::class, 'logout'], [AuthMiddleware::class]);
+
 $router->get('/admin/login', [AuthController::class, 'showAdminLogin'], [GuestMiddleware::class]);
 
 $router->post('/admin/login', [AuthController::class, 'adminLogin'], [GuestMiddleware::class]);
-
-$router->post('/logout', [AuthController::class, 'logout'], [AuthMiddleware::class]);
 
 $router->get('/admin/posts', [PostController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
 
@@ -35,13 +37,13 @@ $router->put('/admin/posts/{id}', [PostController::class, 'update'], [AuthMiddle
 
 $router->delete('/admin/posts/{id}', [PostController::class, 'destroy'], [AuthMiddleware::class, AdminMiddleware::class]);
 
-
 // --- QUIZ & QUESTION FEATURE ROUTES ---
 
 use App\Controllers\Admin\QuizController as AdminQuizController;
 use App\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Controllers\Admin\SettingController as AdminSettingController;
 use App\Controllers\QuizAttemptController;
+use App\Controllers\TakeSurveyController;
 
 // Admin Settings Routes
 $router->get('/admin/settings', [AdminSettingController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
@@ -72,6 +74,11 @@ $router->get('/api/admin/questions/{id}', [AdminQuestionController::class, 'apiS
 $router->put('/api/admin/questions/{id}', [AdminQuestionController::class, 'apiUpdate'], [AuthMiddleware::class, AdminMiddleware::class]);
 $router->delete('/api/admin/questions/{id}', [AdminQuestionController::class, 'apiDestroy'], [AuthMiddleware::class, AdminMiddleware::class]);
 $router->post('/api/admin/quizzes/{quizId}/questions/reorder', [AdminQuestionController::class, 'apiReorder'], [AuthMiddleware::class, AdminMiddleware::class]);
+
+// End-User take survey
+$router->get('/take-survey', [TakeSurveyController::class, 'detailSurvey'], [AuthMiddleware::class]);
+$router->get('/take-questions', [TakeSurveyController::class, 'detailQuestions'], [AuthMiddleware::class]);
+$router->get('/submit-post', [TakeSurveyController::class, 'confirmPost'], [AuthMiddleware::class]);
 
 // End-User Quiz HTML Routes
 $router->get('/quizzes', [QuizAttemptController::class, 'index'], [AuthMiddleware::class]);

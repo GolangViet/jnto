@@ -39,18 +39,18 @@ final class AuthController extends Controller
     {
         $request = app()->request();
         Csrf::verify($request);
-        $data = $request->only(['email', 'password']);
+        $data = $request->only(['username', 'password']);
         $validator = new Validator();
-        if (!$validator->validate($data, ['email' => 'required|email', 'password' => 'required|min:6'])) {
+        if (!$validator->validate($data, ['username' => 'required|min:3', 'password' => 'required|min:6'])) {
             app()->session()->flash('errors', $validator->errors());
             app()->session()->flashOldInput($data);
             $this->redirect('/login');
         }
 
-        $user = $this->userService->findByEmail($data['email']);
+        $user = $this->userService->findByUsername($data['username']);
 
         if (!$user || !password_verify($data['password'], $user['password'])) {
-            app()->session()->flash('error', 'Invalid email or password.');
+            app()->session()->flash('error', 'Invalid username or password.');
             $this->redirect('/login');
         }
 
@@ -88,18 +88,18 @@ final class AuthController extends Controller
     {
         $request = app()->request();
         Csrf::verify($request);
-        $data = $request->only(['email', 'password']);
+        $data = $request->only(['username', 'password']);
         $validator = new Validator();
-        if (!$validator->validate($data, ['email' => 'required|email', 'password' => 'required|min:6'])) {
+        if (!$validator->validate($data, ['username' => 'required|min:3', 'password' => 'required|min:6'])) {
             app()->session()->flash('errors', $validator->errors());
             app()->session()->flashOldInput($data);
             $this->redirect('/admin/login');
         }
 
-        $user = $this->userService->findByEmail($data['email']);
+        $user = $this->userService->findByUsername($data['username']);
 
         if (!$user || !password_verify($data['password'], $user['password'])) {
-            app()->session()->flash('error', 'Invalid email or password.');
+            app()->session()->flash('error', 'Invalid username or password.');
             $this->redirect('/admin/login');
         }
 

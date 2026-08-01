@@ -1,0 +1,393 @@
+.facebook-section {
+    width: 192rem;
+    max-width: 100%;
+    aspect-ratio: 1920 / 1732;
+    position: relative;
+    /* Che khe sub-pixel giữa background của map và section này. */
+    margin: -3px auto 0;
+    overflow: hidden;
+    background: url("./../../images/page-5/bg.webp") center / 100% 100% no-repeat;
+    color: #221f50;
+    font-size: 1rem;
+}
+
+.facebook-form {
+    width: 100%;
+    margin: 0;
+    padding-top: 17.5em;
+}
+
+.facebook-panel {
+    width: 145.5em;
+    aspect-ratio: 1455 / 1181;
+    position: relative;
+    margin: 0 auto;
+    padding: 8.5em 5em 4em;
+    background: url("./../../images/page-5/box-text.webp") center / 100% 100% no-repeat;
+}
+
+.facebook-title {
+    width: 64.3em;
+    aspect-ratio: 643 / 112;
+    position: absolute;
+    z-index: 2;
+    top: -6.5em;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding-bottom: 0.08em;
+    transform: translateX(-50%);
+    background: url("./../../images/page-5/box-title.webp") center / 100% 100% no-repeat;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.facebook-title > span {
+    font-size: 4.4em;
+}
+
+.facebook-intro {
+    text-align: center;
+}
+
+.facebook-intro > img {
+    width: 71.6em;
+    display: block;
+    margin: 0 auto;
+}
+
+.facebook-intro p {
+    margin: 1em 0 0;
+    color: #74351e;
+    font-size: 2.8em;
+    font-weight: 450;
+    line-height: 1.2;
+}
+
+.facebook-intro p + p {
+    margin-top: 0;
+}
+
+.facebook-intro p:last-of-type {
+    margin-bottom: 1.4em;
+}
+
+.facebook-question {
+    width: 124.4em;
+    aspect-ratio: 1244 / 324;
+    position: relative;
+    margin: 6.5em auto 0;
+    padding: 7em 7em 2.5em;
+    background: url("./../../images/page-5/box-cauhoi.webp") center / 100% 100% no-repeat;
+    text-align: center;
+}
+
+.facebook-tag {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    transform: translateX(-50%);
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.facebook-tag > span {
+    font-size: 3.5em;
+}
+
+.facebook-tag--question {
+    width: 23.2em;
+    aspect-ratio: 232 / 70;
+    top: -3.5em;
+    background-image: url("./../../images/page-5/tag-title-cauhoi.webp");
+}
+
+.facebook-question > p {
+    margin: 0;
+    font-size: 2.25em;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.facebook-hashtag-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    margin-top: 6.2em;
+    text-align: left;
+}
+
+.facebook-hashtag-row > strong {
+    flex: 0 0 auto;
+    color: #15308a;
+    font-size: 2.2em;
+}
+
+.facebook-hashtag-box {
+    min-width: 0;
+    height: 6.9em;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 0.2em solid #5674c5;
+    border-radius: 1.8em;
+    background: #fff;
+    color: #17358f;
+}
+
+.facebook-hashtag-box > span {
+    min-width: 0;
+    flex: 1;
+    padding: 0 1.2em;
+    font-size: 2.05em;
+    white-space: nowrap;
+}
+
+.facebook-copy-button {
+    width: 6.9em;
+    height: 100%;
+    flex: 0 0 6.9em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-left: 0.2em solid #5674c5;
+    border-radius: 1.8em 0 0 1.8em;
+    background: #f1f7fb;
+    font: inherit;
+}
+
+.facebook-copy-button img {
+    width: 3.3em;
+    height: 3.9em;
+}
+
+.facebook-copy-button.is-copied {
+    background: #dfeaf7;
+}
+
+.facebook-requirements {
+    position: relative;
+    margin: 9.1em 0 0;
+    padding: 6.4em 0 0;
+}
+
+.facebook-tag--requirements {
+    width: 24.7em;
+    aspect-ratio: 247 / 75;
+    top: -3.75em;
+    background-image: url("./../../images/page-5/tag-title-yeucau.webp");
+}
+
+.facebook-requirements ul {
+    margin: 0;
+    padding-left: 2em;
+    color: #5a240d;
+    font-size: 2.1em;
+    line-height: 1.35;
+    list-style: disc outside;
+}
+
+.facebook-requirements li {
+    padding-left: 0.2em;
+}
+
+.facebook-requirements a {
+    color: #114eb6;
+    text-decoration: underline;
+}
+
+.facebook-link-field {
+    width: 144.2em;
+    height: 11.6em;
+    display: block;
+    margin: 2.2em auto 0;
+}
+
+.facebook-link-field input {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 0 3em;
+    border: 0.15em solid #17358f;
+    border-radius: 3.4em;
+    background: rgba(255, 255, 255, 0.88);
+    color: #17358f;
+    font: inherit;
+    font-size: 2.4em;
+    text-align: center;
+}
+
+.facebook-link-field input::placeholder {
+    color: #17358f;
+    opacity: 1;
+}
+
+.facebook-submit-button {
+    width: 46.4em;
+    aspect-ratio: 464 / 108;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5.5em auto 0;
+    padding: 0 0 0.08em;
+    border: 0;
+    background: transparent url("./../../images/page-4/section-5/button-tieptheo-vang.webp") center / 100% 100% no-repeat;
+    color: #b5000b;
+    font: inherit;
+}
+
+.facebook-submit-button:hover,
+.facebook-submit-button:focus-visible {
+    background-image: url("./../../images/page-4/section-5/button-tieptheo-xanh.webp");
+    color: #fff;
+}
+
+.facebook-submit-button:focus-visible,
+.facebook-copy-button:focus-visible {
+    outline: 0.25em solid #17358f;
+    outline-offset: 0.3em;
+}
+
+.facebook-submit-button > span {
+    font-size: 4em;
+    font-weight: 700;
+    line-height: 1;
+}
+
+@media (max-width: 1919px) {
+    .facebook-section {
+        font-size: 0.520833vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .facebook-section {
+        width: 108rem;
+        aspect-ratio: 1080 / 2479;
+        background-image: url("./../../images/page-5/bg-giay-mobile.webp");
+        font-size: 0.925926vw;
+    }
+
+    .facebook-form {
+        padding-top: 12.6em;
+    }
+
+    .facebook-panel {
+        width: 98.1em;
+        aspect-ratio: 981 / 1824;
+        padding: 13.8em 2.5em 0;
+        background-image: url("./../../images/page-5/box-mobile.webp");
+    }
+
+    .facebook-title {
+        top: -5em;
+    }
+
+    .facebook-title > span {
+        font-size: 4.8em;
+    }
+
+    .facebook-intro br,
+    .facebook-question > p br {
+        display: none;
+    }
+
+    .facebook-intro {
+        width: 71.6em;
+        margin: 0 auto;
+    }
+
+    .facebook-question {
+        width: 89em;
+        aspect-ratio: 890 / 528;
+        margin-top: 12.8em;
+        padding: 10em 7em 2.5em;
+        background-image: url("./../../images/page-5/box-cauhoi-mobile.webp");
+    }
+
+    .facebook-question > p {
+        font-size: 2.8em;
+        line-height: 1.3;
+    }
+
+    .facebook-tag--question {
+        top: -0.4em;
+    }
+
+    .facebook-hashtag-row {
+        flex-direction: column;
+        gap: 1.5em;
+        margin-top: 5em;
+        text-align: center;
+    }
+
+    .facebook-hashtag-row > strong {
+        font-size: 2.5em;
+    }
+
+    .facebook-hashtag-box {
+        width: 78em;
+        height: 6.2em;
+        flex: 0 0 6.2em;
+    }
+
+    .facebook-copy-button {
+        width: 6.2em;
+        flex-basis: 6.2em;
+    }
+
+    .facebook-requirements {
+        margin-top: 10.9em;
+        padding-top: 12em;
+    }
+
+    .facebook-tag--requirements > span {
+        font-size: 3.8em;
+    }
+
+    .facebook-requirements ul {
+        padding-left: 2em;
+        font-size: 2.9em;
+        line-height: 1.45;
+    }
+
+    .facebook-requirements li + li {
+        margin-top: 0.35em;
+    }
+
+    .facebook-link-field {
+        width: 98.1em;
+        height: 12em;
+        margin-top: 3em;
+    }
+
+    .facebook-link-field input {
+        border-width: 0.1em;
+        border-radius: 1em;
+        font-size: 3em;
+    }
+
+    .facebook-submit-button {
+        margin-top: 12em;
+    }
+
+    .facebook-submit-button > span {
+        font-size: 4.8em;
+    }
+}

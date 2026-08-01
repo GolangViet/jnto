@@ -20,6 +20,19 @@ final class UserRepository extends BaseRepository
     }
 
     /**
+     * Find a user by their username.
+     *
+     * @param string $username
+     * @return array|null The user as an associative array, or null if not found.
+     */
+    public function findByUsername(string $username): ?array
+    {
+        /** @var User $userModel */
+        $userModel = $this->model;
+        return $userModel->findByUsername($username);
+    }
+
+    /**
      * Find a user by their email address.
      *
      * @param string $email
@@ -35,7 +48,7 @@ final class UserRepository extends BaseRepository
     /**
      * Create a new user record.
      *
-     * @param array $data Contains keys: name, email, password.
+     * @param array $data Contains keys: username, name, email, password.
      * @return bool True on success, false on failure.
      */
     public function create(array $data): bool

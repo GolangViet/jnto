@@ -15,6 +15,7 @@ return new class {
         $db->exec("
             CREATE TABLE IF NOT EXISTS cms.users (
                 id SERIAL PRIMARY KEY,
+                username VARCHAR(255) NOT NULL UNIQUE,
                 name VARCHAR(255) NOT NULL,
                 email VARCHAR(255) NOT NULL UNIQUE,
                 password VARCHAR(255) NOT NULL,
@@ -29,12 +30,13 @@ return new class {
         $userPassword = password_hash('password', PASSWORD_DEFAULT);
 
         $stmt = $db->prepare("
-            INSERT INTO cms.users (name, email, password, role)
-            VALUES (:name, :email, :password, :role)
+            INSERT INTO cms.users (username, name, email, password, role)
+            VALUES (:username, :name, :email, :password, :role)
             ON CONFLICT (email) DO NOTHING
         ");
 
         $stmt->execute([
+            'username' => 'admin',
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'password' => $adminPassword,
@@ -42,6 +44,7 @@ return new class {
         ]);
 
         $stmt->execute([
+            'username' => 'user',
             'name' => 'Regular User',
             'email' => 'user@example.com',
             'password' => $userPassword,

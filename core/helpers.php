@@ -168,3 +168,89 @@ function component(string $name, array $data = []): void
     require Application::getInstance()->basePath('app/Views/components/' . $name . '.php');
 }
 
+/**
+ * Render a view and return its HTML as a string.
+ *
+ * @param string $view
+ * @param array $data
+ * @param string|bool $layout
+ * @return string
+ */
+function view(string $view, array $data = [], string|bool $layout = false): string
+{
+    return \Core\View::render($view, $data, $layout);
+}
+
+/**
+ * Push a style file to the view.
+ *
+ * @param string $url
+ * @return void
+ */
+function push_style(string $url): void
+{
+    \Core\View::pushStyle($url);
+}
+
+/**
+ * Push a script file to the view.
+ *
+ * @param string $url
+ * @return void
+ */
+function push_script(string $url): void
+{
+    \Core\View::pushScript($url);
+}
+
+/**
+ * Push a modal template to the view.
+ *
+ * @param string $modal
+ * @return void
+ */
+function push_modal(string $modal): void
+{
+    \Core\View::pushModal($modal);
+}
+
+/**
+ * Render all pushed style files.
+ *
+ * @return string
+ */
+function render_styles(): string
+{
+    return \Core\View::renderStyles();
+}
+
+/**
+ * Render all pushed script files.
+ *
+ * @return string
+ */
+function render_scripts(): string
+{
+    return \Core\View::renderScripts();
+}
+
+/**
+ * Render all pushed modal templates.
+ *
+ * @return string
+ */
+function render_modals(): string
+{
+    return \Core\View::renderModals();
+}
+
+/**
+ * Summary of assets
+ *
+ * @param string $path
+ * @return string
+ */
+function assets(string $path = ''): string
+{
+    return url("/assets/{$path}");
+}

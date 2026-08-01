@@ -9,8 +9,14 @@ use Core\Controller;
 
 final class HomeController extends Controller
 {
+    /**
+     * @var PostService
+     */
     private PostService $postService;
 
+    /**
+     * HomeController constructor.
+     */
     public function __construct()
     {
         $this->postService = new PostService();
@@ -23,10 +29,16 @@ final class HomeController extends Controller
      */
     public function index(): string
     {
-        $user = app()->session()->get('user'); 
+        return $this->view('pages/index', ['posts' => $this->postService->getPublishedPosts()]);
+    }
 
-        return $this->view('home/index', [
-            'posts' => $this->postService->getPublishedPosts(),
-        ]);
+    /**
+     * Render the thank you page.
+     *
+     * @return string Rendered HTML for the thank you page.
+     */
+    public function detailThankYou(): string
+    {
+        return $this->view('pages/thank-you');
     }
 }

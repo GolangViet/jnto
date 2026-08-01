@@ -16,6 +16,19 @@ final class User extends Model
     protected string $table = 'cms.users';
 
     /**
+     * Find a user by their username.
+     *
+     * @param string $username
+     * @return array|null The user as an associative array, or null if not found.
+     */
+    public function findByUsername(string $username): ?array
+    {
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE username = :username LIMIT 1");
+        $stmt->execute(['username' => $username]);
+        return $stmt->fetch() ?: null;
+    }
+
+    /**
      * Find a user by their email address.
      *
      * @param string $email
@@ -31,14 +44,14 @@ final class User extends Model
     /**
      * Create a new user record.
      *
-     * @param array $data Contains keys: name, email, password.
+     * @param array $data Contains keys: username, name, email, password.
      * @return bool True on success, false on failure.
      */
     public function create(array $data): bool
     {
         $data['role'] = $data['role'] ?? 'user';
         $stmt = $this->db->prepare(
-            "INSERT INTO {$this->table} (name, email, password, role) VALUES (:name, :email, :password, :role)"
+            "INSERT INTO {$this->table} (username, name, email, password, role) VALUES (:username, :name, :email, :password, :role)"
         );
 
         return $stmt->execute($data);

@@ -1,3 +1,5 @@
+<?php push_style('/assets/css/user/form.css'); ?>
+
 <?php
 $mainQuizId = setting('main_quiz_quiz_id');
 $mainSurveyId = setting('main_survey_quiz_id');
@@ -100,3 +102,5 @@ $mainOpenId = setting('main_open_quiz_id');
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
+<?php push_script('/assets/js/home.js'); ?>
+

@@ -1,36 +1,28 @@
-<div class="card" style="max-width: 450px; margin: 40px auto; padding: 36px; animation: fadeIn 0.4s ease-out;">
-    <div style="text-align: center; margin-bottom: 28px;">
-        <h1 style="font-size: 2rem; font-weight: 800; margin: 0 0 8px; background: linear-gradient(to right, #1e293b, #475569); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sign In</h1>
-        <p class="muted" style="margin: 0; font-size: 1rem;">Login to your end-user account</p>
-    </div>
-
-    <?php if ($errors = app()->session()->pullFlash('errors')): ?>
-        <div class="alert error" style="margin-bottom: 20px;">
-            <ul style="margin: 0; padding-left: 20px;">
-                <?php foreach ($errors as $errorField => $fieldErrors): ?>
-                    <?php foreach ($fieldErrors as $err): ?>
-                        <li><?= e($err) ?></li>
-                    <?php endforeach; ?>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
-
-    <form method="post" action="/login" style="margin: 0;">
+<section class="section-login">
+    <form class="login" method="post" action="/login">
         <?= csrf_field() ?>
-        
-        <div style="margin-bottom: 18px;">
-            <label style="font-weight: 600; font-size: 0.875rem; color: #475569; display: block; margin-bottom: 6px;">Email Address</label>
-            <input type="email" name="email" value="<?= e((string) old('email')) ?>" required placeholder="you@example.com" style="margin: 0;">
+        <h2 class="login-title"><span>ĐĂNG NHẬP</span></h2>
+        <div class="login-box">
+            <div class="login-username">
+                <label for="username" class="login-label">Tên đăng nhập:</label>
+                <input type="text" name="username" class="login-input" id="username" value="<?= e((string) old('username')) ?>" required />
+            </div>
+            <div class="line-decor">
+                <img class="img" src="<?= assets('images/login/line-decor.webp') ?>" alt="line decor">
+            </div>
+            <div class="login-pass">
+                <label for="password-input" class="login-label">Mật khẩu:</label>
+                <div class="login-input-pass">
+                    <input type="password" name="password" class="password-input" id="password-input" required />
+                    <button type="button" class="pass_eye">
+                        <svg class="pass_icon"><use xlink:href="#eye-closed-icon"></use></svg>
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <div style="margin-bottom: 24px;">
-            <label style="font-weight: 600; font-size: 0.875rem; color: #475569; display: block; margin-bottom: 6px;">Password</label>
-            <input type="password" name="password" required placeholder="••••••••" style="margin: 0;">
+        <div class="login-footer">
+            <button type="submit" class="btn-login"><span>ĐĂNG NHẬP</span></button>
+            <h3>Bạn chưa có tài khoản? <a href="#" title="Đăng ký">Đăng Ký</a></h3>
         </div>
-
-        <button class="btn" style="width: 100%; padding: 12px; font-size: 1rem;">
-            Sign In
-        </button>
     </form>
-</div>
+</section>
