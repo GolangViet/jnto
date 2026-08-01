@@ -448,6 +448,28 @@
         font-size: clamp(14px, 1.7vw, 2em);
     }
 }
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .registers{
+        width: 45%;
+    }
+
+    .agree-box{
+        width: 90%;
+    }
+
+    .frm-footer >h3 {
+        font-size: clamp(10px, 1.5vw, 2em);
+    }
+
+    .frm-box{
+        background-position: 2em 0;
+    }
+
+    .line-decor{
+        margin-top: 1em;
+    }
+}
+ 
 
 
 @media only screen and (min-width: 992px) and (max-width: 1199px){  

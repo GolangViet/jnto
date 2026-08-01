@@ -806,7 +806,7 @@ body.modal-open-body{
 .login-input{
     font-size: 2em;
     width: 100%;
-    height: clamp(40px, 3.6vw, 7.2rem);
+    height: clamp(35px, 3.6vw, 7.2rem);
     background-color: #ffffff;
     border-radius: 5px;
     padding-left: 1rem;
@@ -817,6 +817,8 @@ body.modal-open-body{
 .line-decor{
     margin-top: 2em;
     margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .login-input-pass{
@@ -824,7 +826,7 @@ body.modal-open-body{
     position: relative;
     background-color: #ffffff;
     border-radius: 5px;
-    height: clamp(40px, 3.6vw, 7.2rem); 
+    height: clamp(35px, 3.6vw, 7.2rem); 
     overflow: hidden;   
 }
 
@@ -967,7 +969,156 @@ body.modal-open-body{
 
 .frm-footer{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 5em;
+    padding-top: clamp(20px, 3.5vw, 5em);
+    color: #ad0808;
+    gap: 1rem;
+}
+
+.btn-register{
+    font-size: 1rem;
+    aspect-ratio: 507 / 94;
+    width: 60%;
+    background-image: url("../img/register/button-dangky.webp");  
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: transparent;
+    color: #ad0808;
+}
+.btn-register:hover{
+    background-image: url("../img/register/button-dangky-hover.webp"); 
+}
+
+.btn-register > span{
+    font-size: clamp(14px, 1.8vw, 3.2em);
+    font-weight: 600;
+}
+
+.frm-footer >h3{
+    font-size: clamp(10px, 1.8vw, 2.2em);
+    font-weight: 500;
+    color: #ad0808;
+}
+
+.frm-footer >h3 >a{
+    font-weight: 600;
+    position: relative;
+}
+
+.frm-footer >h3 >a::before{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ad0808;
+}
+
+/* ---- check icon --- */
+.agree-box {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1em; 
+    width: 90%; 
+    margin-bottom: 1em;
+}
+
+.agree-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+    cursor: pointer;
+    color: #b30000;
+    line-height: 1.5;
+    font-size: clamp(8px, 1vw, 1.8em);
+}
+
+/* Ẩn nhưng vẫn click được */
+.agree-item input{
+    position:absolute;
+    opacity:0;
+    width:0;
+    height:0;
+}
+
+.checkmark{
+    font-size: 1rem;
+    width:2.8em;
+    height:2.8em;
+    border-radius:50%;
+    background: #ffffff;
+    border: 1px solid #b30000;
+    flex-shrink:0;
+    position:relative;
+    transition:.2s;
+}
+
+.checkmark::after{
+    content:"";
+    position:absolute;
+    left:1em;
+    top:0.6em;
+    width:0.7em;
+    height:1.3em;    
+    border:solid #fff;
+    border-width:0 3px 3px 0;
+    transform:rotate(45deg);
+    opacity:0;
+}
+
+/* Khi check */
+.agree-item input:checked + .checkmark{
+    background:#b30000;
+}
+
+.agree-item input:checked + .checkmark::after{
+    opacity:1;
+}
+
+.text > a {
+    color: #b30000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.text {
+    margin-top: 2px;
+}
+
+.alert_info{
+    font-size: 1rem;
+    aspect-ratio: 772 / 212;
+    width: 100%;
+    margin-top: 1.5em;
+    background-image: url("../img/register/notice-box.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;  
+}
+
+.alert_info > h3{
+    width: 100%;
+    height: 26%;
+    text-align: center;
+    font-size: clamp(12px, 1.5vw, 2.5em);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert_info > p{
+    font-size: clamp(7px, 1vw, 2.2em);
+    color: #152b79;
+    width: 86%;
+    height: 72%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 }
