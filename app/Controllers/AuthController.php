@@ -29,6 +29,16 @@ final class AuthController extends Controller
     }
 
     /**
+     * Show the registration form.
+     *
+     * @return string Rendered registration page HTML.
+     */
+    public function showRegister(): string
+    {
+        return $this->view('auth/register');
+    }
+
+    /**
      * Handle a login request.
      *
      * Validates credentials and sets the authenticated user in session on success.
@@ -67,6 +77,55 @@ final class AuthController extends Controller
         ]);
 
         $this->redirect('/');
+    }
+
+    /**
+     * Handle a registration request.
+     *
+     * @return never Redirects on success or failure.
+     */
+    public function register(): never
+    {
+        $request = app()->request();
+        Csrf::verify($request);
+        $validator = new Validator();
+        $data = $request->only(['username', 'password', 'password_confirmation']);
+        if (!$validator->validate($data, ['username' => 'required|min:3', 'password' => 'required|min:6'])) {
+            app()->session()->flash('errors', $validator->errors());
+            app()->session()->flashOldInput($data);
+            $this->redirect('/register');
+        }
+
+        $errors = [];
+        if ($data['password'] !== $data['password_confirmation']) {
+            $errors['password_confirmation'][] = 'Password confirmation does not match.';
+        }
+
+        if ($this->userService->findByUsername($data['username'])) {
+            $errors['username'][] = 'Username is already taken.';
+        }
+
+        if (!empty($errors)) {
+            app()->session()->flash('errors', $errors);
+            app()->session()->flashOldInput($data);
+            $this->redirect('/register');
+        }
+
+        $username = $data['username'] ?? '';
+        $created = $this->userService->createUser([
+            'name'     => $username,
+            'email'    => $username,
+            'username' => $username,
+            'password' => $data['password'],
+        ]);
+        if (!$created) {
+            app()->session()->flash('error', 'Could not create account. Please try again.');
+            app()->session()->flashOldInput($data);
+            $this->redirect('/register');
+        }
+
+        app()->session()->flash('success', 'Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
+        $this->redirect('/login');
     }
 
     /**

@@ -34,17 +34,17 @@ final class QuizRepository extends BaseRepository
 
         $stmt = $db->prepare($sql);
         $stmt->execute([
-            'title' => $data['title'],
-            'description' => $data['description'] ?? null,
-            'status' => $data['status'] ?? 'draft',
-            'duration_minutes' => isset($data['duration_minutes']) && $data['duration_minutes'] !== '' ? (int) $data['duration_minutes'] : null,
-            'pass_score' => isset($data['pass_score']) && $data['pass_score'] !== '' ? (float) $data['pass_score'] : null,
-            'show_result' => isset($data['show_result']) ? (bool) $data['show_result'] : true,
-            'show_correct_answer' => isset($data['show_correct_answer']) ? (bool) $data['show_correct_answer'] : true,
-            'allow_resume' => isset($data['allow_resume']) ? (bool) $data['allow_resume'] : true,
-            'start_at' => !empty($data['start_at']) ? $data['start_at'] : null,
-            'end_at' => !empty($data['end_at']) ? $data['end_at'] : null,
-            'created_by' => isset($data['created_by']) ? (int) $data['created_by'] : null,
+            'title'               => $data['title'],
+            'pass_score'          => $data['pass_score'] ?? 0,
+            'status'              => $data['status'] ?? 'draft',
+            'description'         => $data['description'] ?? null,
+            'show_result'         => (isset($data['show_result']) ? filter_var($data['show_result'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
+            'duration_minutes'    => (int) ($data['duration_minutes'] ?? ''),
+            'allow_resume'        => (isset($data['allow_resume']) ? filter_var($data['allow_resume'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
+            'show_correct_answer' => (isset($data['show_correct_answer']) ? filter_var($data['show_correct_answer'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
+            'end_at'              => !empty($data['end_at'] ?? '') ? $data['end_at'] : null,
+            'start_at'            => !empty($data['start_at'] ?? '') ? $data['start_at'] : null,
+            'created_by'          => isset($data['created_by']) ? (int)$data['created_by'] : null,
         ]);
 
         return (int) $stmt->fetchColumn();
@@ -82,9 +82,9 @@ final class QuizRepository extends BaseRepository
             'status' => $data['status'] ?? 'draft',
             'duration_minutes' => isset($data['duration_minutes']) && $data['duration_minutes'] !== '' ? (int) $data['duration_minutes'] : null,
             'pass_score' => isset($data['pass_score']) && $data['pass_score'] !== '' ? (float) $data['pass_score'] : null,
-            'show_result' => isset($data['show_result']) ? (bool) $data['show_result'] : true,
-            'show_correct_answer' => isset($data['show_correct_answer']) ? (bool) $data['show_correct_answer'] : true,
-            'allow_resume' => isset($data['allow_resume']) ? (bool) $data['allow_resume'] : true,
+            'show_result' => (isset($data['show_result']) ? filter_var($data['show_result'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
+            'show_correct_answer' => (isset($data['show_correct_answer']) ? filter_var($data['show_correct_answer'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
+            'allow_resume' => (isset($data['allow_resume']) ? filter_var($data['allow_resume'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'start_at' => !empty($data['start_at']) ? $data['start_at'] : null,
             'end_at' => !empty($data['end_at']) ? $data['end_at'] : null,
         ]);

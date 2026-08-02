@@ -262,6 +262,14 @@ function handleDragEnd() {
     fetchQuestions(); // Refresh list to sync correct display
 }
 
+// Helper to enable/disable inputs in a container to manage browser validation
+function toggleInputs(container, enabled) {
+    const inputs = container.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.disabled = !enabled;
+    });
+}
+
 // Dynamic fields toggle based on selection
 function handleTypeChange() {
     const type = qType.value;
@@ -291,6 +299,15 @@ function handleTypeChange() {
         if (acceptedContainer.children.length === 0) {
             addAcceptedAnswerRow();
         }
+    }
+
+    // Toggle disabled status for inputs in choiceSection and openTextSection
+    if (type === 'single_choice' || type === 'multiple_choice' || type === 'true_false') {
+        toggleInputs(choiceSection, true);
+        toggleInputs(openTextSection, false);
+    } else if (type === 'open_text') {
+        toggleInputs(choiceSection, false);
+        toggleInputs(openTextSection, true);
     }
 }
 

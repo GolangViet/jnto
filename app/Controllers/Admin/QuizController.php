@@ -23,8 +23,9 @@ final class QuizController extends Controller
      */
     public function index(): string
     {
-        $quizzes = $this->quizService->getQuizzesWithStats();
-        return $this->view('admin/quizzes/index', ['quizzes' => $quizzes]);
+         $quizzes = $this->quizService->getQuizzesWithStats();
+
+         return $this->view('admin/quizzes/index', ['quizzes' => $quizzes], true);
     }
 
     /**
@@ -42,12 +43,18 @@ final class QuizController extends Controller
     {
         $request = app()->request();
         Csrf::verify($request);
-
         $data = $request->only([
-            'title', 'description', 'status', 'duration_minutes', 'pass_score',
-            'show_result', 'show_correct_answer', 'allow_resume', 'start_at', 'end_at'
+            'title',
+            'status',
+            'end_at',
+            'start_at',
+            'pass_score',
+            'description',
+            'show_result',
+            'allow_resume',
+            'duration_minutes',
+            'show_correct_answer',
         ]);
-
         $errors = $this->validateQuizData($data);
         if (!empty($errors)) {
             app()->session()->flash('errors', $errors);
@@ -56,8 +63,8 @@ final class QuizController extends Controller
         }
 
         $data['show_result'] = isset($data['show_result']);
-        $data['show_correct_answer'] = isset($data['show_correct_answer']);
         $data['allow_resume'] = isset($data['allow_resume']);
+        $data['show_correct_answer'] = isset($data['show_correct_answer']);
         $data['created_by'] = app()->session()->get('user')['id'] ?? null;
 
         $this->quizService->createQuiz($data);
@@ -197,7 +204,7 @@ final class QuizController extends Controller
 
         $currentStatus = $quiz['status'] ?? 'draft';
         $newStatus = $currentStatus === 'published' ? 'inactive' : 'published';
-        
+
         $this->quizService->updateQuiz($quizId, array_merge($quiz, ['status' => $newStatus]));
         app()->response()->json(['status' => $newStatus, 'message' => "Quiz status updated to $newStatus."]);
     }
@@ -217,12 +224,15 @@ final class QuizController extends Controller
         }
     }
 
-    // --- Validation Helper ---
-
+    /**
+     * Validate quiz data for both web and API requests.
+     *
+     * @param array $data
+     * @return array
+     */
     private function validateQuizData(array $data): array
     {
         $errors = [];
-        
         $validator = new Validator();
         if (!$validator->validate($data, ['title' => 'required'])) {
             $errors = array_merge($errors, $validator->errors());

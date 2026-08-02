@@ -22,7 +22,7 @@
         </div>
         <div class="login-footer">
             <button type="submit" class="btn-login"><span>ĐĂNG NHẬP</span></button>
-            <h3>Bạn chưa có tài khoản? <a href="#" title="Đăng ký">Đăng Ký</a></h3>
+            <h3>Bạn chưa có tài khoản? <a href="/register" title="Đăng ký">Đăng Ký</a></h3>
         </div>
     </form>
 </section>

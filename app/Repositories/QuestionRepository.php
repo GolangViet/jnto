@@ -51,7 +51,7 @@ final class QuestionRepository extends BaseRepository
             'question_text' => $data['question_text'],
             'explanation' => $data['explanation'] ?? null,
             'score' => isset($data['score']) ? (float) $data['score'] : 1.0,
-            'is_required' => isset($data['is_required']) ? (bool) $data['is_required'] : true,
+            'is_required' => (isset($data['is_required']) ? filter_var($data['is_required'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'display_order' => isset($data['display_order']) ? (int) $data['display_order'] : 0,
         ]);
 
@@ -85,7 +85,7 @@ final class QuestionRepository extends BaseRepository
             'question_text' => $data['question_text'],
             'explanation' => $data['explanation'] ?? null,
             'score' => isset($data['score']) ? (float) $data['score'] : 1.0,
-            'is_required' => isset($data['is_required']) ? (bool) $data['is_required'] : true,
+            'is_required' => (isset($data['is_required']) ? filter_var($data['is_required'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'display_order' => isset($data['display_order']) ? (int) $data['display_order'] : 0,
         ]);
     }

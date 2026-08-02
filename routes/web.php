@@ -19,6 +19,10 @@ $router->get('/login', [AuthController::class, 'showLogin'], [GuestMiddleware::c
 
 $router->post('/login', [AuthController::class, 'login'], [GuestMiddleware::class]);
 
+$router->get('/register', [AuthController::class, 'showRegister'], [GuestMiddleware::class]);
+
+$router->post('/register', [AuthController::class, 'register'], [GuestMiddleware::class]);
+
 $router->post('/logout', [AuthController::class, 'logout'], [AuthMiddleware::class]);
 
 $router->get('/admin/login', [AuthController::class, 'showAdminLogin'], [GuestMiddleware::class]);
