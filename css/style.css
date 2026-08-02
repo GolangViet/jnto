@@ -57,7 +57,7 @@ body * {
 
 .title{
     font-size: clamp(16px, 1.8vw ,3em);
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -86,6 +86,41 @@ body * {
     height: 1px;
     width: clamp(50px, 6vw, 10em);
     background-color: var(--black);
+}
+
+@media (min-width: 1200px) {
+    .header-wrapper {
+        width: 75%;
+        height: clamp(9.6em, 7.97vw, 15.3em);
+        padding: 0;
+    }
+
+    .logo-japan {
+        height: clamp(6.5em, 4.95vw, 9.5em);
+    }
+
+    .logos {
+        height: clamp(3em, 2.604vw, 5em);
+        gap: clamp(3em, 2.604vw, 5em);
+    }
+
+    .titles {
+        top: 53%;
+        gap: 2.6em;
+    }
+
+    .title {
+        line-height: 1.18;
+    }
+
+    .title_line_lft::before,
+    .title_line_rgt::before {
+        width: clamp(7.5em, 6.25vw, 12em);
+    }
+
+    .title_line_lft::before {
+        left: calc(-1 * (clamp(7.5em, 6.25vw, 12em) + 10px));
+    }
 }
 
 /* ------ banner ----- */
@@ -1125,4 +1160,8 @@ body.modal-open-body{
     align-items: center;
     justify-content: center;
     margin: auto;
+}
+
+.sec2-copy-mobile {
+    display: none;
 }
