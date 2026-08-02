@@ -37,8 +37,8 @@
             panel.hidden = !isActive;
             panel.classList.toggle('is-active', isActive);
         });
-        surveySection.classList.toggle('survey-section--mid', panelName === 'visited');
-        surveySection.classList.toggle('survey-section--large', panelName === 'not-visited');
+        surveySection.classList.toggle('survey-section--mid', panelName === '3-2-a');
+        surveySection.classList.toggle('survey-section--large', panelName === '3-2-b');
         form.classList.remove('was-validated');
         surveySection.scrollIntoView({
             behavior: 'smooth',
@@ -63,7 +63,7 @@
         }
 
         const selectedExperience = form.querySelector('input[name="travel_experience"]:checked');
-        showPanel(selectedExperience.dataset.travelStatus);
+        showPanel(selectedExperience.dataset.surveyTarget);
     });
 
     form.addEventListener('submit', function (event) {

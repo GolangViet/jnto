@@ -122,10 +122,6 @@
     font-weight: 650;
 }
 
-.region-card--kyushu .region-card__label {
-    bottom: 1.15em;
-}
-
 @media (max-width: 1919px) {
     .region-map {
         font-size: 0.520833vw;

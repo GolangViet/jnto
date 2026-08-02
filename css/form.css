@@ -64,7 +64,7 @@
     min-width: 600px;
     min-height: 0;
     aspect-ratio: 1224 / 1514;
-    padding: 3.4em 3.6em 1.7em;
+    padding: 3.4em 1em 1.7em 3.6em;
     background-image: url("../img/form/bg-box-mid.webp");
 }
 
@@ -162,6 +162,10 @@
 .survey-choice > span {
     display: block;
     line-height: 1.25;
+}
+
+.survey-nowrap {
+    white-space: nowrap;
 }
 
 .survey-choice > input:checked {
@@ -277,6 +281,10 @@
 }
 
 @media (max-width: 768px) {
+    .survey-nowrap-mobile {
+        white-space: nowrap;
+    }
+
     .survey-form {
         font-size: 2.4vw;
     }
@@ -390,7 +398,7 @@
     .survey-panel--visited,
     .survey-panel--large {
         font-size: 1em;
-        padding: 3.65em 1.5em 2.5em;
+        padding: 3.65em 0.5em 2.5em 1.5em;
     }
 
     .survey-button {
