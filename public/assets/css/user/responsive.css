@@ -1,4 +1,4 @@
-/* 
+/*
 * <576:     xs
 * 576-768:  sm
 * 768-992:  md
@@ -7,12 +7,12 @@
 * >= 1400:  xxl
 */
 @media (max-width: 575px){
-       
+
 
 }
 
 
-@media (max-width: 768px){ 
+@media (max-width: 768px){
     .header-wrapper{
         width: 100%;
         padding: 10px;
@@ -85,7 +85,7 @@
     .sec2-time_title2{
         aspect-ratio: 217 / 49;
         width: 60%;
-        height: auto;        
+        height: auto;
         top: -0.7em;
     }
 
@@ -93,11 +93,11 @@
         font-size: clamp(12px, 2.4vw, 2.2em);
     }
 
-    .sec2_info {   
+    .sec2_info {
         padding-top: clamp(30px, 4vw, 50px);
     }
 
-    .sec2_info > h4 {       
+    .sec2_info > h4 {
         font-size: clamp(14px, 4vw, 30px);
         margin-bottom: clamp(10px, 2.2vw, 40px);
     }
@@ -109,7 +109,7 @@
     .sec2_info2{
         padding: 3em 1em 1em 1em;
     }
-    
+
     .sec2_info2 > li > p {
         font-size: clamp(10px, 2vw, 2em);
     }
@@ -137,13 +137,13 @@
         padding-bottom: clamp(11em, 19vw, 14em);
     }
 
-    .sec3-title {   
+    .sec3-title {
         padding-top: clamp(10px, 7vw, 6em);
         top: 3.7%;
     }
 
     .sec3-title > h2 {
-        font-size: clamp(14px, 3.5vw, 3.7em);        
+        font-size: clamp(14px, 3.5vw, 3.7em);
     }
 
     .sec3-title > h3 {
@@ -158,7 +158,7 @@
     }
 
     .sec3-footer >p {
-        font-size: clamp(10px, 2.3vw ,1.7em);        
+        font-size: clamp(10px, 2.3vw ,1.7em);
         margin-bottom: 1em;
     }
 
@@ -184,7 +184,7 @@
     }
 
     .footer > .container{
-        max-width: 100% !important;       
+        max-width: 100% !important;
     }
 
     .footer_socials_title{
@@ -207,13 +207,13 @@
         width: 85%;
         margin: auto;
     }
-    
-    .footer_links a{       
+
+    .footer_links a{
         font-size: clamp(12px, 2.5vw, 1.8em);
     }
 
-    .modal-close{       
-        background-color: rgba(255, 255, 255, 0.8);       
+    .modal-close{
+        background-color: rgba(255, 255, 255, 0.8);
     }
 
     /* ---- login ---- */
@@ -234,7 +234,7 @@
 }
 
 @media (max-width: 576px){
-    .section2_title {      
+    .section2_title {
         padding: 2em 0;
     }
     .section2_title > h2 {
@@ -242,13 +242,13 @@
         line-height: 1.5;
     }
 
-    .sec2-line-top::before, .sec2-line-bottom::before {      
-        left: calc(50% + 2vw);       
+    .sec2-line-top::before, .sec2-line-bottom::before {
+        left: calc(50% + 2vw);
     }
 
-    .sec2-line-top::after,.sec2-line-bottom::after  {      
-        right: calc(50% + 2vw);        
-    }   
+    .sec2-line-top::after,.sec2-line-bottom::after  {
+        right: calc(50% + 2vw);
+    }
 
     .section2_wrapper{
         height: 95%;
@@ -261,9 +261,9 @@
         padding-bottom: 6%;
         background-position: 0.7em 0;
     }
-   
 
-    .sec2-time_title2 {     
+
+    .sec2-time_title2 {
         top: -9%;
         width: 70%;
     }
@@ -277,7 +277,7 @@
         padding-top: clamp(15px, 5.5vw, 30px);
     }
 
-    .sec2_info > h4 {       
+    .sec2_info > h4 {
         margin-bottom: clamp(8px, 2.5vw, 16px);
     }
 
@@ -285,12 +285,12 @@
         font-size: clamp(10px, 3vw, 14px);
     }
 
-    .sec2_info2 > li { 
+    .sec2_info2 > li {
         margin-bottom: 0.5em;
     }
 
     .sec2_info > p {
-        font-size: clamp(8px, 2.5vw, 12px);        
+        font-size: clamp(8px, 2.5vw, 12px);
     }
 
     .sec2_info2 {
@@ -309,14 +309,14 @@
     .btn-cta_link > strong {
         font-size: clamp(12px, 3.5vw, 3.6em);
     }
-    
+
     .btn-cta {
         width: 60%;
         bottom: -2em;
     }
 
     /* section 2 */
-    .sec3-title {           
+    .sec3-title {
         top: 5%;
     }
     .sec3-contents{
@@ -343,7 +343,7 @@
     .login-footer {
         gap: 5px;
     }
-    .login-title {    
+    .login-title {
         padding-top: clamp(5px, 1.7vw, 1.9em);
     }
     .login-footer >h3 {
@@ -387,7 +387,7 @@
         font-size: clamp(10px, 1.2vw, 2.2em);
     }
 
-    .pass_eye {    
+    .pass_eye {
         width: 6em;
     }
 }
@@ -405,8 +405,8 @@
     .section2-contents {
         width: 85%;
         left: 50%;
-        transform: translateX(-50%); 
-        height: auto;      
+        transform: translateX(-50%);
+        height: auto;
     }
 
     .container.section2_wrapper{
@@ -425,8 +425,8 @@
         margin-bottom: 12px;
     }
 
-    .sec2_info > p {       
-        font-size: clamp(10px, 1.1vw, 1.5em);        
+    .sec2_info > p {
+        font-size: clamp(10px, 1.1vw, 1.5em);
     }
 
     .sec2_info2{
@@ -449,15 +449,36 @@
     }
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .registers{
+        width: 45%;
+    }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px){  
+    .agree-box{
+        width: 90%;
+    }
+
+    .frm-footer >h3 {
+        font-size: clamp(10px, 1.5vw, 2em);
+    }
+
+    .frm-box{
+        background-position: 2em 0;
+    }
+
+    .line-decor{
+        margin-top: 1em;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){
     .section2_title > h2{
         font-size: clamp(14px, 1.8vw, 2em);
     }
 
     .sec2_info2 > li > p{
         font-size: clamp(14px, 1vw, 2em);
-    }    
+    }
 
     .sec2-time_title, .sec2-time_title2{
         top: 9%;
