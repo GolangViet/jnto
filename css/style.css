@@ -990,6 +990,7 @@ body.modal-open-body{
     background-size: contain;
     background-color: transparent;
     color: #ad0808;
+    border: none;
 }
 .btn-register:hover{
     background-image: url("../img/register/button-dangky-hover.webp"); 
