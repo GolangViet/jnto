@@ -923,6 +923,9 @@ body.modal-open-body{
     background-image: url("../img/register/bg-register.webp");
     background-repeat: no-repeat;
     background-size: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .registers{

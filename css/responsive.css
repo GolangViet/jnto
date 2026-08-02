@@ -231,6 +231,50 @@
     .login-footer {
         bottom: -20%;
     }
+
+    /* ---- register --- */
+    .section-register{
+        aspect-ratio: 1080 / 1594;
+        background-image: url("../img/register/bg-register-m.webp");
+    }
+    .registers{
+        width: 95%;        
+    }
+    .frm-wrapper {
+        width: 65%;
+    }
+    .frm-box-title >span {
+        font-size: clamp(14px, 3.8vw, 3.8em);
+    }
+    .frm-box{
+        background-position: clamp(10px, 2vw, 2.5em) 0;
+    }
+    .login-input,.login-input-pass{
+        height: clamp(40px, 7vw, 5rem);
+    }
+
+    .login-label{
+       font-size: clamp(6px, 2.2vw, 1.6em); 
+    }
+
+    .agree-item {       
+        font-size: clamp(8px, 2vw, 1.8em);
+    }
+
+    .checkmark {  
+        width: 20px;
+        height: 20px;
+    }
+    .checkmark::after {       
+        left: 5px;
+        top: 0;
+        width: 7px;
+        height: 14px;
+    }
+    .alert_info > p {
+        font-size: clamp(7px, 2.2vw, 2.2em);
+    }
+
 }
 
 @media (max-width: 576px){
@@ -352,6 +396,15 @@
     .login-footer {
         bottom: -17%;
     }
+
+    .login-input, .login-input-pass {
+        height: clamp(30px, 7vw, 5rem);
+    }
+
+    .frm-wrapper {
+        width: 65%;
+    }
+
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1199px){
