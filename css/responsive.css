@@ -874,12 +874,13 @@
         grid-template-columns: 1fr;
     }
 
-    .sec3-award-img:first-child {
-        width: 80.7%;
+    .sec3-awards > .sec3-award-img:first-child {
+        width: 77.5%;
+        transform: translateX(-4vw);
     }
 
-    .sec3-award-img:last-child {
-        width: 84.8%;
+    .sec3-awards > .sec3-award-picture:last-child {
+        width: 73.7%;
         margin-top: 2vw;
     }
 
@@ -897,6 +898,76 @@
     .la-lft,
     .la-rgt {
         display: none;
+    }
+
+    .modal {
+        padding: 0;
+    }
+
+    .modal-lg {
+        width: min(73vw, 80dvh);
+        height: auto;
+        max-height: 90dvh;
+    }
+
+    .modal-lg .img {
+        width: 100%;
+        height: auto;
+        max-width: none;
+        max-height: 90dvh;
+    }
+
+    .modal-close {
+        top: 1vw;
+        right: 1vw;
+        width: clamp(20px, 5.5vw, 30px);
+        height: clamp(20px, 5.5vw, 30px);
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    .modal-close::before,
+    .modal-close::after {
+        width: 45%;
+        height: 2px;
+    }
+
+    .section-login {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 1080 / 1082;
+        background-image: url("../img/login/login-bg-mobile.webp");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .login::before,
+    .frm-box::before {
+        top: 56%;
+        width: 12.5%;
+    }
+
+    .login::before {
+        left: -6%;
+    }
+
+    .frm-box::before {
+        left: -9.5%;
+    }
+
+    .login::after,
+    .frm-box::after {
+        top: -13%;
+        width: 10%;
+    }
+
+    .login::after {
+        right: 0.5%;
+    }
+
+    .frm-box::after {
+        right: 2.5%;
     }
 }
 
