@@ -57,4 +57,34 @@ final class UserRepository extends BaseRepository
         $userModel = $this->model;
         return $userModel->create($data);
     }
+
+    /**
+     * Update an existing user record.
+     *
+     * @param int $id User identifier.
+     * @param array $data Updated user data.
+     * @return bool True on success, false on failure.
+     */
+    public function update(int $id, array $data): bool
+    {
+        /** @var User $userModel */
+        $userModel = $this->model;
+        return $userModel->update($id, $data);
+    }
+
+    /**
+     * Get all users with their submitted Facebook posts.
+     *
+     * @return array
+     */
+    public function getAllWithFacebookPost(): array
+    {
+        $db = \Core\Database::connection();
+        $sql = "SELECT u.*, fp.facebook_url, fp.score AS facebook_score 
+                FROM cms.users u
+                LEFT JOIN cms.user_facebook_posts fp ON u.id = fp.user_id
+                ORDER BY u.id ASC";
+        return $db->query($sql)->fetchAll() ?: [];
+    }
 }
+

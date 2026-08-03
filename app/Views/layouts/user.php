@@ -45,7 +45,7 @@
         </section>
 
         <?php if ($success = app()->session()->pullFlash('success')): ?>
-            <div class="alert message-container-wrapper d-none">
+            <div class="alert message-container success">
                 <svg style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -54,7 +54,7 @@
         <?php endif; ?>
 
         <?php if ($error = app()->session()->pullFlash('error')): ?>
-            <div class="alert message-container-wrapper error">
+            <div class="alert message-container error">
                 <svg style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -63,7 +63,7 @@
         <?php endif; ?>
 
         <?php if ($errors = app()->session()->pullFlash('errors')): ?>
-            <div class="alert message-container-wrapper error">
+            <div class="alert message-container error">
                 <ul style="margin: 0; padding-left: 20px; font-size: 18px; color: #F00; list-style: circle;">
                     <?php foreach ($errors as $errorField => $fieldErrors): ?>
                         <?php foreach ($fieldErrors as $err): ?>

@@ -53,4 +53,54 @@ final class UserService
         }
         return $this->userRepository->create($data);
     }
+
+    /**
+     * Get all users.
+     *
+     * @return array List of all users.
+     */
+    public function getAllUsers(): array
+    {
+        return $this->userRepository->getAllWithFacebookPost();
+    }
+
+    /**
+     * Get a user by ID.
+     *
+     * @param int $id User ID.
+     * @return array|null The user record or null if not found.
+     */
+    public function getUserById(int $id): ?array
+    {
+        return $this->userRepository->find($id);
+    }
+
+    /**
+     * Update an existing user.
+     *
+     * @param int $id User ID.
+     * @param array $data Contains keys: username, name, email, role, and optionally password.
+     * @return bool True on success, false on failure.
+     */
+    public function updateUser(int $id, array $data): bool
+    {
+        if (isset($data['password']) && $data['password'] !== '') {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        } else {
+            unset($data['password']);
+        }
+        return $this->userRepository->update($id, $data);
+    }
+
+    /**
+     * Delete a user.
+     *
+     * @param int $id User ID.
+     * @return bool True on success, false on failure.
+     */
+    public function deleteUser(int $id): bool
+    {
+        return $this->userRepository->delete($id);
+    }
 }
+

@@ -56,4 +56,28 @@ final class User extends Model
 
         return $stmt->execute($data);
     }
+
+    /**
+     * Update an existing user record.
+     *
+     * @param int $id User identifier.
+     * @param array $data Contains keys: username, name, email, role, and optionally password.
+     * @return bool True on success, false on failure.
+     */
+    public function update(int $id, array $data): bool
+    {
+        if (isset($data['password']) && $data['password'] !== '') {
+            $stmt = $this->db->prepare(
+                "UPDATE {$this->table} SET username = :username, name = :name, email = :email, role = :role, password = :password, updated_at = CURRENT_TIMESTAMP WHERE id = :id"
+            );
+        } else {
+            unset($data['password']);
+            $stmt = $this->db->prepare(
+                "UPDATE {$this->table} SET username = :username, name = :name, email = :email, role = :role, updated_at = CURRENT_TIMESTAMP WHERE id = :id"
+            );
+        }
+
+        return $stmt->execute($data + ['id' => $id]);
+    }
 }
+

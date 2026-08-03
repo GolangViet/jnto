@@ -47,12 +47,22 @@ $router->delete('/admin/posts/{id}', [PostController::class, 'destroy'], [AuthMi
 use App\Controllers\Admin\QuizController as AdminQuizController;
 use App\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Controllers\Admin\SettingController as AdminSettingController;
+use App\Controllers\Admin\UserController as AdminUserController;
 use App\Controllers\QuizAttemptController;
 use App\Controllers\TakeSurveyController;
 
 // Admin Settings Routes
 $router->get('/admin/settings', [AdminSettingController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
 $router->post('/admin/settings', [AdminSettingController::class, 'update'], [AuthMiddleware::class, AdminMiddleware::class]);
+
+// Admin Users Routes
+$router->get('/admin/users', [AdminUserController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->get('/admin/users/create', [AdminUserController::class, 'create'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->post('/admin/users', [AdminUserController::class, 'store'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->get('/admin/users/{id}/edit', [AdminUserController::class, 'edit'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->put('/admin/users/{id}', [AdminUserController::class, 'update'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->delete('/admin/users/{id}', [AdminUserController::class, 'destroy'], [AuthMiddleware::class, AdminMiddleware::class]);
+
 
 // Admin Quiz HTML Routes
 $router->get('/admin/quizzes', [AdminQuizController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);

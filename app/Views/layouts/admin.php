@@ -18,12 +18,14 @@
                     <a href="/admin/posts">Manage Posts</a>
                     <a href="/admin/quizzes" style="margin-left: 14px;">Manage Quizzes</a>
                     <a href="/admin/settings" style="margin-left: 14px;">Manage Settings</a>
+                    <a href="/admin/users" style="margin-left: 14px;">Manage Users</a>
                     <span class="muted" style="margin-left: 14px; margin-right: 14px; color: #d1d5db;">Hello, <?= e($user['name']) ?> (Admin)</span>
                     <form action="/logout" method="post" style="display:inline">
                         <?= csrf_field() ?>
                         <button class="btn" type="submit">Logout</button>
                     </form>
                 <?php endif; ?>
+
             </div>
         </div>
     </nav>

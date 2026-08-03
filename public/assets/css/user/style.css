@@ -1122,3 +1122,47 @@ body.modal-open-body{
     justify-content: center;
     margin: auto;
 }
+
+.message-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: min(500px, 90%);
+    margin: 20px auto;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.message-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.message-container.success {
+    color: #0f5132;
+    background: #d1e7dd;
+    border: 1px solid #badbcc;
+}
+
+.message-container.error {
+    color: #842029;
+    background: #f8d7da;
+    border: 1px solid #f5c2c7;
+}
+
+.message-container.warning {
+    color: #664d03;
+    background: #fff3cd;
+    border: 1px solid #ffecb5;
+}
+
+.message-container.info {
+    color: #055160;
+    background: #cff4fc;
+    border: 1px solid #b6effb;
+}
