@@ -730,7 +730,13 @@ async function submitQuiz(forced = false) {
         });
         
         if (response.ok) {
-            window.location.href = `/quiz-attempts/${attemptId}/result`;
+            const mainSurveyQuizId = <?= json_encode(setting('main_survey_quiz_id')) ?>;
+            const attemptQuizId = <?= (int) $attempt['quiz_id'] ?>;
+            if (mainSurveyQuizId && Number(mainSurveyQuizId) === attemptQuizId) {
+                window.location.href = '/thank-you';
+            } else {
+                window.location.href = `/quiz-attempts/${attemptId}/result`;
+            }
         } else {
             const res = await response.json();
             alert(res.message || 'Failed to submit quiz.');

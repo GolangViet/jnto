@@ -154,6 +154,11 @@ final class QuizAttemptController extends Controller
             return 'Attempt not found.';
         }
 
+        $mainSurveyId = setting('main_survey_quiz_id');
+        if ($mainSurveyId && (int)$attempt['quiz_id'] === (int)$mainSurveyId) {
+            $this->redirect('/thank-you');
+        }
+
         if (isset($attempt['user_id']) && (int) $attempt['user_id'] !== (int) $user['id']) {
             http_response_code(403);
             return 'Unauthorized to access this result.';

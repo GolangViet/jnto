@@ -8,10 +8,11 @@ use App\Controllers\PostController;
 use App\Middleware\AdminMiddleware;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
+use App\Middleware\SurveyCheckMiddleware;
 
 $router = app()->router();
 
-$router->get('/', [HomeController::class, 'index']);
+$router->get('/', [HomeController::class, 'index'], [SurveyCheckMiddleware::class]);
 
 $router->get('/thank-you', [HomeController::class, 'detailThankYou']);
 
@@ -82,22 +83,23 @@ $router->post('/api/admin/quizzes/{quizId}/questions/reorder', [AdminQuestionCon
 // End-User take survey
 $router->get('/take-survey', [TakeSurveyController::class, 'detailSurvey'], [AuthMiddleware::class]);
 $router->get('/take-questions', [TakeSurveyController::class, 'detailQuestions'], [AuthMiddleware::class]);
-$router->get('/submit-post', [TakeSurveyController::class, 'confirmPost'], [AuthMiddleware::class]);
+$router->get('/confirm-post', [TakeSurveyController::class, 'confirmPost'], [AuthMiddleware::class]);
+$router->post('/submit-post', [TakeSurveyController::class, 'submitPost'], [AuthMiddleware::class]);
 
 // End-User Quiz HTML Routes
-$router->get('/quizzes', [QuizAttemptController::class, 'index'], [AuthMiddleware::class]);
-$router->get('/quizzes/{id}', [QuizAttemptController::class, 'show'], [AuthMiddleware::class]);
-$router->post('/quizzes/{id}/start', [QuizAttemptController::class, 'start'], [AuthMiddleware::class]);
-$router->get('/quiz-attempts/{attemptId}', [QuizAttemptController::class, 'attempt'], [AuthMiddleware::class]);
-$router->get('/quiz-attempts/{attemptId}/result', [QuizAttemptController::class, 'result'], [AuthMiddleware::class]);
+$router->get('/quizzes', [QuizAttemptController::class, 'index'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->get('/quizzes/{id}', [QuizAttemptController::class, 'show'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->post('/quizzes/{id}/start', [QuizAttemptController::class, 'start'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->get('/quiz-attempts/{attemptId}', [QuizAttemptController::class, 'attempt'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->get('/quiz-attempts/{attemptId}/result', [QuizAttemptController::class, 'result'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
 
 // End-User Quiz API Routes
-$router->get('/api/quizzes', [QuizAttemptController::class, 'apiIndex'], [AuthMiddleware::class]);
-$router->get('/api/quizzes/{id}', [QuizAttemptController::class, 'apiShow'], [AuthMiddleware::class]);
-$router->post('/api/quizzes/{id}/start', [QuizAttemptController::class, 'apiStart'], [AuthMiddleware::class]);
-$router->get('/api/quiz-attempts/{attemptId}', [QuizAttemptController::class, 'apiGetAttempt'], [AuthMiddleware::class]);
-$router->post('/api/quiz-attempts/{attemptId}/answers', [QuizAttemptController::class, 'apiSaveAnswer'], [AuthMiddleware::class]);
-$router->post('/api/quiz-attempts/{attemptId}/submit', [QuizAttemptController::class, 'apiSubmit'], [AuthMiddleware::class]);
-$router->get('/api/quiz-attempts/{attemptId}/result', [QuizAttemptController::class, 'apiResult'], [AuthMiddleware::class]);
+$router->get('/api/quizzes', [QuizAttemptController::class, 'apiIndex'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->get('/api/quizzes/{id}', [QuizAttemptController::class, 'apiShow'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->post('/api/quizzes/{id}/start', [QuizAttemptController::class, 'apiStart'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->get('/api/quiz-attempts/{attemptId}', [QuizAttemptController::class, 'apiGetAttempt'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->post('/api/quiz-attempts/{attemptId}/answers', [QuizAttemptController::class, 'apiSaveAnswer'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->post('/api/quiz-attempts/{attemptId}/submit', [QuizAttemptController::class, 'apiSubmit'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
+$router->get('/api/quiz-attempts/{attemptId}/result', [QuizAttemptController::class, 'apiResult'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
 
 

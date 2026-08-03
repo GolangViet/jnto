@@ -15,6 +15,7 @@
     };
 
     function populateOptions(selector, template, namePrefix) {
+        if (!template) return;
         document.querySelectorAll(selector).forEach(function (container, index) {
             const content = template.content.cloneNode(true);
             content.querySelectorAll('input:not(.survey-other-input)').forEach(function (input) {
@@ -62,11 +63,20 @@
             return;
         }
 
-        const selectedExperience = form.querySelector('input[name="travel_experience"]:checked');
-        showPanel(selectedExperience.dataset.travelStatus);
+        const selectedExperience = form.querySelector('input[name="travel_experience"]:checked') || form.querySelector('input[data-travel-status]:checked');
+        if (selectedExperience) {
+            showPanel(selectedExperience.dataset.travelStatus);
+        }
+    });
+
+    form.querySelectorAll('[data-survey-prev]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            showPanel(button.dataset.surveyPrev);
+        });
     });
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
+        window.location.href = '/take-questions';
     });
 })();

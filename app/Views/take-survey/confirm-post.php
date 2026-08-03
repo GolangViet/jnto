@@ -1,5 +1,4 @@
 <?php push_style(assets('css/user/page4.css')); ?>
-
 <?php push_style(assets('css/user/page5.css')); ?>
 
 <section class="region-map" aria-labelledby="region-map-title">
@@ -43,7 +42,8 @@
 </section>
 
 <section class="facebook-section" aria-labelledby="facebook-title">
-    <form class="facebook-form" action="page6.html" method="get">
+    <form class="facebook-form" action="/submit-post" method="post">
+        <?= csrf_field() ?>
         <div class="facebook-panel">
             <h2 class="facebook-title" id="facebook-title">
                 <span>BÀI ĐĂNG FACEBOOK</span>
@@ -102,9 +102,12 @@
 
         <label class="facebook-link-field">
             <span class="visually-hidden">Link bài đăng Facebook</span>
-            <input type="url" name="facebook_url"
-                   placeholder="Thêm link bài đăng Facebook tại đây"
-                   aria-label="Link bài đăng Facebook" required>
+            <input
+                type="url"
+                name="facebook_url"
+                value="<?= e(old('facebook_url') ?: ($existingPost['facebook_url'] ?? '')) ?>"
+                placeholder="Thêm link bài đăng Facebook tại đây"
+                aria-label="Link bài đăng Facebook" required>
         </label>
 
         <div class="">

@@ -318,7 +318,7 @@
 }
 
 .knowledge-choice > input:checked {
-    background: #f12613 url("./../../img/form/mark-stick.png") center / 100% 100% no-repeat;
+    background: #f12613 url("./../../images/form/mark-stick.png") center / 100% 100% no-repeat;
 }
 
 .knowledge-choice > input:focus-visible {
@@ -612,7 +612,7 @@
 }
 
 .open-question-choice > input:checked {
-    background: #f12613 url("./../../img/form/mark-stick.png") center / 100% 100% no-repeat;
+    background: #f12613 url("./../../images/form/mark-stick.png") center / 100% 100% no-repeat;
 }
 
 .open-question-choice > input:focus-visible {
