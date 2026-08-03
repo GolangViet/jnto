@@ -156,7 +156,6 @@
     border-radius: 50%;
     background: #fff;
     box-shadow: 0 0 0 1px rgba(117, 65, 31, 0.02);
-    cursor: inherit;
 }
 
 .survey-choice > span {
