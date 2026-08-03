@@ -681,7 +681,7 @@
         height: auto;
         aspect-ratio: 827 / 971;
         position: absolute;
-        inset: 0 auto auto 50%;
+        inset: 0 auto auto calc(50% + 2vw);
         display: block;
         padding: 0;
         transform: translateX(-50%);

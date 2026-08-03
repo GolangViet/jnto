@@ -285,6 +285,11 @@
         white-space: nowrap;
     }
 
+    .survey-break-mobile {
+        display: block;
+        white-space: nowrap;
+    }
+
     .survey-form {
         font-size: 2.4vw;
     }
