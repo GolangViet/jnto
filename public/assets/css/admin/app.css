@@ -37,6 +37,10 @@ th, td { padding: 12px; border-bottom: 1px solid #e5e7eb; text-align: left; }
     margin-left: auto;
 }
 
+.d-none {
+    display: none;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     .container {
