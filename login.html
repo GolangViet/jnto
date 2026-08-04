@@ -5,8 +5,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Login - JNTO</title>
     <link rel='stylesheet' href='css/default.css?v=20260803-1'>
-    <link rel='stylesheet' href='css/style.css?v=20260803-7'>
-    <link rel='stylesheet' href='css/responsive.css?v=20260803-1'>
+    <link rel='stylesheet' href='css/style.css?v=20260804-4'>
+    <link rel='stylesheet' href='css/responsive.css?v=20260804-4'>
 </head>
 <body>
     <header class="header">
@@ -38,12 +38,16 @@
         </picture>
     </section> 
     <section class="section-login">   
-        <form class="login" action="#" method="post">            
+        <form class="login" action="#" method="post" data-login-demo>
             <h2 class="login-title"><span>ĐĂNG NHẬP</span></h2>
             <div class="login-box">
+                <p class="login-error" id="login-error" role="alert" aria-live="polite" hidden>
+                    <span class="login-error-line">Tên đăng nhập/ Mật khẩu không đúng</span><br>
+                    Vui lòng thử lại.
+                </p>
                 <div class="login-username">
                     <label for="username" class="login-label">Tên đăng nhập:</label>
-                    <input type="text" class="login-input" id="username">
+                    <input type="text" class="login-input" id="username" name="username" autocomplete="username" required aria-describedby="login-error">
                 </div>
                 <div class="line-decor">
                     <img class="img" src="img/login/line-decor.webp" alt="line decor">
@@ -51,7 +55,7 @@
                 <div class="login-pass">
                     <label for="password-input" class="login-label">Mật khẩu:</label>
                     <div class="login-input-pass">
-                        <input type="password" class="password-input" id="password-input">
+                        <input type="password" class="password-input" id="password-input" name="password" autocomplete="current-password" required aria-describedby="login-error">
                         <button type="button" class="pass_eye">
                             <svg class="pass_icon"><use xlink:href="#eye-closed-icon"></use></svg>
                         </button>
@@ -136,6 +140,7 @@
              </symbol>         
         </defs>
     </svg>
+    <script src="js/login.js?v=20260804-1"></script>
     <script src="js/cursor.js?v=20260803-4"></script>
 </body>
 </html>
