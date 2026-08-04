@@ -89,7 +89,7 @@ final class AuthController extends Controller
         $request = app()->request();
         Csrf::verify($request);
         $validator = new Validator();
-        $data = $request->only(['username', 'password', 'password_confirmation']);
+        $data = $request->only(['username', 'password']);
         if (!$validator->validate($data, ['username' => 'required|min:3', 'password' => 'required|min:6'])) {
             app()->session()->flash('errors', $validator->errors());
             app()->session()->flashOldInput($data);
@@ -97,9 +97,6 @@ final class AuthController extends Controller
         }
 
         $errors = [];
-        if ($data['password'] !== $data['password_confirmation']) {
-            $errors['password_confirmation'][] = 'Password confirmation does not match.';
-        }
 
         if ($this->userService->findByUsername($data['username'])) {
             $errors['username'][] = 'Username is already taken.';
