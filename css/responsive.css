@@ -238,9 +238,14 @@
     .login-box {
         width: 75%;
     }
+    .login-error {
+        bottom: calc(100% + 0.15em);
+        width: max-content;
+        font-size: clamp(7px, 1.2vw, 10px);
+    }
     .line-decor {
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 2px;
+        margin-bottom: 2px;
     }
     .login-footer {
         bottom: -20%;
@@ -252,15 +257,16 @@
         background-image: url("../img/register/bg-register-m.webp");
     }
     .registers{
-        width: 95%;        
+        width: 95%;
     }
     .frm-wrapper {
-        width: 65%;
+        width: 69%;
     }
     .frm-box-title >span {
         font-size: clamp(14px, 3.8vw, 3.8em);
     }
     .frm-box{
+        width: 83%;
         background-position: clamp(10px, 2vw, 2.5em) 0;
     }
     .login-input,.login-input-pass{
@@ -268,11 +274,13 @@
     }
 
     .login-label{
-       font-size: clamp(6px, 2.2vw, 1.6em); 
+       font-size: clamp(7px, 2.5vw, 1.8em);
     }
 
     .agree-item {       
-        font-size: clamp(8px, 2vw, 1.8em);
+        font-size: clamp(9px, 2.3vw, 2em);
+        display: flex;
+        align-items: center;
     }
 
     .checkmark {  
@@ -286,7 +294,19 @@
         height: 14px;
     }
     .alert_info > p {
-        font-size: clamp(7px, 2.2vw, 2.2em);
+        font-size: clamp(8px, 2.4vw, 2.4em);
+        width: 92%;
+        height: 73%;
+        line-height: 1.15;
+    }
+
+    .alert_info > h3 {
+        height: 27%;
+        line-height: 1;
+    }
+
+    .alert_info > p > span {
+        white-space: nowrap;
     }
 
 }
@@ -396,6 +416,12 @@
 
     .login-title > span {
         font-size: clamp(18px, 5vw, 3.8em);
+    }
+
+    .login-error {
+        bottom: calc(100% + 0.1em);
+        width: max-content;
+        font-size: clamp(7px, 1.85vw, 9.5px);
     }
 
     .login-footer {
@@ -876,7 +902,7 @@
 
     .sec3-awards > .sec3-award-img:first-child {
         width: 77.5%;
-        transform: translateX(-4vw);
+        margin: auto;
     }
 
     .sec3-awards > .sec3-award-picture:last-child {
@@ -953,7 +979,8 @@
     }
 
     .frm-box::before {
-        left: -9.5%;
+        left: -8%;
+        top: 35.5vw;
     }
 
     .login::after,
@@ -967,7 +994,13 @@
     }
 
     .frm-box::after {
-        right: 2.5%;
+        right: 3.5%;
+        top: -10.5vw;
+    }
+
+    .frm-wrapper {
+        left: -0.5vw;
+        top: 2vw;
     }
 }
 
