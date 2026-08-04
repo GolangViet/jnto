@@ -273,6 +273,8 @@
 
     .agree-item {       
         font-size: clamp(8px, 2vw, 1.8em);
+        display: flex;
+        align-items: center;
     }
 
     .checkmark {  
