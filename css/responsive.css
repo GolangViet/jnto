@@ -876,7 +876,7 @@
 
     .sec3-awards > .sec3-award-img:first-child {
         width: 77.5%;
-        transform: translateX(-4vw);
+        margin: auto;
     }
 
     .sec3-awards > .sec3-award-picture:last-child {
