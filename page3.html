@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Câu hỏi khảo sát - JNTO</title>
-    <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/default.css?v=20260803-1">
+    <link rel="stylesheet" href="css/style.css?v=20260803-7">
+    <link rel="stylesheet" href="css/responsive.css?v=20260803-1">
+    <link rel="stylesheet" href="css/form.css?v=20260803-2">
 </head>
 <body class="survey-page">
     <header class="header">
@@ -110,19 +110,19 @@
                             </span>
                         </legend>
                         <label class="survey-choice">
-                            <input type="radio" name="travel_experience" value="visited-return" data-travel-status="visited" required>
+                            <input type="radio" name="travel_experience" value="visited-return" data-survey-target="3-2-b" required>
                             <span>Đã từng đi và muốn đi lại</span>
                         </label>
                         <label class="survey-choice">
-                            <input type="radio" name="travel_experience" value="visited-no-plan" data-travel-status="visited">
+                            <input type="radio" name="travel_experience" value="visited-no-plan" data-survey-target="3-2-b">
                             <span>Đã từng đi nhưng hiện chưa có kế hoạch quay lại</span>
                         </label>
                         <label class="survey-choice">
-                            <input type="radio" name="travel_experience" value="not-visited-plan" data-travel-status="not-visited">
+                            <input type="radio" name="travel_experience" value="not-visited-plan" data-survey-target="3-2-a">
                             <span>Chưa từng đi nhưng có kế hoạch đi trong tương lai</span>
                         </label>
                         <label class="survey-choice">
-                            <input type="radio" name="travel_experience" value="not-visited-no-plan" data-travel-status="not-visited">
+                            <input type="radio" name="travel_experience" value="not-visited-no-plan" data-survey-target="3-2-a">
                             <span>Chưa từng đi và chưa có kế hoạch</span>
                         </label>
                     </fieldset>
@@ -132,7 +132,7 @@
                     </div>
                 </div>
 
-                <div class="survey-panel survey-panel--visited" data-survey-panel="visited" hidden>
+                <div class="survey-panel survey-panel--visited" data-survey-panel="3-2-a" hidden>
                     <fieldset class="survey-question">
                         <legend>
                             <span class="question-number">4.</span>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
 
-                <div class="survey-panel survey-panel--not-visited survey-panel--large" data-survey-panel="not-visited" hidden>
+                <div class="survey-panel survey-panel--not-visited survey-panel--large" data-survey-panel="3-2-b" hidden>
                     <fieldset class="survey-question">
                         <legend>
                             <span class="question-number">4.</span>
@@ -194,7 +194,7 @@
                     <fieldset class="survey-question">
                         <legend>
                             <span class="question-number">6.</span>
-                            <span class="question-copy">Bạn muốn đi du lịch Nhật Bản theo hình thức nào?</span>
+                            <span class="question-copy">Bạn muốn đi du lịch Nhật Bản theo hình <span class="survey-break-mobile">thức nào?</span></span>
                         </legend>
                         <div data-travel-style-options></div>
                     </fieldset>
@@ -295,8 +295,8 @@
     </template>
 
     <template id="information-options-template">
-        <label class="survey-choice"><input type="checkbox" value="jnto-social"><span>Các kênh SNS (Cảm Nhận Nhật Bản và visitjapan_vn) và website của JNTO Việt Nam</span></label>
-        <label class="survey-choice"><input type="checkbox" value="kol"><span>Các kênh SNS của những người có tầm ảnh hưởng (KOL)</span></label>
+        <label class="survey-choice"><input type="checkbox" value="jnto-social"><span>Các kênh SNS (Cảm Nhận Nhật Bản và visitjapan_vn) và website của <span class="survey-nowrap">JNTO Việt Nam</span></span></label>
+        <label class="survey-choice"><input type="checkbox" value="kol"><span>Các kênh SNS của những người có tầm <span class="survey-nowrap-mobile">ảnh hưởng (KOL)</span></span></label>
         <label class="survey-choice"><input type="checkbox" value="tiktok"><span>TikTok</span></label>
         <label class="survey-choice"><input type="checkbox" value="facebook"><span>Facebook</span></label>
         <label class="survey-choice"><input type="checkbox" value="youtube"><span>YouTube</span></label>
@@ -328,6 +328,7 @@
         </defs>
     </svg>
 
+    <script src="js/cursor.js?v=20260803-4"></script>
     <script src="js/form.js"></script>
 </body>
 </html>
