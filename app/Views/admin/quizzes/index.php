@@ -29,7 +29,6 @@
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">Status</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: center;">Questions</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: center;">Attempts</th>
-                    <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: center;">Pass Score</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">Duration</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem;">Validity</th>
                     <th style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #4b5563; font-size: 0.85rem; text-align: right; border-top-right-radius: 10px;">Actions</th>
@@ -60,9 +59,6 @@
                         </td>
                         <td style="padding: 16px; font-size: 0.9rem; text-align: center; font-weight: 500;"><?= (int)($quiz['questions_count'] ?? 0) ?></td>
                         <td style="padding: 16px; font-size: 0.9rem; text-align: center; font-weight: 500;"><?= (int)($quiz['attempts_count'] ?? 0) ?></td>
-                        <td style="padding: 16px; font-size: 0.9rem; text-align: center; font-weight: 500; color: #4b5563;">
-                            <?= $quiz['pass_score'] !== null ? e((string)(float)$quiz['pass_score']) . '%' : '<span class="muted">—</span>' ?>
-                        </td>
                         <td style="padding: 16px; font-size: 0.9rem; color: #4b5563;">
                             <?= $quiz['duration_minutes'] ? e((string)$quiz['duration_minutes']) . 'm' : '<span class="muted">Unlimited</span>' ?>
                         </td>
@@ -89,7 +85,6 @@
                                     ['type' => 'link', 'text' => 'Edit Settings', 'url' => "/admin/quizzes/{$quiz['id']}/edit"],
                                     ['type' => 'button', 'text' => ($status === 'published' ? 'Deactivate' : 'Publish'), 'onclick' => "publishToggle({$quiz['id']})", 'id' => "pub-btn-{$quiz['id']}"],
                                     ['type' => 'button', 'text' => 'Duplicate', 'onclick' => "duplicateQuiz({$quiz['id']})"],
-                                    ['type' => 'link', 'text' => 'Preview', 'url' => "/quizzes/{$quiz['id']}", 'target' => '_blank'],
                                     ['type' => 'divider'],
                                     ['type' => 'form', 'text' => 'Delete', 'action' => "/admin/quizzes/{$quiz['id']}", 'method' => 'DELETE', 'confirm' => 'Are you sure you want to delete this quiz? all questions and attempts will be deleted permanently!', 'style' => 'color: #dc2626; font-weight: 600;']
                                 ]

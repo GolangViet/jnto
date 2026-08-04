@@ -34,12 +34,12 @@ final class QuizRepository extends BaseRepository
 
         $stmt = $db->prepare($sql);
         $stmt->execute([
-            'title'               => $data['title'],
+            'title'               => $data['title'] ?? 'New Quiz',
             'pass_score'          => $data['pass_score'] ?? 0,
             'status'              => $data['status'] ?? 'draft',
             'description'         => $data['description'] ?? null,
             'show_result'         => (isset($data['show_result']) ? filter_var($data['show_result'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
-            'duration_minutes'    => (int) ($data['duration_minutes'] ?? ''),
+            'duration_minutes'    => isset($data['duration_minutes']) && $data['duration_minutes'] !== '' ? (int) $data['duration_minutes'] : null,
             'allow_resume'        => (isset($data['allow_resume']) ? filter_var($data['allow_resume'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'show_correct_answer' => (isset($data['show_correct_answer']) ? filter_var($data['show_correct_answer'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'end_at'              => !empty($data['end_at'] ?? '') ? $data['end_at'] : null,

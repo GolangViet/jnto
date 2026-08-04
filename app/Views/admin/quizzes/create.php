@@ -34,7 +34,7 @@
             <textarea id="description" name="description" rows="4" placeholder="Brief details about the quiz topic..."><?= e(old('description')) ?></textarea>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+        <div style="margin-bottom: 18px;">
             <div>
                 <label for="status" style="font-weight: 600; color: #374151; font-size: 0.95rem;">Status</label>
                 <select id="status" name="status">
@@ -43,44 +43,46 @@
                     <option value="inactive" <?= old('status') === 'inactive' ? 'selected' : '' ?>>Inactive</option>
                 </select>
             </div>
-            <div>
-                <label for="duration_minutes" style="font-weight: 600; color: #374151; font-size: 0.95rem;">Duration (Minutes)</label>
-                <input type="number" id="duration_minutes" name="duration_minutes" value="<?= e(old('duration_minutes')) ?>" min="1" placeholder="Leave empty for unlimited time">
-            </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+
+        <div class="d-none">
+            <label for="duration_minutes" style="font-weight: 600; color: #374151; font-size: 0.95rem;">Duration (Minutes)</label>
+            <input type="number" id="duration_minutes" name="duration_minutes" value="<?= (old('duration_minutes') !== null && old('duration_minutes') !== '' && (int)old('duration_minutes') > 0) ? e((string)old('duration_minutes')) : '' ?>" min="1" placeholder="Leave empty for unlimited time">
+        </div>
+
+        <div style="display: none; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
             <div>
                 <label for="pass_score" style="font-weight: 600; color: #374151; font-size: 0.95rem;">Pass Score (%)</label>
-                <input type="number" step="0.1" id="pass_score" name="pass_score" value="<?= e(old('pass_score')) ?>" min="0" max="100" placeholder="e.g., 70">
+                <input type="number" step="0.1" id="pass_score" name="pass_score" value="<?= e(old('pass_score', '0')) ?>" min="0" max="100" placeholder="e.g., 70">
             </div>
             <div>
                 <label for="allow_resume" style="font-weight: 600; color: #374151; font-size: 0.95rem; display: block; margin-bottom: 8px;">Resume Unfinished Attempt</label>
                 <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 10px;">
-                    <input type="checkbox" id="allow_resume" name="allow_resume" value="1" <?= old('allow_resume', '1') === '1' ? 'checked' : '' ?> style="width: auto; margin: 0;">
+                    <input type="checkbox" id="allow_resume" name="allow_resume" value="1" <?= old('allow_resume', '') === '1' ? 'checked' : '' ?> style="width: auto; margin: 0;">
                     Allow users to resume unfinished attempt
                 </label>
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+        <div style="display: none; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
             <div>
                 <label for="show_result" style="font-weight: 600; color: #374151; font-size: 0.95rem; display: block; margin-bottom: 8px;">Results Settings</label>
                 <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 10px;">
-                    <input type="checkbox" id="show_result" name="show_result" value="1" <?= old('show_result', '1') === '1' ? 'checked' : '' ?> style="width: auto; margin: 0;">
+                    <input type="checkbox" id="show_result" name="show_result" value="1" <?= old('show_result', '') === '1' ? 'checked' : '' ?> style="width: auto; margin: 0;">
                     Show final score and review after completion
                 </label>
             </div>
             <div>
                 <label for="show_correct_answer" style="font-weight: 600; color: #374151; font-size: 0.95rem; display: block; margin-bottom: 8px;">Correct Answers Settings</label>
                 <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 10px;">
-                    <input type="checkbox" id="show_correct_answer" name="show_correct_answer" value="1" <?= old('show_correct_answer', '1') === '1' ? 'checked' : '' ?> style="width: auto; margin: 0;">
+                    <input type="checkbox" id="show_correct_answer" name="show_correct_answer" value="1" <?= old('show_correct_answer', '') === '1' ? 'checked' : '' ?> style="width: auto; margin: 0;">
                     Show correct answers in the review list
                 </label>
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+        <div style="display: none; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
             <div>
                 <label for="start_at" style="font-weight: 600; color: #374151; font-size: 0.95rem;">Start Date & Time</label>
                 <input type="datetime-local" id="start_at" name="start_at" value="<?= e(old('start_at')) ?>">
