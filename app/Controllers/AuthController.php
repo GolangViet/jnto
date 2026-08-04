@@ -60,7 +60,7 @@ final class AuthController extends Controller
         $user = $this->userService->findByUsername($data['username']);
 
         if (!$user || !password_verify($data['password'], $user['password'])) {
-            app()->session()->flash('error', 'Invalid username or password.');
+            app()->session()->flash('error', 'Tên đăng nhập / Mật khẩu không đúng. Vui lòng thử lại!');
             $this->redirect('/login');
         }
 
@@ -99,7 +99,7 @@ final class AuthController extends Controller
         $errors = [];
 
         if ($this->userService->findByUsername($data['username'])) {
-            $errors['username'][] = 'Username is already taken.';
+            $errors['username'][] = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
         }
 
         if (!empty($errors)) {
@@ -155,7 +155,7 @@ final class AuthController extends Controller
         $user = $this->userService->findByUsername($data['username']);
 
         if (!$user || !password_verify($data['password'], $user['password'])) {
-            app()->session()->flash('error', 'Invalid username or password.');
+            app()->session()->flash('error', 'Tên đăng nhập / Mật khẩu không đúng. Vui lòng thử lại!');
             $this->redirect('/admin/login');
         }
 

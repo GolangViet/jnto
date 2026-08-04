@@ -34,14 +34,19 @@
                 <div class="sec2-time">
                     <div class="sec2-time_title2"><span>ĐỐI TƯỢNG THAM GIA</span></div>
                     <ul class="sec2_info2">
-                        <li><p>Là công dân Việt Nam, từ đủ 18 tuổi<br> trở lên, đang sinh sống trên lãnh thổ<br> Việt Nam</p></li>
-                        <li><p>Bằng việc tham gia, người chơi xác nhận<br> đã đọc, hiểu rõ và đồng ý với các<br> quy định tại Thể lệ này.</p></li>
+                        <li>
+                            <p class="sec2-copy-desktop">Là công dân Việt Nam, từ đủ 18 tuổi<br> trở lên, đang sinh sống trên lãnh thổ<br> Việt Nam</p>
+                            <p class="sec2-copy-mobile">Là công dân Việt Nam, từ đủ 18 tuổi trở lên,<br>đang sinh sống trên lãnh thổ Việt Nam.</p>
+                        </li>
+                        <li>
+                            <p class="sec2-copy-desktop">Bằng việc tham gia, người chơi xác nhận<br> đã đọc, hiểu rõ và đồng ý với các<br> quy định tại Thể lệ này.</p>
+                            <p class="sec2-copy-mobile">Bằng việc tham gia, người chơi xác nhận<br>đã đọc, hiểu rõ và đồng ý với các quy định<br>tại Thể lệ này.</p>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="btn-cta">
         <div class="btn-cta_link">
             <strong>CÁCH THỨC THAM GIA</strong>
@@ -58,7 +63,10 @@
     <div class="sec3-contents">
         <div class="sec3-awards">
             <img class="sec3-award-img" src="<?= assets('images/giai-nhat.webp') ?>" alt="giải thưởng 1">
-            <img class="sec3-award-img" src="<?= assets('images/giai-hai-ba-bon.webp') ?>" alt="giải thưởng 234">
+            <picture class="sec3-award-picture">
+                <source media="(max-width: 768px)" srcset="<?= assets('images/jnto-giai234.webp') ?>">
+                <img class="sec3-award-img" src="<?= assets('images/giai-hai-ba-bon.webp') ?>" alt="giải nhì, giải ba và giải khuyến khích">
+            </picture>
         </div>
         <div class="sec3-footer">
             <p>
@@ -67,6 +75,12 @@
             <p>
                 *Voucher Traveloka áp dụng cho tất cả các dịch vụ trên Traveloka đối với điểm đến Nhật Bản và có thể sử dụng đồng thời với các ưu đãi khác.
             </p>
+        </div>
+        <div class="la-lft" aria-hidden="true">
+            <img class="img" src="<?= assets('images/la-left.webp') ?>" alt="">
+        </div>
+        <div class="la-rgt" aria-hidden="true">
+            <img class="img" src="<?= assets('images/la-right.webp') ?>" alt="">
         </div>
     </div>
     <a class="btn-join-now" href="/take-survey" title="Tham gia ngay">
@@ -77,12 +91,6 @@
     </div>
     <div class="nui-rgt">
         <img class="img" src="<?= assets('images/nui-right.png') ?>" alt="nui phai bg">
-    </div>
-    <div class="la-lft">
-        <img class="img" src="<?= assets('images/la-left.webp') ?>" alt="la left bg">
-    </div>
-    <div class="la-rgt">
-        <img class="img" src="<?= assets('images/la-right.webp') ?>" alt="la right bg">
     </div>
 </section>
 

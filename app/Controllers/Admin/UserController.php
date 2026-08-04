@@ -66,7 +66,7 @@ final class UserController extends Controller
         }
 
         if ($this->userService->findByUsername($data['username'])) {
-            $errors['username'][] = 'Username is already taken.';
+            $errors['username'][] = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
         }
 
         if ($this->userService->findByEmail($data['email'])) {

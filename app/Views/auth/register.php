@@ -1,4 +1,4 @@
-<section class="section-register">       
+<section class="section-register">
     <div class="registers">
         <form class="frm-box" action="/register" method="post" id="register-form">
             <?= csrf_field() ?>
@@ -20,6 +20,31 @@
                         </button>
                     </div>
                 </div>
+
+                <div id="agree-error-message" class="message-container error" style="display: none; width: 100%; margin: 15px 0 15px 0;">
+                    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.</span>
+                </div>
+
+                <?php if ($error = app()->session()->pullFlash('error')): ?>
+                    <div class="message-container error" style="width: 100%; margin: 15px 0 15px 0;">
+                        <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span><?= e($error) ?></span>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($errors = app()->session()->pullFlash('errors')): ?>
+                    <div class="message-container error" style="width: 100%; margin: 15px 0 15px 0;">
+                        <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span><?= e(array_values($errors)[0][0] ?? '') ?></span>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="frm-footer">
                 <div class="agree-box">
@@ -28,7 +53,7 @@
                         <span class="checkmark"></span>
                         <span class="text">
                             Tôi đã đọc và đồng ý với
-                            <a href="#">Điều kiện &amp; Điều khoản.</a>
+                            <a class="terms-modal-trigger" href="#terms-modal">Điều kiện &amp; Điều khoản.</a>
                         </span>
                     </label>
                     <label class="agree-item">
@@ -40,28 +65,30 @@
                     </label>
                 </div>
 
-                <div id="agree-error-message" class="message-container error" style="display: none; width: 100%; margin: 0 0 15px 0;">
-                    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.</span>
-                </div>
-
                 <button type="submit" class="btn-register"><span>ĐĂNG KÝ</span></button>
                 <h3>Bạn đã có tài khoản? <a href="/login" title="Đăng nhập">Đăng nhập</a></h3>
-                
+
                 <div class="alert_info">
                     <h3>LƯU Ý</h3>
-                    <p>*Người tham gia vui lòng ghi nhớ thông tin tài khoản đã<br>
-                        đăng ký. Trong trường hợp quên tài khoản hoặc mật khẩu,<br>
-                        người tham gia sẽ cần đăng ký tài khoản mới và thực hiện<br>
-                        các bước tham gia chương trình lại từ đầu.
+                    <p><span>*Người tham gia <strong>vui lòng ghi nhớ thông tin tài khoản đã<br>
+                            đăng ký.</strong> Trong trường hợp quên tài khoản hoặc mật khẩu,<br>
+                            người tham gia sẽ cần <strong>đăng ký tài khoản mới</strong> và thực hiện<br>
+                            các bước tham gia chương trình lại từ đầu.</span>
                     </p>
                 </div>
             </div>
         </form>
     </div>
 </section>
+
+<div class="modal terms-modal" id="terms-modal" role="dialog" aria-modal="true" aria-label="Điều kiện và Điều khoản">
+    <div class="terms-modal-dialog">
+        <button type="button" class="modal-close terms-modal-close" aria-label="Đóng Điều kiện và Điều khoản"></button>
+        <div class="terms-modal-scroll">
+            <img src="<?= assets('images/JNTO-T&amp;C-R2.webp') ?>" alt="Nội dung Điều kiện và Điều khoản của chương trình">
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function () {
@@ -71,13 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const agree1 = document.querySelector('input[name="agree1"]');
             const agree2 = document.querySelector('input[name="agree2"]');
             const errorBox = document.getElementById('agree-error-message');
-            
             if (!agree1.checked || !agree2.checked) {
                 event.preventDefault();
                 if (errorBox) {
                     errorBox.style.display = 'flex';
                 }
-                alert("Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.");
             } else {
                 if (errorBox) {
                     errorBox.style.display = 'none';
@@ -87,3 +112,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
+<?php push_script(assets('js/user/register.js')); ?>
