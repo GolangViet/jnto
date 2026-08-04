@@ -18,7 +18,7 @@ if ($mainSurveyId):
                 foreach ($opt['related_question_ids'] as $rqId) {
                     $triggeredQuestionIds[(int)$rqId] = true;
                 }
-                
+
                 $optText = strtolower($opt['option_text']);
                 if (str_contains($optText, 'chưa từng') || str_contains($optText, 'not-visited') || str_contains($optText, 'not visited') || str_contains($optText, 'chua tung')) {
                     foreach ($opt['related_question_ids'] as $rqId) {
@@ -48,7 +48,7 @@ if ($mainSurveyId):
 
     if (!function_exists('renderDynamicQuestions')) {
         function renderDynamicQuestions(array $qList, array $savedAnswers, &$qCount) {
-            foreach ($qList as $q): 
+            foreach ($qList as $q):
                 $savedAns = null;
                 foreach ($savedAnswers as $ans) {
                     if ((int)$ans['question_id'] === (int)$q['id']) {
@@ -64,11 +64,11 @@ if ($mainSurveyId):
                         <span class="question-number"><?= $qCount++ ?>.</span>
                         <span class="question-copy"><?= e($q['question_text']) ?></span>
                     </legend>
-                    <?php 
+                    <?php
                     if ($q['type'] === 'single_choice' || $q['type'] === 'true_false'):
                         foreach ($q['options'] ?? [] as $opt):
                             $isChecked = in_array((int)$opt['id'], $savedOptionIds, true);
-                            
+
                             $travelStatus = '';
                             if (!empty($opt['related_question_ids'])) {
                                 $optText = strtolower($opt['option_text']);
@@ -78,22 +78,22 @@ if ($mainSurveyId):
                                     $travelStatus = 'visited';
                                 }
                             }
-                            
+
                             $isOther = (bool)($opt['allow_custom_text'] ?? false);
                             ?>
                             <label class="survey-choice <?= $isOther ? 'survey-choice--other' : '' ?>">
-                                <input type="radio" 
-                                       name="q_<?= (int)$q['id'] ?>" 
-                                       value="<?= (int)$opt['id'] ?>" 
+                                <input type="radio"
+                                       name="q_<?= (int)$q['id'] ?>"
+                                       value="<?= (int)$opt['id'] ?>"
                                        <?= $isChecked ? 'checked' : '' ?>
                                        <?= $travelStatus ? 'data-travel-status="' . $travelStatus . '"' : '' ?>
                                        <?= $q['is_required'] ? 'required' : '' ?>>
                                 <span><?= e($opt['option_text']) ?></span>
                                 <?php if ($isOther): ?>
-                                    <input class="survey-other-input" 
-                                           type="text" 
+                                    <input class="survey-other-input"
+                                           type="text"
                                            data-option-id="<?= (int)$opt['id'] ?>"
-                                           value="<?= e($savedCustomTexts[(string)$opt['id']] ?? $savedCustomTexts[(int)$opt['id']] ?? '') ?>" 
+                                           value="<?= e($savedCustomTexts[(string)$opt['id']] ?? $savedCustomTexts[(int)$opt['id']] ?? '') ?>"
                                            aria-label="<?= e($opt['option_text']) ?>">
                                 <?php endif; ?>
                             </label>
@@ -104,22 +104,22 @@ if ($mainSurveyId):
                             $isOther = (bool)($opt['allow_custom_text'] ?? false);
                             ?>
                             <label class="survey-choice <?= $isOther ? 'survey-choice--other' : '' ?>">
-                                <input type="checkbox" 
-                                       name="q_<?= (int)$q['id'] ?>[]" 
-                                       value="<?= (int)$opt['id'] ?>" 
+                                <input type="checkbox"
+                                       name="q_<?= (int)$q['id'] ?>[]"
+                                       value="<?= (int)$opt['id'] ?>"
                                        <?= $isChecked ? 'checked' : '' ?>>
                                 <span><?= e($opt['option_text']) ?></span>
                                 <?php if ($isOther): ?>
-                                    <input class="survey-other-input" 
-                                           type="text" 
+                                    <input class="survey-other-input"
+                                           type="text"
                                            data-option-id="<?= (int)$opt['id'] ?>"
-                                           value="<?= e($savedCustomTexts[(string)$opt['id']] ?? $savedCustomTexts[(int)$opt['id']] ?? '') ?>" 
+                                           value="<?= e($savedCustomTexts[(string)$opt['id']] ?? $savedCustomTexts[(int)$opt['id']] ?? '') ?>"
                                            aria-label="<?= e($opt['option_text']) ?>">
                                 <?php endif; ?>
                             </label>
                         <?php endforeach; ?>
                     <?php elseif ($q['type'] === 'open_text'): ?>
-                        <textarea name="q_<?= (int)$q['id'] ?>" 
+                        <textarea name="q_<?= (int)$q['id'] ?>"
                                   <?= $q['is_required'] ? 'required' : '' ?>><?= e($savedAns['answer_text'] ?? '') ?></textarea>
                     <?php endif; ?>
                 </fieldset>
@@ -133,22 +133,19 @@ if ($mainSurveyId):
             <h1 class="survey-title" id="survey-title">CÂU HỎI KHẢO SÁT</h1>
 
             <div class="survey-panel survey-panel--intro is-active" data-survey-panel="intro">
-                <?php 
+                <?php
                 $qCount = 1;
-                renderDynamicQuestions($introQuestions, $savedAnswers, $qCount); 
+                renderDynamicQuestions($introQuestions, $savedAnswers, $qCount);
                 ?>
                 <div class="survey-actions">
-                    <a class="survey-button" href="/" style="background-image: url('<?= assets('images/form/bg-button-next.webp') ?>'); transform: scaleX(-1);">
-                        <span style="transform: scaleX(-1); display: inline-block;">Quay lại</span>
-                    </a>
                     <button class="survey-button" type="button" id="survey-next"><span>Tiếp theo</span></button>
                 </div>
             </div>
 
             <div class="survey-panel survey-panel--visited" data-survey-panel="visited" hidden>
-                <?php 
+                <?php
                 $branchCount = count($introQuestions) + 1;
-                renderDynamicQuestions($visitedQuestions, $savedAnswers, $branchCount); 
+                renderDynamicQuestions($visitedQuestions, $savedAnswers, $branchCount);
                 ?>
                 <div class="survey-actions">
                     <button class="survey-button" type="button" data-survey-prev="intro" style="background-image: url('<?= assets('images/form/bg-button-next.webp') ?>'); transform: scaleX(-1);">
@@ -159,9 +156,9 @@ if ($mainSurveyId):
             </div>
 
             <div class="survey-panel survey-panel--not-visited survey-panel--large" data-survey-panel="not-visited" hidden>
-                <?php 
+                <?php
                 $branchCount = count($introQuestions) + 1;
-                renderDynamicQuestions($notVisitedQuestions, $savedAnswers, $branchCount); 
+                renderDynamicQuestions($notVisitedQuestions, $savedAnswers, $branchCount);
                 ?>
                 <div class="survey-actions">
                     <button class="survey-button" type="button" data-survey-prev="intro" style="background-image: url('<?= assets('images/form/bg-button-next.webp') ?>'); transform: scaleX(-1);">
@@ -263,7 +260,7 @@ if ($mainSurveyId):
 
         form.addEventListener('submit', async function (event) {
             event.preventDefault();
-            
+
             // Check validation
             const activePanel = form.querySelector('.survey-panel.is-active');
             const requiredInputs = Array.from(activePanel.querySelectorAll('[required]'));
