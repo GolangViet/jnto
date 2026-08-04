@@ -30,14 +30,19 @@ final class TakeSurveyController extends Controller
      */
     public function detailSurvey(): string
     {
-        $mainSurveyId = setting('main_survey_quiz_id');
-        if (!$mainSurveyId) {
-            return $this->view('take-survey/detail-survey');
-        }
-
         $user = app()->session()->get('user');
         if (!$user) {
             $this->redirect('/login');
+        }
+
+        $targetRoute = $this->getRequiredRouteForUser((int) $user['id']);
+        if ($targetRoute !== '/take-survey') {
+            $this->redirect($targetRoute);
+        }
+
+        $mainSurveyId = setting('main_survey_quiz_id');
+        if (!$mainSurveyId) {
+            return $this->view('take-survey/detail-survey');
         }
 
         try {
@@ -46,10 +51,6 @@ final class TakeSurveyController extends Controller
             if (!$attempt) {
                 http_response_code(404);
                 return 'Survey attempt not found.';
-            }
-
-            if ($attempt['status'] !== 'in_progress') {
-                $this->redirect('/take-questions');
             }
 
             $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id']);
@@ -89,19 +90,9 @@ final class TakeSurveyController extends Controller
             $this->redirect('/login');
         }
 
-        $mainSurveyId = setting('main_survey_quiz_id');
-        if ($mainSurveyId) {
-            $db = \Core\Database::connection();
-            $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status = 'submitted'");
-            $stmt->execute([
-                'quiz_id' => (int) $mainSurveyId,
-                'user_id' => (int) $user['id']
-            ]);
-            $hasCompleted = (int) $stmt->fetchColumn() > 0;
-
-            if (!$hasCompleted) {
-                $this->redirect('/take-survey');
-            }
+        $targetRoute = $this->getRequiredRouteForUser((int) $user['id']);
+        if ($targetRoute !== '/take-questions') {
+            $this->redirect($targetRoute);
         }
 
         $mainQuizId = setting('main_quiz_quiz_id');
@@ -189,31 +180,17 @@ final class TakeSurveyController extends Controller
      */
     public function confirmPost(): string
     {
-        $mainSurveyId = setting('main_survey_quiz_id');
-        if ($mainSurveyId) {
-            $user = app()->session()->get('user');
-            if (!$user) {
-                $this->redirect('/login');
-            }
-
-            $db = \Core\Database::connection();
-            $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status = 'submitted'");
-            $stmt->execute([
-                'quiz_id' => (int) $mainSurveyId,
-                'user_id' => (int) $user['id']
-            ]);
-            $hasCompleted = (int) $stmt->fetchColumn() > 0;
-
-            if (!$hasCompleted) {
-                $this->redirect('/take-survey');
-            }
-        }
-
         $user = app()->session()->get('user');
-        $existingPost = null;
-        if ($user) {
-            $existingPost = $this->facebookPostRepository->findByUserId((int) $user['id']);
+        if (!$user) {
+            $this->redirect('/login');
         }
+
+        $targetRoute = $this->getRequiredRouteForUser((int) $user['id']);
+        if ($targetRoute !== '/confirm-post') {
+            $this->redirect($targetRoute);
+        }
+
+        $existingPost = $this->facebookPostRepository->findByUserId((int) $user['id']);
 
         return $this->view('take-survey/confirm-post', ['existingPost' => $existingPost]);
     }
@@ -231,6 +208,11 @@ final class TakeSurveyController extends Controller
         $user = app()->session()->get('user');
         if (!$user) {
             $this->redirect('/login');
+        }
+
+        if ($this->isPostSubmitted((int) $user['id'])) {
+            app()->session()->flash('error', 'Bạn đã nộp bài viết Facebook rồi.');
+            $this->redirect('/thank-you');
         }
 
         $facebookUrl = trim((string) $request->input('facebook_url'));
@@ -308,5 +290,71 @@ final class TakeSurveyController extends Controller
             $this->redirect('/confirm-post');
         }
     }
+
+    private function isSurveyCompleted(int $userId): bool
+    {
+        $mainSurveyId = setting('main_survey_quiz_id');
+        if (!$mainSurveyId) {
+            return true;
+        }
+
+        $db = \Core\Database::connection();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status = 'submitted'");
+        $stmt->execute([
+            'quiz_id' => (int) $mainSurveyId,
+            'user_id' => $userId
+        ]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    private function isQuestionsCompleted(int $userId): bool
+    {
+        $mainQuizId = setting('main_quiz_quiz_id');
+        $mainOpenId = setting('main_open_quiz_id');
+
+        $quizFinished = true;
+        if ($mainQuizId) {
+            $db = \Core\Database::connection();
+            $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status != 'in_progress'");
+            $stmt->execute([
+                'quiz_id' => (int) $mainQuizId,
+                'user_id' => $userId
+            ]);
+            $quizFinished = (int) $stmt->fetchColumn() > 0;
+        }
+
+        $openFinished = true;
+        if ($mainOpenId) {
+            $db = \Core\Database::connection();
+            $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status != 'in_progress'");
+            $stmt->execute([
+                'quiz_id' => (int) $mainOpenId,
+                'user_id' => $userId
+            ]);
+            $openFinished = (int) $stmt->fetchColumn() > 0;
+        }
+
+        return $quizFinished && $openFinished;
+    }
+
+    private function isPostSubmitted(int $userId): bool
+    {
+        return $this->facebookPostRepository->findByUserId($userId) !== null;
+    }
+
+    private function getRequiredRouteForUser(int $userId): string
+    {
+        if (!$this->isSurveyCompleted($userId)) {
+            return '/take-survey';
+        }
+        if (!$this->isQuestionsCompleted($userId)) {
+            return '/take-questions';
+        }
+        if (!$this->isPostSubmitted($userId)) {
+            return '/confirm-post';
+        }
+        return '/thank-you';
+    }
 }
+
 

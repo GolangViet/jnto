@@ -258,6 +258,10 @@
     color: #c51b0c;
 }
 
+.survey-panel--visited.is-active {
+    min-height: initial;
+}
+
 @media (max-width: 1024px) {
     .survey-panel {
         width: min(63vw, 700px);
@@ -381,6 +385,9 @@
         font-size: 0.85em;
     }
 
+    .survey-panel--not-visited {
+        aspect-ratio: 932 / 2959;
+    }
 }
 
 @media (max-width: 575px) {

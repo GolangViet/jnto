@@ -63,9 +63,9 @@
             return;
         }
 
-        const selectedExperience = form.querySelector('input[name="travel_experience"]:checked') || form.querySelector('input[data-travel-status]:checked');
+        const selectedExperience = form.querySelector('input[name="travel_experience"]:checked') || form.querySelector('input[data-survey-target]:checked');
         if (selectedExperience) {
-            showPanel(selectedExperience.dataset.travelStatus);
+            showPanel(selectedExperience.dataset.surveyTarget);
         }
     });
 

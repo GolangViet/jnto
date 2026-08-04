@@ -56,17 +56,19 @@ final class SurveyCheckMiddleware
             }
         }
 
-        // Check if user has already completed the survey
+        // Check if user has already completed the survey and other steps
         try {
-            $db = Database::connection();
-            $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status = 'submitted'");
-            $stmt->execute([
-                'quiz_id' => (int) $mainSurveyId,
-                'user_id' => (int) $user['id']
-            ]);
-            $hasCompleted = (int) $stmt->fetchColumn() > 0;
+            $userId = (int) $user['id'];
+            $surveyDone = $this->isSurveyCompleted($userId);
+            $questionsDone = $this->isQuestionsCompleted($userId);
+            $postDone = $this->isPostSubmitted($userId);
 
-            if (!$hasCompleted) {
+            if ($surveyDone && $questionsDone && $postDone) {
+                $response->redirect('/thank-you');
+                return false;
+            }
+
+            if (!$surveyDone) {
                 $response->redirect('/take-survey');
                 return false;
             }
@@ -75,5 +77,59 @@ final class SurveyCheckMiddleware
         }
 
         return true;
+    }
+
+    private function isSurveyCompleted(int $userId): bool
+    {
+        $mainSurveyId = setting('main_survey_quiz_id');
+        if (!$mainSurveyId) {
+            return true;
+        }
+
+        $db = Database::connection();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status = 'submitted'");
+        $stmt->execute([
+            'quiz_id' => (int) $mainSurveyId,
+            'user_id' => $userId
+        ]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    private function isQuestionsCompleted(int $userId): bool
+    {
+        $mainQuizId = setting('main_quiz_quiz_id');
+        $mainOpenId = setting('main_open_quiz_id');
+
+        $quizFinished = true;
+        if ($mainQuizId) {
+            $db = Database::connection();
+            $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status != 'in_progress'");
+            $stmt->execute([
+                'quiz_id' => (int) $mainQuizId,
+                'user_id' => $userId
+            ]);
+            $quizFinished = (int) $stmt->fetchColumn() > 0;
+        }
+
+        $openFinished = true;
+        if ($mainOpenId) {
+            $db = Database::connection();
+            $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status != 'in_progress'");
+            $stmt->execute([
+                'quiz_id' => (int) $mainOpenId,
+                'user_id' => $userId
+            ]);
+            $openFinished = (int) $stmt->fetchColumn() > 0;
+        }
+
+        return $quizFinished && $openFinished;
+    }
+
+    private function isPostSubmitted(int $userId): bool
+    {
+        $db = Database::connection();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM cms.user_facebook_posts WHERE user_id = :user_id");
+        $stmt->execute(['user_id' => $userId]);
+        return (int) $stmt->fetchColumn() > 0;
     }
 }
