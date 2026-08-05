@@ -273,6 +273,11 @@
         height: clamp(40px, 7vw, 5rem);
     }
 
+    .login-input,
+    .password-input {
+        font-size: 1.6em;
+    }
+
     .login-label{
        font-size: clamp(7px, 2.5vw, 1.8em);
     }

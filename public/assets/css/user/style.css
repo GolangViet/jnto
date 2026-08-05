@@ -60,7 +60,7 @@ body{
 .logo-japan{
     height: 100%;
 }
-.logo-japan > img{
+.logo-japan img{
     height: 100%;
 }
 .logos{
@@ -966,6 +966,20 @@ body.modal-open-body{
     outline-offset: -0.12em;
 }
 
+.password-input[aria-invalid="true"] {
+    outline: none;
+}
+
+.login-input-pass:has(.password-input[aria-invalid="true"])::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    border: 0.24em solid rgba(207, 41, 26, 0.55);
+    border-radius: 5px;
+    pointer-events: none;
+}
+
 .login-label{
     font-size: clamp(14px, 1.2vw, 2.2em);
     color: #91592b;
@@ -1007,6 +1021,7 @@ body.modal-open-body{
     height: 100%;
     padding-left: 1rem;
     border: none;
+    border-radius: 5px;
 }
 
 .pass_eye{
@@ -1173,6 +1188,10 @@ body.modal-open-body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.frm-wrapper > .login-error {
+    bottom: calc(100% - 3.1em);
 }
 
 .frm-footer{
