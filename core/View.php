@@ -80,7 +80,7 @@ final class View
                     $parsedUrl .= '?v=' . $version;
                 }
             }
-            $html .= '    <link rel="stylesheet" href="' . e($parsedUrl) . '">' . "\n";
+            $html .= '    <link rel="stylesheet" href="' . e($parsedUrl) . '?v=' . $version . '">' . "\n";
         }
 
         return $html;
@@ -130,6 +130,16 @@ final class View
     }
 
     /**
+     * Get the current asset version hash.
+     *
+     * @return string
+     */
+    public static function getVersion(): string
+    {
+        return self::getGitCommitHash();
+    }
+
+    /**
      * Render all queued script tags.
      *
      * @return string
@@ -147,7 +157,8 @@ final class View
                     $parsedUrl .= '?v=' . $version;
                 }
             }
-            $html .= '    <script type="text/javascript" src="' . e($parsedUrl) . '"></script>' . "\n";
+
+            $html .= '    <script type="text/javascript" src="' . e($parsedUrl) . '?v=' . $version . '"></script>' . "\n";
         }
 
         return $html;

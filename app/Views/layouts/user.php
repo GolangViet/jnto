@@ -4,9 +4,9 @@
     <title>JNTO</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?= assets('css/user/default.css') ?>">
-    <link rel="stylesheet" href="<?= assets('css/user/style.css') ?>">
-    <link rel="stylesheet" href="<?= assets('css/user/responsive.css') ?>">
+    <link rel="stylesheet" href="<?= asset_with_version('css/user/default.css') ?>">
+    <link rel="stylesheet" href="<?= asset_with_version('css/user/style.css') ?>">
+    <link rel="stylesheet" href="<?= asset_with_version('css/user/responsive.css') ?>">
 
     <?= render_styles() ?>
 </head>
@@ -122,7 +122,7 @@
 
     <?= render_modals() ?>
 
-    <script type="text/javascript" src="<?= assets('js/user/app.js') ?>"></script>
+    <script type="text/javascript" src="<?= asset_with_version('js/user/app.js') ?>"></script>
 
     <?= render_scripts() ?>
 

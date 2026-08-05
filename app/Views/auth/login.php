@@ -47,4 +47,4 @@
     </form>
 </section>
 
-<?php push_script(assets('js/user/login.js')); ?>
+<?php push_script(asset_with_version('js/user/login.js')); ?>

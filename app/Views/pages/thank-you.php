@@ -1,4 +1,4 @@
-<?php push_style(assets('css/user/page6.css')); ?>
+<?php push_style(asset_with_version('css/user/page6.css')); ?>
 
 <section class="success-section" aria-labelledby="success-title">
     <div class="success-panel">
@@ -70,4 +70,4 @@
     </a>
 </section>
 
-<?php push_script(assets('js/user/page6.js')); ?>
+<?php push_script(asset_with_version('js/user/page6.js')); ?>

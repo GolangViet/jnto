@@ -1,4 +1,4 @@
-<?php push_style(assets('css/user/form.css')); ?>
+<?php push_style(asset_with_version('css/user/form.css')); ?>
 
 <?php
 
@@ -63,7 +63,7 @@ if (!function_exists('renderDynamicQuestions')) {
     <legend>
         <span class="question-number"><?= $qCount++ ?>.</span>
         <span class="question-copy">
-            <?= e($q['question_text']) ?>
+            <?= $q['question_text'] ?>
             <?= $questionType === 'multiple_choice' ? "<em>(Có thể chọn nhiều đáp án)</em>" : '' ?>
             <?= $notes !== '' ? $notes : '' ?>
         </span>
@@ -221,7 +221,7 @@ if (!function_exists('renderDynamicQuestions')) {
     </label>
 </template>
 
-<?php push_script(assets('js/user/form.js')); ?>
+<?php push_script(asset_with_version('js/user/form.js')); ?>
 
 <script>
 (function() {

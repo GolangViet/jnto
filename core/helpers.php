@@ -254,3 +254,18 @@ function assets(string $path = ''): string
 {
     return url("/assets/{$path}");
 }
+
+/**
+ * Get the path to an asset with its version hash.
+ *
+ * @param string $path
+ * @return string
+ */
+function asset_with_version(string $path = ''): string
+{
+    $url = assets($path);
+    $version = \Core\View::getVersion();
+    $separator = str_contains($url, '?') ? '&' : '?';
+    
+    return $url . $separator . 'v=' . $version;
+}

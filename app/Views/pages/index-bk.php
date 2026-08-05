@@ -1,4 +1,4 @@
-<?php push_style('/assets/css/user/form.css'); ?>
+<?php push_style(asset_with_version('/assets/css/user/form.css')); ?>
 
 <?php
 $mainQuizId = setting('main_quiz_quiz_id');
@@ -102,5 +102,5 @@ $mainOpenId = setting('main_open_quiz_id');
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
-<?php push_script('/assets/js/home.js'); ?>
+<?php push_script(asset_with_version('/assets/js/home.js')); ?>
 

@@ -1,5 +1,5 @@
-<?php push_style(assets('css/user/page4.css')); ?>
-<?php push_style(assets('css/user/page5.css')); ?>
+<?php push_style(asset_with_version('css/user/page4.css')); ?>
+<?php push_style(asset_with_version('css/user/page5.css')); ?>
 
 <section class="region-map" aria-labelledby="region-map-title">
     <h2 class="visually-hidden" id="region-map-title">Khám phá các vùng của Nhật Bản</h2>
@@ -117,4 +117,4 @@
     </form>
 </section>
 
-<?php push_script(assets('js/user/page5.js')); ?>
+<?php push_script(asset_with_version('js/user/page5.js')); ?>

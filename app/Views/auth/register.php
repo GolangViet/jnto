@@ -1,4 +1,4 @@
-<div id="agree-error-message" class="alert message-container error">
+<div id="agree-error-message" class="alert message-container error" style="display: none;">
     <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; flex-shrink: 0;">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
@@ -76,4 +76,4 @@
     </div>
 </div>
 
-<?php push_script(assets('js/user/register.js')); ?>
+<?php push_script(asset_with_version('js/user/register.js')); ?>
