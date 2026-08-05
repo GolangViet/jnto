@@ -39,9 +39,9 @@ final class QuestionRepository extends BaseRepository
     {
         $db = Database::connection();
         $sql = "INSERT INTO cms.questions (
-            quiz_id, type, question_text, explanation, score, is_required, display_order
+            quiz_id, type, question_text, explanation, score, is_required, display_order, notes
         ) VALUES (
-            :quiz_id, :type, :question_text, :explanation, :score, :is_required, :display_order
+            :quiz_id, :type, :question_text, :explanation, :score, :is_required, :display_order, :notes
         ) RETURNING id";
 
         $stmt = $db->prepare($sql);
@@ -53,6 +53,7 @@ final class QuestionRepository extends BaseRepository
             'score' => isset($data['score']) ? (float) $data['score'] : 1.0,
             'is_required' => (isset($data['is_required']) ? filter_var($data['is_required'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'display_order' => isset($data['display_order']) ? (int) $data['display_order'] : 0,
+            'notes' => $data['notes'] ?? null,
         ]);
 
         return (int) $stmt->fetchColumn();
@@ -75,6 +76,7 @@ final class QuestionRepository extends BaseRepository
             score = :score,
             is_required = :is_required,
             display_order = :display_order,
+            notes = :notes,
             updated_at = CURRENT_TIMESTAMP
             WHERE id = :id";
 
@@ -87,6 +89,7 @@ final class QuestionRepository extends BaseRepository
             'score' => isset($data['score']) ? (float) $data['score'] : 1.0,
             'is_required' => (isset($data['is_required']) ? filter_var($data['is_required'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'display_order' => isset($data['display_order']) ? (int) $data['display_order'] : 0,
+            'notes' => $data['notes'] ?? null,
         ]);
     }
 

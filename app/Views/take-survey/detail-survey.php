@@ -55,6 +55,7 @@ if (!function_exists('renderDynamicQuestions')) {
             }
 
             $questionType = $q['type'] ?? '';
+            $notes = $q['notes'] ?? '';
             $savedOptionIds = $savedAns['selected_option_ids'] ?? [];
             $savedCustomTexts = $savedAns['option_custom_texts'] ?? [];
 ?>
@@ -64,6 +65,7 @@ if (!function_exists('renderDynamicQuestions')) {
         <span class="question-copy">
             <?= e($q['question_text']) ?>
             <?= $questionType === 'multiple_choice' ? "<em>(Có thể chọn nhiều đáp án)</em>" : '' ?>
+            <?= $notes !== '' ? $notes : '' ?>
         </span>
     </legend>
 
@@ -91,14 +93,14 @@ if (!function_exists('renderDynamicQuestions')) {
                 <?= $isChecked ? 'checked' : '' ?>
                 <?= $travelStatus ? 'data-survey-target="' . $travelStatus . '"' : '' ?>
                 <?= $q['is_required'] ? 'required' : '' ?>>
-            <span><?= e($opt['option_text']) ?></span>
+            <span><?= $opt['option_text'] ?></span>
             <?php if ($isOther): ?>
                 <input
                     class="survey-other-input"
                     type="text"
                     data-option-id="<?= (int)$opt['id'] ?>"
                     value="<?= e($savedCustomTexts[(string)$opt['id']] ?? $savedCustomTexts[(int)$opt['id']] ?? '') ?>"
-                    aria-label="<?= e($opt['option_text']) ?>">
+                    aria-label="<?= $opt['option_text'] ?>">
             <?php endif; ?>
         </label>
             <?php endforeach; ?>
@@ -113,21 +115,21 @@ if (!function_exists('renderDynamicQuestions')) {
                             name="q_<?= (int)$q['id'] ?>[]"
                             value="<?= (int)$opt['id'] ?>"
                             <?= $isChecked ? 'checked' : '' ?>>
-                        <span><?= e($opt['option_text']) ?></span>
+                        <span><?= $opt['option_text'] ?></span>
                         <?php if ($isOther): ?>
                             <input
                                 class="survey-other-input"
                                 type="text"
                                 data-option-id="<?= (int)$opt['id'] ?>"
                                 value="<?= e($savedCustomTexts[(string)$opt['id']] ?? $savedCustomTexts[(int)$opt['id']] ?? '') ?>"
-                                aria-label="<?= e($opt['option_text']) ?>">
+                                aria-label="<?= $opt['option_text'] ?>">
                         <?php endif; ?>
                     </label>
                 <?php endforeach; ?>
                 <?php elseif ($q['type'] === 'open_text'): ?>
                     <textarea
                         name="q_<?= (int)$q['id'] ?>"
-                        <?= $q['is_required'] ? 'required' : '' ?>><?= e($savedAns['answer_text'] ?? '') ?></textarea>
+                        <?= $q['is_required'] ? 'required' : '' ?>><?= $savedAns['answer_text'] ?? '' ?></textarea>
                 <?php endif; ?>
             </fieldset>
         <?php endforeach;

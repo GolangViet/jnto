@@ -223,7 +223,7 @@ final class AuthController extends Controller
             'role' => 'admin',
         ]);
 
-        $this->redirect('/admin/posts');
+        $this->redirect('/admin/quizzes');
     }
 
     /**

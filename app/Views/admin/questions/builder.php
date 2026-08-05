@@ -1,3 +1,62 @@
+<style>
+/* Tooltip Container */
+.question-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: color 0.2s ease;
+    vertical-align: middle;
+}
+
+.question-tooltip:hover {
+    color: #4f46e5;
+}
+
+/* Tooltip text */
+.question-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #1f2937;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 12px;
+    position: absolute;
+    z-index: 50;
+    bottom: 125%; /* Position above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    font-size: 0.75rem;
+    font-weight: 500;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+    white-space: normal;
+}
+
+/* Tooltip arrow */
+.question-tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1f2937 transparent transparent transparent;
+}
+
+/* Show the tooltip text when hovering */
+.question-tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+}
+</style>
+
 <div style="margin-bottom: 24px; animation: fadeIn 0.3s ease-out;">
     <a href="/admin/quizzes" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
         <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,8 +116,21 @@
                 </div>
 
                 <div style="margin-bottom: 16px;">
-                    <label for="q-text" style="font-weight: 600; color: #374151; font-size: 0.9rem;">Question Text *</label>
+                    <label for="q-text" style="font-weight: 600; color: #374151; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px;">
+                        Question Text *
+                        <span class="question-tooltip">
+                            <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="tooltiptext">Can breakline by add \n</span>
+                        </span>
+                    </label>
                     <textarea id="q-text" rows="3" required placeholder="Enter the question text here..." style="margin-top: 4px; margin-bottom: 0;"></textarea>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label for="q-notes" style="font-weight: 600; color: #374151; font-size: 0.9rem;">Notes</label>
+                    <textarea id="q-notes" rows="2" placeholder="Enter private notes or admin instructions..." style="margin-top: 4px; margin-bottom: 0;"></textarea>
                 </div>
 
                 <div style="margin-bottom: 16px;">
@@ -134,6 +206,7 @@ const qText = document.getElementById('q-text');
 const qExplanation = document.getElementById('q-explanation');
 const qRequired = document.getElementById('q-required');
 const qDisplayOrder = document.getElementById('q-display-order');
+const qNotes = document.getElementById('q-notes');
 
 const choiceSection = document.getElementById('choice-options-section');
 const optionsContainer = document.getElementById('options-container');
@@ -409,6 +482,7 @@ async function loadQuestionIntoEditor(id) {
         qExplanation.value = q.explanation || '';
         qRequired.checked = q.is_required ? true : false;
         qDisplayOrder.value = q.display_order;
+        qNotes.value = q.notes || '';
 
         editorTitle.innerText = `Edit Question #${q.id}`;
         deleteQBtn.style.display = 'inline-block';
@@ -444,6 +518,7 @@ function clearFormForNewQuestion() {
     qText.value = '';
     qExplanation.value = '';
     qRequired.checked = true;
+    qNotes.value = '';
     
     // Auto increment display order based on current list length
     qDisplayOrder.value = questions.length + 1;
@@ -467,6 +542,7 @@ async function saveQuestion(event) {
         explanation: qExplanation.value,
         is_required: qRequired.checked ? 1 : 0,
         display_order: parseInt(qDisplayOrder.value),
+        notes: qNotes.value,
         options: [],
         accepted_answers: []
     };

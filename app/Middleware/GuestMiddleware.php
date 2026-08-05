@@ -20,7 +20,7 @@ final class GuestMiddleware
     {
         if ($user = app()->session()->get('user')) {
             if (($user['role'] ?? 'user') === 'admin') {
-                $response->redirect('/admin/posts');
+                $response->redirect('/admin/quizzes');
             } else {
                 $response->redirect('/');
             }
