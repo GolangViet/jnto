@@ -20,17 +20,18 @@ try {
     echo $html;
     echo "============================\n\n";
 
-    $hasFormCss = strpos($html, '<link rel="stylesheet" href="/assets/css/user/form.css">') !== false;
-    $hasHomeJs = strpos($html, '<script type="text/javascript" src="/assets/js/home.js"></script>') !== false;
+    $hasFormCss = (bool) preg_match('#<link rel="stylesheet" href="/assets/css/user/form\.css\?v=[a-f0-9]{7}">#', $html, $matchesCss, PREG_OFFSET_CAPTURE);
+    $hasHomeJs = (bool) preg_match('#<script type="text/javascript" src="/assets/js/home\.js\?v=[a-f0-9]{7}"></script>#', $html, $matchesJs, PREG_OFFSET_CAPTURE);
     
     $headClosePos = strpos($html, '</head>');
-    $formCssPos = strpos($html, '<link rel="stylesheet" href="/assets/css/user/form.css">');
+    $formCssPos = $hasFormCss ? $matchesCss[0][1] : -1;
     $bodyClosePos = strpos($html, '</body>');
-    $homeJsPos = strpos($html, '<script type="text/javascript" src="/assets/js/home.js"></script>');
+    $homeJsPos = $hasHomeJs ? $matchesJs[0][1] : -1;
+
 
     echo "Validation Results:\n";
-    echo "Pushed form.css stylesheet detected: " . ($hasFormCss ? "YES" : "NO") . "\n";
-    echo "Pushed home.js script detected: " . ($hasHomeJs ? "YES" : "NO") . "\n";
+    echo "Pushed form.css stylesheet (with version hash) detected: " . ($hasFormCss ? "YES" : "NO") . "\n";
+    echo "Pushed home.js script (with version hash) detected: " . ($hasHomeJs ? "YES" : "NO") . "\n";
 
     if ($hasFormCss && $hasHomeJs) {
         if ($formCssPos < $headClosePos) {
@@ -39,7 +40,7 @@ try {
             echo "CSS position relative to </head>: INCORRECT\n";
         }
         
-        if ($homeJsPos < $bodyClosePos) {
+        if ($homeJsPos !== -1 && $homeJsPos < $bodyClosePos) {
             echo "JS position relative to </body>: CORRECT (placed before closing body tag)\n";
         } else {
             echo "JS position relative to </body>: INCORRECT\n";

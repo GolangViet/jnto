@@ -70,11 +70,63 @@ final class View
     public static function renderStyles(): string
     {
         $html = '';
+        $version = self::getGitCommitHash();
         foreach (self::$styles as $url) {
-            $html .= '    <link rel="stylesheet" href="' . e($url) . '">' . "\n";
+            $parsedUrl = $url;
+            if ($version !== '' && !str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '//')) {
+                if (str_contains($url, '?')) {
+                    $parsedUrl .= '&v=' . $version;
+                } else {
+                    $parsedUrl .= '?v=' . $version;
+                }
+            }
+            $html .= '    <link rel="stylesheet" href="' . e($parsedUrl) . '">' . "\n";
         }
 
         return $html;
+    }
+
+    /**
+     * Get the last git commit hash (short version).
+     *
+     * @return string
+     */
+    private static function getGitCommitHash(): string
+    {
+        static $hash = null;
+        if ($hash !== null) {
+            return $hash;
+        }
+
+        $hash = '';
+        $gitDir = app()->basePath('.git');
+        if (is_dir($gitDir)) {
+            $headFile = $gitDir . '/HEAD';
+            if (is_file($headFile)) {
+                $headContent = trim((string) file_get_contents($headFile));
+                if (str_starts_with($headContent, 'ref:')) {
+                    $refPath = trim(substr($headContent, 4));
+                    $refFile = $gitDir . '/' . $refPath;
+                    if (is_file($refFile)) {
+                        $hash = substr(trim((string) file_get_contents($refFile)), 0, 7);
+                    } else {
+                        $packedRefsFile = $gitDir . '/packed-refs';
+                        if (is_file($packedRefsFile)) {
+                            $packedContent = file_get_contents($packedRefsFile);
+                            if ($packedContent !== false) {
+                                if (preg_match('/^([a-f0-9]{40})\s+' . preg_quote($refPath, '/') . '$/m', $packedContent, $matches)) {
+                                    $hash = substr($matches[1], 0, 7);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    $hash = substr($headContent, 0, 7);
+                }
+            }
+        }
+
+        return $hash;
     }
 
     /**
@@ -85,12 +137,22 @@ final class View
     public static function renderScripts(): string
     {
         $html = '';
+        $version = self::getGitCommitHash();
         foreach (self::$scripts as $url) {
-            $html .= '    <script type="text/javascript" src="' . e($url) . '"></script>' . "\n";
+            $parsedUrl = $url;
+            if ($version !== '' && !str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '//')) {
+                if (str_contains($url, '?')) {
+                    $parsedUrl .= '&v=' . $version;
+                } else {
+                    $parsedUrl .= '?v=' . $version;
+                }
+            }
+            $html .= '    <script type="text/javascript" src="' . e($parsedUrl) . '"></script>' . "\n";
         }
 
         return $html;
     }
+
 
     /**
      * Render all queued modal templates.
