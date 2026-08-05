@@ -184,6 +184,7 @@
     background: url("./../../images/page-4/section-3/bg-giay.webp") center / 100% 100% no-repeat;
     color: #7b351b;
     font-size: 1rem;
+    margin-top: -3px;
 }
 
 .knowledge-form {

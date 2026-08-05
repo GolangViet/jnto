@@ -15,7 +15,6 @@
        target="_blank" rel="noopener noreferrer"
        aria-label="Tìm hiểu về vùng Kyushu">
         <img src="<?= assets('images/page-4/box-kyushu.webp') ?>" alt="">
-        <span class="region-card__label">KYUSHU</span>
     </a>
 
     <a class="region-card region-card--hokuriku"
