@@ -4,6 +4,10 @@
             <?= csrf_field() ?>
             <h2 class="frm-box-title"><span>ĐĂNG KÝ</span></h2>
             <div class="frm-wrapper">
+                <p class="login-error" id="login-error" role="alert" aria-live="polite" hidden>
+                    <span class="login-error-line">Tên đăng nhập / Mật khẩu không đúng</span><br>
+                </p>
+
                 <div class="login-username">
                     <label for="username" class="login-label">Tên đăng nhập:</label>
                     <input type="text" name="username" class="login-input" id="username" value="<?= e((string) old('username')) ?>" required />
@@ -22,29 +26,11 @@
                 </div>
 
                 <div id="agree-error-message" class="message-container error" style="display: none; width: 100%; margin: 15px 0 15px 0;">
-                    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
+                    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; flex-shrink: 0;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span>Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.</span>
                 </div>
-
-                <?php if ($error = app()->session()->pullFlash('error')): ?>
-                    <div class="message-container error" style="width: 100%; margin: 15px 0 15px 0;">
-                        <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span><?= e($error) ?></span>
-                    </div>
-                <?php endif; ?>
-
-                <?php if ($errors = app()->session()->pullFlash('errors')): ?>
-                    <div class="message-container error" style="width: 100%; margin: 15px 0 15px 0;">
-                        <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span><?= e(array_values($errors)[0][0] ?? '') ?></span>
-                    </div>
-                <?php endif; ?>
             </div>
             <div class="frm-footer">
                 <div class="agree-box">
@@ -89,28 +75,5 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('register-form');
-    if (form) {
-        form.addEventListener('submit', function (event) {
-            const agree1 = document.querySelector('input[name="agree1"]');
-            const agree2 = document.querySelector('input[name="agree2"]');
-            const errorBox = document.getElementById('agree-error-message');
-            if (!agree1.checked || !agree2.checked) {
-                event.preventDefault();
-                if (errorBox) {
-                    errorBox.style.display = 'flex';
-                }
-            } else {
-                if (errorBox) {
-                    errorBox.style.display = 'none';
-                }
-            }
-        });
-    }
-});
-</script>
 
 <?php push_script(assets('js/user/register.js')); ?>

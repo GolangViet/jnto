@@ -51,30 +51,51 @@ final class AuthController extends Controller
         Csrf::verify($request);
         $data = $request->only(['username', 'password']);
         $validator = new Validator();
+        $isJson = $request->expectsJson();
         if (!$validator->validate($data, ['username' => 'required|min:3', 'password' => 'required|min:6'])) {
+            if ($isJson) {
+                app()->response()->json([
+                    'errors' => $validator->errors(),
+                    'message' => 'Thông tin đăng nhập không hợp lệ.',
+                ], 422);
+            }
+
             app()->session()->flash('errors', $validator->errors());
             app()->session()->flashOldInput($data);
             $this->redirect('/login');
         }
 
         $user = $this->userService->findByUsername($data['username']);
-
         if (!$user || !password_verify($data['password'], $user['password'])) {
-            app()->session()->flash('error', 'Tên đăng nhập / Mật khẩu không đúng. Vui lòng thử lại!');
+            $errorMsg = "Tên đăng nhập / Mật khẩu không đúng \nVui lòng thử lại!";
+            if ($isJson) {
+                app()->response()->json(['message' => $errorMsg], 401);
+            }
+
+            app()->session()->flash('error', $errorMsg);
             $this->redirect('/login');
         }
 
         if (($user['role'] ?? 'user') === 'admin') {
-            app()->session()->flash('error', 'Admins must use the admin login portal.');
+            $errorMsg = 'Admins must use the admin login portal.';
+            if ($isJson) {
+                app()->response()->json(['message' => $errorMsg], 403);
+            }
+
+            app()->session()->flash('error', $errorMsg);
             $this->redirect('/login');
         }
 
         app()->session()->put('user', [
-            'id' => $user['id'],
-            'name' => $user['name'],
-            'email' => $user['email'],
-            'role' => $user['role'] ?? 'user',
+            'id'    => $user['id'] ?? '',
+            'name'  => $user['name'] ?? '',
+            'email' => $user['email'] ?? '',
+            'role'  => $user['role'] ?? 'user',
         ]);
+
+        if ($isJson) {
+            app()->response()->json(['success' => true, 'redirect' => '/']);
+        }
 
         $this->redirect('/');
     }
@@ -90,7 +111,16 @@ final class AuthController extends Controller
         Csrf::verify($request);
         $validator = new Validator();
         $data = $request->only(['username', 'password']);
+        $isJson = $request->expectsJson();
+
         if (!$validator->validate($data, ['username' => 'required|min:3', 'password' => 'required|min:6'])) {
+            if ($isJson) {
+                app()->response()->json([
+                    'errors' => $validator->errors(),
+                    'message' => 'Thông tin đăng ký không hợp lệ.',
+                ], 422);
+            }
+
             app()->session()->flash('errors', $validator->errors());
             app()->session()->flashOldInput($data);
             $this->redirect('/register');
@@ -103,6 +133,13 @@ final class AuthController extends Controller
         }
 
         if (!empty($errors)) {
+            if ($isJson) {
+                app()->response()->json([
+                    'errors' => $errors,
+                    'message' => 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.',
+                ], 422);
+            }
+
             app()->session()->flash('errors', $errors);
             app()->session()->flashOldInput($data);
             $this->redirect('/register');
@@ -116,12 +153,27 @@ final class AuthController extends Controller
             'password' => $data['password'],
         ]);
         if (!$created) {
-            app()->session()->flash('error', 'Could not create account. Please try again.');
+            $errorMsg = 'Could not create account. Please try again.';
+            if ($isJson) {
+                app()->response()->json([
+                    'message' => $errorMsg,
+                ], 500);
+            }
+
+            app()->session()->flash('error', $errorMsg);
             app()->session()->flashOldInput($data);
             $this->redirect('/register');
         }
 
         app()->session()->flash('success', 'Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
+
+        if ($isJson) {
+            app()->response()->json([
+                'success' => true,
+                'redirect' => '/login',
+            ]);
+        }
+
         $this->redirect('/login');
     }
 

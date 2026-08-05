@@ -1463,3 +1463,7 @@ body.modal-open-body{
     width: 14px;
     height: 14px;
 }
+
+.login-error-line {
+    white-space: pre-line;
+}

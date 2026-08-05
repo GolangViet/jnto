@@ -19,7 +19,7 @@ final class AuthMiddleware
     public function handle(Request $request, Response $response): bool
     {
         if (!app()->session()->get('user')) {
-            $response->redirect('/login');
+            $response->redirect('/register');
         }
 
         return true;

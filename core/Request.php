@@ -88,4 +88,16 @@ final class Request
     {
         return $this->method() === 'POST';
     }
+
+    /**
+     * Determine if the current request expects or sends JSON.
+     *
+     * @return bool
+     */
+    public function expectsJson(): bool
+    {
+        $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+        $contentType = $_SERVER['CONTENT_TYPE'] ?? $_SERVER['HTTP_CONTENT_TYPE'] ?? '';
+        return stripos($accept, 'application/json') !== false || stripos($contentType, 'application/json') !== false;
+    }
 }

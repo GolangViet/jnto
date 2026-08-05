@@ -4,8 +4,7 @@
         <h2 class="login-title"><span>ĐĂNG NHẬP</span></h2>
         <div class="login-box">
             <p class="login-error" id="login-error" role="alert" aria-live="polite" hidden>
-                <span class="login-error-line">Tên đăng nhập/ Mật khẩu không đúng</span><br>
-                Vui lòng thử lại.
+                <span class="login-error-line">Tên đăng nhập / Mật khẩu không đúng</span><br>
             </p>
 
             <div class="login-username">
@@ -39,24 +38,6 @@
                     </button>
                 </div>
             </div>
-
-            <?php if ($error = app()->session()->pullFlash('error')): ?>
-                <div class="message-container error" style="width: 100%; margin: 15px 0 15px 0;">
-                    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span><?= e($error) ?></span>
-                </div>
-            <?php endif; ?>
-
-            <?php if ($errors = app()->session()->pullFlash('errors')): ?>
-                <div class="message-container error" style="width: 100%; margin: 15px 0 15px 0;">
-                    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span><?= e(array_values($errors)[0][0] ?? '') ?></span>
-                </div>
-            <?php endif; ?>
         </div>
 
         <div class="login-footer">
@@ -65,3 +46,5 @@
         </div>
     </form>
 </section>
+
+<?php push_script(assets('js/user/login.js')); ?>
