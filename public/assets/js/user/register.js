@@ -42,7 +42,7 @@
         const inputs = Array.from(form.querySelectorAll('input[required]'));
         const agree1 = form.querySelector('input[name="agree1"]');
         const agree2 = form.querySelector('input[name="agree2"]');
-        const agreeErrorBox = form.querySelector('#agree-error-message');
+        const agreeErrorBox = document.querySelector('#agree-error-message');
 
         const hideError = () => {
             if (error) error.hidden = true;

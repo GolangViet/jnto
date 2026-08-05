@@ -1485,3 +1485,16 @@ body.modal-open-body{
 .login-error-line {
     white-space: pre-line;
 }
+
+.admin-btn.logout-btn {
+    background: #374151;
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+}
+
+.admin-btn.logout-btn:hover {
+    background: #4b5563;
+    box-shadow: 0 0 12px rgba(75, 85, 99, 0.5);
+    transform: translateY(-1px);
+}

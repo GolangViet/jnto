@@ -1,3 +1,10 @@
+<div id="agree-error-message" class="alert message-container error">
+    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; flex-shrink: 0;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.</span>
+</div>
+
 <section class="section-register">
     <div class="registers">
         <form class="frm-box" action="/register" method="post" id="register-form">
@@ -23,13 +30,6 @@
                             <svg class="pass_icon"><use xlink:href="#eye-closed-icon"></use></svg>
                         </button>
                     </div>
-                </div>
-
-                <div id="agree-error-message" class="message-container error" style="display: none; width: 100%; margin: 15px 0 15px 0;">
-                    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; flex-shrink: 0;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.</span>
                 </div>
             </div>
             <div class="frm-footer">
