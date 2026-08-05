@@ -63,9 +63,9 @@
 .facebook-intro p {
     margin: 1em 0 0;
     color: #74351e;
-    font-size: 2.8em;
+    font-size: 2.5em;
     font-weight: 450;
-    line-height: 1.2;
+    line-height: 1.3332;
 }
 
 .facebook-intro p + p {
@@ -111,22 +111,25 @@
 .facebook-tag--question {
     width: 23.2em;
     aspect-ratio: 232 / 70;
-    top: -3.5em;
+    top: -2em;
     background-image: url("./../../images/page-5/tag-title-cauhoi.webp");
 }
 
 .facebook-question > p {
     margin: 0;
-    font-size: 2.25em;
-    font-weight: 500;
-    line-height: 1.25;
+    color: #152b79;
+    font-family: "Myriad Pro", "Montserrat", sans-serif;
+    font-size: 2.5em;
+    font-weight: 400;
+    line-height: 1.3332;
+    letter-spacing: 0.01em;
 }
 
 .facebook-hashtag-row {
     display: flex;
     align-items: center;
     gap: 1.5em;
-    margin-top: 6.2em;
+    margin-top: 4.2em;
     text-align: left;
 }
 
@@ -198,8 +201,8 @@
     margin: 0;
     padding-left: 2em;
     color: #5a240d;
-    font-size: 2.1em;
-    line-height: 1.35;
+    font-size: 2.5em;
+    line-height: 1.4444;
     list-style: disc outside;
 }
 
@@ -236,6 +239,10 @@
 .facebook-link-field input::placeholder {
     color: #17358f;
     opacity: 1;
+}
+
+.facebook-link-field input:focus::placeholder {
+    opacity: 0;
 }
 
 .facebook-submit-button {
@@ -313,6 +320,14 @@
         margin: 0 auto;
     }
 
+    .facebook-intro p {
+        font-size: 2.8em;
+    }
+
+    .facebook-tag--requirements {
+        top: -5.75em;
+    }
+
     .facebook-question {
         width: 89em;
         aspect-ratio: 890 / 528;
@@ -354,7 +369,7 @@
 
     .facebook-requirements {
         margin-top: 10.9em;
-        padding-top: 12em;
+        padding-top: 10em;
     }
 
     .facebook-tag--requirements > span {
@@ -363,7 +378,7 @@
 
     .facebook-requirements ul {
         padding-left: 2em;
-        font-size: 2.9em;
+        font-size: 2.8em;
         line-height: 1.45;
     }
 
