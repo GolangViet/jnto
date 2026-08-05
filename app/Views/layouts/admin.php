@@ -15,6 +15,7 @@
             <a href="/"><strong><?= e(config('app.name')) ?> Admin Panel</strong></a>
             <div>
                 <?php if ($user = app()->session()->get('user')): ?>
+                    <a href="/admin/dashboard" style="margin-left: 14px; font-weight: bold; color: #60a5fa;">Dashboard</a>
                     <a class="d-none" href="/admin/posts">Manage Posts</a>
                     <a href="/admin/quizzes" style="margin-left: 14px;">Manage Quizzes</a>
                     <a href="/admin/settings" style="margin-left: 14px;">Manage Settings</a>

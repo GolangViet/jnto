@@ -48,8 +48,12 @@ use App\Controllers\Admin\QuizController as AdminQuizController;
 use App\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Controllers\Admin\SettingController as AdminSettingController;
 use App\Controllers\Admin\UserController as AdminUserController;
+use App\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Controllers\QuizAttemptController;
 use App\Controllers\TakeSurveyController;
+
+// Admin Dashboard Route
+$router->get('/admin/dashboard', [AdminDashboardController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
 
 // Admin Settings Routes
 $router->get('/admin/settings', [AdminSettingController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
