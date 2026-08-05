@@ -960,8 +960,7 @@ body.modal-open-body{
     white-space: nowrap;
 }
 
-.login-input[aria-invalid="true"],
-.password-input[aria-invalid="true"] {
+.login-input[aria-invalid="true"] {
     outline: 0.12em solid rgba(207, 41, 26, 0.55);
     outline-offset: -0.12em;
 }
