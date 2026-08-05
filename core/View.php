@@ -70,17 +70,8 @@ final class View
     public static function renderStyles(): string
     {
         $html = '';
-        $version = self::getGitCommitHash();
         foreach (self::$styles as $url) {
-            $parsedUrl = $url;
-            if ($version !== '' && !str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '//')) {
-                if (str_contains($url, '?')) {
-                    $parsedUrl .= '&v=' . $version;
-                } else {
-                    $parsedUrl .= '?v=' . $version;
-                }
-            }
-            $html .= '    <link rel="stylesheet" href="' . e($parsedUrl) . '?v=' . $version . '">' . "\n";
+            $html .= '    <link rel="stylesheet" href="' . e($url) . '">' . "\n";
         }
 
         return $html;
@@ -147,18 +138,8 @@ final class View
     public static function renderScripts(): string
     {
         $html = '';
-        $version = self::getGitCommitHash();
         foreach (self::$scripts as $url) {
-            $parsedUrl = $url;
-            if ($version !== '' && !str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '//')) {
-                if (str_contains($url, '?')) {
-                    $parsedUrl .= '&v=' . $version;
-                } else {
-                    $parsedUrl .= '?v=' . $version;
-                }
-            }
-
-            $html .= '    <script type="text/javascript" src="' . e($parsedUrl) . '?v=' . $version . '"></script>' . "\n";
+            $html .= '    <script type="text/javascript" src="' . e($url) . '"></script>' . "\n";
         }
 
         return $html;
