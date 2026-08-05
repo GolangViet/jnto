@@ -56,17 +56,10 @@ final class SurveyCheckMiddleware
             }
         }
 
-        // Check if user has already completed the survey and other steps
+        // Check if user has already completed the survey
         try {
             $userId = (int) $user['id'];
             $surveyDone = $this->isSurveyCompleted($userId);
-            $questionsDone = $this->isQuestionsCompleted($userId);
-            $postDone = $this->isPostSubmitted($userId);
-
-            if ($surveyDone && $questionsDone && $postDone) {
-                $response->redirect('/thank-you');
-                return false;
-            }
 
             if (!$surveyDone) {
                 $response->redirect('/take-survey');

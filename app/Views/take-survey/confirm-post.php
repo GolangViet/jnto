@@ -114,9 +114,6 @@
             <button class="facebook-submit-button" type="submit">
                 <span>NỘP BÀI</span>
             </button>
-            <a class="facebook-submit-button" href="/thank-you">
-                <span>Trang kế tiếp</span>
-            </a>
         </div>
     </form>
 </section>
