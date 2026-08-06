@@ -71,7 +71,7 @@
     <div class="terms-modal-dialog">
         <button type="button" class="modal-close terms-modal-close" aria-label="Đóng Điều kiện và Điều khoản"></button>
         <div class="terms-modal-scroll">
-            <img src="<?= assets('images/JNTO-T&amp;C-R2.webp') ?>" alt="Nội dung Điều kiện và Điều khoản của chương trình">
+            <img src="<?= assets('images/JNTO-T&amp;C-R3.png') ?>" alt="Nội dung Điều kiện và Điều khoản của chương trình">
         </div>
     </div>
 </div>
