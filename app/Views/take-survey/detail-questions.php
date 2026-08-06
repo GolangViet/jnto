@@ -10,14 +10,14 @@
     </div>
 
     <a class="region-card region-card--kyushu"
-       href="https://www.japan.travel/en/destinations/kyushu/"
+       href="https://www.japan.travel/vi/destinations/kyushu/"
        target="_blank" rel="noopener noreferrer"
        aria-label="Tìm hiểu về vùng Kyushu">
         <img src="<?= assets('images/page-4/box-kyushu.webp') ?>" alt="">
     </a>
 
     <a class="region-card region-card--hokuriku"
-       href="https://www.japan.travel/en/destinations/hokuriku-shinetsu/"
+       href="https://www.japan.travel/vi/destinations/hokuriku-shinetsu/"
        target="_blank" rel="noopener noreferrer"
        aria-label="Tìm hiểu về vùng Chubu, Hokuriku Shinetsu">
         <img src="<?= assets('images/page-4/box-hokuriki.webp') ?>" alt="">
@@ -28,7 +28,7 @@
     </a>
 
     <a class="region-card region-card--tokai"
-       href="https://www.japan.travel/en/destinations/tokai/"
+       href="https://www.japan.travel/vi/destinations/tokai/"
        target="_blank" rel="noopener noreferrer"
        aria-label="Tìm hiểu về vùng Chubu, Tokai">
         <img src="<?= assets('images/page-4/box-tokai.webp') ?>" alt="">
