@@ -1,0 +1,27 @@
+DirectoryIndex public/index.php
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block hidden files
+    RewriteRule (^|/)\. - [F,L]
+
+    # Block internal source directories
+    RewriteRule ^(?:app|core|vendor|storage|config|database|tests)(?:/|$) - [F,L,NC]
+
+    # Expose public assets as /assets/...
+    RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+    # Do not expose /public in browser URLs
+    RewriteCond %{THE_REQUEST} \s/+public(?:/|[\s?]) [NC]
+    RewriteRule ^public(?:/(.*))?$ /$1 [R=302,L,NE]
+
+    # Serve real root files/directories
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Send application routes to the original front controller
+    RewriteRule ^ public/index.php [QSA,L]
+</IfModule>
