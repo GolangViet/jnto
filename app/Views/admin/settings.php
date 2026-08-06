@@ -46,6 +46,24 @@
             </select>
         </div>
 
+        <div style="margin-bottom: 24px;">
+            <label style="font-weight: 600; color: #374151; font-size: 0.95rem; display: block; margin-bottom: 8px;">Leaderboard Quizzes to Show</label>
+            <span class="muted" style="display: block; margin-top: -4px; margin-bottom: 12px; font-size: 0.85rem;">Select which quiz question sets should be visible on the top quiz leaderboard. If none are selected, all quiz submissions will be shown.</span>
+            <div style="display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f9fafb;">
+                <?php 
+                    $visibleQuizzes = isset($settings['leaderboard_visible_quizzes']) && $settings['leaderboard_visible_quizzes'] !== null
+                        ? explode(',', $settings['leaderboard_visible_quizzes'])
+                        : [];
+                ?>
+                <?php foreach ($quizzes as $quiz): ?>
+                    <label style="display: flex; align-items: center; gap: 10px; font-weight: 500; color: #374151; font-size: 0.9rem; cursor: pointer; user-select: none; margin: 0;">
+                        <input type="checkbox" name="leaderboard_visible_quizzes[]" value="<?= (int)$quiz['id'] ?>" <?= in_array((string)$quiz['id'], $visibleQuizzes) ? 'checked' : '' ?> style="width: 16px; height: 16px; margin: 0; cursor: pointer;">
+                        <span><?= e($quiz['title']) ?> <span style="color: #6b7280; font-size: 0.8rem;">(ID: <?= (int)$quiz['id'] ?>)</span></span>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
         <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 20px; display: flex; justify-content: flex-end;">
             <button type="submit" class="btn" style="background: #4f46e5; display: inline-flex; align-items: center; gap: 6px;">
                 <svg style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">

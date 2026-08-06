@@ -12,7 +12,7 @@
 <body>
     <nav class="nav" style="background: #111827; border-bottom: 2px solid #3b82f6;">
         <div class="container">
-            <a href="/"><strong><?= e(config('app.name')) ?> Admin Panel</strong></a>
+            <a href="/admin/dashboard"><strong><?= e(config('app.name')) ?> Admin Panel</strong></a>
             <div>
                 <?php if ($user = app()->session()->get('user')): ?>
                     <a href="/admin/dashboard" style="margin-left: 14px; font-weight: bold; color: #60a5fa;">Dashboard</a>
@@ -20,6 +20,7 @@
                     <a href="/admin/quizzes" style="margin-left: 14px;">Manage Quizzes</a>
                     <a href="/admin/settings" style="margin-left: 14px;">Manage Settings</a>
                     <a href="/admin/users" style="margin-left: 14px;">Manage Users</a>
+                    <a href="/" target="_blank" style="margin-left: 14px;">User Site</a>
                     <span class="muted" style="margin-left: 14px; margin-right: 14px; color: #d1d5db;">Hello, <?= e($user['name']) ?> (Admin)</span>
                     <form action="/logout" method="post" style="display:inline">
                         <?= csrf_field() ?>

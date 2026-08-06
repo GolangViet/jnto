@@ -92,7 +92,7 @@ $showCorrect = filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDA
                         QUESTION <?= $index + 1 ?>
                     </span>
                     <span style="font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 9999px; background: <?= $badgeBg ?>; color: <?= $badgeColor ?>; text-transform: uppercase;">
-                        <?= $isCorrect ? 'Correct' : 'Incorrect' ?> (Score: <?= e((string)(float)($ans['awarded_score'] ?? 0)) ?>/<?= e((string)(float)$q['score']) ?>)
+                        <?= $isCorrect ? 'Correct' : 'Incorrect' ?> (Score: <?= e((string)(float)($ans ? ($ans['awarded_score'] ?? 0) : 0)) ?>/<?= e((string)(float)$q['score']) ?>)
                     </span>
                 </div>
 
@@ -106,7 +106,7 @@ $showCorrect = filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDA
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($q['options'] as $opt): ?>
                                 <?php
-                                $isUserSelected = in_array((int)$opt['id'], $ans['selected_option_ids'] ?? []);
+                                $isUserSelected = in_array((int)$opt['id'], $ans ? ($ans['selected_option_ids'] ?? []) : []);
                                 $isCorrectOpt = filter_var($opt['is_correct'] ?? false, FILTER_VALIDATE_BOOL);
                                 
                                 $optBorder = 'var(--border)';
@@ -135,7 +135,7 @@ $showCorrect = filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDA
                     <?php elseif ($q['type'] === 'open_text'): ?>
                         <div style="display: flex; flex-direction: column; gap: 12px;">
                             <div style="padding: 12px 16px; border: 1px solid <?= $isCorrect ? '#c2e7c9' : '#fad2cf' ?>; background: <?= $isCorrect ? '#e6f4ea' : '#fce8e6' ?>; border-radius: 8px;">
-                                <strong>Your Answer:</strong> <code style="font-family: inherit; font-size: 1rem; color: <?= $isCorrect ? '#137333' : '#c5221f' ?>; font-weight: 600;"><?= e($ans['answer_text'] ?: '[No answer submitted]') ?></code>
+                                <strong>Your Answer:</strong> <code style="font-family: inherit; font-size: 1rem; color: <?= $isCorrect ? '#137333' : '#c5221f' ?>; font-weight: 600;"><?= e(($ans['answer_text'] ?? '') ?: '[No answer submitted]') ?></code>
                             </div>
                             
                             <?php if ($showCorrect && !empty($q['accepted_answers'])): ?>

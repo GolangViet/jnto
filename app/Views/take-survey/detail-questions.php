@@ -141,7 +141,7 @@
                             }
                         }
                         ?>
-                        <div data-question-id="<?= (int)$q['id'] ?>" data-question-type="open_text" data-quiz-type="knowledge">
+                        <div class="knowledge-question-list" data-question-id="<?= (int)$q['id'] ?>" data-question-type="open_text" data-quiz-type="knowledge">
                             <label class="knowledge-essay">
                                 <span class="knowledge-essay__heading">
                                     <strong><?= $essayCount++ ?>.</strong>
@@ -359,10 +359,24 @@
                     triggerSave(event.target);
                 }
             });
+
+            container.addEventListener('focusin', function (event) {
+                if (event.target.classList.contains('knowledge-other-input') ||
+                    event.target.classList.contains('open-question-other-input')) {
+                    const choiceLabel = event.target.closest('.knowledge-choice, .open-question-choice');
+                    if (choiceLabel) {
+                        const input = choiceLabel.querySelector('input[type="radio"], input[type="checkbox"]');
+                        if (input && !input.checked) {
+                            input.checked = true;
+                            input.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    }
+                }
+            });
         });
 
         function triggerSave(element) {
-            const questionEl = element.closest('.knowledge-question, .open-question');
+            const questionEl = element.closest('.knowledge-question-list, .knowledge-question, .open-question');
             if (!questionEl) return;
 
             const questionId = parseInt(questionEl.dataset.questionId);
@@ -405,6 +419,14 @@
         if (nextBtn) {
             nextBtn.addEventListener('click', async function (event) {
                 event.preventDefault();
+
+                // Flush any pending save for the active element
+                if (document.activeElement &&
+                    (document.activeElement.classList.contains('knowledge-other-input') ||
+                     document.activeElement.classList.contains('open-question-other-input') ||
+                     document.activeElement.tagName === 'TEXTAREA')) {
+                    triggerSave(document.activeElement);
+                }
 
                 let isValid = true;
                 let firstInvalid = null;

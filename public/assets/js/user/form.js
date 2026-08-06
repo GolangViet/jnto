@@ -76,6 +76,9 @@
     });
 
     form.addEventListener('submit', function (event) {
+        if (form.dataset.dynamic === 'true') {
+            return;
+        }
         event.preventDefault();
         window.location.href = '/take-questions';
     });

@@ -49,11 +49,15 @@ use App\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Controllers\Admin\SettingController as AdminSettingController;
 use App\Controllers\Admin\UserController as AdminUserController;
 use App\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Controllers\Admin\QuizAttemptController as AdminQuizAttemptController;
 use App\Controllers\QuizAttemptController;
 use App\Controllers\TakeSurveyController;
 
 // Admin Dashboard Route
 $router->get('/admin/dashboard', [AdminDashboardController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
+
+// Admin Quiz Attempt Route
+$router->get('/admin/quiz-attempts/{id}', [AdminQuizAttemptController::class, 'show'], [AuthMiddleware::class, AdminMiddleware::class]);
 
 // Admin Settings Routes
 $router->get('/admin/settings', [AdminSettingController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
@@ -115,5 +119,4 @@ $router->get('/api/quiz-attempts/{attemptId}', [QuizAttemptController::class, 'a
 $router->post('/api/quiz-attempts/{attemptId}/answers', [QuizAttemptController::class, 'apiSaveAnswer'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
 $router->post('/api/quiz-attempts/{attemptId}/submit', [QuizAttemptController::class, 'apiSubmit'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
 $router->get('/api/quiz-attempts/{attemptId}/result', [QuizAttemptController::class, 'apiResult'], [AuthMiddleware::class, SurveyCheckMiddleware::class]);
-
 

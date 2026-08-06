@@ -101,8 +101,10 @@ return new class {
             'display_order' => 4,
         ]);
         $q4Id = (int) $qStmt->fetchColumn();
-        $ansStmt->execute(['question_id' => $q4Id, 'answer_text' => 'Vườn Kenrokuen và Hẻm núi Kakusenkei', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Vườn Kenrokuen và Hẻm núi Kakusenkei'), 'match_type' => 'exact']);
-        $ansStmt->execute(['question_id' => $q4Id, 'answer_text' => 'Kenrokuen và Kakusenkei', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Kenrokuen và Kakusenkei'), 'match_type' => 'exact']);
+        $ansStmt->execute(['question_id' => $q4Id, 'answer_text' => 'Vườn Kenrokuen và Hẻm núi Kakusenkei', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Vườn Kenrokuen và Hẻm núi Kakusenkei'), 'match_type' => 'contains']);
+        $ansStmt->execute(['question_id' => $q4Id, 'answer_text' => 'Kenrokuen và Kakusenkei', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Kenrokuen và Kakusenkei'), 'match_type' => 'contains']);
+        $ansStmt->execute(['question_id' => $q4Id, 'answer_text' => 'Kenrokuen', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Kenrokuen'), 'match_type' => 'contains']);
+        $ansStmt->execute(['question_id' => $q4Id, 'answer_text' => 'Kakusenkei', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Kakusenkei'), 'match_type' => 'contains']);
 
         // Question 5 (Saga foliage)
         $qStmt->execute([
@@ -115,8 +117,8 @@ return new class {
             'display_order' => 5,
         ]);
         $q5Id = (int) $qStmt->fetchColumn();
-        $ansStmt->execute(['question_id' => $q5Id, 'answer_text' => 'Chùa Daikozenji', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Chùa Daikozenji'), 'match_type' => 'exact']);
-        $ansStmt->execute(['question_id' => $q5Id, 'answer_text' => 'Daikozenji', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Daikozenji'), 'match_type' => 'exact']);
+        $ansStmt->execute(['question_id' => $q5Id, 'answer_text' => 'Chùa Daikozenji', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Chùa Daikozenji'), 'match_type' => 'contains']);
+        $ansStmt->execute(['question_id' => $q5Id, 'answer_text' => 'Daikozenji', 'normalized_answer' => \App\Helpers\TextNormalizer::normalize('Daikozenji'), 'match_type' => 'contains']);
     }
 
     /**

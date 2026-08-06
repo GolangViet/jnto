@@ -350,6 +350,13 @@
 .progress-questions { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
 .progress-post { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
 .progress-thankyou { background: linear-gradient(90deg, #10b981, #34d399); }
+
+.leaderboard-badge:hover {
+    border-color: #3b82f6 !important;
+    background-color: #eff6ff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
 </style>
 
 <div class="dashboard-container">
@@ -382,8 +389,8 @@
         <p style="color: #64748b; font-size: 0.9rem; margin-top: 0; margin-bottom: 20px;">
             The number of registered users who have completed each page/stage of the survey flow.
         </p>
-        
-        <?php 
+
+        <?php
             $totalForPercent = max($totalUsers, 1);
             $surveyPercent = round(($doneSurveyCount / $totalForPercent) * 100);
             $questionsPercent = round(($doneQuestionsCount / $totalForPercent) * 100);
@@ -463,9 +470,9 @@
     </div>
 
     <!-- Leaderboard: Top Users with the Best Quiz Score -->
-    <div class="panel-card" style="margin-bottom: 24px; display:none;">
+    <div class="panel-card" style="margin-bottom: 24px;">
         <h2 class="panel-title" style="margin-bottom: 12px;">Top Quiz Leaderboard</h2>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0; margin-bottom: 20px;">Top performers based on highest percentage and raw scores across all quiz submissions.</p>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0; margin-bottom: 20px;">Top unique performers based on their highest percentage and raw score across quiz submissions.</p>
 
         <?php if (empty($leaderboard)): ?>
             <div class="empty-state" style="padding: 48px;">No quiz attempts have been submitted yet.</div>
@@ -475,16 +482,14 @@
                     <thead>
                         <tr>
                             <th style="width: 60px; text-align: center;">Rank</th>
-                            <th>User</th>
-                            <th>Quiz Title</th>
-                            <th>Accuracy</th>
-                            <th>Score</th>
-                            <th>Submitted At</th>
+                            <th style="width: 250px;">User</th>
+                            <th>Quiz Submissions &amp; Results</th>
+                            <th style="width: 180px;">Last Activity</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($leaderboard as $index => $row): ?>
-                            <?php 
+                            <?php
                                 $rank = $index + 1;
                                 $rankClass = 'rank-other';
                                 if ($rank === 1) $rankClass = 'rank-1';
@@ -492,24 +497,36 @@
                                 elseif ($rank === 3) $rankClass = 'rank-3';
                             ?>
                             <tr>
-                                <td style="text-align: center;">
+                                <td style="text-align: center; vertical-align: middle;">
                                     <span class="rank-badge <?= $rankClass ?>"><?= $rank ?></span>
                                 </td>
-                                <td>
+                                <td style="vertical-align: middle;">
                                     <strong><?= e($row['user_name']) ?></strong>
                                     <span class="user-meta">@<?= e($row['user_username']) ?> | ID: <?= e((string)$row['user_id']) ?></span>
+                                    <?php if (!empty($row['facebook_url'])): ?>
+                                        <div style="margin-top: 6px;">
+                                            <a href="<?= e($row['facebook_url']) ?>" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; color: #1877f2; text-decoration: none; font-weight: 500; transition: color 0.2s;" class="facebook-link-leaderboard" onmouseover="this.style.color='#115cbe'" onmouseout="this.style.color='#1877f2'">
+                                                <svg style="width: 12px; height: 12px; fill: currentColor;" viewBox="0 0 24 24">
+                                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                                </svg>
+                                                <span>Facebook Post</span>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
                                 </td>
-                                <td>
-                                    <strong style="color: #3b82f6;"><?= e($row['quiz_title']) ?></strong>
+                                <td style="vertical-align: middle;">
+                                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                        <?php foreach ($row['quizzes'] as $qid => $quiz): ?>
+                                            <a href="/admin/quiz-attempts/<?= (int)$quiz['attempt_id'] ?>" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; box-shadow: 0 1px 2px rgba(0,0,0,0.02); text-decoration: none; color: inherit; transition: all 0.2s;" class="leaderboard-badge">
+                                                <span style="font-weight: 600; color: #475569;"><?= e($quiz['quiz_title']) ?>:</span>
+                                                <span class="badge badge-percentage" style="padding: 2px 6px; font-size: 0.7rem;"><?= e((string)(float)$quiz['percentage']) ?>%</span>
+                                                <span class="badge badge-score" style="padding: 2px 6px; font-size: 0.7rem;"><?= e((string)(float)$quiz['score']) ?>/<?= e((string)(float)$quiz['total_score']) ?></span>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </td>
-                                <td>
-                                    <span class="badge badge-percentage"><?= e((string)(float)$row['percentage']) ?>%</span>
-                                </td>
-                                <td>
-                                    <span class="badge badge-score"><?= e((string)(float)$row['score']) ?> / <?= e((string)(float)$row['total_score']) ?></span>
-                                </td>
-                                <td style="color: #64748b; font-size: 0.85rem;">
-                                    <?= date('Y-m-d H:i:s', strtotime($row['submitted_at'])) ?>
+                                <td style="color: #64748b; font-size: 0.85rem; vertical-align: middle;">
+                                    <?= date('Y-m-d H:i:s', strtotime($row['last_submitted_at'])) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

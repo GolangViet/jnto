@@ -138,7 +138,7 @@ if (!function_exists('renderDynamicQuestions')) {
 ?>
 
 <section class="survey-section" aria-labelledby="survey-title">
-    <form class="survey-form" id="survey-form" action="#" method="post" novalidate>
+    <form class="survey-form" id="survey-form" action="#" method="post" novalidate data-dynamic="true">
         <h1 class="survey-title" id="survey-title">CÂU HỎI KHẢO SÁT</h1>
 
         <div class="survey-panel survey-panel--intro is-active" data-survey-panel="intro">
@@ -271,6 +271,19 @@ if (!function_exists('renderDynamicQuestions')) {
         }
     });
 
+    form.addEventListener('focusin', function (event) {
+        if (event.target.classList.contains('survey-other-input')) {
+            const choiceLabel = event.target.closest('.survey-choice');
+            if (choiceLabel) {
+                const input = choiceLabel.querySelector('input[type="radio"], input[type="checkbox"]');
+                if (input && !input.checked) {
+                    input.checked = true;
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        }
+    });
+
     function triggerSave(element) {
         const fieldset = element.closest('.survey-question');
         if (!fieldset) return;
@@ -311,6 +324,12 @@ if (!function_exists('renderDynamicQuestions')) {
 
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
+
+        // Flush any pending save for the active element
+        if (document.activeElement && 
+            (document.activeElement.classList.contains('survey-other-input') || document.activeElement.tagName === 'TEXTAREA')) {
+            triggerSave(document.activeElement);
+        }
 
         // Check validation
         const activePanel = form.querySelector('.survey-panel.is-active');

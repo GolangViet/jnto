@@ -246,4 +246,25 @@ final class QuizAttemptRepository extends BaseRepository
             'passed' => $data['passed'] ? 1 : 0,
         ]);
     }
+
+    /**
+     * Find all attempts by a specific user.
+     *
+     * @param int $userId
+     * @return array
+     */
+    public function findAttemptsByUserId(int $userId): array
+    {
+        $db = Database::connection();
+        $sql = "SELECT qa.*, q.title as quiz_title
+                FROM cms.quiz_attempts qa
+                JOIN cms.quizzes q ON qa.quiz_id = q.id
+                WHERE qa.user_id = :user_id
+                ORDER BY qa.created_at DESC";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetchAll() ?: [];
+    }
 }
+

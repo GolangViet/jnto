@@ -55,6 +55,14 @@ final class SettingController extends Controller
         $this->settingRepository->setSetting('main_quiz_quiz_id', $mainQuizId);
         $this->settingRepository->setSetting('main_open_quiz_id', $mainOpenId);
 
+        $leaderboardVisibleQuizzes = $request->input('leaderboard_visible_quizzes');
+        if (is_array($leaderboardVisibleQuizzes)) {
+            $visibleQuizzesValue = implode(',', array_map('intval', $leaderboardVisibleQuizzes));
+        } else {
+            $visibleQuizzesValue = null;
+        }
+        $this->settingRepository->setSetting('leaderboard_visible_quizzes', $visibleQuizzesValue);
+
         app()->session()->flash('success', 'Settings updated successfully.');
         $this->redirect('/admin/settings');
     }

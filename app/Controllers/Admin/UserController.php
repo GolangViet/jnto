@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers\Admin;
 
 use App\Services\UserService;
+use App\Repositories\QuizAttemptRepository;
 use Core\Controller;
 use Core\Csrf;
 use Core\Validator;
@@ -12,10 +13,12 @@ use Core\Validator;
 final class UserController extends Controller
 {
     private UserService $userService;
+    private QuizAttemptRepository $attemptRepository;
 
     public function __construct()
     {
         $this->userService = new UserService();
+        $this->attemptRepository = new QuizAttemptRepository();
     }
 
     /**
@@ -108,7 +111,12 @@ final class UserController extends Controller
             return 'User not found.';
         }
 
-        return $this->view('admin/users/edit', ['user' => $user]);
+        $attempts = $this->attemptRepository->findAttemptsByUserId((int) $id);
+
+        return $this->view('admin/users/edit', [
+            'user' => $user,
+            'attempts' => $attempts,
+        ]);
     }
 
     /**
