@@ -340,6 +340,23 @@
             };
         }
 
+        function updateCustomInputs() {
+            const otherInputs = document.querySelectorAll('.knowledge-other-input, .open-question-other-input');
+            otherInputs.forEach(input => {
+                const choiceLabel = input.closest('.knowledge-choice, .open-question-choice');
+                if (choiceLabel) {
+                    const checkable = choiceLabel.querySelector('input[type="radio"], input[type="checkbox"]');
+                    if (checkable) {
+                        if (checkable.checked) {
+                            input.required = true;
+                        } else {
+                            input.required = false;
+                        }
+                    }
+                }
+            });
+        }
+
         const handleInputSave = debounce((element) => {
             triggerSave(element);
         }, 600);
@@ -356,6 +373,7 @@
 
             container.addEventListener('change', function (event) {
                 if (event.target.type === 'radio' || event.target.type === 'checkbox') {
+                    updateCustomInputs();
                     triggerSave(event.target);
                 }
             });
@@ -368,6 +386,7 @@
                         const input = choiceLabel.querySelector('input[type="radio"], input[type="checkbox"]');
                         if (input && !input.checked) {
                             input.checked = true;
+                            updateCustomInputs();
                             input.dispatchEvent(new Event('change', { bubbles: true }));
                         }
                     }
@@ -494,6 +513,8 @@
                 }
             });
         }
+
+        updateCustomInputs();
     })();
     </script>
 <?php endif; ?>

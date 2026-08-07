@@ -274,6 +274,18 @@ final class QuizAttemptService
 
                 if (isset($answersMap[$qId])) {
                     $ans = $answersMap[$qId];
+                    // Validate if any selected option requires custom text but is missing/empty
+                    $options = $this->questionRepository->getOptionsForQuestion($qId);
+                    foreach ($options as $opt) {
+                        $optId = (int) $opt['id'];
+                        if ($opt['allow_custom_text'] && in_array($optId, $ans['selected_option_ids'], true)) {
+                            $customText = $ans['option_custom_texts'][(string) $optId] ?? $ans['option_custom_texts'][(int) $optId] ?? null;
+                            if ($customText === null || trim((string) $customText) === '') {
+                                throw new \RuntimeException("Bạn chưa nhập câu trả lời chi tiết cho lựa chọn \"" . $opt['option_text'] . "\".");
+                            }
+                        }
+                    }
+
                     if ($ans['is_correct']) {
                         $awardedScore += (float) $ans['awarded_score'];
                         $correctCount++;

@@ -699,6 +699,45 @@ function updateTimerDisplay(totalSecs) {
 // Submission
 function confirmSubmit() {
     const visibleQuestions = questions.filter(q => isQuestionVisible(q.id));
+    
+    // Check if any visible question has a selected option with allow_custom_text but empty/blank text
+    let invalidQuestionIdx = -1;
+    let invalidOptionText = '';
+    
+    for (let i = 0; i < visibleQuestions.length; i++) {
+        const q = visibleQuestions[i];
+        const ans = userAnswers[q.id];
+        if (q.options) {
+            for (let opt of q.options) {
+                if (opt.allow_custom_text && ans.selected_option_ids.includes(opt.id)) {
+                    const customText = ans.option_custom_texts[opt.id];
+                    if (!customText || customText.trim() === '') {
+                        invalidQuestionIdx = questions.indexOf(q);
+                        invalidOptionText = opt.option_text;
+                        break;
+                    }
+                }
+            }
+        }
+        if (invalidQuestionIdx !== -1) {
+            break;
+        }
+    }
+    
+    if (invalidQuestionIdx !== -1) {
+        alert(`Bạn chưa nhập câu trả lời chi tiết cho lựa chọn "${invalidOptionText}".`);
+        jumpToQuestion(invalidQuestionIdx);
+        // Focus the custom text input
+        setTimeout(() => {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            // Find the one that matches or focus the first text input found
+            if (inputs.length > 0) {
+                inputs[0].focus();
+            }
+        }, 100);
+        return;
+    }
+
     // Check if unanswered questions exist
     let unansweredCount = 0;
     visibleQuestions.forEach(q => {

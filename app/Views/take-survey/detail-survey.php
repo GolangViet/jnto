@@ -254,6 +254,23 @@ if (!function_exists('renderDynamicQuestions')) {
         };
     }
 
+    function updateCustomInputs() {
+        const otherInputs = document.querySelectorAll('.survey-other-input');
+        otherInputs.forEach(input => {
+            const choiceLabel = input.closest('.survey-choice');
+            if (choiceLabel) {
+                const checkable = choiceLabel.querySelector('input[type="radio"], input[type="checkbox"]');
+                if (checkable) {
+                    if (checkable.checked) {
+                        input.required = true;
+                    } else {
+                        input.required = false;
+                    }
+                }
+            }
+        });
+    }
+
     const handleInputSave = debounce((element) => {
         triggerSave(element);
     }, 600);
@@ -267,6 +284,7 @@ if (!function_exists('renderDynamicQuestions')) {
 
     form.addEventListener('change', function (event) {
         if (event.target.type === 'radio' || event.target.type === 'checkbox') {
+            updateCustomInputs();
             triggerSave(event.target);
         }
     });
@@ -278,6 +296,7 @@ if (!function_exists('renderDynamicQuestions')) {
                 const input = choiceLabel.querySelector('input[type="radio"], input[type="checkbox"]');
                 if (input && !input.checked) {
                     input.checked = true;
+                    updateCustomInputs();
                     input.dispatchEvent(new Event('change', { bubbles: true }));
                 }
             }
@@ -365,5 +384,7 @@ if (!function_exists('renderDynamicQuestions')) {
             alert('An error occurred during submission.');
         }
     });
+
+    updateCustomInputs();
 })();
 </script>
