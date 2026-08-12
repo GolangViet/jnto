@@ -615,6 +615,13 @@
     display: block;
 }
 
+@media (min-width: 769px) {
+    .knowledge-choice,
+    .open-question-choice {
+        align-items: center;
+    }
+}
+
 .open-question-arrow {
     width: 2.6em;
     height: 1.8em;
