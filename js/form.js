@@ -81,6 +81,6 @@
             return;
         }
         event.preventDefault();
-        window.location.href = '/take-questions';
+        window.location.href = `${window.APP_URL}/take-questions`;
     });
 })();

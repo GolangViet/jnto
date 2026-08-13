@@ -345,7 +345,7 @@ if (!function_exists('renderDynamicQuestions')) {
         event.preventDefault();
 
         // Flush any pending save for the active element
-        if (document.activeElement && 
+        if (document.activeElement &&
             (document.activeElement.classList.contains('survey-other-input') || document.activeElement.tagName === 'TEXTAREA')) {
             triggerSave(document.activeElement);
         }
@@ -374,7 +374,7 @@ if (!function_exists('renderDynamicQuestions')) {
                 }
             });
             if (response.ok) {
-                window.location.href = '/take-questions';
+                window.location.href = `${window.APP_URL}/take-questions`;
             } else {
                 const res = await response.json();
                 alert(res.message || 'Failed to submit survey.');
