@@ -1,1 +1,1 @@
-<div class="card"><h1>Create post</h1><form method="post" action="/admin/posts"><?= csrf_field() ?><?php require app()->basePath('app/Views/admin/posts/form.php'); ?><button class="btn">Create</button></form></div>
+<div class="card"><h1>Create post</h1><form method="post" action="<?= url('admin/posts') ?>"><?= csrf_field() ?><?php require app()->basePath('app/Views/admin/posts/form.php'); ?><button class="btn">Create</button></form></div>

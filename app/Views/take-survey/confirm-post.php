@@ -41,7 +41,7 @@
 </section>
 
 <section class="facebook-section" aria-labelledby="facebook-title">
-    <form class="facebook-form" action="/submit-post" method="post">
+    <form class="facebook-form" action="<?= url('submit-post') ?>" method="post">
         <?= csrf_field() ?>
         <div class="facebook-panel">
             <h2 class="facebook-title" id="facebook-title">

@@ -16,9 +16,9 @@
         </div>
     <?php endif; ?>
 
-    <form method="post" action="/admin/login" style="margin: 0;">
+    <form method="post" action="<?= url('admin/login') ?>" style="margin: 0;">
         <?= csrf_field() ?>
-        
+
         <div style="margin-bottom: 16px;">
             <label style="font-weight: 600; font-size: 0.875rem; color: #475569; display: block; margin-bottom: 6px;">Username</label>
             <input type="text" name="username" value="<?= e((string) old('username')) ?>" required placeholder="admin" style="margin: 0; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; width: 100%; box-sizing: border-box;">

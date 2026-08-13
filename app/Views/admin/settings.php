@@ -4,7 +4,7 @@
 </div>
 
 <div class="card" style="animation: fadeIn 0.4s ease-out; padding: 28px; max-width: 650px;">
-    <form action="/admin/settings" method="post">
+    <form action="<?= url('/admin/settings') ?>" method="post">
         <?= csrf_field() ?>
 
         <div style="margin-bottom: 24px;">
@@ -50,7 +50,7 @@
             <label style="font-weight: 600; color: #374151; font-size: 0.95rem; display: block; margin-bottom: 8px;">Leaderboard Quizzes to Show</label>
             <span class="muted" style="display: block; margin-top: -4px; margin-bottom: 12px; font-size: 0.85rem;">Select which quiz question sets should be visible on the top quiz leaderboard. If none are selected, all quiz submissions will be shown.</span>
             <div style="display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f9fafb;">
-                <?php 
+                <?php
                     $visibleQuizzes = isset($settings['leaderboard_visible_quizzes']) && $settings['leaderboard_visible_quizzes'] !== null
                         ? explode(',', $settings['leaderboard_visible_quizzes'])
                         : [];
