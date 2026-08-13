@@ -41,7 +41,7 @@ final class Response
      */
     public function redirect(string $url): never
     {
-        header('Location: ' . $url);
+        header('Location: ' . url($url));
         exit;
     }
 }
