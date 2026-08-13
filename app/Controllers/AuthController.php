@@ -94,7 +94,7 @@ final class AuthController extends Controller
         ]);
 
         if ($isJson) {
-            app()->response()->json(['success' => true, 'redirect' => '/']);
+            app()->response()->json(['success' => true, 'redirect' => url('/')]);
         }
 
         $this->redirect('/');
@@ -170,11 +170,11 @@ final class AuthController extends Controller
         if ($isJson) {
             app()->response()->json([
                 'success' => true,
-                'redirect' => '/login',
+                'redirect' => url('login'),
             ]);
         }
 
-        $this->redirect('/login');
+        $this->redirect('login');
     }
 
     /**
