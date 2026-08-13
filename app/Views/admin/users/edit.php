@@ -1,5 +1,5 @@
 <div style="margin-bottom: 24px;">
-    <a href="/admin/users" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
+    <a href="<?= url('admin/users') ?>" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
         <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -21,12 +21,12 @@
 <?php endif; ?>
 
 <div class="card" style="padding: 28px;">
-    <form method="post" action="/admin/users/<?= (int)$user['id'] ?>">
+    <form method="post" action="<?= url('admin/users/' . (int)$user['id']) ?>">
         <?= csrf_field() ?>
         <input type="hidden" name="_method" value="PUT">
         <?php require app()->basePath('app/Views/admin/users/form.php'); ?>
         <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
-            <a href="/admin/users" class="btn" style="background: #9ca3af; text-decoration: none;">Cancel</a>
+            <a href="<?= url('admin/users') ?>" class="btn" style="background: #9ca3af; text-decoration: none;">Cancel</a>
             <button class="btn" style="background: #4f46e5;">Update</button>
         </div>
     </form>
@@ -60,9 +60,9 @@
                         $statusColor = '#9ca3af'; $statusBg = '#f3f4f6';
                         if ($status === 'submitted') { $statusColor = '#16a34a'; $statusBg = '#dcfce7'; }
                         elseif ($status === 'expired') { $statusColor = '#d97706'; $statusBg = '#fef3c7'; }
-                        
+
                         $isPassed = filter_var($attempt['passed'] ?? false, FILTER_VALIDATE_BOOL);
-                        $passedBadge = $status === 'submitted' 
+                        $passedBadge = $status === 'submitted'
                             ? '<span class="badge" style="background: ' . ($isPassed ? '#e6f4ea; color: #137333;' : '#fce8e6; color: #c5221f;') . ' font-weight: 600; padding: 2px 6px; font-size: 0.75rem;">' . ($isPassed ? 'Yes' : 'No') . '</span>'
                             : '<span class="muted">N/A</span>';
                         ?>
@@ -86,7 +86,7 @@
                                 <?= $attempt['submitted_at'] ? date('Y-m-d H:i:s', strtotime($attempt['submitted_at'])) : '<span class="muted">N/A</span>' ?>
                             </td>
                             <td style="padding: 14px 16px; text-align: right;">
-                                <a href="/admin/quiz-attempts/<?= (int)$attempt['id'] ?>" class="btn" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 600; background: #4f46e5;">View Answers</a>
+                                <a href="<?= url('admin/quiz-attempts/' . (int)$attempt['id']) ?>" class="btn" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 600; background: #4f46e5;">View Answers</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

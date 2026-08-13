@@ -302,7 +302,7 @@
         <button class="page4-next-button" type="submit" form="open-question-form">
             <span>TIẾP THEO</span>
         </button>
-        <a href="/confirm-post" class="page4-next-button">Trang tiếp theo</a>
+        <a href="<?= url('confirm-post') ?>" class="page4-next-button">Trang tiếp theo</a>
     <?php endif; ?>
 </section>
 
@@ -315,7 +315,7 @@
         async function saveAnswer(attemptId, questionId, selectedOptionIds, answerText, optionCustomTexts) {
             if (!attemptId) return;
             try {
-                await fetch(`/api/quiz-attempts/${attemptId}/answers`, {
+                await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/answers`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -478,13 +478,13 @@
                 try {
                     const submitPromises = [];
                     if (quizAttemptId) {
-                        submitPromises.push(fetch(`/api/quiz-attempts/${quizAttemptId}/submit`, {
+                        submitPromises.push(fetch(`${window.APP_URL}/api/quiz-attempts/${quizAttemptId}/submit`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' }
                         }));
                     }
                     if (openAttemptId) {
-                        submitPromises.push(fetch(`/api/quiz-attempts/${openAttemptId}/submit`, {
+                        submitPromises.push(fetch(`${window.APP_URL}/api/quiz-attempts/${openAttemptId}/submit`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' }
                         }));
@@ -499,7 +499,7 @@
                     }
 
                     if (allOk) {
-                        window.location.href = '/confirm-post';
+                        window.location.href = `${window.APP_URL}/confirm-post`;
                     } else {
                         alert('Có lỗi xảy ra khi nộp bài. Vui lòng thử lại.');
                         nextBtn.disabled = false;

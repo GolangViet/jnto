@@ -517,7 +517,7 @@
                                 <td style="vertical-align: middle;">
                                     <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                                         <?php foreach ($row['quizzes'] as $qid => $quiz): ?>
-                                            <a href="/admin/quiz-attempts/<?= (int)$quiz['attempt_id'] ?>" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; box-shadow: 0 1px 2px rgba(0,0,0,0.02); text-decoration: none; color: inherit; transition: all 0.2s;" class="leaderboard-badge">
+                                            <a href="<?= url('admin/quiz-attempts/' . (int)$quiz['attempt_id']) ?>" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 12px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; box-shadow: 0 1px 2px rgba(0,0,0,0.02); text-decoration: none; color: inherit; transition: all 0.2s;" class="leaderboard-badge">
                                                 <span style="font-weight: 600; color: #475569;"><?= e($quiz['quiz_title']) ?>:</span>
                                                 <span class="badge badge-percentage" style="padding: 2px 6px; font-size: 0.7rem;"><?= e((string)(float)$quiz['percentage']) ?>%</span>
                                                 <span class="badge badge-score" style="padding: 2px 6px; font-size: 0.7rem;"><?= e((string)(float)$quiz['score']) ?>/<?= e((string)(float)$quiz['total_score']) ?></span>

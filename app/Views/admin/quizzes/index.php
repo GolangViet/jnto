@@ -3,7 +3,7 @@
         <h1 style="margin: 0; font-size: 2rem; font-weight: 700; color: #111827;">Quiz Management</h1>
         <p class="muted" style="margin: 4px 0 0;">Create, edit, duplicate, and configure quizzes.</p>
     </div>
-    <a href="/admin/quizzes/create" class="btn" style="display: inline-flex; align-items: center; gap: 6px;">
+    <a href="<?= url('admin/quizzes/create') ?>" class="btn" style="display: inline-flex; align-items: center; gap: 6px;">
         <svg style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
@@ -106,7 +106,7 @@ async function publishToggle(quizId) {
 
     btn.disabled = true;
     try {
-        const response = await fetch(`/api/admin/quizzes/${quizId}/publish`, {
+        const response = await fetch(`${window.APP_URL}/api/admin/quizzes/${quizId}/publish`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -142,7 +142,7 @@ async function publishToggle(quizId) {
 async function duplicateQuiz(quizId) {
     if (!confirm('Are you sure you want to duplicate this quiz?')) return;
     try {
-        const response = await fetch(`/api/admin/quizzes/${quizId}/duplicate`, {
+        const response = await fetch(`${window.APP_URL}/api/admin/quizzes/${quizId}/duplicate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

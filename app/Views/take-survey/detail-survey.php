@@ -229,7 +229,7 @@ if (!function_exists('renderDynamicQuestions')) {
 
     async function saveAnswer(questionId, selectedOptionIds, answerText, optionCustomTexts) {
         try {
-            await fetch(`/api/quiz-attempts/${attemptId}/answers`, {
+            await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/answers`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -367,7 +367,7 @@ if (!function_exists('renderDynamicQuestions')) {
         }
 
         try {
-            const response = await fetch(`/api/quiz-attempts/${attemptId}/submit`, {
+            const response = await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/submit`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

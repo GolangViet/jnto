@@ -1,6 +1,6 @@
 <div style="display:flex;justify-content:space-between;align-items:center">
     <h1>Users</h1>
-    <a class="btn" href="/admin/users/create">Create user</a>
+    <a class="btn" href="<?= url('admin/users/create') ?>">Create user</a>
 </div>
 
 <div class="card">
@@ -41,8 +41,8 @@
                     </td>
                     <td><?= e($u['created_at']) ?></td>
                     <td>
-                        <a class="btn" href="/admin/users/<?= (int)$u['id'] ?>/edit">Edit</a>
-                        <form method="post" action="/admin/users/<?= (int)$u['id'] ?>" style="display:inline">
+                        <a class="btn" href="<?= url('admin/users/' . (int)$u['id'] . '/edit') ?>">Edit</a>
+                        <form method="post" action="<?= url('admin/users/' . (int)$u['id']) ?>" style="display:inline">
                             <?= csrf_field() ?>
                             <input type="hidden" name="_method" value="DELETE">
                             <button class="btn danger" onclick="return confirm('Delete this user?')">Delete</button>

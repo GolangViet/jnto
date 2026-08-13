@@ -58,7 +58,7 @@
 </style>
 
 <div style="margin-bottom: 24px; animation: fadeIn 0.3s ease-out;">
-    <a href="/admin/quizzes" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
+    <a href="<?= url('admin/quizzes') ?>" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
         <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -76,15 +76,15 @@
                 <h3 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #111827;">Questions</h3>
                 <span id="question-count-badge" style="font-size: 0.8rem; background: #e0e7ff; color: #4f46e5; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">0</span>
             </div>
-            
+
             <div id="no-questions-placeholder" style="text-align: center; padding: 24px; color: #9ca3af; font-size: 0.9rem; display: none;">
                 No questions yet. Use the editor to add your first question!
             </div>
-            
+
             <ul id="questions-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
                 <!-- Dynamically populated -->
             </ul>
-            
+
             <button onclick="clearFormForNewQuestion()" class="btn" style="width: 100%; margin-top: 14px; background: #f3f4f6; color: #4b5563; border: 1px dashed #d1d5db; font-weight: 600;">
                 + Add New Question
             </button>
@@ -95,7 +95,7 @@
     <div>
         <div class="card" style="padding: 24px;" id="editor-container">
             <h2 id="editor-title" style="margin-top: 0; margin-bottom: 20px; font-size: 1.3rem; font-weight: 700; color: #111827;">Add New Question</h2>
-            
+
             <form id="question-form" onsubmit="saveQuestion(event)">
                 <input type="hidden" id="edit-question-id" value="">
 
@@ -157,7 +157,7 @@
                         <h4 style="margin: 0; font-size: 1rem; font-weight: 600; color: #374151;">Answer Options</h4>
                         <button type="button" onclick="addOptionRow()" id="add-opt-btn" class="btn" style="background: #10b981; font-size: 0.8rem; padding: 6px 12px;">+ Add Option</button>
                     </div>
-                    
+
                     <div id="options-container" style="display: flex; flex-direction: column; gap: 8px;">
                         <!-- Dynamically generated rows -->
                     </div>
@@ -169,7 +169,7 @@
                         <h4 style="margin: 0; font-size: 1rem; font-weight: 600; color: #374151;">Accepted Answers</h4>
                         <button type="button" onclick="addAcceptedAnswerRow()" class="btn" style="background: #10b981; font-size: 0.8rem; padding: 6px 12px;">+ Add Answer</button>
                     </div>
-                    
+
                     <div id="accepted-answers-container" style="display: flex; flex-direction: column; gap: 8px;">
                         <!-- Dynamically generated rows -->
                     </div>
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchQuestions() {
     try {
-        const response = await fetch(`/api/admin/quizzes/${quizId}/questions`);
+        const response = await fetch(`${window.APP_URL}/api/admin/quizzes/${quizId}/questions`);
         questions = await response.json();
         renderQuestionsList();
     } catch (err) {
@@ -237,14 +237,14 @@ async function fetchQuestions() {
 function renderQuestionsList() {
     questionsList.innerHTML = '';
     countBadge.innerText = questions.length;
-    
+
     if (questions.length === 0) {
         noQuestionsPlaceholder.style.display = 'block';
         return;
     }
-    
+
     noQuestionsPlaceholder.style.display = 'none';
-    
+
     questions.forEach((q, index) => {
         const li = document.createElement('li');
         li.className = 'card';
@@ -256,7 +256,7 @@ function renderQuestionsList() {
         li.style.cursor = 'grab';
         li.style.border = '1px solid #e5e7eb';
         li.draggable = true;
-        
+
         // Drag and drop event listeners
         li.addEventListener('dragstart', (e) => handleDragStart(e, index));
         li.addEventListener('dragover', (e) => handleDragOver(e));
@@ -298,7 +298,7 @@ function handleDragOver(e) {
 async function handleDrop(e, index) {
     e.preventDefault();
     if (dragSrcIndex === null || dragSrcIndex === index) return;
-    
+
     // Swap display orders in local questions array
     const draggedItem = questions[dragSrcIndex];
     questions.splice(dragSrcIndex, 1);
@@ -314,7 +314,7 @@ async function handleDrop(e, index) {
 
     // Call API to save new ordering
     try {
-        const response = await fetch(`/api/admin/quizzes/${quizId}/questions/reorder`, {
+        const response = await fetch(`${window.APP_URL}/api/admin/quizzes/${quizId}/questions/reorder`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -350,7 +350,7 @@ function handleTypeChange() {
         choiceSection.style.display = 'block';
         openTextSection.style.display = 'none';
         addOptBtn.style.display = 'inline-block';
-        
+
         // Add default two options if container is empty
         if (optionsContainer.children.length === 0) {
             addOptionRow();
@@ -360,7 +360,7 @@ function handleTypeChange() {
         choiceSection.style.display = 'block';
         openTextSection.style.display = 'none';
         addOptBtn.style.display = 'none'; // Lock adding options
-        
+
         // Recreate exactly True and False options
         optionsContainer.innerHTML = '';
         addOptionRow('True', 'A');
@@ -368,7 +368,7 @@ function handleTypeChange() {
     } else if (type === 'open_text') {
         choiceSection.style.display = 'none';
         openTextSection.style.display = 'block';
-        
+
         if (acceptedContainer.children.length === 0) {
             addAcceptedAnswerRow();
         }
@@ -400,7 +400,7 @@ function addOptionRow(text = '', key = '', isCorrect = false, optionId = '', all
 
     const type = qType.value;
     const inputType = type === 'multiple_choice' ? 'checkbox' : 'radio';
-    
+
     // Build options for related questions dropdown
     const currentQId = editIdInput.value ? parseInt(editIdInput.value) : null;
     let relatedOptionsHtml = '';
@@ -470,10 +470,10 @@ function toggleSimilarity(selectEl) {
 // Load existing question into Editor
 async function loadQuestionIntoEditor(id) {
     try {
-        const response = await fetch(`/api/admin/questions/${id}`);
+        const response = await fetch(`${window.APP_URL}/api/admin/questions/${id}`);
         if (!response.ok) throw new Error('Question not found');
         const q = await response.json();
-        
+
         // Populate inputs
         editIdInput.value = q.id;
         qType.value = q.type;
@@ -519,7 +519,7 @@ function clearFormForNewQuestion() {
     qExplanation.value = '';
     qRequired.checked = true;
     qNotes.value = '';
-    
+
     // Auto increment display order based on current list length
     qDisplayOrder.value = questions.length + 1;
 
@@ -534,7 +534,7 @@ async function saveQuestion(event) {
 
     const id = editIdInput.value;
     const type = qType.value;
-    
+
     const payload = {
         type: type,
         score: parseFloat(qScore.value),
@@ -557,7 +557,7 @@ async function saveQuestion(event) {
             const allowCustomText = row.querySelector('.opt-allow-custom').checked;
             const relatedSelect = row.querySelector('.opt-related-questions');
             const relatedQuestionIds = Array.from(relatedSelect.selectedOptions).map(o => parseInt(o.value));
-            
+
             payload.options.push({
                 id: idVal ? parseInt(idVal) : null,
                 option_key: key,
@@ -574,7 +574,7 @@ async function saveQuestion(event) {
             const text = row.querySelector('.ans-text').value;
             const matchType = row.querySelector('.ans-match-type').value;
             const similarity = row.querySelector('.ans-similarity').value;
-            
+
             payload.accepted_answers.push({
                 answer_text: text,
                 match_type: matchType,
@@ -584,7 +584,7 @@ async function saveQuestion(event) {
     }
 
     // Call save API
-    const url = id ? `/api/admin/questions/${id}` : `/api/admin/quizzes/${quizId}/questions`;
+    const url = id ? `${window.APP_URL}/api/admin/questions/${id}` : `${window.APP_URL}/api/admin/quizzes/${quizId}/questions`;
     const method = id ? 'PUT' : 'POST';
 
     try {
@@ -636,7 +636,7 @@ async function saveAndAddAnother() {
 async function deleteActiveQuestion() {
     const id = editIdInput.value;
     if (!id) return;
-    
+
     if (confirm('Are you sure you want to delete this question?')) {
         await deleteQuestion(parseInt(id));
         clearFormForNewQuestion();
@@ -645,7 +645,7 @@ async function deleteActiveQuestion() {
 
 async function deleteQuestion(id) {
     try {
-        const response = await fetch(`/api/admin/questions/${id}`, {
+        const response = await fetch(`${window.APP_URL}/api/admin/questions/${id}`, {
             method: 'DELETE'
         });
         if (response.ok) {

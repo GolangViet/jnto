@@ -603,7 +603,7 @@ async function sendAnswerToServer(questionId) {
     const ans = userAnswers[questionId];
     
     try {
-        const response = await fetch(`/api/quiz-attempts/${attemptId}/answers`, {
+        const response = await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/answers`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -761,7 +761,7 @@ async function submitQuiz(forced = false) {
     showSaving();
     
     try {
-        const response = await fetch(`/api/quiz-attempts/${attemptId}/submit`, {
+        const response = await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/submit`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

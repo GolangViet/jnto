@@ -1,5 +1,5 @@
 <div style="margin-bottom: 24px; animation: fadeIn 0.3s ease-out;">
-    <a href="/admin/quizzes" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
+    <a href="<?= url('admin/quizzes') ?>" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
         <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -21,7 +21,7 @@
 <?php endif; ?>
 
 <div class="card" style="animation: fadeIn 0.4s ease-out; padding: 28px;">
-    <form action="/admin/quizzes/<?= (int)$quiz['id'] ?>" method="post">
+    <form action="<?= url('admin/quizzes/' . (int)$quiz['id']) ?>" method="post">
         <?= csrf_field() ?>
         <input type="hidden" name="_method" value="PUT">
 
@@ -105,7 +105,7 @@
         </div>
 
         <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
-            <a href="/admin/quizzes" class="btn" style="background: #9ca3af; text-decoration: none;">Cancel</a>
+            <a href="<?= url('admin/quizzes') ?>" class="btn" style="background: #9ca3af; text-decoration: none;">Cancel</a>
             <button type="submit" class="btn" style="background: #4f46e5;">Update Settings</button>
         </div>
     </form>

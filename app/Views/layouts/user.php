@@ -10,6 +10,10 @@
 
     <?= render_styles() ?>
 
+    <script>
+        window.APP_URL = <?= json_encode(rtrim((string) config('app.url'), '/')) ?>;
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -30,7 +34,7 @@
                 <div class="admin-top-bar">
                     <div class="admin-top-bar-content">
                         <span class="admin-welcome-text">Xin chào, <strong><?= e($user['name']) ?></strong> (Quản trị viên)</span>
-                        <a href="/admin/dashboard" class="admin-btn">
+                        <a href="<?= url('admin/dashboard') ?>" class="admin-btn">
                             <svg viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
                             </svg>
@@ -42,7 +46,7 @@
         <?php endif; ?>
         <div class="header-wrapper">
             <div class="logo-japan">
-                <a href="/" style="font-size: 0;">
+                <a href="<?= url('/') ?>" style="font-size: 0;">
                     <img src="<?= assets('images/campaign-nhat-ban.png') ?>" alt="logo Campaign nhật bản">
                 </a>
             </div>

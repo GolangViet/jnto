@@ -15,19 +15,19 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 try {
     $html = View::render('home/index', ['posts' => []]);
-    
+
     echo "=== RENDERED HTML OUTPUT ===\n";
     echo $html;
     echo "============================\n\n";
 
-    $hasFormCss = (bool) preg_match('#<link rel="stylesheet" href="/assets/css/user/form\.css\?v=[a-f0-9]{7}">#', $html, $matchesCss, PREG_OFFSET_CAPTURE);
-    $hasHomeJs = (bool) preg_match('#<script type="text/javascript" src="/assets/js/home\.js\?v=[a-f0-9]{7}"></script>#', $html, $matchesJs, PREG_OFFSET_CAPTURE);
-    
+    $hasFormCss = (bool) preg_match('#<link rel="stylesheet" href="' . url('/assets/css/user/form\.css') . '\?v=[a-f0-9]{7}">#', $html, $matchesCss, PREG_OFFSET_CAPTURE);
+    $hasHomeJs = (bool) preg_match('#<script type="text/javascript" src="' . url('/assets/js/home\.js') . '\?v=[a-f0-9]{7}"></script>#', $html, $matchesJs, PREG_OFFSET_CAPTURE);
+
     $testPath = 'images/logo.png';
     $versionedUrl = asset_with_version($testPath);
     $expectedPattern = '#/assets/images/logo\.png\?v=[a-f0-9]{7}#';
     $hasVersionedUrl = (bool) preg_match($expectedPattern, $versionedUrl);
-    
+
     $headClosePos = strpos($html, '</head>');
     $formCssPos = $hasFormCss ? $matchesCss[0][1] : -1;
     $bodyClosePos = strpos($html, '</body>');
@@ -45,13 +45,13 @@ try {
         } else {
             echo "CSS position relative to </head>: INCORRECT\n";
         }
-        
+
         if ($homeJsPos !== -1 && $homeJsPos < $bodyClosePos) {
             echo "JS position relative to </body>: CORRECT (placed before closing body tag)\n";
         } else {
             echo "JS position relative to </body>: INCORRECT\n";
         }
-        
+
         echo "SUCCESS: All asset queue tests passed successfully!\n";
     } else {
         echo "FAILURE: Asset files were not rendered in the template.\n";

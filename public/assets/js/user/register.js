@@ -109,7 +109,7 @@
             const submitBtn = form.querySelector(".btn-register");
             if (submitBtn) submitBtn.disabled = true;
 
-            fetch(form.action || '/register', {
+            fetch(form.action || `${window.APP_URL}/register`, {
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },

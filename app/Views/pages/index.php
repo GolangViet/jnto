@@ -83,7 +83,7 @@
             <img class="img" src="<?= assets('images/la-right.webp') ?>" alt="">
         </div>
     </div>
-    <a class="btn-join-now" href="/take-survey" title="Tham gia ngay">
+    <a class="btn-join-now" href="<?= url('take-survey') ?>" title="Tham gia ngay">
         <span>THAM GIA NGAY</span>
     </a>
     <div class="nui-lft">

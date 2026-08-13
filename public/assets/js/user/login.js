@@ -40,7 +40,7 @@
         const submitBtn = form.querySelector(".btn-login");
         if (submitBtn) submitBtn.disabled = true;
 
-        fetch(form.action || '/login', {
+        fetch(form.action || `${window.APP_URL}/login`, {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },

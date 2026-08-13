@@ -7,7 +7,7 @@
 
 <section class="section-register">
     <div class="registers">
-        <form class="frm-box" action="/register" method="post" id="register-form">
+        <form class="frm-box" action="<?= url('register') ?>" method="post" id="register-form">
             <?= csrf_field() ?>
             <h2 class="frm-box-title"><span>ĐĂNG KÝ</span></h2>
             <div class="frm-wrapper">
@@ -52,7 +52,7 @@
                 </div>
 
                 <button type="submit" class="btn-register"><span>ĐĂNG KÝ</span></button>
-                <h3>Bạn đã có tài khoản? <a href="/login" title="Đăng nhập">Đăng nhập</a></h3>
+                <h3>Bạn đã có tài khoản? <a href="<?= url('login') ?>" title="Đăng nhập">Đăng nhập</a></h3>
 
                 <div class="alert_info">
                     <h3>LƯU Ý</h3>

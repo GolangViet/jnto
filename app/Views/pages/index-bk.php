@@ -17,7 +17,7 @@ $mainOpenId = setting('main_open_quiz_id');
                     <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;">Challenge yourself with our featured quiz, discover new regions, culture and see your score instantly.</p>
                 </div>
                 <div style="position: relative; z-index: 1;">
-                    <a href="/quizzes/<?= (int)$mainQuizId ?>" class="btn" style="background: #ffffff; color: #1e1b4b; padding: 12px 24px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; justify-content: center; box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15); transition: all 0.2s;">
+                    <a href="<?= url('quizzes/' . (int)$mainQuizId) ?>" class="btn" style="background: #ffffff; color: #1e1b4b; padding: 12px 24px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; justify-content: center; box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15); transition: all 0.2s;">
                         Start Quiz Now
                         <svg style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -36,7 +36,7 @@ $mainOpenId = setting('main_open_quiz_id');
                     <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;">Share your feedback and travel preferences through our official survey to shape future tourism projects.</p>
                 </div>
                 <div style="position: relative; z-index: 1;">
-                    <a href="/quizzes/<?= (int)$mainSurveyId ?>" class="btn" style="background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color: #ffffff; padding: 12px 24px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; justify-content: center; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3); transition: all 0.2s;">
+                    <a href="<?= url('quizzes/' . (int)$mainSurveyId) ?>" class="btn" style="background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color: #ffffff; padding: 12px 24px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; justify-content: center; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3); transition: all 0.2s;">
                         Take Survey
                         <svg style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -55,7 +55,7 @@ $mainOpenId = setting('main_open_quiz_id');
                     <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;">Provide detailed answers, ideas, and open feedback about your travel experiences in Japan.</p>
                 </div>
                 <div style="position: relative; z-index: 1;">
-                    <a href="/quizzes/<?= (int)$mainOpenId ?>" class="btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; padding: 12px 24px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); transition: all 0.2s;">
+                    <a href="<?= url('quizzes/' . (int)$mainOpenId) ?>" class="btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; padding: 12px 24px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); transition: all 0.2s;">
                         Answer Questions
                         <svg style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />

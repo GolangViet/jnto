@@ -1,5 +1,5 @@
 <div style="margin-bottom: 24px; animation: fadeIn 0.3s ease-out;">
-    <a href="/quizzes" style="text-decoration: none; color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.95rem;">
+    <a href="<?= url('quizzes') ?>" style="text-decoration: none; color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.95rem;">
         <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -11,7 +11,7 @@
     <h1 style="font-size: 2rem; font-weight: 800; margin: 0 0 16px; color: var(--text-main); text-align: center;">
         <?= e($quiz['title']) ?>
     </h1>
-    
+
     <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; text-align: center; margin-bottom: 32px;">
         <?= e($quiz['description'] ?: 'No description available for this quiz.') ?>
     </p>
@@ -48,7 +48,7 @@
         </ul>
     </div>
 
-    <form action="/quizzes/<?= (int)$quiz['id'] ?>/start" method="post" style="text-align: center;">
+    <form action="<?= url('quizzes/' . (int)$quiz['id'] . '/start') ?>" method="post" style="text-align: center;">
         <?= csrf_field() ?>
         <button type="submit" class="btn" style="padding: 14px 40px; font-size: 1.1rem; border-radius: 12px; font-weight: 700; width: 100%;">
             Start Quiz Attempt

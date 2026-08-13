@@ -10,18 +10,14 @@ Options -Indexes
     # Block internal source directories
     RewriteRule ^(?:app|core|vendor|storage|config|database|tests)(?:/|$) - [F,L,NC]
 
-    # Expose public assets as /assets/...
+    # /assets/... -> /public/assets/...
     RewriteRule ^assets/(.*)$ public/assets/$1 [L]
 
-    # Do not expose /public in browser URLs
-    RewriteCond %{THE_REQUEST} \s/+public(?:/|[\s?]) [NC]
-    RewriteRule ^public(?:/(.*))?$ /$1 [R=302,L,NE]
-
-    # Serve real root files/directories
+    # Serve existing files/directories
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
-    # Send application routes to the original front controller
+    # Everything else -> public/index.php
     RewriteRule ^ public/index.php [QSA,L]
 </IfModule>

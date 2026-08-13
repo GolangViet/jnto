@@ -67,7 +67,7 @@ $showCorrect = filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDA
     </div>
 
     <div style="display: flex; justify-content: center; gap: 16px;">
-        <a href="/quizzes" class="btn" style="background: var(--primary); padding: 12px 28px; font-weight: 700;">
+        <a href="<?= url('quizzes') ?>" class="btn" style="background: var(--primary); padding: 12px 28px; font-weight: 700;">
             Browse More Quizzes
         </a>
     </div>
@@ -108,7 +108,7 @@ $showCorrect = filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDA
                                 <?php
                                 $isUserSelected = in_array((int)$opt['id'], $ans ? ($ans['selected_option_ids'] ?? []) : []);
                                 $isCorrectOpt = filter_var($opt['is_correct'] ?? false, FILTER_VALIDATE_BOOL);
-                                
+
                                 $optBorder = 'var(--border)';
                                 $optBg = 'transparent';
                                 $optIndicator = '';
@@ -137,7 +137,7 @@ $showCorrect = filter_var($attempt['show_correct_answer'] ?? true, FILTER_VALIDA
                             <div style="padding: 12px 16px; border: 1px solid <?= $isCorrect ? '#c2e7c9' : '#fad2cf' ?>; background: <?= $isCorrect ? '#e6f4ea' : '#fce8e6' ?>; border-radius: 8px;">
                                 <strong>Your Answer:</strong> <code style="font-family: inherit; font-size: 1rem; color: <?= $isCorrect ? '#137333' : '#c5221f' ?>; font-weight: 600;"><?= e(($ans['answer_text'] ?? '') ?: '[No answer submitted]') ?></code>
                             </div>
-                            
+
                             <?php if ($showCorrect && !empty($q['accepted_answers'])): ?>
                                 <div style="padding: 12px 16px; border: 1px solid var(--border); background: #f8fafc; border-radius: 8px;">
                                     <strong>Accepted Answers:</strong>

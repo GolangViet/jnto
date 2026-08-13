@@ -11,19 +11,19 @@
 <body>
 <nav class="nav">
     <div class="container">
-        <a href="/"><strong><?= e(config('app.name')) ?></strong></a>
+        <a href="<?= url('/') ?>"><strong><?= e(config('app.name')) ?></strong></a>
         <div>
             <?php if ($user = app()->session()->get('user')): ?>
                 <?php if (($user['role'] ?? 'user') === 'admin'): ?>
-                    <a href="/admin/posts">Admin</a>
+                    <a href="<?= url('admin/posts') ?>">Admin</a>
                 <?php endif; ?>
                 <span class="muted" style="margin-left: 14px; margin-right: 14px; color: #d1d5db;">Hello, <?= e($user['name']) ?></span>
-                <form action="/logout" method="post" style="display:inline">
+                <form action="<?= url('logout') ?>" method="post" style="display:inline">
                     <?= csrf_field() ?>
                     <button class="btn" type="submit">Logout</button>
                 </form>
             <?php else: ?>
-                <a href="/login">Login</a>
+                <a href="<?= url('login') ?>">Login</a>
             <?php endif; ?>
         </div>
     </div>
