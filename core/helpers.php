@@ -82,6 +82,8 @@ function e(?string $value): string
  */
 function url(string $path = ''): string
 {
+    return rtrim((string) config('app.url'), '/') . '/' . ltrim($path, '/');
+
     static $base = null;
     if ($base === null) {
         if (php_sapi_name() === 'cli') {
