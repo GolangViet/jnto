@@ -82,7 +82,21 @@ function e(?string $value): string
  */
 function url(string $path = ''): string
 {
-    return rtrim((string) config('app.url'), '/') . '/' . ltrim($path, '/');
+    static $base = null;
+    if ($base === null) {
+        if (php_sapi_name() === 'cli') {
+            $base = rtrim((string) config('app.url'), '/');
+        } else {
+            $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+                || (isset($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on');
+            $scheme = $isHttps ? 'https' : 'http';
+            $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $base = $scheme . '://' . $host;
+        }
+    }
+
+    return $base . '/' . ltrim($path, '/');
 }
 
 /**
@@ -266,6 +280,25 @@ function asset_with_version(string $path = ''): string
     $url = assets($path);
     $version = \Core\View::getVersion();
     $separator = str_contains($url, '?') ? '&' : '?';
-    
+
     return $url . $separator . 'v=' . $version;
+}
+
+/**
+ * Get the canonical url
+ *
+ * @return string
+ */
+function canonical_url(): string
+{
+    $canonicalBase = url();
+    $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+    $path = '/' . trim($path, '/');
+    if ($path === '/') {
+        $canonical = $canonicalBase . '/';
+    } else {
+        $canonical = $canonicalBase . $path;
+    }
+
+    return $canonical;
 }

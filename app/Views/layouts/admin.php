@@ -9,7 +9,7 @@
     </style>
     <link rel="stylesheet" href="<?= assets('css/admin/app.css') ?>">
     <script>
-        window.APP_URL = <?= json_encode(rtrim((string) config('app.url'), '/')) ?>;
+        window.APP_URL = <?= json_encode(rtrim(url(), '/')) ?>;
     </script>
 </head>
 <body>

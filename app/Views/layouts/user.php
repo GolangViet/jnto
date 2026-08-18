@@ -4,6 +4,7 @@
     <title>JNTO</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="https://www.japan.travel/vi/vn/">
     <link rel="stylesheet" href="<?= asset_with_version('css/user/default.css') ?>">
     <link rel="stylesheet" href="<?= asset_with_version('css/user/style.css') ?>">
     <link rel="stylesheet" href="<?= asset_with_version('css/user/responsive.css') ?>">
@@ -11,7 +12,7 @@
     <?= render_styles() ?>
 
     <script>
-        window.APP_URL = <?= json_encode(rtrim((string) config('app.url'), '/')) ?>;
+        window.APP_URL = <?= json_encode(rtrim(url(), '/')) ?>;
     </script>
 
     <!-- Google Tag Manager -->
