@@ -26,6 +26,10 @@ final class DashboardController extends Controller
         $search = $request->input('search');
         $search = is_string($search) ? trim($search) : '';
         $quizFilter = (int)$request->input('quiz_id', 0);
+        $startDate = $request->input('start_date');
+        $startDate = is_string($startDate) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $startDate) ? $startDate : '';
+        $endDate = $request->input('end_date');
+        $endDate = is_string($endDate) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $endDate) ? $endDate : '';
         $page = (int)$request->input('page', 1);
 
         $totalCount = 0;
@@ -109,6 +113,8 @@ final class DashboardController extends Controller
             'leaderboardPerPage' => 10,
             'leaderboardSearch' => $search,
             'leaderboardQuizFilter' => $quizFilter,
+            'leaderboardStartDate' => $startDate,
+            'leaderboardEndDate' => $endDate,
             'leaderboardQuizzes' => $quizzes,
             'doneSurveyCount' => $doneSurveyCount,
             'doneQuestionsCount' => $doneQuestionsCount,
@@ -138,6 +144,10 @@ final class DashboardController extends Controller
         $search = $request->input('search');
         $search = is_string($search) ? trim($search) : '';
         $quizFilter = (int)$request->input('quiz_id', 0);
+        $startDate = $request->input('start_date');
+        $startDate = is_string($startDate) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $startDate) ? $startDate : '';
+        $endDate = $request->input('end_date');
+        $endDate = is_string($endDate) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $endDate) ? $endDate : '';
 
         // Base where clause and params
         $where = "u.role = 'user' AND qa.status = 'submitted'";
@@ -161,6 +171,16 @@ final class DashboardController extends Controller
                 $params[$paramName] = $vid;
             }
             $where .= " AND qa.quiz_id IN (" . implode(',', $placeholders) . ")";
+        }
+
+        // Apply date filters
+        if ($startDate !== '') {
+            $where .= " AND qa.submitted_at >= :start_date";
+            $params['start_date'] = $startDate . ' 00:00:00';
+        }
+        if ($endDate !== '') {
+            $where .= " AND qa.submitted_at <= :end_date";
+            $params['end_date'] = $endDate . ' 23:59:59';
         }
 
         // Calculate count if required
@@ -256,6 +276,16 @@ final class DashboardController extends Controller
                     $attemptsParams[$paramName] = $vid;
                 }
                 $sqlAttempts .= " AND qa.quiz_id IN (" . implode(',', $attemptsQuizPlaceholders) . ")";
+            }
+
+            // Apply date filters to attempts query to keep them consistent
+            if ($startDate !== '') {
+                $sqlAttempts .= " AND qa.submitted_at >= :start_date_attempts";
+                $attemptsParams['start_date_attempts'] = $startDate . ' 00:00:00';
+            }
+            if ($endDate !== '') {
+                $sqlAttempts .= " AND qa.submitted_at <= :end_date_attempts";
+                $attemptsParams['end_date_attempts'] = $endDate . ' 23:59:59';
             }
 
             $sqlAttempts .= " ORDER BY qa.percentage DESC, qa.score DESC, qa.submitted_at ASC";
