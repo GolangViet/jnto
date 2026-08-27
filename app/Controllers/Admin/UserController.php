@@ -26,8 +26,29 @@ final class UserController extends Controller
      */
     public function index(): string
     {
-        $users = $this->userService->getAllUsers();
-        return $this->view('admin/users/index', ['users' => $users]);
+        $request = app()->request();
+        $search = trim((string)$request->input('search', ''));
+        $role = trim((string)$request->input('role', ''));
+        $facebookPost = trim((string)$request->input('facebook_post', ''));
+        $page = $request->input('page') ? max(1, (int)$request->input('page')) : 1;
+        $perPage = 15;
+
+        $filters = [
+            'search' => $search,
+            'role' => $role,
+            'facebook_post' => $facebookPost,
+        ];
+
+        $result = $this->userService->getPaginatedUsers($filters, $page, $perPage);
+        $totalPages = (int)ceil($result['total'] / $perPage);
+
+        return $this->view('admin/users/index', [
+            'users' => $result['items'],
+            'total' => $result['total'],
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'filters' => $filters,
+        ]);
     }
 
     /**

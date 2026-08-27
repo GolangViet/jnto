@@ -471,11 +471,46 @@
 
     <!-- Leaderboard: Top Users with the Best Quiz Score -->
     <div class="panel-card" style="margin-bottom: 24px;">
-        <h2 class="panel-title" style="margin-bottom: 12px;">Top Quiz Leaderboard</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 16px; flex-wrap: wrap;">
+            <h2 class="panel-title" style="margin: 0;">Top Quiz Leaderboard</h2>
+            <?php if ($leaderboardTotalCount > 0): ?>
+                <a href="<?= url('admin/dashboard/export-leaderboard?' . http_build_query(array_filter([
+                    'search' => $leaderboardSearch !== '' ? $leaderboardSearch : null,
+                    'quiz_id' => $leaderboardQuizFilter > 0 ? $leaderboardQuizFilter : null,
+                ]))) ?>" class="btn" style="background: #10b981; color: #fff; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; border-radius: 8px; text-decoration: none; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#059669'; this.style.transform='translateY(-1px)';" onmouseout="this.style.background='#10b981'; this.style.transform='none';">
+                    <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                    </svg>
+                    <span>Export CSV</span>
+                </a>
+            <?php endif; ?>
+        </div>
         <p style="color: #64748b; font-size: 0.9rem; margin-top: 0; margin-bottom: 20px;">Top unique performers based on their highest percentage and raw score across quiz submissions.</p>
 
+        <!-- Filters Form -->
+        <form method="GET" action="<?= url('admin/dashboard') ?>" style="display: flex; gap: 12px; margin-bottom: 20px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px; position: relative;">
+                <input type="text" name="search" value="<?= e($leaderboardSearch) ?>" placeholder="Search name or username..." style="width: 100%; padding: 11px 15px 11px 35px; border: 1px solid #cbd5e1; border-radius: 6px; transition: border 0.2s; margin-bottom: 0; margin-top: 0;" onfocus="this.style.borderColor='#4f46e5'" onblur="this.style.borderColor='#cbd5e1'" />
+                <svg style="position: absolute; left: 12px; top: 52%; transform: translateY(-50%); width: 16px; height: 16px; fill: #64748b;" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </div>
+            <div style="min-width: 180px;">
+                <select name="quiz_id" style="width: 100%; padding: 10px 15px 11px 11px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; cursor: pointer; transition: border 0.2s;margin-bottom: 0; margin-top: 0;" onfocus="this.style.borderColor='#4f46e5'" onblur="this.style.borderColor='#cbd5e1'">
+                    <option value="">All Quizzes</option>
+                    <?php foreach ($leaderboardQuizzes as $q): ?>
+                        <option value="<?= (int)$q['id'] ?>" <?= $leaderboardQuizFilter === (int)$q['id'] ? 'selected' : '' ?>><?= e($q['title']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <button type="submit" class="btn" style="background: #4f46e5; color: #fff; padding: 12px 16px; font-size: 0.9rem; font-weight: 600; border-radius: 6px; cursor: pointer; border: none; transition: background 0.2s;" onmouseover="this.style.background='#3730a3'" onmouseout="this.style.background='#4f46e5'">Filter</button>
+            <?php if ($leaderboardSearch !== '' || $leaderboardQuizFilter > 0): ?>
+                <a href="<?= url('admin/dashboard') ?>" class="btn" style="background: #e2e8f0; color: #334155; padding: 8px 16px; font-size: 0.9rem; font-weight: 600; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; border: 1px solid #cbd5e1; transition: background 0.2s;" onmouseover="this.style.background='#cbd5e1'" onmouseout="this.style.background='#e2e8f0'">Reset</a>
+            <?php endif; ?>
+        </form>
+
         <?php if (empty($leaderboard)): ?>
-            <div class="empty-state" style="padding: 48px;">No quiz attempts have been submitted yet.</div>
+            <div class="empty-state" style="padding: 48px;">No quiz attempts match the filters or have been submitted yet.</div>
         <?php else: ?>
             <div class="table-responsive">
                 <table class="custom-table">
@@ -490,7 +525,7 @@
                     <tbody>
                         <?php foreach ($leaderboard as $index => $row): ?>
                             <?php
-                                $rank = $index + 1;
+                                $rank = ($leaderboardPage - 1) * $leaderboardPerPage + $index + 1;
                                 $rankClass = 'rank-other';
                                 if ($rank === 1) $rankClass = 'rank-1';
                                 elseif ($rank === 2) $rankClass = 'rank-2';
@@ -533,6 +568,41 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Pagination Footer -->
+            <?php if ($leaderboardTotalPages > 1): ?>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0; flex-wrap: wrap; gap: 12px;">
+                    <div style="color: #64748b; font-size: 0.85rem;">
+                        Showing Page <strong><?= $leaderboardPage ?></strong> of <strong><?= $leaderboardTotalPages ?></strong> (Total <strong><?= $leaderboardTotalCount ?></strong> users)
+                    </div>
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <?php 
+                            $buildUrl = function($p) use ($leaderboardSearch, $leaderboardQuizFilter) {
+                                return url('admin/dashboard?' . http_build_query(array_filter([
+                                    'page' => $p > 1 ? $p : null,
+                                    'search' => $leaderboardSearch !== '' ? $leaderboardSearch : null,
+                                    'quiz_id' => $leaderboardQuizFilter > 0 ? $leaderboardQuizFilter : null,
+                                ])));
+                            };
+                        ?>
+                        <?php if ($leaderboardPage > 1): ?>
+                            <a href="<?= $buildUrl($leaderboardPage - 1) ?>" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">Previous</a>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $leaderboardTotalPages; $i++): ?>
+                            <?php if ($i === $leaderboardPage): ?>
+                                <span style="background: #4f46e5; color: #fff; padding: 6px 12px; font-size: 0.85rem; font-weight: 600; border-radius: 6px; border: 1px solid #4f46e5; display: inline-flex; align-items: center; justify-content: center; min-width: 32px; box-sizing: border-box;"><?= $i ?></span>
+                            <?php else: ?>
+                                <a href="<?= $buildUrl($i) ?>" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; min-width: 32px; box-sizing: border-box;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'"><?= $i ?></a>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+
+                        <?php if ($leaderboardPage < $leaderboardTotalPages): ?>
+                            <a href="<?= $buildUrl($leaderboardPage + 1) ?>" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">Next</a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 </div>

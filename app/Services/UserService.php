@@ -102,5 +102,19 @@ final class UserService
     {
         return $this->userRepository->delete($id);
     }
+
+    /**
+     * Get paginated and filtered users.
+     *
+     * @param array $filters Supported keys: 'search', 'role', 'facebook_post'
+     * @param int $page Current page number
+     * @param int $perPage Records per page
+     * @return array Contains 'items' (array) and 'total' (int)
+     */
+    public function getPaginatedUsers(array $filters, int $page = 1, int $perPage = 15): array
+    {
+        return $this->userRepository->getPaginatedWithFacebookPost($filters, $page, $perPage);
+    }
 }
+
 

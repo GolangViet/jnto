@@ -4,7 +4,7 @@
     <title>JNTO</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="https://www.japan.travel/vi/vn/">
+    <link rel="canonical" href="<?= rtrim(url(), '/') ?>">
     <link rel="stylesheet" href="<?= asset_with_version('css/user/default.css') ?>">
     <link rel="stylesheet" href="<?= asset_with_version('css/user/style.css') ?>">
     <link rel="stylesheet" href="<?= asset_with_version('css/user/responsive.css') ?>">
