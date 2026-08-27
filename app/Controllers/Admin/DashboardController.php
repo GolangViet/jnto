@@ -346,7 +346,7 @@ final class DashboardController extends Controller
      */
     public function exportLeaderboard(): void
     {
-        $leaderboard = $this->getLeaderboardData();
+        $leaderboard = $this->getLeaderboardData(false);
         $db = Database::connection();
 
         // Send headers
