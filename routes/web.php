@@ -55,6 +55,7 @@ use App\Controllers\TakeSurveyController;
 
 // Admin Dashboard Route
 $router->get('/admin/dashboard', [AdminDashboardController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->get('/admin/dashboard/export-leaderboard', [AdminDashboardController::class, 'exportLeaderboard'], [AuthMiddleware::class, AdminMiddleware::class]);
 
 // Admin Quiz Attempt Route
 $router->get('/admin/quiz-attempts/{id}', [AdminQuizAttemptController::class, 'show'], [AuthMiddleware::class, AdminMiddleware::class]);

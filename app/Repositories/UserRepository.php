@@ -86,5 +86,77 @@ final class UserRepository extends BaseRepository
                 ORDER BY u.id ASC";
         return $db->query($sql)->fetchAll() ?: [];
     }
+
+    /**
+     * Get paginated users with facebook post details and optional filters.
+     *
+     * @param array $filters Supported keys: 'search', 'role', 'facebook_post'
+     * @param int $page Current page number
+     * @param int $perPage Records per page
+     * @return array Contains 'items' (array) and 'total' (int)
+     */
+    public function getPaginatedWithFacebookPost(array $filters, int $page = 1, int $perPage = 15): array
+    {
+        $db = \Core\Database::connection();
+        $whereClauses = [];
+        $params = [];
+
+        if (!empty($filters['search'])) {
+            $whereClauses[] = "(u.username ILIKE :search OR u.name ILIKE :search OR u.email ILIKE :search)";
+            $params['search'] = '%' . $filters['search'] . '%';
+        }
+
+        if (!empty($filters['role'])) {
+            $whereClauses[] = "u.role = :role";
+            $params['role'] = $filters['role'];
+        }
+
+        if (isset($filters['facebook_post']) && $filters['facebook_post'] !== '') {
+            if ($filters['facebook_post'] === 'yes') {
+                $whereClauses[] = "fp.facebook_url IS NOT NULL AND fp.facebook_url != ''";
+            } elseif ($filters['facebook_post'] === 'no') {
+                $whereClauses[] = "(fp.facebook_url IS NULL OR fp.facebook_url = '')";
+            }
+        }
+
+        $whereSql = '';
+        if (count($whereClauses) > 0) {
+            $whereSql = "WHERE " . implode(" AND ", $whereClauses);
+        }
+
+        // Count Query
+        $countSql = "SELECT COUNT(u.id) 
+                     FROM cms.users u
+                     LEFT JOIN cms.user_facebook_posts fp ON u.id = fp.user_id
+                     $whereSql";
+        
+        $stmtCount = $db->prepare($countSql);
+        $stmtCount->execute($params);
+        $totalCount = (int)$stmtCount->fetchColumn();
+
+        // Data Query
+        $offset = ($page - 1) * $perPage;
+        $sql = "SELECT u.*, fp.facebook_url, fp.score AS facebook_score 
+                FROM cms.users u
+                LEFT JOIN cms.user_facebook_posts fp ON u.id = fp.user_id
+                $whereSql
+                ORDER BY u.id ASC
+                LIMIT :limit OFFSET :offset";
+
+        $stmt = $db->prepare($sql);
+        foreach ($params as $key => $val) {
+            $stmt->bindValue($key, $val);
+        }
+        $stmt->bindValue('limit', $perPage, \PDO::PARAM_INT);
+        $stmt->bindValue('offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        $items = $stmt->fetchAll() ?: [];
+
+        return [
+            'items' => $items,
+            'total' => $totalCount,
+        ];
+    }
 }
+
 
