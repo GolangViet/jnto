@@ -1,3 +1,42 @@
+<style>
+.copyable-cell {
+    position: relative;
+    padding-right: 28px !important; /* Make room for copy button */
+}
+.copyable-cell .cell-text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.copyable-cell .copy-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.15s ease-in-out;
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+}
+.copyable-cell .copy-btn:hover {
+    color: #4f46e5;
+    background-color: #f1f5f9;
+}
+.copyable-cell:hover .copy-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+</style>
+
 <div style="display:flex;justify-content:space-between;align-items:center">
     <h1>Users</h1>
     <a class="btn" href="<?= url('admin/users/create') ?>">Create user</a>
@@ -55,9 +94,24 @@
                 <?php foreach ($users as $u): ?>
                     <tr>
                         <td><?= (int)$u['id'] ?></td>
-                        <td><?= e($u['username']) ?></td>
-                        <td><?= e($u['name']) ?></td>
-                        <td><?= e($u['email']) ?></td>
+                        <td class="copyable-cell" style="max-width: 150px;" data-copy-text="<?= e($u['username']) ?>" title="<?= e($u['username']) ?>">
+                            <span class="cell-text"><?= e($u['username']) ?></span>
+                            <button type="button" class="copy-btn" onclick="copyToClipboard(this)" title="Copy username">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </td>
+                        <td class="copyable-cell" style="max-width: 150px;" data-copy-text="<?= e($u['name']) ?>" title="<?= e($u['name']) ?>">
+                            <span class="cell-text"><?= e($u['name']) ?></span>
+                            <button type="button" class="copy-btn" onclick="copyToClipboard(this)" title="Copy name">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </td>
+                        <td class="copyable-cell" style="max-width: 200px;" data-copy-text="<?= e($u['email']) ?>" title="<?= e($u['email']) ?>">
+                            <span class="cell-text"><?= e($u['email']) ?></span>
+                            <button type="button" class="copy-btn" onclick="copyToClipboard(this)" title="Copy email">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </td>
                         <td>
                             <span class="btn <?= $u['role'] === 'admin' ? 'danger' : 'muted' ?>" style="padding: 2px 6px; font-size: 0.8rem; cursor: default;">
                                 <?= e(ucfirst($u['role'])) ?>
@@ -73,9 +127,11 @@
                                 <span class="muted">N/A</span>
                             <?php endif; ?>
                         </td>
-                        <td><?= e($u['created_at']) ?></td>
                         <td>
-                            <a class="btn" href="<?= url('admin/users/' . (int)$u['id'] . '/edit') ?>">Edit</a>
+                            <?= date('Y-m-d H:i:s', strtotime($u['created_at'])) ?>
+                        </td>
+                        <td>
+                            <a class="btn" style="font-size: 13px;" href="<?= url('admin/users/' . (int)$u['id'] . '/edit') ?>">Edit</a>
                             <form method="post" action="<?= url('admin/users/' . (int)$u['id']) ?>" style="display:inline">
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="_method" value="DELETE">
@@ -142,3 +198,30 @@
         </div>
     <?php endif; ?>
 </div>
+
+<script>
+function copyToClipboard(btn) {
+    const cell = btn.closest('.copyable-cell');
+    if (!cell) return;
+    const text = cell.getAttribute('data-copy-text');
+    if (!text) return;
+
+    navigator.clipboard.writeText(text).then(() => {
+        const origHTML = btn.innerHTML;
+        // Temporary success checkmark icon
+        btn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        `;
+        btn.style.color = '#22c55e';
+        
+        setTimeout(() => {
+            btn.innerHTML = origHTML;
+            btn.style.color = '';
+        }, 1500);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+</script>
