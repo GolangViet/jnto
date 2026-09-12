@@ -90,6 +90,28 @@ final class Request
     }
 
     /**
+     * Retrieve an HTTP header value.
+     *
+     * @param string $key Header name (case-insensitive, e.g., 'X-CSRF-TOKEN').
+     * @param string|null $default Default value if header missing.
+     * @return string|null Header value or default.
+     */
+    public function header(string $key, ?string $default = null): ?string
+    {
+        $normalizedKey = strtoupper(str_replace('-', '_', $key));
+        
+        if (isset($_SERVER['HTTP_' . $normalizedKey])) {
+            return (string) $_SERVER['HTTP_' . $normalizedKey];
+        }
+
+        if (isset($_SERVER[$normalizedKey])) {
+            return (string) $_SERVER[$normalizedKey];
+        }
+
+        return $default;
+    }
+
+    /**
      * Determine if the current request expects or sends JSON.
      *
      * @return bool
@@ -98,6 +120,9 @@ final class Request
     {
         $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
         $contentType = $_SERVER['CONTENT_TYPE'] ?? $_SERVER['HTTP_CONTENT_TYPE'] ?? '';
-        return stripos($accept, 'application/json') !== false || stripos($contentType, 'application/json') !== false;
+        $requestedWith = $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '';
+        return stripos($accept, 'application/json') !== false 
+            || stripos($contentType, 'application/json') !== false
+            || strtolower($requestedWith) === 'xmlhttprequest';
     }
 }

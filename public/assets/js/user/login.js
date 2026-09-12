@@ -31,8 +31,11 @@
         const usernameInput = form.querySelector('#username');
         const passwordInput = form.querySelector('#password-input');
         const tokenInput = form.querySelector('input[name="_token"]');
+        const metaToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        const csrfToken = metaToken || (tokenInput ? tokenInput.value : '');
+
         const payload = {
-            _token: tokenInput ? tokenInput.value : '',
+            _token: csrfToken,
             username: usernameInput ? usernameInput.value : '',
             password: passwordInput ? passwordInput.value : ''
         };
@@ -43,7 +46,12 @@
         fetch(form.action || `${window.APP_URL}/login`, {
             method: 'POST',
             body: JSON.stringify(payload),
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                'X-Requested-With': 'XMLHttpRequest'
+            },
         })
         .then(async (response) => {
             let data;
@@ -56,6 +64,14 @@
             }
 
             if (!response.ok) {
+                if (response.status === 419) {
+                    showError('Phiên làm việc đã hết hạn. Trang sẽ tự động tải lại...');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                    return;
+                }
+
                 let msg = data?.message ?? 'Đăng nhập thất bại. Vui lòng thử lại.';
                 if (data.errors) {
                     const firstField = Object.keys(data.errors)[0];
@@ -74,7 +90,9 @@
             }
         })
         .catch((err) => {
-            showError(err.message);
+            if (err && err.message) {
+                showError(err.message);
+            }
         })
         .finally(() => {
             if (submitBtn) submitBtn.disabled = false;
