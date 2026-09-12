@@ -12,7 +12,10 @@ final class Session
     public function __construct()
     {
         if (php_sapi_name() !== 'cli' && session_status() !== PHP_SESSION_ACTIVE && !headers_sent()) {
-            session_start();
+            session_start([
+                'cookie_httponly' => true,
+                'cookie_samesite' => 'Lax',
+            ]);
         }
     }
 

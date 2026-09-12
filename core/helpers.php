@@ -132,7 +132,17 @@ function old(string $key, mixed $default = ''): mixed
  */
 function csrf_field(): string
 {
-    return '<input type="hidden" name="_token" value="' . e(app()->session()->token()) . '">';
+    return '<input type="hidden" name="_token" value="' . e(csrf_token()) . '">';
+}
+
+/**
+ * Retrieve the current CSRF token string.
+ *
+ * @return string
+ */
+function csrf_token(): string
+{
+    return app()->session()->token();
 }
 
 /**
