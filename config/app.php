@@ -9,4 +9,5 @@ return [
     'url' => env('APP_URL', 'URL: https://mng.sys.jnto.go.jp'),
     'key' => env('APP_KEY', 'base64:M0pudDBTZWN1cmVBcHBLZXlGb3JFcmNyeXB0aW9uMzI='),
     'cipher' => 'AES-256-CBC',
+    'session_lifetime' => (int) env('SESSION_LIFETIME', 7776000),
 ];
