@@ -1,97 +1,32 @@
-<section class="section2">
-    <picture>
-        <source media="(max-width: 768px)" srcset="<?= assets('images/bg/bg-m.webp') ?>">
-        <img class="bg2" src="<?= assets('images/bg/bg-cam.webp') ?>" alt="bg2">
-    </picture>
+<style>
+    .header, .banner, .footer {display:none!important;}
 
-    <div class="container section2_wrapper">
-        <div class="section2_title">
-            <h2>Cùng Cơ quan Xúc tiến Du lịch Nhật Bản (JNTO) tham gia <br>
-                thử thách <strong>“NHẬT BẢN: VẺ ĐẸP VÔ TẬN, ĐI ĐỂ TRỞ VỀ"</strong> <br>
-                trên microsite để nhận vô số phần quà giá trị.
-            </h2>
-            <div class="sec2-line-top">
-                <img src="<?= assets('images/bg/hoa.webp') ?>" alt="line top">
-            </div>
-            <div class="sec2-line-bottom">
-                <img src="<?= assets('images/bg/hoa.webp') ?>" alt="line top">
-            </div>
-        </div>
-        <div class="section2-box">
-            <div class="section2-contents">
-                <div class="sec2-time">
-                    <div class="sec2-time_title"><span>THỜI GIAN</span></div>
-                    <div class="sec2_info">
-                        <h4>04/08 - 27/09/2026</h4>
-                        <h5>Thời gian công bố kết quả:</h5>
-                        <h4 class="mb-2">20/10/2026</h4>
-                        <p>
-                            *Danh sách trúng thưởng sẽ được<br>
-                            công bố trên Fanpage JNTO
-                        </p>
-                    </div>
-                </div>
-                <div class="sec2-time">
-                    <div class="sec2-time_title2"><span>ĐỐI TƯỢNG THAM GIA</span></div>
-                    <ul class="sec2_info2">
-                        <li>
-                            <p class="sec2-copy-desktop">Là công dân Việt Nam, từ đủ 18 tuổi<br> trở lên, đang sinh sống trên lãnh thổ<br> Việt Nam</p>
-                            <p class="sec2-copy-mobile">Là công dân Việt Nam, từ đủ 18 tuổi trở lên,<br>đang sinh sống trên lãnh thổ Việt Nam.</p>
-                        </li>
-                        <li>
-                            <p class="sec2-copy-desktop">Bằng việc tham gia, người chơi xác nhận<br> đã đọc, hiểu rõ và đồng ý với các<br> quy định tại Thể lệ này.</p>
-                            <p class="sec2-copy-mobile">Bằng việc tham gia, người chơi xác nhận<br>đã đọc, hiểu rõ và đồng ý với các quy định<br>tại Thể lệ này.</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="btn-cta">
-        <div class="btn-cta_link">
-            <strong>CÁCH THỨC THAM GIA</strong>
-            <span>Tìm hiểu thêm <u>tại đây</u></span>
-        </div>
-    </div>
-</section>
+</style>
 
-<section class="section3">
-    <div class="sec3-title">
-        <h2>CƠ CẤU GIẢI THƯỞNG</h2>
-        <h3>50 phần quà hấp dẫn</h3>
+<div style="max-width: 640px; margin: 30px auto 0; text-align: center; background: rgba(255, 255, 255, 0.96); border: 2px solid #e11d48; border-radius: 16px; padding: 32px 24px; box-shadow: 0 10px 25px rgba(225, 29, 72, 0.15); position: relative; z-index: 2;">
+    <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: #ffe4e6; border-radius: 50%; color: #e11d48; margin-bottom: 16px;">
+        <svg style="width: 36px; height: 36px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
     </div>
-    <div class="sec3-contents">
-        <div class="sec3-awards">
-            <img class="sec3-award-img" src="<?= assets('images/giai-nhat.webp') ?>" alt="giải thưởng 1">
-            <picture class="sec3-award-picture">
-                <source media="(max-width: 768px)" srcset="<?= assets('images/jnto-giai234.webp') ?>">
-                <img class="sec3-award-img" src="<?= assets('images/giai-hai-ba-bon.webp') ?>" alt="giải nhì, giải ba và giải khuyến khích">
-            </picture>
-        </div>
-        <div class="sec3-footer">
-            <p>
-                *Vé máy bay và vé Have Fun Pass được áp dụng với điểm đến là vùng Kyushu hoặc Chubu. Vé không được chuyển nhượng, trao đổi hoặc quy đổi thành tiền mặt dưới bất kỳ hình thức nào.
-            </p>
-            <p>
-                *Voucher Traveloka áp dụng cho tất cả các dịch vụ trên Traveloka đối với điểm đến Nhật Bản và có thể sử dụng đồng thời với các ưu đãi khác.
-            </p>
-        </div>
-        <div class="la-lft" aria-hidden="true">
-            <img class="img" src="<?= assets('images/la-left.webp') ?>" alt="">
-        </div>
-        <div class="la-rgt" aria-hidden="true">
-            <img class="img" src="<?= assets('images/la-right.webp') ?>" alt="">
-        </div>
+    <h3 style="font-size: 1.75rem; font-weight: 800; color: #9f1239; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+        CHƯƠNG TRÌNH ĐÃ HẾT HẠN
+    </h3>
+    <p style="font-size: 1.05rem; color: #475569; line-height: 1.6; margin: 0 0 20px;">
+        Cảm ơn bạn đã quan tâm và đồng hành cùng <strong>JNTO</strong>. Thử thách <em>“NHẬT BẢN: VẺ ĐẸP VÔ TẬN, ĐI ĐỂ TRỞ VỀ”</em> đã chính thức khép lại cổng tham gia.
+    </p>
+    <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">
+        <p style="margin: 0 0 6px; font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+            THỜI GIAN CÔNG BỐ KẾT QUẢ:
+        </p>
+        <p style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #e11d48;">
+            20/10/2026
+        </p>
+        <p style="margin: 6px 0 0; font-size: 0.875rem; color: #64748b;">
+            *Danh sách trúng thưởng sẽ được công bố trên Fanpage JNTO.
+        </p>
     </div>
-    <a class="btn-join-now" href="<?= url('take-survey') ?>" title="Tham gia ngay">
-        <span>THAM GIA NGAY</span>
+    <a href="https://www.facebook.com/camnhannhatban" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); color: #fff; text-decoration: none; border-radius: 9999px; font-weight: 700; font-size: 1rem; box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4); transition: transform 0.2s, box-shadow 0.2s;">
+        Theo dõi Fanpage JNTO
     </a>
-    <div class="nui-lft">
-        <img class="img" src="<?= assets('images/nui-left.png') ?>" alt="nui trai bg">
-    </div>
-    <div class="nui-rgt">
-        <img class="img" src="<?= assets('images/nui-right.png') ?>" alt="nui phai bg">
-    </div>
-</section>
-
-<?php push_modal(view('components/modals/common-modal')); ?>
+</div>
