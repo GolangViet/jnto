@@ -5,8 +5,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Register - JNTO</title>
     <link rel='stylesheet' href='css/default.css?v=20260803-1'>
-    <link rel='stylesheet' href='css/style.css?v=20260804-4'>
-    <link rel='stylesheet' href='css/responsive.css?v=20260804-4'>
+    <link rel='stylesheet' href='css/style.css?v=20261013-1'>
+    <link rel='stylesheet' href='css/responsive.css?v=20261013-1'>
 </head>
 <body>
     <header class="header">
@@ -38,61 +38,65 @@
         </picture>
     </section> 
     <section class="section-register">       
-        <div class="registers">
-            <form class="frm-box" action="#" method="post">
-                <h2 class="frm-box-title"><span>ĐĂNG KÝ</span></h2>
+        <form class="registers" id="register-form" action="#" method="post" data-register-demo>
+            <div class="reg-error" id="reg-error" role="alert" aria-live="polite" hidden>
+                <p class="reg-error-text">
+                    <span class="reg-error-line">Tên đăng nhập này đã tồn tại.</span><br>
+                    Vui lòng chọn tên khác.
+                </p>
+                <button type="button" class="reg-error-close" id="reg-error-close" aria-label="Đóng thông báo">
+                    <img src="img/register/icon-close.webp" alt="Đóng" class="reg-error-close-img">
+                </button>
+            </div>
+            <div class="frm-box">
+                <h2 class="frm-box-title sr-only"><span>ĐĂNG KÝ</span></h2>
                 <div class="frm-wrapper">
                     <div class="login-username">
-                        <label for="username" class="login-label">Tên đăng nhập:</label>
-                        <input type="text" class="login-input" id="username">
-                    </div>
-                    <div class="line-decor">
-                        <img class="img" src="img/login/line-decor.webp" alt="line decor">
+                        <label for="username" class="login-label">
+                            Tên đăng nhập: <span class="label-sub">(Vui lòng KHÔNG sử dụng email cá nhân)</span>
+                        </label>
+                        <input type="text" class="login-input" id="username" name="username" autocomplete="username" required aria-describedby="reg-error">
                     </div>
                     <div class="login-pass">
                         <label for="password-input" class="login-label">Mật khẩu:</label>
                         <div class="login-input-pass">
-                            <input type="password" class="password-input" id="password-input">
-                            <button type="button" class="pass_eye">
-                                <svg class="pass_icon"><use xlink:href="#eye-closed-icon"></use></svg>
+                            <input type="password" class="password-input" id="password-input" name="password" autocomplete="new-password" required aria-describedby="reg-error">
+                            <button type="button" class="pass_eye" id="pass-eye-btn" aria-label="Hiện/ẩn mật khẩu">
+                                <img src="img/register/icon-hidepassword.webp" alt="Ẩn/Hiện mật khẩu" class="pass_eye_img">
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="frm-footer">
-                    <div class="agree-box">
-                        <label class="agree-item">
-                            <input type="checkbox" name="agree1" value="checked">
-                            <span class="checkmark"></span>
-                            <span class="text">
-                                Tôi đã đọc và đồng ý với
-                                <a class="terms-modal-trigger" href="#terms-modal">Điều kiện &amp; Điều khoản.</a>
-                            </span>
-                        </label>
-                        <label class="agree-item">
-                            <input type="checkbox" name="agree2" value="0">
-                            <span class="checkmark"></span>
-                            <span class="text">
-                                Tôi đồng ý cho Ban tổ chức sử dụng thông tin và hình ảnh cá nhân để liên hệ và trao giải.
-                            </span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn-register"><span>ĐĂNG KÝ</span></button>
-                    <h3>Bạn đã có tài khoản? <a href="#" title="Đăng ký">Đăng nhập</a></h3>
-                    
-                    <div class="alert_info">
-                        <h3>LƯU Ý</h3>
-                        <p><span>*Người tham gia <strong>vui lòng ghi nhớ thông tin tài khoản đã<br>
-                            đăng ký.</strong> Trong trường hợp quên tài khoản hoặc mật khẩu,<br>
-                            người tham gia sẽ cần <strong>đăng ký tài khoản mới</strong> và thực hiện<br>
-                            các bước tham gia chương trình lại từ đầu.</span>
-                        </p>
-                    </div>
+            </div>
+            <div class="frm-footer">
+                <div class="agree-box">
+                    <label class="agree-item">
+                        <input type="checkbox" name="agree1" value="checked" required>
+                        <span class="checkmark"></span>
+                        <span class="text">
+                            Tôi đã đọc và đồng ý với
+                            <a class="terms-modal-trigger" href="#terms-modal">Điều kiện &amp; Điều khoản.</a>
+                        </span>
+                    </label>
+                    <label class="agree-item">
+                        <input type="checkbox" name="agree2" value="0">
+                        <span class="checkmark"></span>
+                        <span class="text">
+                            Tôi đồng ý cho Ban tổ chức sử dụng thông tin và hình ảnh cá nhân để liên hệ và trao giải.
+                        </span>
+                    </label>
                 </div>
-               
-            </form>
-        </div>
+
+                <button type="submit" class="btn-register"><span>ĐĂNG KÝ</span></button>
+                <h3>Bạn đã có tài khoản? <a href="login.html" title="Đăng nhập">Đăng nhập</a></h3>
+                
+                <div class="alert_info">
+                    <h3 class="alert_info_title">LƯU Ý</h3>
+                    <p class="alert_info_desc"><span>*Người tham gia <strong>vui lòng ghi nhớ thông tin tài khoản đã đăng ký.</strong> Trong trường hợp quên tài khoản hoặc mật khẩu, người tham gia sẽ cần <strong>đăng ký tài khoản mới</strong> và thực hiện các bước tham gia chương trình lại từ đầu.</span>
+                    </p>
+                </div>
+            </div>
+        </form>
     </section>
     <footer class="footer"> 
         <div class="container">
@@ -183,7 +187,7 @@
             </symbol>         
         </defs>
     </svg>
-    <script src="js/register.js"></script>
+    <script src="js/register.js?v=20261013-1"></script>
     <script src="js/cursor.js?v=20260803-4"></script>
 </body>
 </html>

@@ -1243,249 +1243,288 @@ body.modal-open-body {
 
 /* ----- register ----- */
 .section-register {
+    position: relative;
     font-size: 1rem;
     width: 100%;
-    aspect-ratio: 1923 / 1227;
+    aspect-ratio: 1920 / 1227;
+    min-height: 980px;
     background-image: url("../img/register/bg-register.webp");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-position: center top;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: clamp(20px, 3vw, 50px) 0;
+    overflow: hidden;
 }
 
 .registers {
     position: relative;
-    width: 40%;
+    width: clamp(340px, 33vw, 634px);
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.reg-error {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    bottom: calc(100% + clamp(12px, 1.5vw, 24px));
+    transform: translateX(-50%);
+    width: clamp(260px, 20vw, 365px);
+    aspect-ratio: 365 / 91;
+    background-image: url("../img/register/box-error.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0.4em 2.2em 0.4em 0.8em;
+    filter: drop-shadow(0 4px 10px rgba(180, 50, 70, 0.15));
+}
+
+.reg-error[hidden] {
+    display: none;
+}
+
+.reg-error-text {
+    margin: 0;
+    color: #c42127;
+    font-size: clamp(10px, 0.85vw, 14px);
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.reg-error-line {
+    white-space: nowrap;
+}
+
+.reg-error-close {
+    position: absolute;
+    top: -0.45em;
+    right: -0.45em;
+    width: clamp(20px, 1.8vw, 30px);
+    height: clamp(20px, 1.8vw, 30px);
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.reg-error-close:hover {
+    transform: scale(1.12);
+}
+
+.reg-error-close-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .frm-box {
-    font-size: 1rem;
     position: relative;
-    width: 90%;
-    aspect-ratio: 766 / 581;
-    background-image: url("../img/login/login-box.webp");
+    width: 100%;
+    aspect-ratio: 634 / 473;
+    background-image: url("../img/register/box-dangky.webp");
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 3em 0;
+    background-size: 100% 100%;
+    background-position: center;
 }
 
-.login::before,
-.login::after,
 .frm-box::before,
 .frm-box::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    pointer-events: none;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.login::before,
-.frm-box::before {
-    top: 74%;
-    left: -9.5%;
-    width: 12.5%;
-    aspect-ratio: 115 / 110;
-    background-image: url("../img/la-left.webp");
-}
-
-.login::after,
-.frm-box::after {
-    top: 16%;
-    right: -7%;
-    width: 11%;
-    aspect-ratio: 82 / 78;
-    background-image: url("../img/la-right.webp");
-}
-
-.frm-box-title {
-    font-size: 1rem;
-    color: #a76f42;
-    text-align: center;
-    height: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.frm-box-title>span {
-    font-size: clamp(14px, 1.8vw, 3.8em);
+    display: none !important;
 }
 
 .frm-wrapper {
-    width: 70%;
-    height: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    left: 0.5em;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 82%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: clamp(10px, 1.3vw, 22px);
+}
+
+.label-sub {
+    font-size: clamp(10px, 0.75vw, 13px);
+    color: #e53935;
+    font-weight: 600;
+    font-style: italic;
+    margin-left: 0.3em;
 }
 
 .frm-footer {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding-top: clamp(20px, 3.5vw, 5em);
-    color: #ad0808;
-    gap: 1rem;
+    gap: clamp(8px, 0.8vw, 14px);
+    margin-top: clamp(6px, 0.8vw, 14px);
 }
 
-.btn-register {
-    font-size: 1rem;
-    aspect-ratio: 507 / 94;
-    width: 60%;
-    background-image: url("../img/register/button-dangky.webp");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    background-color: transparent;
-    color: #ad0808;
-    border: none;
-}
-
-.btn-register:hover {
-    background-image: url("../img/register/button-dangky-hover.webp");
-}
-
-.btn-register>span {
-    font-size: clamp(14px, 1.8vw, 3.2em);
-    font-weight: 600;
-}
-
-.frm-footer>h3 {
-    font-size: clamp(10px, 1.8vw, 2.2em);
-    font-weight: 500;
-    color: #ad0808;
-}
-
-.frm-footer>h3>a {
-    font-weight: 600;
-    position: relative;
-}
-
-.frm-footer>h3>a::before {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #ad0808;
-}
-
-/* ---- check icon --- */
 .agree-box {
-    font-size: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    width: 90%;
-    margin-bottom: 1em;
+    gap: clamp(8px, 0.7vw, 12px);
+    width: 100%;
+    margin-top: clamp(8px, 1vw, 14px);
 }
 
 .agree-item {
     display: flex;
-    align-items: flex-start;
-    gap: 1em;
-    color: #b30000;
-    line-height: 1.5;
-    font-size: clamp(8px, 1vw, 1.8em);
+    align-items: center;
+    gap: clamp(8px, 0.7vw, 12px);
+    color: #1b4393;
+    font-size: clamp(11px, 0.9vw, 15px);
+    line-height: 1.4;
+    cursor: pointer;
+    user-select: none;
 }
 
-/* Ẩn nhưng vẫn click được */
 .agree-item input {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
+    pointer-events: none;
 }
 
 .checkmark {
-    font-size: 1rem;
-    width: 2.8em;
-    height: 2.8em;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 1px solid #b30000;
+    width: clamp(20px, 1.6vw, 26px);
+    height: clamp(20px, 1.6vw, 26px);
     flex-shrink: 0;
-    position: relative;
-    transition: .2s;
+    background-image: url("../img/register/icon-mark.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: transform 0.15s ease;
 }
 
-.checkmark::after {
-    content: "";
-    position: absolute;
-    left: 1em;
-    top: 0.6em;
-    width: 0.7em;
-    height: 1.3em;
-    border: solid #fff;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-    opacity: 0;
+.agree-item input:checked + .checkmark {
+    background-image: url("../img/register/icon-checkpoint.webp");
 }
 
-/* Khi check */
-.agree-item input:checked+.checkmark {
-    background: #b30000;
+.agree-item:hover .checkmark {
+    transform: scale(1.08);
 }
 
-.agree-item input:checked+.checkmark::after {
-    opacity: 1;
+.agree-item .text {
+    margin: 0;
 }
 
-.text>a {
-    color: #b30000;
-    font-weight: bold;
+.agree-item .text a {
+    color: #1b4393;
+    font-weight: 700;
     text-decoration: underline;
+    transition: color 0.2s ease;
 }
 
-.text {
-    margin-top: 2px;
+.agree-item .text a:hover {
+    color: #0b2668;
+}
+
+.btn-register {
+    border: none;
+    aspect-ratio: 406 / 88;
+    width: clamp(200px, 21.1vw, 406px);
+    background-image: url("../img/register/button-dangky.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-color: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-top: clamp(8px, 1vw, 16px);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-register>span {
+    font-size: clamp(14px, 1.35vw, 22px);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.btn-register:hover {
+    transform: scale(1.03);
+    filter: brightness(1.08) drop-shadow(0 0 12px rgba(45, 120, 240, 0.6));
+    background-image: url("../img/register/button-dangky-hover.webp");
+}
+
+.btn-register:active {
+    transform: scale(0.98);
+}
+
+.frm-footer>h3 {
+    margin: 0;
+    font-size: clamp(12px, 1.05vw, 16px);
+    font-weight: 500;
+    color: #1a3978;
+}
+
+.frm-footer>h3>a {
+    font-weight: 700;
+    color: #174299;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.frm-footer>h3>a:hover {
+    color: #0b2668;
 }
 
 .alert_info {
-    font-size: 1rem;
-    aspect-ratio: 772 / 212;
-    width: 100%;
-    margin-top: 1.5em;
-    background-image: url("../img/register/notice-box.webp");
+    position: relative;
+    width: clamp(340px, 41vw, 789px);
+    aspect-ratio: 789 / 233;
+    background-image: url("../img/register/box-luuy.webp");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100% 100%;
     background-position: center;
+    margin-top: clamp(12px, 1.5vw, 24px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.alert_info>h3 {
+.alert_info_title {
     width: 100%;
-    height: 26%;
+    height: 30%;
     text-align: center;
-    font-size: clamp(12px, 1.5vw, 2.5em);
-    font-weight: 700;
+    font-size: clamp(12px, 1.2vw, 18px);
+    font-weight: 800;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
-    line-height: 1;
+    letter-spacing: 0.05em;
 }
 
-.alert_info>p {
-    font-size: clamp(7px, 1vw, 2.2em);
-    line-height: 1.2;
-    color: #152b79;
+.alert_info_desc {
     width: 86%;
-    height: 72%;
+    height: 70%;
+    font-size: clamp(10px, 0.8vw, 13.5px);
+    line-height: 1.35;
+    color: #e02438;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1493,13 +1532,8 @@ body.modal-open-body {
     text-align: center;
 }
 
-.alert_info>p>span {
-    display: block;
-    width: 100%;
-}
-
-.alert_info>p strong {
-    font-weight: 700;
+.alert_info_desc strong {
+    font-weight: 800;
 }
 
 .sec2-copy-mobile {
