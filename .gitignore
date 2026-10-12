@@ -3,3 +3,7 @@
 .vscode
 vendor
 docker/postgres/postgres-data
+
+AGENTS.md
+.agents
+docs
