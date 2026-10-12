@@ -11,8 +11,8 @@
             event.preventDefault();
             modal.classList.add("modal-open");
             document.body.classList.add("modal-open-body");
-            scrollArea.scrollTop = 0;
-            closeButton.focus();
+            if (scrollArea) scrollArea.scrollTop = 0;
+            if (closeButton) closeButton.focus();
         };
 
         const closeModal = () => {
@@ -22,7 +22,7 @@
         };
 
         trigger.addEventListener("click", openModal);
-        closeButton.addEventListener("click", closeModal);
+        if (closeButton) closeButton.addEventListener("click", closeModal);
 
         modal.addEventListener("click", (event) => {
             if (event.target === modal) closeModal();
@@ -36,48 +36,69 @@
     }
 
     // --- Register Form Submission & Validation ---
-    const form = document.querySelector("#register-form");
+    const form = document.querySelector("#register-form") || document.querySelector("[data-register-demo]");
     if (form) {
-        const error = form.querySelector('.login-error');
-        const inputs = Array.from(form.querySelectorAll('input[required]'));
+        const error = form.querySelector("#reg-error") || form.querySelector(".login-error");
+        const closeBtn = form.querySelector("#reg-error-close") || form.querySelector(".login-error-close");
+        const inputs = Array.from(form.querySelectorAll("input[required]"));
+        const passInput = form.querySelector("#password-input");
+        const passEyeBtn = form.querySelector("#pass-eye-btn");
         const agree1 = form.querySelector('input[name="agree1"]');
         const agree2 = form.querySelector('input[name="agree2"]');
-        const agreeErrorBox = document.querySelector('#agree-error-message');
+        const agreeErrorBox = document.querySelector("#agree-error-message");
 
         const hideError = () => {
             if (error) error.hidden = true;
-            inputs.forEach((input) => input.removeAttribute('aria-invalid'));
+            inputs.forEach((input) => input.removeAttribute("aria-invalid"));
         };
 
         const showError = (message) => {
             if (error) {
                 error.hidden = false;
-                const errorLine = error.querySelector('.login-error-line');
+                const errorLine = error.querySelector(".reg-error-line") || error.querySelector(".login-error-line");
                 if (errorLine && message) {
                     errorLine.textContent = message;
                 }
             }
-            inputs.forEach((input) => input.setAttribute('aria-invalid', 'true'));
+            inputs.forEach((input) => input.setAttribute("aria-invalid", "true"));
         };
 
-        inputs.forEach((input) => input.addEventListener('input', hideError));
+        if (closeBtn) {
+            closeBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                hideError();
+            });
+        }
+
+        if (passEyeBtn && passInput) {
+            passEyeBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                const isPassword = passInput.type === "password";
+                passInput.type = isPassword ? "text" : "password";
+                passEyeBtn.setAttribute("aria-pressed", isPassword ? "true" : "false");
+                passEyeBtn.setAttribute("aria-label", isPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu");
+                passEyeBtn.classList.toggle("is-active", isPassword);
+            });
+        }
+
+        inputs.forEach((input) => input.addEventListener("input", hideError));
 
         if (agree1) {
-            agree1.addEventListener('change', () => {
-                if (agree1.checked && agree2 && agree2.checked) {
-                    if (agreeErrorBox) agreeErrorBox.style.display = 'none';
+            agree1.addEventListener("change", () => {
+                if (agree1.checked && (!agree2 || agree2.checked)) {
+                    if (agreeErrorBox) agreeErrorBox.style.display = "none";
                 }
             });
         }
         if (agree2) {
-            agree2.addEventListener('change', () => {
-                if (agree2.checked && agree1 && agree1.checked) {
-                    if (agreeErrorBox) agreeErrorBox.style.display = 'none';
+            agree2.addEventListener("change", () => {
+                if (agree2.checked && (!agree1 || agree1.checked)) {
+                    if (agreeErrorBox) agreeErrorBox.style.display = "none";
                 }
             });
         }
 
-        form.addEventListener('submit', (event) => {
+        form.addEventListener("submit", (event) => {
             event.preventDefault();
 
             if (!form.checkValidity()) {
@@ -85,47 +106,53 @@
                 return;
             }
 
-            if (!agree1 || !agree2 || !agree1.checked || !agree2.checked) {
+            if (agree1 && !agree1.checked) {
                 if (agreeErrorBox) {
-                    agreeErrorBox.style.display = 'flex';
+                    agreeErrorBox.style.display = "flex";
                 }
                 return;
             } else {
                 if (agreeErrorBox) {
-                    agreeErrorBox.style.display = 'none';
+                    agreeErrorBox.style.display = "none";
                 }
             }
 
-            const usernameInput = form.querySelector('#username');
-            const passwordInput = form.querySelector('#password-input');
+            const usernameInput = form.querySelector("#username");
             const tokenInput = form.querySelector('input[name="_token"]');
+            const metaToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content");
+            const csrfToken = metaToken || (tokenInput ? tokenInput.value : "");
 
             const payload = {
-                _token: tokenInput ? tokenInput.value : '',
-                username: usernameInput ? usernameInput.value : '',
-                password: passwordInput ? passwordInput.value : ''
+                _token: csrfToken,
+                username: usernameInput ? usernameInput.value : "",
+                password: passInput ? passInput.value : ""
             };
 
             const submitBtn = form.querySelector(".btn-register");
             if (submitBtn) submitBtn.disabled = true;
 
             fetch(form.action || `${window.APP_URL}/register`, {
-                method: 'POST',
+                method: "POST",
                 body: JSON.stringify(payload),
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken,
+                    "X-Requested-With": "XMLHttpRequest"
+                },
             })
             .then(async (response) => {
                 let data;
-                const contentType = response.headers.get('content-type') ?? '';
-                if (contentType.includes('application/json')) {
+                const contentType = response.headers.get("content-type") ?? "";
+                if (contentType.includes("application/json")) {
                     data = await response.json();
                 } else {
                     const text = await response.text();
-                    throw new Error(text || 'Đăng ký thất bại. Vui lòng thử lại.');
+                    throw new Error(text || "Đăng ký thất bại. Vui lòng thử lại.");
                 }
 
                 if (!response.ok) {
-                    let msg = data?.message ?? 'Đăng ký thất bại. Vui lòng thử lại.';
+                    let msg = data?.message ?? "Đăng ký thất bại. Vui lòng thử lại.";
                     if (data.errors) {
                         const firstField = Object.keys(data.errors)[0];
                         if (firstField && data.errors[firstField].length > 0) {
@@ -142,7 +169,9 @@
                 }
             })
             .catch((err) => {
-                showError(err.message);
+                if (err && err.message) {
+                    showError(err.message);
+                }
             })
             .finally(() => {
                 if (submitBtn) submitBtn.disabled = false;

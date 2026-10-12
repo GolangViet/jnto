@@ -122,10 +122,6 @@
     font-weight: 650;
 }
 
-.region-card--kyushu .region-card__label {
-    bottom: 1.15em;
-}
-
 @media (max-width: 1919px) {
     .region-map {
         font-size: 0.520833vw;
@@ -184,7 +180,6 @@
     background: url("./../../images/page-4/section-3/bg-giay.webp") center / 100% 100% no-repeat;
     color: #7b351b;
     font-size: 1rem;
-    margin-top: -3px;
 }
 
 .knowledge-form {
@@ -613,13 +608,6 @@
 .open-question-choice > span {
     min-width: 0;
     display: block;
-}
-
-@media (min-width: 769px) {
-    .knowledge-choice,
-    .open-question-choice {
-        align-items: center;
-    }
 }
 
 .open-question-arrow {

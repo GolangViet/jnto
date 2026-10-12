@@ -75,6 +75,19 @@
         });
     });
 
+    form.addEventListener('input', function (event) {
+        if (event.target && event.target.classList.contains('survey-other-input')) {
+            const choice = event.target.closest('.survey-choice');
+            if (choice) {
+                const checkable = choice.querySelector('input[type="radio"], input[type="checkbox"]');
+                if (checkable && !checkable.checked) {
+                    checkable.checked = true;
+                    checkable.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        }
+    });
+
     form.addEventListener('submit', function (event) {
         if (form.dataset.dynamic === 'true') {
             return;

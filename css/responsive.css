@@ -931,7 +931,7 @@
         bottom: auto;
         left: auto;
         transform: none;
-        aspect-ratio: 714 / 157;
+        aspect-ratio: 734 / 166;
     }
 
     .btn-cta {
@@ -939,7 +939,7 @@
         max-width: none;
         top: 138.2vw;
         bottom: auto;
-        aspect-ratio: 714 / 157;
+        aspect-ratio: 734 / 166;
     }
 
     .btn-cta_link {
@@ -963,8 +963,8 @@
 /* ===== Index page: section 3 mobile alignment ===== */
 @media (max-width: 768px) {
     .section3 {
-        margin-top: -0.9vw;
-        padding-top: 16vw;
+        margin-top: 0;
+        padding-top: 32vw;
         padding-bottom: 12vw;
     }
 
@@ -1018,7 +1018,7 @@
     }
 
     .sec3-awards>.sec3-award-picture:last-child {
-        width: 78%;
+        width: 82%;
         margin: 2vw auto 0;
     }
 
@@ -1316,7 +1316,7 @@
     .sec2-cta-group .btn-cta {
         width: 100%;
         max-width: none;
-        aspect-ratio: 714 / 157;
+        aspect-ratio: 734 / 166;
         top: auto;
         bottom: auto;
         left: auto;
@@ -1351,19 +1351,15 @@
     }
 }
 
-@media (min-width: 769px) and (max-width: 1919px) {
-
+@media (min-width: 769px) {
     .section2,
     .section3 {
-        font-size: 0.520833vw;
+        font-size: clamp(6.5px, 0.520833vw, 10px);
     }
-}
 
-/* ===== Index page: section 3 desktop/tablet alignment ===== */
-/* Section 3 desktop/tablet visual alignment. */
-@media (min-width: 769px) {
     .section3 {
-        padding-top: clamp(6em, 5vw, 10em);
+        margin-top: 0;
+        padding-top: 22em;
         padding-bottom: 5%;
     }
 

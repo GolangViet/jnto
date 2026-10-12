@@ -1,20 +1,21 @@
-<<<<<<< HEAD
 /**
  * JNTO Application JavaScript
  */
-=======
-const AppMain = (function(){
+const AppMain = (function () {
     const modal = document.querySelector('.modal');
     const closeBtn = document.querySelector('.modal-close');
+    const openBtn = document.querySelector('.btn-cta_link');
 
     // Mở modal
     function openModal() {
+        if (!modal) return;
         modal.classList.add('modal-open');
         document.body.classList.add('modal-open-body');
     }
 
     // Đóng modal
     function closeModal() {
+        if (!modal) return;
         modal.classList.remove('modal-open');
         document.body.classList.remove('modal-open-body');
     }
@@ -25,31 +26,30 @@ const AppMain = (function(){
     }
 
     // Click ra ngoài vùng ảnh (nền tối) cũng đóng modal
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
 
     // Nhấn phím Esc để đóng modal
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('modal-open')) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('modal-open')) {
             closeModal();
         }
     });
 
-    const openBtn = document.querySelector('.btn-cta_link');
     if (openBtn) {
         openBtn.addEventListener('click', openModal);
     }
 
-
-   return {
-        init: function(){
+    return {
+        init: function () {
         },
-    }
+    };
 })();
->>>>>>> main
 
 /**
  * Toggle custom dropdown menus.
@@ -79,6 +79,8 @@ function toggleDropdown(event, id) {
 
 // Global initialization when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
+    AppMain.init();
+
     // Close dropdowns when clicking outside
     document.addEventListener('click', () => {
         document.querySelectorAll('.dropdown-menu').forEach(el => {

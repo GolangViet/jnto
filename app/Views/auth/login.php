@@ -1,12 +1,17 @@
 <section class="section-login">
     <form class="login" method="post" action="<?= url('login') ?>" data-login-demo>
         <?= csrf_field() ?>
-        <h2 class="login-title"><span>ĐĂNG NHẬP</span></h2>
-        <div class="login-box">
-            <p class="login-error" id="login-error" role="alert" aria-live="polite" hidden>
-                <span class="login-error-line">Tên đăng nhập / Mật khẩu không đúng</span><br>
+        <div class="login-error" id="login-error" role="alert" aria-live="polite" hidden>
+            <p class="login-error-text">
+                <span class="login-error-line">Tên đăng nhập/ Mật khẩu không đúng.</span><br>
+                Vui lòng thử lại.
             </p>
-
+            <button type="button" class="login-error-close" id="login-error-close" aria-label="Đóng thông báo">
+                <img src="<?= assets('images/login/icon-close.webp') ?>" alt="Đóng" class="login-error-close-img">
+            </button>
+        </div>
+        <h2 class="login-title sr-only"><span>ĐĂNG NHẬP</span></h2>
+        <div class="login-box">
             <div class="login-username">
                 <label for="username" class="login-label">Tên đăng nhập:</label>
                 <input
@@ -19,9 +24,6 @@
                     aria-describedby="login-error"
                     required />
             </div>
-            <div class="line-decor">
-                <img class="img" src="<?= assets('images/login/line-decor.webp') ?>" alt="line decor">
-            </div>
             <div class="login-pass">
                 <label for="password-input" class="login-label">Mật khẩu:</label>
                 <div class="login-input-pass">
@@ -33,8 +35,8 @@
                         class="password-input"
                         id="password-input"
                         required />
-                    <button type="button" class="pass_eye">
-                        <svg class="pass_icon"><use xlink:href="#eye-closed-icon"></use></svg>
+                    <button type="button" class="pass_eye" id="pass-eye-btn" aria-label="Hiện/ẩn mật khẩu">
+                        <img src="<?= assets('images/login/icon-hidepassword.webp') ?>" alt="Ẩn/Hiện mật khẩu" class="pass_eye_img">
                     </button>
                 </div>
             </div>
@@ -42,7 +44,7 @@
 
         <div class="login-footer">
             <button type="submit" class="btn-login"><span>ĐĂNG NHẬP</span></button>
-            <h3>Bạn chưa có tài khoản? <a href="<?= url('register') ?>" title="Đăng ký">Đăng Ký</a></h3>
+            <h3>Bạn chưa có tài khoản? <a href="<?= url('register') ?>" title="Đăng ký">Đăng ký</a></h3>
         </div>
     </form>
 </section>

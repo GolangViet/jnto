@@ -1,4 +1,4 @@
-/*
+/* 
 * <576:     xs
 * 576-768:  sm
 * 768-992:  md
@@ -199,104 +199,211 @@
     }
 
     /* ---- login ---- */
+    .section-login {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 1080 / 1091;
+        background-image: url("./../../images/login/login-bg-mobile.webp");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
     .login {
-        width: 50%;
-        background-position: 1em 0;
+        width: min(88%, 520px);
+        aspect-ratio: 628 / 484;
+        background-image: url("./../../images/login/login-box-mobile.webp");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        top: 48%;
+    }
+
+    .login::before,
+    .login::after {
+        display: none !important;
     }
 
     .login-box {
-        width: 75%;
+        width: 84%;
+        top: 57%;
+        gap: clamp(8px, 2.2vw, 16px);
     }
 
     .login-error {
-        bottom: calc(100% + 0.15em);
-        width: max-content;
-        font-size: clamp(7px, 1.2vw, 10px);
+        width: min(82%, 440px);
+        aspect-ratio: 547 / 109;
+        background-image: url("./../../images/login/box-error-mobile.webp");
+        bottom: calc(100% + clamp(10px, 2vw, 20px));
+        padding: 0.3em 2.2em 0.3em 0.8em;
     }
 
-    .line-decor {
-        margin-top: 2px;
-        margin-bottom: 2px;
+    .login-error-text {
+        font-size: clamp(9px, 2.6vw, 13px);
+        line-height: 1.3;
     }
 
-    .login-footer {
-        bottom: -20%;
+    .login-error-close {
+        width: clamp(18px, 5.5vw, 26px);
+        height: clamp(18px, 5.5vw, 26px);
+        top: -0.4em;
+        right: -0.4em;
     }
 
-    /* ---- register --- */
-    .section-register {
-        aspect-ratio: 1080 / 1594;
-        background-image: url("./../../images/register/bg-register-m.webp");
-    }
-
-    .registers {
-        width: 95%;
-    }
-
-    .frm-wrapper {
-        width: 69%;
-    }
-
-    .frm-box-title>span {
-        font-size: clamp(14px, 3.8vw, 3.8em);
-    }
-
-    .frm-box {
-        width: 83%;
-        background-position: clamp(10px, 2vw, 2.5em) 0;
+    .login-label {
+        font-size: clamp(11px, 2.8vw, 15px);
+        margin-bottom: 0.2em;
     }
 
     .login-input,
     .login-input-pass {
-        height: clamp(40px, 7vw, 5rem);
+        height: clamp(34px, 8vw, 44px);
+        border-radius: 6px;
     }
 
     .login-input,
     .password-input {
-        font-size: 1.6em;
+        font-size: clamp(12px, 3vw, 15px);
+        padding: 0 10px;
     }
 
-    .login-input[aria-invalid="true"] {
-        outline-width: 0.15em;
-        outline-offset: -0.15em;
+    .pass_eye {
+        width: clamp(34px, 8vw, 44px);
+        background-image: url("./../../images/login/icon-hidepassword-mobile.webp");
     }
 
-    .login-label {
-        font-size: clamp(7px, 2.5vw, 1.8em);
+    .login-footer {
+        top: calc(100% + clamp(10px, 2.2vw, 22px));
+        gap: clamp(6px, 1.6vw, 12px);
+    }
+
+    .btn-login {
+        width: clamp(180px, 55%, 260px);
+        aspect-ratio: 406 / 88;
+    }
+
+    .btn-login>span {
+        font-size: clamp(13px, 3.6vw, 18px);
+    }
+
+    .login-footer>h3 {
+        font-size: clamp(10px, 2.8vw, 13px);
+    }
+
+    /* ---- register --- */
+    .section-register {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 1091 / 1592;
+        background-image: url("./../../images/register/bg-register-m.webp");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        padding: 4vw 0 6vw;
+    }
+
+    .registers {
+        width: min(92%, 520px);
+    }
+
+    .reg-error {
+        width: min(80%, 420px);
+        aspect-ratio: 475 / 115;
+        background-image: url("./../../images/register/box-error-mobile.webp");
+        bottom: calc(100% + clamp(10px, 2vw, 20px));
+        padding: 0.3em 2.2em 0.3em 0.8em;
+    }
+
+    .reg-error-text {
+        font-size: clamp(9px, 2.6vw, 13px);
+        line-height: 1.3;
+    }
+
+    .reg-error-close {
+        width: clamp(18px, 5.5vw, 26px);
+        height: clamp(18px, 5.5vw, 26px);
+        top: -0.4em;
+        right: -0.4em;
+    }
+
+    .frm-box {
+        width: 100%;
+        aspect-ratio: 783 / 585;
+        background-image: url("./../../images/register/box-dangky-mobile.webp");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+    }
+
+    .frm-box::before,
+    .frm-box::after {
+        display: none !important;
+    }
+
+    .frm-wrapper {
+        width: 84%;
+        top: 57%;
+        gap: clamp(8px, 2.2vw, 16px);
+    }
+
+    .label-sub {
+        font-size: clamp(8.5px, 2.2vw, 12px);
+    }
+
+    .agree-box {
+        margin-top: clamp(8px, 2vw, 14px);
+        gap: clamp(6px, 1.8vw, 10px);
     }
 
     .agree-item {
-        font-size: clamp(9px, 2.3vw, 2em);
-        display: flex;
-        align-items: center;
+        font-size: clamp(9.5px, 2.5vw, 13px);
+        gap: 2vw;
     }
 
     .checkmark {
-        width: 20px;
-        height: 20px;
+        width: clamp(18px, 5vw, 24px);
+        height: clamp(18px, 5vw, 24px);
+        background-image: url("./../../images/register/icon-mark-mobile.webp");
     }
 
-    .checkmark::after {
-        left: 5px;
-        top: 0;
-        width: 7px;
-        height: 14px;
+    .agree-item input:checked + .checkmark {
+        background-image: url("./../../images/register/icon-checkpoint-mobile.webp");
     }
 
-    .alert_info>p {
-        font-size: clamp(8px, 2.4vw, 2.4em);
-        width: 92%;
-        height: 73%;
-        line-height: 1.15;
+    .btn-register {
+        width: clamp(180px, 55%, 260px);
+        aspect-ratio: 406 / 88;
+        background-image: url("./../../images/register/button-dangky-mobile.webp");
+        margin-top: clamp(8px, 1.8vw, 14px);
     }
 
-    .alert_info>h3 {
-        height: 27%;
-        line-height: 1;
+    .btn-register>span {
+        font-size: clamp(13px, 3.6vw, 18px);
     }
 
-    .alert_info>p>span {
-        white-space: nowrap;
+    .frm-footer>h3 {
+        font-size: clamp(10px, 2.8vw, 13px);
+    }
+
+    .alert_info {
+        width: 100%;
+        aspect-ratio: 789 / 267;
+        background-image: url("./../../images/register/box-luuy-mobile.webp");
+        margin-top: clamp(10px, 2.2vw, 18px);
+    }
+
+    .alert_info_title {
+        font-size: clamp(11px, 3.2vw, 16px);
+        height: 28%;
+    }
+
+    .alert_info_desc {
+        width: 88%;
+        height: 72%;
+        font-size: clamp(8.5px, 2.4vw, 12px);
+        line-height: 1.25;
     }
 
 }
@@ -397,38 +504,11 @@
 
     /* ----- login ----- */
     .login {
-        width: 90%;
+        width: 92%;
     }
 
-    .login-title>span {
-        font-size: clamp(18px, 5vw, 3.8em);
-    }
-
-    .login-error {
-        bottom: calc(100% + 0.1em);
-        width: max-content;
-        font-size: clamp(7px, 1.85vw, 9.5px);
-    }
-
-    .login-footer {
-        gap: 5px;
-    }
-
-    .login-title {
-        padding-top: clamp(5px, 1.7vw, 1.9em);
-    }
-
-    .login-footer>h3 {
-        font-size: 8px;
-    }
-
-    .login-footer {
-        bottom: -17%;
-    }
-
-    .login-input,
-    .login-input-pass {
-        height: clamp(30px, 7vw, 5rem);
+    .login-box {
+        width: 86%;
     }
 
     .frm-wrapper {
@@ -543,23 +623,15 @@
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
     .registers {
-        width: 45%;
+        width: min(60%, 550px);
     }
 
     .agree-box {
-        width: 90%;
+        width: 100%;
     }
 
     .frm-footer>h3 {
-        font-size: clamp(10px, 1.5vw, 2em);
-    }
-
-    .frm-box {
-        background-position: 2em 0;
-    }
-
-    .line-decor {
-        margin-top: 1em;
+        font-size: clamp(11px, 1.3vw, 15px);
     }
 }
 
@@ -859,7 +931,7 @@
         bottom: auto;
         left: auto;
         transform: none;
-        aspect-ratio: 714 / 157;
+        aspect-ratio: 734 / 166;
     }
 
     .btn-cta {
@@ -867,7 +939,7 @@
         max-width: none;
         top: 138.2vw;
         bottom: auto;
-        aspect-ratio: 714 / 157;
+        aspect-ratio: 734 / 166;
     }
 
     .btn-cta_link {
@@ -891,8 +963,8 @@
 /* ===== Index page: section 3 mobile alignment ===== */
 @media (max-width: 768px) {
     .section3 {
-        margin-top: -0.9vw;
-        padding-top: 16vw;
+        margin-top: 0;
+        padding-top: 32vw;
         padding-bottom: 12vw;
     }
 
@@ -946,7 +1018,7 @@
     }
 
     .sec3-awards>.sec3-award-picture:last-child {
-        width: 78%;
+        width: 82%;
         margin: 2vw auto 0;
     }
 
@@ -995,52 +1067,6 @@
     .modal-close::after {
         width: 45%;
         height: 2px;
-    }
-
-    .section-login {
-        width: 100%;
-        height: auto;
-        min-height: 0;
-        aspect-ratio: 1080 / 1082;
-        background-image: url("./../../images/login/login-bg-mobile.webp");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-    }
-
-    .login::before,
-    .frm-box::before {
-        top: 56%;
-        width: 12.5%;
-    }
-
-    .login::before {
-        left: -6%;
-    }
-
-    .frm-box::before {
-        left: -8%;
-        top: 35.5vw;
-    }
-
-    .login::after,
-    .frm-box::after {
-        top: -13%;
-        width: 10%;
-    }
-
-    .login::after {
-        right: 0.5%;
-    }
-
-    .frm-box::after {
-        right: 3.5%;
-        top: -10.5vw;
-    }
-
-    .frm-wrapper {
-        left: -0.5vw;
-        top: 2vw;
     }
 }
 
@@ -1290,7 +1316,7 @@
     .sec2-cta-group .btn-cta {
         width: 100%;
         max-width: none;
-        aspect-ratio: 714 / 157;
+        aspect-ratio: 734 / 166;
         top: auto;
         bottom: auto;
         left: auto;
@@ -1325,18 +1351,15 @@
     }
 }
 
-@media (min-width: 769px) and (max-width: 1919px) {
+@media (min-width: 769px) {
     .section2,
     .section3 {
-        font-size: 0.520833vw;
+        font-size: clamp(6.5px, 0.520833vw, 10px);
     }
-}
 
-/* ===== Index page: section 3 desktop/tablet alignment ===== */
-/* Section 3 desktop/tablet visual alignment. */
-@media (min-width: 769px) {
     .section3 {
-        padding-top: clamp(6em, 5vw, 10em);
+        margin-top: 0;
+        padding-top: 22em;
         padding-bottom: 5%;
     }
 

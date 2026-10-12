@@ -141,6 +141,7 @@
 
     <?= render_modals() ?>
 
+    <script type="text/javascript" src="<?= asset_with_version('js/user/cursor.js') ?>"></script>
     <script type="text/javascript" src="<?= asset_with_version('js/user/app.js') ?>"></script>
 
     <?= render_scripts() ?>
