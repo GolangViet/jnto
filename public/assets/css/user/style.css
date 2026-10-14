@@ -546,10 +546,9 @@ body {
 /* --- section 3 --- */
 .section3 {
     position: relative;
-    font-size: 1rem;
-    margin-top: -5em;
+    margin-top: -6.5%;
     width: 100%;
-    background-image: url("./../../images/bg/bg-giay-vang.webp");
+    background-image: url("../img/bg/bg-giay-vang.webp");
     background-position: center;
     background-size: cover;
     background-repeat: repeat-y;
@@ -557,6 +556,7 @@ body {
     padding-bottom: 5%;
     overflow: hidden;
 }
+
 
 
 .sec3-title {
