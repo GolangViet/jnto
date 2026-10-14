@@ -172,7 +172,6 @@ body {
     position: relative;
     width: 100%;
     aspect-ratio: 1920 / 1052;
-    background-color: #ffd2dc;
     margin-top: -3rem;
     z-index: 4;
     font-size: clamp(6.5px, 0.520833vw, 20px);
@@ -1442,7 +1441,7 @@ body.modal-open-body {
     width: clamp(20px, 1.6vw, 26px);
     height: clamp(20px, 1.6vw, 26px);
     flex-shrink: 0;
-    background-image: url("./../../images/register/icon-mark.webp");
+    background-image: url("./../../images/register/icon-checkpoint.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -1450,7 +1449,7 @@ body.modal-open-body {
 }
 
 .agree-item input:checked+.checkmark {
-    background-image: url("./../../images/register/icon-checkpoint.webp");
+    background-image: url("./../../images/register/icon-mark.webp");
 }
 
 .agree-item:hover .checkmark {

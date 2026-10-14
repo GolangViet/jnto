@@ -68,8 +68,12 @@
     background-image: url("../img/form/bg-box-mid.webp");
 }
 
+.survey-panel--not-visited {
+    --panel-width: min(55.4vw, 1055px);
+}
+
 .survey-panel--large {
-    width: min(69.5vw, 810px);
+    width: min(69.5vw, 890px);
     min-width: 550px;
     aspect-ratio: 1343 / 2064;
     padding: 3.3em 4.4em 1.9em;

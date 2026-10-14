@@ -1158,4 +1158,11 @@
     .sec3-contents {
         padding: 8.5rem 2rem 2rem;
     }
+
+    .sec3-title {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background-position: center -15px;
+    }
 }

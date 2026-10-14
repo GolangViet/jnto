@@ -93,11 +93,14 @@ final class AuthController extends Controller
             'role'  => $user['role'] ?? 'user',
         ]);
 
+        $fromSurvey = ($request->input('from') ?? $request->query('from') ?? $_GET['from'] ?? '') === 'survey';
+        $redirectUrl = $fromSurvey ? url('take-survey') : url('/');
+
         if ($isJson) {
-            app()->response()->json(['success' => true, 'redirect' => url('/')]);
+            app()->response()->json(['success' => true, 'redirect' => $redirectUrl]);
         }
 
-        $this->redirect('/');
+        $this->redirect($redirectUrl);
     }
 
     /**
@@ -165,16 +168,29 @@ final class AuthController extends Controller
             $this->redirect('/register');
         }
 
-        app()->session()->flash('success', 'Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
+        $user = $this->userService->findByUsername($username);
+        if ($user) {
+            app()->session()->put('user', [
+                'id'    => $user['id'] ?? '',
+                'name'  => $user['name'] ?? '',
+                'email' => $user['email'] ?? '',
+                'role'  => $user['role'] ?? 'user',
+            ]);
+        }
+
+        app()->session()->flash('success', 'Đăng ký tài khoản thành công!');
+
+        $fromSurvey = ($request->input('from') ?? $request->query('from')) === 'survey';
+        $redirectUrl = $fromSurvey ? url('take-survey') : url('/');
 
         if ($isJson) {
             app()->response()->json([
                 'success' => true,
-                'redirect' => url('login'),
+                'redirect' => $redirectUrl,
             ]);
         }
 
-        $this->redirect('login');
+        $this->redirect($redirectUrl);
     }
 
     /**
