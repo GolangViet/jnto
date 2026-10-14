@@ -1357,12 +1357,6 @@
         font-size: clamp(6.5px, 0.520833vw, 10px);
     }
 
-    .section3 {
-        margin-top: 0;
-        padding-top: 22em;
-        padding-bottom: 5%;
-    }
-
     .sec3-contents {
         position: relative;
         overflow: visible;
