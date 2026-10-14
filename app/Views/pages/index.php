@@ -22,9 +22,9 @@
                 <div class="sec2-time">
                     <div class="sec2-time_title"><span>THỜI GIAN</span></div>
                     <div class="sec2_info">
-                        <h4>04/08 - 27/09/2026</h4>
+                        <h4>05/11 - 27/12/2026</h4>
                         <h5>Thời gian công bố kết quả:</h5>
-                        <h4 class="mb-2">20/10/2026</h4>
+                        <h4 class="mb-2">25/01/2027</h4>
                         <p>
                             *Danh sách trúng thưởng sẽ được<br>
                             công bố trên Fanpage JNTO
@@ -70,7 +70,7 @@
         <div class="sec3-awards">
             <img class="sec3-award-img" src="<?= assets('images/giai-nhat.webp') ?>" alt="giải thưởng 1">
             <picture class="sec3-award-picture">
-                <source media="(max-width: 768px)" srcset="<?= assets('images/jnto-giai234.webp') ?>">
+                <source media="(max-width: 768px)" srcset="<?= assets('images/giai-hai-ba-bon-mobile.webp') ?>">
                 <img class="sec3-award-img" src="<?= assets('images/giai-hai-ba-bon.webp') ?>" alt="giải nhì, giải ba và giải khuyến khích">
             </picture>
         </div>
