@@ -546,8 +546,7 @@ body {
 /* --- section 3 --- */
 .section3 {
     position: relative;
-    font-size: 1rem;
-    margin-top: -5em;
+    margin-top: -6.5%;
     width: 100%;
     background-image: url("../img/bg/bg-giay-vang.webp");
     background-position: center;
