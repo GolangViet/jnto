@@ -365,11 +365,11 @@
     .checkmark {
         width: clamp(18px, 5vw, 24px);
         height: clamp(18px, 5vw, 24px);
-        background-image: url("./../../images/register/icon-mark-mobile.webp");
+        background-image: url("./../../images/register/icon-checkpoint-mobile.webp");
     }
 
     .agree-item input:checked + .checkmark {
-        background-image: url("./../../images/register/icon-checkpoint-mobile.webp");
+        background-image: url("./../../images/register/icon-mark-mobile.webp");
     }
 
     .btn-register {

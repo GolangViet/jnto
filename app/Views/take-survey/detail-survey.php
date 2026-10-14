@@ -2,6 +2,11 @@
 
 <?php
 
+$questions = $questions ?? [];
+$savedAnswers = $savedAnswers ?? [];
+$attempt = $attempt ?? null;
+$user = $user ?? null;
+
 $introQuestions = [];
 $visitedQuestions = [];
 $notVisitedQuestions = [];
@@ -225,24 +230,114 @@ if (!function_exists('renderDynamicQuestions')) {
 
 <script>
 (function() {
-    const attemptId = <?= (int)$attempt['id'] ?>;
+    const attemptId = <?= isset($attempt['id']) ? (int)$attempt['id'] : 'null' ?>;
+    const isLoggedIn = <?= !empty($user) ? 'true' : 'false' ?>;
+    const STORAGE_KEY = 'jnto_survey_data';
+
+    function getStoredData() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : { answers: {}, travel_status: null, pending_sync: false };
+        } catch (e) {
+            return { answers: {}, travel_status: null, pending_sync: false };
+        }
+    }
+
+    function setStoredData(data) {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (e) {
+            console.error('Failed to update localStorage:', e);
+        }
+    }
+
+    function collectQuestionAnswer(fieldset) {
+        if (!fieldset) return null;
+        const questionId = parseInt(fieldset.dataset.questionId, 10);
+        const type = fieldset.dataset.questionType;
+
+        let selectedOptionIds = [];
+        let answerText = null;
+        let optionCustomTexts = {};
+
+        if (type === 'single_choice' || type === 'true_false') {
+            const checkedRadio = fieldset.querySelector('input[type="radio"]:checked');
+            if (checkedRadio) {
+                selectedOptionIds.push(parseInt(checkedRadio.value, 10));
+                const otherInput = checkedRadio.closest('.survey-choice')?.querySelector('.survey-other-input');
+                if (otherInput && otherInput.value.trim() !== '') {
+                    optionCustomTexts[checkedRadio.value] = otherInput.value.trim();
+                }
+            }
+        } else if (type === 'multiple_choice') {
+            fieldset.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+                selectedOptionIds.push(parseInt(cb.value, 10));
+                const otherInput = cb.closest('.survey-choice')?.querySelector('.survey-other-input');
+                if (otherInput && otherInput.value.trim() !== '') {
+                    optionCustomTexts[cb.value] = otherInput.value.trim();
+                }
+            });
+        } else if (type === 'open_text') {
+            const textarea = fieldset.querySelector('textarea');
+            if (textarea) {
+                answerText = textarea.value;
+            }
+        }
+
+        return {
+            question_id: questionId,
+            selected_option_ids: selectedOptionIds,
+            answer_text: answerText,
+            option_custom_texts: optionCustomTexts
+        };
+    }
+
+    function collectAllAnswers() {
+        const answers = {};
+        form.querySelectorAll('.survey-question').forEach(fieldset => {
+            const ans = collectQuestionAnswer(fieldset);
+            if (ans && (ans.selected_option_ids.length > 0 || (ans.answer_text && ans.answer_text.trim() !== ''))) {
+                answers[ans.question_id] = ans;
+            }
+        });
+        return answers;
+    }
 
     async function saveAnswer(questionId, selectedOptionIds, answerText, optionCustomTexts) {
-        try {
-            await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/answers`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    question_id: questionId,
-                    selected_option_ids: selectedOptionIds,
-                    answer_text: answerText,
-                    option_custom_texts: optionCustomTexts
-                })
-            });
-        } catch (err) {
-            console.error('Failed to save answer:', err);
+        // Store in localStorage for both guest and backup
+        const stored = getStoredData();
+        stored.answers = stored.answers || {};
+        stored.answers[questionId] = {
+            question_id: questionId,
+            selected_option_ids: selectedOptionIds,
+            answer_text: answerText,
+            option_custom_texts: optionCustomTexts
+        };
+
+        const selectedExp = form.querySelector('input[name="travel_experience"]:checked') || form.querySelector('input[data-survey-target]:checked');
+        if (selectedExp && selectedExp.dataset.surveyTarget) {
+            stored.travel_status = selectedExp.dataset.surveyTarget;
+        }
+        setStoredData(stored);
+
+        // If authenticated with attempt, save to server
+        if (isLoggedIn && attemptId) {
+            try {
+                await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/answers`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        question_id: questionId,
+                        selected_option_ids: selectedOptionIds,
+                        answer_text: answerText,
+                        option_custom_texts: optionCustomTexts
+                    })
+                });
+            } catch (err) {
+                console.error('Failed to save answer to server:', err);
+            }
         }
     }
 
@@ -261,11 +356,7 @@ if (!function_exists('renderDynamicQuestions')) {
             if (choiceLabel) {
                 const checkable = choiceLabel.querySelector('input[type="radio"], input[type="checkbox"]');
                 if (checkable) {
-                    if (checkable.checked) {
-                        input.required = true;
-                    } else {
-                        input.required = false;
-                    }
+                    input.required = checkable.checked;
                 }
             }
         });
@@ -276,6 +367,8 @@ if (!function_exists('renderDynamicQuestions')) {
     }, 600);
 
     const form = document.getElementById('survey-form');
+    if (!form) return;
+
     form.addEventListener('input', function (event) {
         if (event.target.classList.contains('survey-other-input') || event.target.tagName === 'TEXTAREA') {
             handleInputSave(event.target);
@@ -307,38 +400,161 @@ if (!function_exists('renderDynamicQuestions')) {
         const fieldset = element.closest('.survey-question');
         if (!fieldset) return;
 
-        const questionId = parseInt(fieldset.dataset.questionId);
-        const type = fieldset.dataset.questionType;
+        const ans = collectQuestionAnswer(fieldset);
+        if (ans) {
+            saveAnswer(ans.question_id, ans.selected_option_ids, ans.answer_text, ans.option_custom_texts);
+        }
+    }
 
-        let selectedOptionIds = [];
-        let answerText = null;
-        let optionCustomTexts = {};
+    function restoreFromLocalStorage() {
+        const stored = getStoredData();
+        if (!stored || !stored.answers) return;
 
-        if (type === 'single_choice' || type === 'true_false') {
-            const checkedRadio = fieldset.querySelector('input[type="radio"]:checked');
-            if (checkedRadio) {
-                selectedOptionIds.push(parseInt(checkedRadio.value));
-                const otherInput = checkedRadio.closest('.survey-choice').querySelector('.survey-other-input');
-                if (otherInput) {
-                    optionCustomTexts[checkedRadio.value] = otherInput.value;
+        Object.values(stored.answers).forEach(ans => {
+            const qId = ans.question_id;
+            const fieldset = form.querySelector(`.survey-question[data-question-id="${qId}"]`);
+            if (!fieldset) return;
+
+            const type = fieldset.dataset.questionType;
+            if (type === 'single_choice' || type === 'true_false') {
+                if (ans.selected_option_ids && ans.selected_option_ids.length > 0) {
+                    const optId = ans.selected_option_ids[0];
+                    const radio = fieldset.querySelector(`input[type="radio"][value="${optId}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                    }
+                }
+            } else if (type === 'multiple_choice') {
+                if (Array.isArray(ans.selected_option_ids)) {
+                    ans.selected_option_ids.forEach(optId => {
+                        const cb = fieldset.querySelector(`input[type="checkbox"][value="${optId}"]`);
+                        if (cb) {
+                            cb.checked = true;
+                        }
+                    });
+                }
+            } else if (type === 'open_text') {
+                const textarea = fieldset.querySelector('textarea');
+                if (textarea && ans.answer_text) {
+                    textarea.value = ans.answer_text;
                 }
             }
-        } else if (type === 'multiple_choice') {
-            fieldset.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
-                selectedOptionIds.push(parseInt(cb.value));
-                const otherInput = cb.closest('.survey-choice').querySelector('.survey-other-input');
-                if (otherInput) {
-                    optionCustomTexts[cb.value] = otherInput.value;
-                }
-            });
-        } else if (type === 'open_text') {
-            const textarea = fieldset.querySelector('textarea');
-            if (textarea) {
-                answerText = textarea.value;
+
+            if (ans.option_custom_texts) {
+                Object.entries(ans.option_custom_texts).forEach(([optId, text]) => {
+                    const customInput = fieldset.querySelector(`.survey-other-input[data-option-id="${optId}"]`)
+                        || fieldset.querySelector(`input[value="${optId}"]`)?.closest('.survey-choice')?.querySelector('.survey-other-input');
+                    if (customInput) {
+                        customInput.value = text;
+                    }
+                });
+            }
+        });
+
+        updateCustomInputs();
+
+        if (stored.travel_status) {
+            const targetRadio = form.querySelector(`input[data-survey-target="${stored.travel_status}"]`);
+            if (targetRadio) {
+                targetRadio.checked = true;
             }
         }
+    }
 
-        saveAnswer(questionId, selectedOptionIds, answerText, optionCustomTexts);
+    function createOverlay(text) {
+        let overlay = document.getElementById('survey-sync-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'survey-sync-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.65)';
+            overlay.style.display = 'flex';
+            overlay.style.flexDirection = 'column';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.zIndex = '99999';
+            overlay.style.color = '#fff';
+            overlay.style.fontFamily = 'inherit';
+            overlay.innerHTML = `
+                <div style="background: #fff; color: #333; padding: 24px 32px; border-radius: 12px; text-align: center; max-width: 400px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+                    <div style="font-size: 28px; margin-bottom: 12px;">⏳</div>
+                    <div id="survey-sync-msg" style="font-size: 16px; font-weight: 600; line-height: 1.5;">${text}</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #777;">Vui lòng không đóng trình duyệt...</div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        } else {
+            const msgEl = overlay.querySelector('#survey-sync-msg');
+            if (msgEl) msgEl.textContent = text;
+            overlay.style.display = 'flex';
+        }
+    }
+
+    function removeOverlay() {
+        const overlay = document.getElementById('survey-sync-overlay');
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+    }
+
+    async function handleAutoSyncIfPending() {
+        if (!isLoggedIn || !attemptId) {
+            restoreFromLocalStorage();
+            return;
+        }
+
+        const stored = getStoredData();
+        if (!stored || !stored.answers || Object.keys(stored.answers).length === 0) {
+            return;
+        }
+
+        if (stored.pending_sync) {
+            createOverlay('Đang lưu kết quả khảo sát của bạn...');
+            try {
+                for (const ans of Object.values(stored.answers)) {
+                    await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/answers`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            question_id: ans.question_id,
+                            selected_option_ids: ans.selected_option_ids,
+                            answer_text: ans.answer_text,
+                            option_custom_texts: ans.option_custom_texts
+                        })
+                    });
+                }
+
+                const response = await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/submit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    localStorage.removeItem(STORAGE_KEY);
+                    window.location.href = `${window.APP_URL}/take-questions`;
+                    return;
+                } else {
+                    removeOverlay();
+                    const res = await response.json();
+                    alert(res.message || 'Không thể gửi kết quả khảo sát. Vui lòng thử lại.');
+                    restoreFromLocalStorage();
+                }
+            } catch (e) {
+                console.error('Error auto-syncing survey:', e);
+                removeOverlay();
+                restoreFromLocalStorage();
+            }
+        } else {
+            restoreFromLocalStorage();
+        }
     }
 
     form.addEventListener('submit', async function (event) {
@@ -352,7 +568,7 @@ if (!function_exists('renderDynamicQuestions')) {
 
         // Check validation
         const activePanel = form.querySelector('.survey-panel.is-active');
-        const requiredInputs = Array.from(activePanel.querySelectorAll('[required]'));
+        const requiredInputs = Array.from(activePanel ? activePanel.querySelectorAll('[required]') : form.querySelectorAll('[required]'));
         const isValid = requiredInputs.every(function (input) {
             return input.checkValidity();
         });
@@ -362,10 +578,31 @@ if (!function_exists('renderDynamicQuestions')) {
             const firstInvalid = requiredInputs.find(function (input) {
                 return !input.checkValidity();
             });
-            firstInvalid.reportValidity();
+            if (firstInvalid) {
+                firstInvalid.reportValidity();
+            }
             return;
         }
 
+        // Collect all answers
+        const allAnswers = collectAllAnswers();
+        const selectedExp = form.querySelector('input[name="travel_experience"]:checked') || form.querySelector('input[data-survey-target]:checked');
+        const stored = {
+            answers: allAnswers,
+            travel_status: selectedExp?.dataset?.surveyTarget || null,
+            pending_sync: true,
+            saved_at: new Date().toISOString()
+        };
+        setStoredData(stored);
+
+        // If guest (not logged in): redirect to register/login
+        if (!isLoggedIn) {
+            window.location.href = `${window.APP_URL}/register?from=survey`;
+            return;
+        }
+
+        // If logged in: submit the attempt
+        createOverlay('Đang nộp bài khảo sát...');
         try {
             const response = await fetch(`${window.APP_URL}/api/quiz-attempts/${attemptId}/submit`, {
                 method: 'POST',
@@ -374,17 +611,21 @@ if (!function_exists('renderDynamicQuestions')) {
                 }
             });
             if (response.ok) {
+                localStorage.removeItem(STORAGE_KEY);
                 window.location.href = `${window.APP_URL}/take-questions`;
             } else {
+                removeOverlay();
                 const res = await response.json();
-                alert(res.message || 'Failed to submit survey.');
+                alert(res.message || 'Có lỗi xảy ra khi nộp bài.');
             }
         } catch (err) {
+            removeOverlay();
             console.error(err);
-            alert('An error occurred during submission.');
+            alert('Có lỗi xảy ra trong quá trình nộp bài.');
         }
     });
 
     updateCustomInputs();
+    handleAutoSyncIfPending();
 })();
 </script>

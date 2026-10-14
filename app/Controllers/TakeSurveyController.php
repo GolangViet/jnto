@@ -31,29 +31,38 @@ final class TakeSurveyController extends Controller
     public function detailSurvey(): string
     {
         $user = app()->session()->get('user');
-        if (!$user) {
-            $this->redirect('/login');
-        }
-
-        $targetRoute = $this->getRequiredRouteForUser((int) $user['id']);
-        if ($targetRoute !== '/take-survey') {
-            $this->redirect($targetRoute);
+        if ($user) {
+            $targetRoute = $this->getRequiredRouteForUser((int) $user['id']);
+            if ($targetRoute !== '/take-survey') {
+                $this->redirect($targetRoute);
+            }
         }
 
         $mainSurveyId = setting('main_survey_quiz_id');
         if (!$mainSurveyId) {
-            return $this->view('take-survey/detail-survey');
+            return $this->view('take-survey/detail-survey', [
+                'attempt' => null,
+                'questions' => [],
+                'savedAnswers' => [],
+                'user' => $user,
+            ]);
         }
 
         try {
-            $attemptId = $this->attemptService->startAttempt((int) $mainSurveyId, (int) $user['id']);
-            $attempt = $this->attemptService->getAttemptById($attemptId);
-            if (!$attempt) {
-                http_response_code(404);
-                return 'Survey attempt not found.';
+            $attempt = null;
+            $savedAnswers = [];
+
+            if ($user) {
+                $attemptId = $this->attemptService->startAttempt((int) $mainSurveyId, (int) $user['id']);
+                $attempt = $this->attemptService->getAttemptById($attemptId);
+                if (!$attempt) {
+                    http_response_code(404);
+                    return 'Survey attempt not found.';
+                }
+                $savedAnswers = $this->attemptService->getAttemptAnswers($attemptId);
             }
 
-            $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id']);
+            $questions = $this->questionService->getQuestionsForQuiz((int) $mainSurveyId);
             foreach ($questions as &$question) {
                 $details = $this->questionService->getQuestionById((int) $question['id']);
                 $options = $details['options'] ?? [];
@@ -65,16 +74,20 @@ final class TakeSurveyController extends Controller
                 $question['accepted_answers'] = [];
             }
 
-            $savedAnswers = $this->attemptService->getAttemptAnswers($attemptId);
-
             return $this->view('take-survey/detail-survey', [
                 'attempt' => $attempt,
                 'questions' => $questions,
                 'savedAnswers' => $savedAnswers,
+                'user' => $user,
             ]);
         } catch (\Throwable $e) {
             app()->session()->flash('error', $e->getMessage());
-            return $this->view('take-survey/detail-survey');
+            return $this->view('take-survey/detail-survey', [
+                'attempt' => null,
+                'questions' => [],
+                'savedAnswers' => [],
+                'user' => $user,
+            ]);
         }
     }
 

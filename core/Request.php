@@ -47,6 +47,18 @@ final class Request
     }
 
     /**
+     * Retrieve a query parameter from GET data.
+     *
+     * @param string $key Query parameter key.
+     * @param mixed|null $default Default value if key is missing.
+     * @return mixed The query parameter value or default.
+     */
+    public function query(string $key, mixed $default = null): mixed
+    {
+        return $_GET[$key] ?? $default;
+    }
+
+    /**
      * Retrieve an input value from POST or GET data.
      *
      * @param string $key Input key to retrieve.

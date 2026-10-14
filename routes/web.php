@@ -100,7 +100,7 @@ $router->delete('/api/admin/questions/{id}', [AdminQuestionController::class, 'a
 $router->post('/api/admin/quizzes/{quizId}/questions/reorder', [AdminQuestionController::class, 'apiReorder'], [AuthMiddleware::class, AdminMiddleware::class]);
 
 // End-User take survey
-$router->get('/take-survey', [TakeSurveyController::class, 'detailSurvey'], [AuthMiddleware::class]);
+$router->get('/take-survey', [TakeSurveyController::class, 'detailSurvey']);
 $router->get('/take-questions', [TakeSurveyController::class, 'detailQuestions'], [AuthMiddleware::class]);
 $router->get('/confirm-post', [TakeSurveyController::class, 'confirmPost'], [AuthMiddleware::class]);
 $router->post('/submit-post', [TakeSurveyController::class, 'submitPost'], [AuthMiddleware::class]);

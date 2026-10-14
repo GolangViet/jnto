@@ -7,6 +7,21 @@
     const inputs = Array.from(form.querySelectorAll('input[required]'));
     const passInput = form.querySelector('#password-input');
     const passEyeBtn = form.querySelector('#pass-eye-btn');
+    const surveyNotice = document.querySelector('#survey-save-notice');
+
+    if (surveyNotice) {
+        const params = new URLSearchParams(window.location.search);
+        let hasPending = false;
+        try {
+            const raw = localStorage.getItem('jnto_survey_data');
+            if (raw) {
+                hasPending = !!JSON.parse(raw)?.pending_sync;
+            }
+        } catch (e) {}
+        if (params.get('from') === 'survey' || hasPending) {
+            surveyNotice.style.display = 'flex';
+        }
+    }
 
     const hideError = () => {
         if (error) error.hidden = true;
@@ -57,10 +72,12 @@
         const metaToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
         const csrfToken = metaToken || (tokenInput ? tokenInput.value : '');
 
+        const urlParams = new URLSearchParams(window.location.search);
         const payload = {
             _token: csrfToken,
             username: usernameInput ? usernameInput.value : '',
-            password: passwordInput ? passwordInput.value : ''
+            password: passwordInput ? passwordInput.value : '',
+            from: urlParams.get('from') || ''
         };
 
         const submitBtn = form.querySelector('.btn-login');
@@ -107,7 +124,14 @@
             }
 
             if (data.redirect) {
-                window.location.href = data.redirect;
+                let redirectUrl = data.redirect;
+                try {
+                    const raw = localStorage.getItem('jnto_survey_data');
+                    if (raw && JSON.parse(raw)?.pending_sync) {
+                        redirectUrl = `${window.APP_URL}/take-survey`;
+                    }
+                } catch (e) {}
+                window.location.href = redirectUrl;
             } else {
                 window.location.reload();
             }

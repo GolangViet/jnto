@@ -1,17 +1,13 @@
-<div id="agree-error-message" class="alert message-container error" style="display: none;">
-    <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px; flex-shrink: 0;">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    <span>Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.</span>
+<div id="survey-save-notice" class="message-container info" style="display: none; background-color: #e8f4fd; color: #0d47a1; border: 1px solid #bbdefb; margin: 12px auto; max-width: 580px; border-radius: 8px; padding: 12px 16px; font-size: 14px; text-align: center;">
+    <span>🎉 Bạn đã hoàn thành khảo sát! Vui lòng đăng ký tài khoản (hoặc <a href="<?= url('login') ?>" style="color: #0d47a1; text-decoration: underline; font-weight: bold;">đăng nhập</a>) để lưu kết quả và tiếp tục.</span>
 </div>
 
 <section class="section-register">       
-    <form class="registers" id="register-form" action="<?= url('register') ?>" method="post" data-register-demo>
+    <form class="registers" id="register-form" action="<?= url('register') ?>" method="post" data-register-demo novalidate>
         <?= csrf_field() ?>
         <div class="reg-error" id="reg-error" role="alert" aria-live="polite" hidden>
             <p class="reg-error-text">
-                <span class="reg-error-line">Tên đăng nhập này đã tồn tại.</span><br>
-                Vui lòng chọn tên khác.
+                <span class="reg-error-line">Tên đăng nhập này đã tồn tại. Vui lòng chọn tên khác.</span>
             </p>
             <button type="button" class="reg-error-close" id="reg-error-close" aria-label="Đóng thông báo">
                 <img src="<?= assets('images/register/icon-close.webp') ?>" alt="Đóng" class="reg-error-close-img">
@@ -40,7 +36,7 @@
         <div class="frm-footer">
             <div class="agree-box">
                 <label class="agree-item">
-                    <input type="checkbox" name="agree1" value="checked" required>
+                    <input type="checkbox" name="agree1" value="checked">
                     <span class="checkmark"></span>
                     <span class="text">
                         Tôi đã đọc và đồng ý với
@@ -54,6 +50,13 @@
                         Tôi đồng ý cho Ban tổ chức sử dụng thông tin và hình ảnh cá nhân để liên hệ và trao giải.
                     </span>
                 </label>
+            </div>
+
+            <div id="agree-error-message" class="message-container error" style="display: none; width: 100%; margin: 10px 0 10px 0; font-size: 13px;">
+                <svg class="message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px; flex-shrink: 0; margin-right: 6px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Vui lòng đọc và đồng ý với các điều khoản trước khi đăng ký.</span>
             </div>
 
             <button type="submit" class="btn-register"><span>ĐĂNG KÝ</span></button>
