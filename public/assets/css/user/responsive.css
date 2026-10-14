@@ -1087,15 +1087,6 @@
 
 /* ===== Index page: desktop-first max-width responsive scaling ===== */
 @media (max-width: 1400px) {
-    .section2_wrapper {
-        max-width: 1320px;
-        padding: 6rem 1.5rem 8rem;
-    }
-
-    .section2-contents {
-        font-size: 0.9rem;
-    }
-
     .sec3-wrapper {
         max-width: 1200px;
     }
@@ -1112,15 +1103,6 @@
 }
 
 @media (max-width: 1200px) {
-    .section2_wrapper {
-        max-width: 1100px;
-        padding: 5rem 1.5rem 7rem;
-    }
-
-    .section2-contents {
-        font-size: 0.78rem;
-    }
-
     .sec3-wrapper {
         max-width: 990px;
     }
@@ -1150,15 +1132,6 @@
 }
 
 @media (max-width: 991px) {
-    .section2_wrapper {
-        max-width: 860px;
-        padding: 4rem 1.5rem 6rem;
-    }
-
-    .section2-contents {
-        font-size: 0.62rem;
-    }
-
     .sec3-wrapper {
         max-width: 760px;
     }

@@ -167,12 +167,15 @@ body {
 }
 
 /* ---- section 2 ---- */
+/* ---- section 2 ---- */
 .section2 {
     position: relative;
     width: 100%;
+    aspect-ratio: 1920 / 1052;
     background-color: #ffd2dc;
     margin-top: -3rem;
     z-index: 4;
+    font-size: clamp(6.5px, 0.520833vw, 20px);
 }
 
 .section2 > picture {
@@ -192,31 +195,36 @@ body {
     display: block;
 }
 
-.section2_wrapper {
-    position: relative;
+.section2_wrapper,
+.container.section2_wrapper {
+    position: absolute;
+    inset: 0;
     z-index: 2;
     width: 100%;
-    max-width: 152rem;
+    max-width: 100% !important;
+    height: 100%;
     margin: 0 auto;
-    padding: 7rem 2rem 9rem;
+    padding: 6em 2em 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
 }
 
 .section2_title {
     position: relative;
     font-size: 1em;
-    padding: 3em 0;
-    margin-bottom: clamp(20px, 3.5vw, 5em);
+    padding: 2.5em 0;
+    margin-bottom: 2em;
     text-align: center;
 }
 
 .section2_title>h2 {
-    font-size: clamp(16px, 1.7vw, 2.2em);
+    font-size: 2.2em;
     color: var(--pink);
     font-weight: 500;
     text-align: center;
+    line-height: 1.35;
 }
 
 .sec2-line-top {
@@ -294,16 +302,16 @@ body {
 }
 
 .section2-box {
-    font-size: 1rem;
+    font-size: 1em;
     position: relative;
-    width: 100%;
-    max-width: 148.2em;
+    width: 148.2em;
+    max-width: 90%;
     margin: 0 auto;
 }
 
 .section2-contents {
     position: relative;
-    font-size: 1rem;
+    font-size: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
@@ -316,7 +324,7 @@ body {
 }
 
 .sec2-time {
-    font-size: 1rem;
+    font-size: 1em;
     position: relative;
     display: flex;
     align-items: center;
@@ -361,7 +369,7 @@ body {
 
 .sec2-time_title>span,
 .sec2-time_title2>span {
-    font-size: clamp(14px, 1.6vw, 2.6em);
+    font-size: 2.6em;
     font-weight: 700;
     color: var(--white);
     line-height: 1;
@@ -370,7 +378,7 @@ body {
 
 .sec2_info,
 .sec2_info2 {
-    font-size: 1rem;
+    font-size: 1em;
     width: 54em;
     height: 30em;
     position: absolute;
@@ -389,18 +397,18 @@ body {
 }
 
 .sec2_info>h4 {
-    margin: 0 0 1.26em;
+    margin: 0 0 0.8em;
     color: #d51a5c;
-    font-size: clamp(14px, 2vw, 3.2em);
+    font-size: 3.2em;
     line-height: 1;
     text-align: center;
     white-space: nowrap;
 }
 
 .sec2_info>h5 {
-    margin: 0 0 0.27em;
+    margin: 0 0 0.3em;
     color: var(--pink);
-    font-size: clamp(12px, 1.4vw, 2.6em);
+    font-size: 2.6em;
     font-weight: 500;
     line-height: 1.15;
     text-align: center;
@@ -408,14 +416,15 @@ body {
 }
 
 .sec2_info>h4.mb-2 {
-    margin-bottom: 0.97em;
+    margin-bottom: 0.6em;
     color: var(--pink);
+    font-size: 3.2em;
 }
 
 .sec2_info>p {
     margin: 0;
     color: var(--pink);
-    font-size: clamp(12px, 1.1vw, 1.6em);
+    font-size: 1.6em;
     line-height: 1.25;
     text-align: center;
     white-space: nowrap;
@@ -432,15 +441,15 @@ body {
     margin: 0 0 1.1em;
     padding-left: 3.1em;
     color: var(--pink);
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: 500;
     position: relative;
 }
 
 .sec2_info2>li>p {
     margin: 0;
-    font-size: clamp(10px, 1.3vw, 2.2em);
-    line-height: 1.28;
+    font-size: 2.2em;
+    line-height: 1.35;
     word-spacing: 0;
     white-space: nowrap;
 }
@@ -448,7 +457,7 @@ body {
 .sec2_info2>li::before {
     content: "✿";
     position: absolute;
-    top: 0.3em;
+    top: 0.1em;
     left: 0;
     color: var(--pink);
     font-size: 1.8em;
@@ -458,13 +467,13 @@ body {
 /* --- section 3 ------ */
 .section3 {
     position: relative;
-    margin-top: -6.5%;
+    margin-top: 0;
     width: 100%;
     background-image: url("./../../images/bg/bg-giay-vang.webp");
     background-position: center top;
     background-size: cover;
     background-repeat: repeat-y;
-    padding-top: clamp(6em, 5vw, 10em);
+    padding-top: clamp(4em, 3.5vw, 7em);
     padding-bottom: 5%;
     overflow: hidden;
 }
