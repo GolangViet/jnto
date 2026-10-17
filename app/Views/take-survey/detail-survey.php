@@ -318,6 +318,12 @@ if (!function_exists('renderDynamicQuestions')) {
         if (selectedExp && selectedExp.dataset.surveyTarget) {
             stored.travel_status = selectedExp.dataset.surveyTarget;
         }
+        if (!stored.status || stored.status !== 'done') {
+            stored.status = 'not_done';
+            try {
+                localStorage.setItem('jnto_survey_status', 'not_done');
+            } catch (e) {}
+        }
         setStoredData(stored);
 
         // If authenticated with attempt, save to server
@@ -503,6 +509,15 @@ if (!function_exists('renderDynamicQuestions')) {
 
     async function handleAutoSyncIfPending() {
         if (!isLoggedIn || !attemptId) {
+            try {
+                const surveyStatus = localStorage.getItem('jnto_survey_status');
+                const raw = localStorage.getItem('jnto_survey_data');
+                const data = raw ? JSON.parse(raw) : null;
+                if (surveyStatus === 'done' || data?.status === 'done') {
+                    window.location.href = `${window.APP_URL}/register?from=survey`;
+                    return;
+                }
+            } catch (e) {}
             restoreFromLocalStorage();
             return;
         }
@@ -512,7 +527,7 @@ if (!function_exists('renderDynamicQuestions')) {
             return;
         }
 
-        if (stored.pending_sync) {
+        if (stored.pending_sync || stored.status === 'done') {
             createOverlay('Đang lưu kết quả khảo sát của bạn...');
             try {
                 for (const ans of Object.values(stored.answers)) {
@@ -538,7 +553,15 @@ if (!function_exists('renderDynamicQuestions')) {
                 });
 
                 if (response.ok) {
-                    localStorage.removeItem(STORAGE_KEY);
+                    try {
+                        localStorage.setItem('jnto_survey_status', 'done');
+                        const stored = getStoredData();
+                        stored.status = 'done';
+                        stored.pending_sync = false;
+                        stored.completed_at = new Date().toISOString();
+                        setStoredData(stored);
+                    } catch (e) {}
+
                     window.location.href = `${window.APP_URL}/take-questions`;
                     return;
                 } else {
@@ -590,9 +613,14 @@ if (!function_exists('renderDynamicQuestions')) {
         const stored = {
             answers: allAnswers,
             travel_status: selectedExp?.dataset?.surveyTarget || null,
-            pending_sync: true,
-            saved_at: new Date().toISOString()
+            status: 'done',
+            pending_sync: !isLoggedIn,
+            saved_at: new Date().toISOString(),
+            completed_at: new Date().toISOString()
         };
+        try {
+            localStorage.setItem('jnto_survey_status', 'done');
+        } catch (e) {}
         setStoredData(stored);
 
         // If guest (not logged in): redirect to register/login
@@ -611,7 +639,15 @@ if (!function_exists('renderDynamicQuestions')) {
                 }
             });
             if (response.ok) {
-                localStorage.removeItem(STORAGE_KEY);
+                try {
+                    localStorage.setItem('jnto_survey_status', 'done');
+                    const stored = getStoredData();
+                    stored.status = 'done';
+                    stored.pending_sync = false;
+                    stored.completed_at = new Date().toISOString();
+                    setStoredData(stored);
+                } catch (e) {}
+
                 window.location.href = `${window.APP_URL}/take-questions`;
             } else {
                 removeOverlay();

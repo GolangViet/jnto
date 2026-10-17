@@ -52,9 +52,40 @@
         display: none;
     }
 
+    .header-right {
+        gap: 2vw;
+        height: 5.5vw;
+    }
+
     .logos {
-        gap: 4.6vw;
+        gap: 2.2vw;
         height: 3.8vw;
+    }
+    
+    .logo-japan img {
+        height: 100%;
+    }
+
+    .header-divider {
+        height: 4vw;
+    }
+
+    .user-avatar-circle {
+        width: 5.8vw;
+        height: 5.8vw;
+        min-width: 26px;
+        min-height: 26px;
+    }
+
+    .user-menu-chevron {
+        width: 2.4vw;
+        height: 2.4vw;
+        min-width: 10px;
+        min-height: 10px;
+    }
+
+    .user-dropdown-card {
+        min-width: 135px;
     }
 
     /* section 2 */
@@ -1093,8 +1124,9 @@
 
     .sec3-title {
         width: 480px;
-        margin: 0 auto -7.5rem;
-        padding-top: 6rem;
+        margin: 0;
+        padding-top: 5rem;
+        top: 118px;
     }
 
     .sec3-contents {
@@ -1127,7 +1159,7 @@
     }
 
     .sec3-contents {
-        padding: 10rem 2.5rem 2.5rem;
+        /* padding: 10rem 2.5rem 2.5rem; */
     }
 }
 

@@ -304,6 +304,66 @@ final class TakeSurveyController extends Controller
         }
     }
 
+    /**
+     * API Endpoint to sync and submit cached survey answers for a logged-in user.
+     */
+    public function apiSyncSurvey(): never
+    {
+        $user = app()->session()->get('user');
+        if (!$user) {
+            app()->response()->json(['success' => false, 'message' => 'Unauthenticated.'], 401);
+        }
+
+        $userId = (int) $user['id'];
+        $mainSurveyId = setting('main_survey_quiz_id');
+
+        // If no survey is configured, redirect to questions directly
+        if (!$mainSurveyId) {
+            app()->response()->json([
+                'success' => true,
+                'redirect' => url('take-questions'),
+            ]);
+        }
+
+        // If already submitted in database, avoid re-taking and redirect
+        if ($this->isSurveyCompleted($userId)) {
+            app()->response()->json([
+                'success' => true,
+                'already_completed' => true,
+                'redirect' => url('take-questions'),
+            ]);
+        }
+
+        $payload = app()->request()->all();
+        $answers = $payload['answers'] ?? [];
+
+        try {
+            $attemptId = $this->attemptService->startAttempt((int) $mainSurveyId, $userId);
+
+            if (is_array($answers)) {
+                foreach ($answers as $ans) {
+                    if (is_array($ans) && !empty($ans['question_id'])) {
+                        $this->attemptService->saveAnswer($attemptId, $userId, $ans);
+                    }
+                }
+            }
+
+            $submitResult = $this->attemptService->submitAttempt($attemptId, $userId);
+
+            app()->response()->json([
+                'success' => true,
+                'attempt_id' => $attemptId,
+                'result' => $submitResult,
+                'redirect' => url('take-questions'),
+            ]);
+        } catch (\Throwable $e) {
+            app()->response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+    }
+
     private function isSurveyCompleted(int $userId): bool
     {
         $mainSurveyId = setting('main_survey_quiz_id');
