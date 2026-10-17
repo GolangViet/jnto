@@ -30,21 +30,40 @@
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+    <?php
+    $currentUser = app()->session()->get('user');
+    $userSurveyStatus = 'not_done';
+    if ($currentUser && !empty($currentUser['id'])) {
+        $mainSurveyId = setting('main_survey_quiz_id');
+        if ($mainSurveyId) {
+            try {
+                $db = \Core\Database::connection();
+                $stmt = $db->prepare("SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = :quiz_id AND user_id = :user_id AND status = 'submitted'");
+                $stmt->execute(['quiz_id' => (int) $mainSurveyId, 'user_id' => (int) $currentUser['id']]);
+                if ((int) $stmt->fetchColumn() > 0) {
+                    $userSurveyStatus = 'done';
+                }
+            } catch (\Throwable $e) {}
+        }
+    }
+    ?>
+    <script>
+        window.IS_LOGGED_IN = <?= json_encode(!empty($currentUser)) ?>;
+        window.CURRENT_USER_SURVEY_STATUS = <?= json_encode($currentUser ? $userSurveyStatus : null) ?>;
+    </script>
     <header class="header">
-        <?php if ($user = app()->session()->get('user')): ?>
-            <?php if (($user['role'] ?? 'user') === 'admin'): ?>
-                <div class="admin-top-bar">
-                    <div class="admin-top-bar-content">
-                        <span class="admin-welcome-text">Xin chào, <strong><?= e($user['name']) ?></strong> (Quản trị viên)</span>
-                        <a href="<?= url('admin/dashboard') ?>" class="admin-btn">
-                            <svg viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-                            </svg>
-                            Trang quản trị
-                        </a>
-                    </div>
+        <?php if ($currentUser && ($currentUser['role'] ?? 'user') === 'admin'): ?>
+            <div class="admin-top-bar">
+                <div class="admin-top-bar-content">
+                    <span class="admin-welcome-text">Xin chào, <strong><?= e($currentUser['name']) ?></strong> (Quản trị viên)</span>
+                    <a href="<?= url('admin/dashboard') ?>" class="admin-btn">
+                        <svg viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                        </svg>
+                        Trang quản trị
+                    </a>
                 </div>
-            <?php endif; ?>
+            </div>
         <?php endif; ?>
         <div class="header-wrapper">
             <div class="logo-japan">
@@ -52,9 +71,47 @@
                     <img src="<?= assets('images/campaign-nhat-ban.png') ?>" alt="logo Campaign nhật bản">
                 </a>
             </div>
-            <div class="logos">
-                <img src="<?= assets('images/jed-logo.png') ?>" alt="logo jed">
-                <img src="<?= assets('images/jnto-logo.png') ?>" alt="logo jnto">
+            <div class="header-right">
+                <div class="logos">
+                    <img src="<?= assets('images/jed-logo.png') ?>" alt="logo jed">
+                    <img src="<?= assets('images/jnto-logo.png') ?>" alt="logo jnto">
+                </div>
+                <?php if ($currentUser): ?>
+                    <div class="header-divider" aria-hidden="true"></div>
+                    <div class="user-menu-dropdown" id="userMenuDropdown">
+                        <button type="button" class="user-menu-trigger" id="userMenuTrigger" aria-label="Menu tài khoản" aria-expanded="false" aria-haspopup="true">
+                            <span class="user-avatar-circle">
+                                <svg class="user-avatar-svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                                </svg>
+                            </span>
+                            <svg class="user-menu-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="user-dropdown-card" id="userDropdownCard" role="menu">
+                            <button type="button" class="dropdown-item" id="accountInfoBtn" role="menuitem">
+                                <svg class="dropdown-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>Tài khoản</span>
+                            </button>
+                            <div class="dropdown-card-divider"></div>
+                            <form id="header-logout-form" action="<?= url('logout') ?>" method="POST" style="display: none;">
+                                <?= csrf_field() ?>
+                            </form>
+                            <button type="button" class="dropdown-item dropdown-item-danger" id="accountLogoutBtn" role="menuitem">
+                                <svg class="dropdown-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                <span>Đăng xuất</span>
+                            </button>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="titles">
                 <div class="title_line_lft">
@@ -118,10 +175,7 @@
                     <h3 class="footer_sponsor_title"><span>Nhà tài trợ</span></h3>
                     <div class="footer_sponser_brands">
                         <a href="https://www.vietnamairlines.com/dk/vi/lotusmiles" title="Vietnam Arilines" target="_blank">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="<?= assets('images/footer/logo-jal-mobile.png') ?>">
-                                <img src="<?= assets('images/footer/logo-jal.png') ?>" alt="Japan Airlines">
-                            </picture>
+                            <img src="<?= assets('images/brand-4.png') ?>" alt="Vietnam Arilines">
                         </a>
                         <a target="_blank" href="https://travelcontentsapp.com/en/" title="Travel">
                             <picture>
@@ -147,6 +201,76 @@
             </div>
         </div>
     </footer>
+
+    <?php if ($currentUser = app()->session()->get('user')): ?>
+        <div class="account-modal-overlay" id="accountInfoModal" role="dialog" aria-modal="true" aria-labelledby="accountModalTitle" style="display: none;">
+            <div class="account-modal-backdrop" id="accountModalBackdrop"></div>
+            <div class="account-modal-container">
+                <div class="account-modal-header">
+                    <div class="account-modal-title-wrapper">
+                        <div class="account-modal-header-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="account-modal-title" id="accountModalTitle">Thông tin tài khoản</h3>
+                    </div>
+                    <button type="button" class="account-modal-close" id="closeAccountModal" aria-label="Đóng">&times;</button>
+                </div>
+                <div class="account-modal-body">
+                    <div class="account-profile-badge">
+                        <div class="account-badge-avatar">
+                            <?= mb_substr(e($currentUser['name'] ?: ($currentUser['username'] ?? 'U')), 0, 1, 'UTF-8') ?>
+                        </div>
+                        <div class="account-badge-meta">
+                            <div class="account-badge-name"><?= e($currentUser['name'] ?: ($currentUser['username'] ?? 'Người dùng')) ?></div>
+                            <div class="account-badge-role">
+                                <?= ($currentUser['role'] ?? 'user') === 'admin' ? 'Quản trị viên' : 'Thành viên' ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="account-info-grid">
+                        <div class="account-info-item">
+                            <span class="account-info-label">Tên hiển thị:</span>
+                            <span class="account-info-value"><?= e($currentUser['name']) ?></span>
+                        </div>
+                        <?php if (!empty($currentUser['username'])): ?>
+                            <div class="account-info-item">
+                                <span class="account-info-label">Tên đăng nhập:</span>
+                                <span class="account-info-value"><?= e($currentUser['username']) ?></span>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($currentUser['email'])): ?>
+                            <div class="account-info-item">
+                                <span class="account-info-label">Email:</span>
+                                <span class="account-info-value"><?= e($currentUser['email']) ?></span>
+                            </div>
+                        <?php endif; ?>
+                        <div class="account-info-item">
+                            <span class="account-info-label">Vai trò:</span>
+                            <span class="account-info-value"><?= ($currentUser['role'] ?? 'user') === 'admin' ? 'Quản trị viên (Admin)' : 'Người tham gia' ?></span>
+                        </div>
+                    </div>
+
+                    <?php if (($currentUser['role'] ?? 'user') === 'admin'): ?>
+                        <div class="account-modal-admin-action">
+                            <a href="<?= url('admin/dashboard') ?>" class="account-admin-link">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Đi đến Trang quản trị</span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="account-modal-footer">
+                    <button type="button" class="account-modal-btn" id="closeAccountModalBtn">Đóng</button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <?= render_modals() ?>
 
@@ -182,6 +306,7 @@
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
+            // Password toggle
             document.querySelectorAll('.pass_eye').forEach(function (button) {
                 button.addEventListener('click', function () {
                     const input = button.parentElement.querySelector('input');
@@ -196,6 +321,113 @@
                         }
                     }
                 });
+            });
+
+            // User dropdown toggle
+            const userMenuDropdown = document.getElementById('userMenuDropdown');
+            const userMenuTrigger = document.getElementById('userMenuTrigger');
+            const userDropdownCard = document.getElementById('userDropdownCard');
+
+            if (userMenuTrigger && userDropdownCard) {
+                userMenuTrigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const isOpen = userMenuDropdown.classList.toggle('is-open');
+                    userMenuTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                document.addEventListener('click', function (e) {
+                    if (userMenuDropdown && !userMenuDropdown.contains(e.target)) {
+                        userMenuDropdown.classList.remove('is-open');
+                        userMenuTrigger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Persist survey status in localStorage
+            window.CURRENT_USER_SURVEY_STATUS = <?= json_encode($currentUser ? $userSurveyStatus : null) ?>;
+            if (window.CURRENT_USER_SURVEY_STATUS) {
+                try {
+                    const raw = localStorage.getItem('jnto_survey_data');
+                    const data = raw ? JSON.parse(raw) : {};
+                    if (window.CURRENT_USER_SURVEY_STATUS === 'done') {
+                        localStorage.setItem('jnto_survey_status', 'done');
+                        data.status = 'done';
+                        data.pending_sync = false;
+                        localStorage.setItem('jnto_survey_data', JSON.stringify(data));
+                    } else if (!data.pending_sync && data.status !== 'done') {
+                        localStorage.setItem('jnto_survey_status', 'not_done');
+                        data.status = 'not_done';
+                        localStorage.setItem('jnto_survey_data', JSON.stringify(data));
+                    }
+                } catch (e) {}
+            }
+
+            // Logout handling: persist survey status before submit
+            const accountLogoutBtn = document.getElementById('accountLogoutBtn');
+            const logoutForm = document.getElementById('header-logout-form');
+            if (accountLogoutBtn && logoutForm) {
+                accountLogoutBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (window.CURRENT_USER_SURVEY_STATUS === 'done') {
+                        try {
+                            localStorage.setItem('jnto_survey_status', 'done');
+                            const raw = localStorage.getItem('jnto_survey_data');
+                            const data = raw ? JSON.parse(raw) : {};
+                            data.status = 'done';
+                            data.pending_sync = false;
+                            localStorage.setItem('jnto_survey_data', JSON.stringify(data));
+                        } catch (err) {
+                            console.error('Failed to save survey status before logout:', err);
+                        }
+                    }
+                    logoutForm.submit();
+                });
+            }
+
+            // Account info modal
+            const accountInfoBtn = document.getElementById('accountInfoBtn');
+            const accountModal = document.getElementById('accountInfoModal');
+            const closeAccountModal = document.getElementById('closeAccountModal');
+            const closeAccountModalBtn = document.getElementById('closeAccountModalBtn');
+            const accountModalBackdrop = document.getElementById('accountModalBackdrop');
+
+            function openAccountModal() {
+                if (accountModal) {
+                    accountModal.style.display = 'flex';
+                    if (userMenuDropdown) {
+                        userMenuDropdown.classList.remove('is-open');
+                        userMenuTrigger.setAttribute('aria-expanded', 'false');
+                    }
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeAccountModalFunc() {
+                if (accountModal) {
+                    accountModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if (accountInfoBtn) {
+                accountInfoBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openAccountModal();
+                });
+            }
+
+            if (closeAccountModal) closeAccountModal.addEventListener('click', closeAccountModalFunc);
+            if (closeAccountModalBtn) closeAccountModalBtn.addEventListener('click', closeAccountModalFunc);
+            if (accountModalBackdrop) accountModalBackdrop.addEventListener('click', closeAccountModalFunc);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    if (userMenuDropdown) {
+                        userMenuDropdown.classList.remove('is-open');
+                        userMenuTrigger.setAttribute('aria-expanded', 'false');
+                    }
+                    closeAccountModalFunc();
+                }
             });
         });
     </script>

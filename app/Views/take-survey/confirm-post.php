@@ -11,32 +11,17 @@
     </div>
 
     <a class="region-card region-card--kyushu"
-       href="https://www.japan.travel/vi/destinations/kyushu/"
+       href="https://www.japan.travel/vi/destinations/chugoku/"
        target="_blank" rel="noopener noreferrer"
-       aria-label="Tìm hiểu về vùng Kyushu">
-        <img src="<?= assets('images/page-4/box-kyushu.webp') ?>" alt="">
+       aria-label="Tìm hiểu về vùng Chugoku">
+        <img src="<?= assets('images/page-4/box-chugoku.webp') ?>" alt="">
     </a>
 
-    <a class="region-card region-card--hokuriku"
-       href="https://www.japan.travel/vi/destinations/hokuriku-shinetsu/"
+    <a class="region-card region-card--hokkaido"
+       href="https://www.japan.travel/vi/destinations/hokkaido/hokkaido/"
        target="_blank" rel="noopener noreferrer"
-       aria-label="Tìm hiểu về vùng Chubu, Hokuriku Shinetsu">
-        <img src="<?= assets('images/page-4/box-hokuriki.webp') ?>" alt="">
-        <span class="region-card__label">
-                    <strong>CHUBU</strong>
-                    <small>(Hokuriku Shinetsu)</small>
-                </span>
-    </a>
-
-    <a class="region-card region-card--tokai"
-       href="https://www.japan.travel/vi/destinations/tokai/"
-       target="_blank" rel="noopener noreferrer"
-       aria-label="Tìm hiểu về vùng Chubu, Tokai">
-        <img src="<?= assets('images/page-4/box-tokai.webp') ?>" alt="">
-        <span class="region-card__label">
-                    <strong>CHUBU</strong>
-                    <small>(Tokai)</small>
-                </span>
+       aria-label="Tìm hiểu về vùng Hokkaido">
+        <img src="<?= assets('images/page-4/box-hokkaido.webp') ?>" alt="">
     </a>
 </section>
 

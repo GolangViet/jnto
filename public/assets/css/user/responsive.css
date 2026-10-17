@@ -52,12 +52,119 @@
         display: none;
     }
 
-    .logos {
-        gap: 4.6vw;
-        height: 3.8vw;
+    .header-right {
+        gap: 2vw;
+        height: 5.5vw;
     }
 
-    /* section 2 handled below in section 2 mobile alignment */
+    .logos {
+        gap: 2.2vw;
+        height: 3.8vw;
+    }
+    
+    .logo-japan img {
+        height: 100%;
+    }
+
+    .header-divider {
+        height: 4vw;
+    }
+
+    .user-avatar-circle {
+        width: 5.8vw;
+        height: 5.8vw;
+        min-width: 26px;
+        min-height: 26px;
+    }
+
+    .user-menu-chevron {
+        width: 2.4vw;
+        height: 2.4vw;
+        min-width: 10px;
+        min-height: 10px;
+    }
+
+    .user-dropdown-card {
+        min-width: 135px;
+    }
+
+    /* section 2 */
+    .section2_title>h2 {
+        font-size: clamp(10px, 2.5vw, 3em);
+    }
+
+    .section2-box {
+        height: 100%;
+    }
+
+    .sec2-line-top>img,
+    .sec2-line-bottom>img {
+        width: 2vw;
+        height: 2vw;
+    }
+
+    .sec2-line-top::before,
+    .sec2-line-top::after,
+    .sec2-line-bottom::before,
+    .sec2-line-bottom::after {
+        width: 55%;
+    }
+
+    .section2-contents {
+        background-image: url("./../../images/box-m.webp");
+        aspect-ratio: 827 / 971;
+        width: 75%;
+        left: 50%;
+        transform: translateX(-50%);
+        grid-template-columns: 1fr;
+        background-position: 1.5em 0;
+        align-items: center;
+        padding-top: 6%;
+        padding-bottom: 6%;
+    }
+
+    .sec2-time_title {
+        top: 0;
+    }
+
+    .sec2-time_title {
+        aspect-ratio: 217 / 49;
+        width: 40%;
+        height: auto;
+    }
+
+    .sec2-time_title2 {
+        aspect-ratio: 217 / 49;
+        width: 60%;
+        height: auto;
+        top: -0.7em;
+    }
+
+    .sec2-time_title>span,
+    .sec2-time_title2>span {
+        font-size: clamp(12px, 2.4vw, 2.2em);
+    }
+
+    .sec2_info {
+        padding-top: clamp(30px, 4vw, 50px);
+    }
+
+    .sec2_info>h4 {
+        font-size: clamp(14px, 4vw, 30px);
+        margin-bottom: clamp(10px, 2.2vw, 40px);
+    }
+
+    .sec2_info>h5 {
+        font-size: clamp(12px, 2.5vw, 22px);
+    }
+
+    .sec2_info2 {
+        padding: 3em 1em 1em 1em;
+    }
+
+    .sec2_info2>li>p {
+        font-size: clamp(10px, 2vw, 2em);
+    }
 
     .btn-cta {
         width: 55%;
@@ -82,111 +189,36 @@
         font-size: clamp(12px, 4vw, 3em);
     }
 
-    .footer {
-        font-size: 1vw;
-        min-height: 49.72vw;
-        padding: 3.9vw 0 2.6vw;
-        background-image: url("./../../images/footer/bg-footer-mobile.webp");
-        background-size: 100% 100%;
-        background-position: center top;
-        background-repeat: no-repeat;
+    .footer-wrapper {
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+        gap: 3em;
     }
 
     .footer>.container {
-        width: 100% !important;
         max-width: 100% !important;
-        padding: 0 !important;
-        margin: 0;
-    }
-
-    .footer-wrapper {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0;
-    }
-
-    .footer_socials {
-        width: 100%;
-        align-items: center;
     }
 
     .footer_socials_title {
-        padding: 0;
-        margin: 0 0 1.4vw;
         text-align: center;
     }
 
     .footer_socials_title>span {
-        font-size: 2.56vw;
-        line-height: 1.2;
+        font-size: clamp(14px, 3.3vw, 2.5em);
     }
 
     .footer_social {
         justify-content: center;
-        padding-top: 0;
-        margin: 0 0 2.3vw;
-        gap: 1.8vw;
     }
 
     .footer_social_item {
-        width: 8.06vw;
-        height: 8.06vw;
-        font-size: 1em;
-    }
-
-    .footer_social>li:nth-child(1) .footer_social_item {
-        background-image: url("./../../images/footer/icon-facebook-mobile.webp");
-    }
-
-    .footer_social>li:nth-child(2) .footer_social_item {
-        background-image: url("./../../images/footer/icon-instagram-mobile.webp");
-    }
-
-    .footer_social>li:nth-child(3) .footer_social_item {
-        background-image: url("./../../images/footer/icon-youtube-mobile.webp");
+        font-size: 8px;
     }
 
     .footer_sponsors {
-        width: 76.48vw;
-        aspect-ratio: 826 / 187;
-        margin: 0 auto;
-        background-image: url("./../../images/footer/box-taitro-mobile.webp");
-    }
-
-    .footer_sponsor_title {
-        height: 31.02%;
-    }
-
-    .footer_sponsor_title>span {
-        font-size: 2.56vw;
-    }
-
-    .footer_sponser_brands {
-        height: 68.98%;
-        padding: 0 2.04vw 0 3.33vw;
-        gap: 3.5vw;
-    }
-
-    .footer_sponser_brands>a:nth-child(1) {
-        width: 27.13vw;
-    }
-
-    .footer_sponser_brands>a:nth-child(2) {
-        width: 21.85vw;
-    }
-
-    .footer_sponser_brands>a:nth-child(3) {
-        width: 15.37vw;
-        transform: translateY(-0.6vw);
-    }
-
-    .footer-private {
-        width: 100%;
-        margin: 3.24vw 0 0;
-        padding-top: 1.85vw;
-        background-image: url("./../../images/footer/line-mobile.png");
-        background-size: 100% 1px;
+        width: 85%;
+        margin: auto;
     }
 
     .footer_links a {
@@ -1020,5 +1052,81 @@
     .modal-close::after {
         width: 45%;
         height: 2px;
+    }
+}
+
+/* ===== Index page: desktop-first max-width responsive scaling ===== */
+@media (max-width: 1400px) {
+    .sec3-wrapper {
+        max-width: 1200px;
+    }
+
+    .sec3-title {
+        width: 480px;
+        margin: 0;
+        padding-top: 5rem;
+        top: 118px;
+    }
+
+    .sec3-contents {
+        padding: 12rem 3rem 3rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .sec3-wrapper {
+        max-width: 990px;
+    }
+
+    .sec3-cta-group {
+        max-width: 620px;
+        margin-bottom: 4rem;
+    }
+
+    .sec3-title {
+        width: 420px;
+        margin: 0 auto -6.5rem;
+        padding-top: 5.5rem;
+    }
+
+    .sec3-title>h2 {
+        font-size: 3rem;
+    }
+
+    .sec3-title>h3 {
+        font-size: 2.4rem;
+    }
+
+    .sec3-contents {
+        /* padding: 10rem 2.5rem 2.5rem; */
+    }
+}
+
+@media (max-width: 991px) {
+    .sec3-wrapper {
+        max-width: 760px;
+    }
+
+    .sec3-cta-group {
+        max-width: 520px;
+        margin-bottom: 3.5rem;
+    }
+
+    .sec3-title {
+        width: 360px;
+        margin: 0 auto -5.5rem;
+        padding-top: 4.8rem;
+    }
+
+    .sec3-title>h2 {
+        font-size: 2.6rem;
+    }
+
+    .sec3-title>h3 {
+        font-size: 2rem;
+    }
+
+    .sec3-contents {
+        padding: 8.5rem 2rem 2rem;
     }
 }

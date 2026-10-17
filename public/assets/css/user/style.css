@@ -67,16 +67,392 @@ body {
     height: 100%;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(12px, 1.5vw, 24px);
+    height: clamp(30px, 4vw, 5em);
+}
+
 .logos {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2em;
-    height: clamp(30px, 4vw, 5em);
+    gap: clamp(12px, 1.5vw, 2em);
+    height: 100%;
 }
 
 .logos>img {
     height: 100%;
+}
+
+.header-divider {
+    width: 1px;
+    height: clamp(22px, 2.2vw, 34px);
+    background-color: #d1d5db;
+    flex-shrink: 0;
+}
+
+.user-menu-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.user-menu-trigger {
+    background: transparent;
+    border: none;
+    padding: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border-radius: 9999px;
+    outline: none;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.user-menu-trigger:hover {
+    opacity: 0.85;
+}
+
+.user-avatar-circle {
+    width: clamp(32px, 2.8vw, 40px);
+    height: clamp(32px, 2.8vw, 40px);
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.user-avatar-svg {
+    width: 65%;
+    height: 65%;
+    color: #6b7280;
+    fill: currentColor;
+}
+
+.user-menu-chevron {
+    width: 14px;
+    height: 14px;
+    color: #4b5563;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+}
+
+.user-menu-dropdown.is-open .user-menu-chevron {
+    transform: rotate(180deg);
+}
+
+.user-dropdown-card {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 156px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 6px 0;
+    z-index: 1000;
+    display: none;
+}
+
+.user-menu-dropdown.is-open .user-dropdown-card {
+    display: block;
+    animation: headerDropdownFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    color: #374151;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+    box-sizing: border-box;
+}
+
+.dropdown-item:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.dropdown-item-icon {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    stroke: currentColor;
+}
+
+.dropdown-card-divider {
+    height: 1px;
+    background-color: #f0f0f0;
+    margin: 4px 0;
+}
+
+.dropdown-item-danger {
+    color: #ef4444;
+}
+
+.dropdown-item-danger .dropdown-item-icon {
+    stroke: #ef4444;
+}
+
+.dropdown-item-danger:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+.dropdown-item-danger:hover .dropdown-item-icon {
+    stroke: #dc2626;
+}
+
+@keyframes headerDropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----- Account Info Modal ----- */
+.account-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.account-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.account-modal-container {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    animation: accountModalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+@keyframes accountModalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.account-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.account-modal-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.account-modal-header-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #fee2e2;
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.account-modal-header-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+}
+
+.account-modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.account-modal-close {
+    background: transparent;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.account-modal-close:hover {
+    color: #111827;
+    background: #f3f4f6;
+}
+
+.account-profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: #f9fafb;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.account-badge-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+    flex-shrink: 0;
+}
+
+.account-badge-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.account-badge-role {
+    font-size: 12px;
+    font-weight: 500;
+    color: #059669;
+    background: #ecfdf5;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.account-info-grid {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.account-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13.5px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+.account-info-item:last-child {
+    border-bottom: none;
+}
+
+.account-info-label {
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.account-info-value {
+    color: #111827;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.account-modal-admin-action {
+    padding: 0 20px 16px;
+}
+
+.account-admin-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 16px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    font-size: 13.5px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s;
+    box-sizing: border-box;
+}
+
+.account-admin-link:hover {
+    background: #dcfce7;
+}
+
+.account-modal-footer {
+    padding: 12px 20px;
+    background: #f9fafb;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.account-modal-btn {
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.account-modal-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
 }
 
 .titles {
@@ -446,16 +822,16 @@ body {
 /* --- section 3 ------ */
 .section3 {
     position: relative;
-    font-size: clamp(4px, 0.520833vw, 20px);
-    margin-top: -4.7em;
+    margin-top: -30px;
     width: 100%;
     aspect-ratio: 1920 / 1640;
     background-image: url("./../../images/bg/bg-giay-vang.webp");
     background-position: center top;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    padding: 0;
-    overflow: visible;
+    background-size: cover;
+    background-repeat: repeat-y;
+    padding-top: clamp(4em, 3.5vw, 7em);
+    padding-bottom: 5%;
+    /* overflow: hidden; */
 }
 
 .sec3-wrapper,
@@ -478,12 +854,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 1.9em;
-    width: 73.4em;
-    max-width: 90%;
-    margin: -3.8em auto 0;
+    justify-content: center;
+    gap: 1.5em;
+    width: 100%;
+    max-width: 73.4em;
+    margin: 0 auto;
     z-index: 5;
+    position: absolute;
+    top: -107px;
 }
 
 .btn-join-top {
@@ -590,7 +968,8 @@ body {
     font-size: 1em;
     position: relative;
     width: 100%;
-    margin: -10.3em auto 0;
+    max-width: 127.9em;
+    margin: 145px auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -607,10 +986,9 @@ body {
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+    margin: 0 auto -8.5em; /* Kéo đè lên viền trên của bg3-content.webp */
     position: absolute;
-    top: 17.4em;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 125px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -647,15 +1025,14 @@ body {
     position: relative;
     z-index: 1;
     margin: 0 auto;
-    width: 127.9em;
-    max-width: 100%;
-    aspect-ratio: 1279 / 1391;
-    transform: translateX(-2.55em);
+    width: 100%;
+    /*max-width: 127.9em;*/
+    /*aspect-ratio: 1279 / 1391;*/
     background-image: url("./../../images/bg/bg3-content.webp");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center top;
-    padding: 34.1em 0 0 2.9em;
+    padding: 31em 15em 10em 15em; /* Chừa 14em bên trên cho nút sec3-title đè lên */
     border: none;
     box-sizing: border-box;
 }
@@ -1805,3 +2182,4 @@ body.modal-open-body {
     box-shadow: 0 0 12px rgba(75, 85, 99, 0.5);
     transform: translateY(-1px);
 }
+

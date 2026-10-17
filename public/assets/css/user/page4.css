@@ -17,6 +17,10 @@
     overflow: hidden;
 }
 
+.banner {
+    z-index: 3;
+}
+
 .region-map {
     width: 192em;
     max-width: 100%;
@@ -24,17 +28,18 @@
     position: relative;
     margin: 0 auto;
     overflow: hidden;
-    background: url("./../../images/page-4/bg-map.webp") center / 100% 100% no-repeat;
+    background: url("./../../images/page-4/bg-map-2.webp") center / 122% 122% no-repeat;
     color: #713017;
     font-size: 1rem;
+    z-index: 2;
 }
 
 .region-map__guide {
     width: 50.4em;
     position: absolute;
-    top: 16.25em;
-    left: 45.8em;
+    top: 26.25em;
     text-align: center;
+    left: 33rem;
 }
 
 .region-map__guide img {
@@ -49,7 +54,7 @@
     margin: 0.45em 0 0.65em;
     transform: translateX(-50%);
     color: #713017;
-    font-size: 2.4em;
+    font-size: 1.8em;
     font-weight: 500;
     line-height: 1.4;
     white-space: nowrap;
@@ -82,13 +87,13 @@
 }
 
 .region-card--kyushu {
-    top: 45.4em;
-    left: 28.8em;
+    top: 40em;
+    left: 31.8em;
 }
 
 .region-card--hokuriku {
-    top: 26em;
-    left: 123.9em;
+    top: 38em;
+    right: 32em;
 }
 
 .region-card--tokai {
@@ -138,15 +143,15 @@
     .region-map {
         width: 108rem;
         aspect-ratio: 1080 / 1540;
-        background-image: url("./../../images/page-4/bg-map-mobile.webp");
+        background-image: url("./../../images/page-4/bg-map-2-mobile.webp");
         font-size: 0.925926vw;
     }
 
     .region-map__guide {
         width: 61.2em;
-        top: 9.8em;
         left: 50%;
         transform: translateX(-50%);
+        top: 15px;
     }
 
     .region-map__guide p {
@@ -155,13 +160,13 @@
     }
 
     .region-card--kyushu {
-        top: 44.1em;
-        left: 8.1em;
+        top: 42em;
+        left: 10em;
     }
 
     .region-card--hokuriku {
-        top: 86em;
-        left: 66em;
+        top: 98em;
+        left: 64em;
     }
 
     .region-card--tokai {
@@ -188,7 +193,7 @@
     position: relative;
     margin: 18.8em auto 0;
     padding: 7.9em 7.4em 0;
-    background: url("./../../images/page-4/section-3/box.webp") center / 100% 100% no-repeat;
+    background: url("./../../images/page-4/section-3/box-2.webp") center / 100% 100% no-repeat;
 }
 
 .knowledge-part {
@@ -496,9 +501,10 @@
     justify-content: center;
     margin: 0 auto;
     overflow: hidden;
-    background: url("./../../images/page-4/section-4/bg-landscape.webp") center / 100% 100% no-repeat;
+    background: url("./../../images/page-4/section-4/bg-landscape-2.webp") center / 100% 100% no-repeat;
     color: #7b351b;
     font-size: 1rem;
+    z-index: 2;
 }
 
 .open-question-form {
@@ -507,7 +513,7 @@
     position: relative;
     margin: 0;
     padding: 12.4em 27.5em 0;
-    background: url("./../../images/page-4/section-4/box-text-1.webp") center / 100% 100% no-repeat;
+    background: url("./../../images/page-4/section-4/box-text-1-2.webp") center / 100% 100% no-repeat;
 }
 
 .open-question-title {
@@ -631,6 +637,8 @@
     padding-top: 6.4em;
     background: url("./../../images/page-4/section-5/bg-giay.webp") center / 100% 100% no-repeat;
     font-size: 1rem;
+    margin-top: -55px;
+    z-index: 1;
 }
 
 .page4-next-button {
@@ -642,7 +650,7 @@
     padding: 0 0 0.08em;
     border: 0;
     background: transparent url("./../../images/page-4/section-5/button-tieptheo-vang.webp") center / 100% 100% no-repeat;
-    color: #b5000b;
+    color: #fff;
     font: inherit;
 }
 
@@ -675,7 +683,7 @@
         width: 108rem;
         aspect-ratio: 1080 / 1544;
         align-items: flex-start;
-        background-image: url("./../../images/page-4/section-4/bg-landscape-mobile.webp");
+        background-image: url("./../../images/page-4/section-4/bg-landscape-2-mobile.webp");
         font-size: 0.925926vw;
     }
 
@@ -684,7 +692,7 @@
         aspect-ratio: 1046 / 1344;
         margin-top: 17.3em;
         padding: 12.1em 12.8em 0;
-        background-image: url("./../../images/page-4/section-4/box-text-mobile.webp");
+        background-image: url("./../../images/page-4/section-4/box-text-2-2-mobile.webp");
     }
 
     .open-question-title {
