@@ -1,8 +1,8 @@
-<div id="survey-save-notice" class="message-container info" style="display: none; background-color: #e8f4fd; color: #0d47a1; border: 1px solid #bbdefb; margin: 12px auto; max-width: 580px; border-radius: 8px; padding: 12px 16px; font-size: 14px; text-align: center;">
+<div id="survey-save-notice" class="message-container info d-none" style="display: none!important; background-color: #e8f4fd; color: #0d47a1; border: 1px solid #bbdefb; margin: 12px auto; max-width: 580px; border-radius: 8px; padding: 12px 16px; font-size: 14px; text-align: center;">
     <span>🎉 Bạn đã hoàn thành khảo sát! Vui lòng đăng ký tài khoản (hoặc <a href="<?= url('login') ?>" style="color: #0d47a1; text-decoration: underline; font-weight: bold;">đăng nhập</a>) để lưu kết quả và tiếp tục.</span>
 </div>
 
-<section class="section-register">       
+<section class="section-register">
     <form class="registers" id="register-form" action="<?= url('register') ?>" method="post" data-register-demo novalidate>
         <?= csrf_field() ?>
         <div class="reg-error" id="reg-error" role="alert" aria-live="polite" hidden>
@@ -61,7 +61,7 @@
 
             <button type="submit" class="btn-register"><span>ĐĂNG KÝ</span></button>
             <h3>Bạn đã có tài khoản? <a href="<?= url('login') ?>" title="Đăng nhập">Đăng nhập</a></h3>
-            
+
             <div class="alert_info">
                 <h3 class="alert_info_title">LƯU Ý</h3>
                 <p class="alert_info_desc"><span>*Người tham gia <strong>vui lòng ghi nhớ thông tin tài khoản đã đăng ký.</strong> Trong trường hợp quên tài khoản hoặc mật khẩu, người tham gia sẽ cần <strong>đăng ký tài khoản mới</strong> và thực hiện các bước tham gia chương trình lại từ đầu.</span>

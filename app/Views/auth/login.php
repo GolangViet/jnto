@@ -1,4 +1,4 @@
-<div id="survey-save-notice" class="message-container info" style="display: none; background-color: #e8f4fd; color: #0d47a1; border: 1px solid #bbdefb; margin: 12px auto; max-width: 580px; border-radius: 8px; padding: 12px 16px; font-size: 14px; text-align: center;">
+<div id="survey-save-notice" class="message-container info d-none" style="display: none!important; background-color: #e8f4fd; color: #0d47a1; border: 1px solid #bbdefb; margin: 12px auto; max-width: 580px; border-radius: 8px; padding: 12px 16px; font-size: 14px; text-align: center;">
     <span>🎉 Bạn đã hoàn thành khảo sát! Vui lòng đăng nhập (hoặc <a href="<?= url('register') ?>" style="color: #0d47a1; text-decoration: underline; font-weight: bold;">đăng ký</a>) để lưu kết quả và tiếp tục.</span>
 </div>
 

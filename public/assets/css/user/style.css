@@ -63,11 +63,8 @@ body {
     height: 100%;
 }
 
-.logo-japan>img,
-.logo-japan>a,
-.logo-japan>a>img {
+.logo-japan>img {
     height: 100%;
-    display: block;
 }
 
 .header-right {
@@ -82,8 +79,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2em;
-    height: clamp(30px, 4vw, 5em);
+    gap: clamp(12px, 1.5vw, 2em);
+    height: 100%;
 }
 
 .logos>img {
@@ -229,7 +226,6 @@ body {
         opacity: 0;
         transform: translateY(-6px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -273,7 +269,6 @@ body {
         opacity: 0;
         transform: scale(0.95);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -517,10 +512,6 @@ body {
         height: clamp(6.5em, 4.95vw, 9.5em);
     }
 
-    .header-right {
-        height: clamp(3em, 2.604vw, 5em);
-    }
-
     .logos {
         height: clamp(3em, 2.604vw, 5em);
         gap: clamp(3em, 2.604vw, 5em);
@@ -562,7 +553,7 @@ body {
     font-size: clamp(4px, 0.520833vw, 20px);
 }
 
-.section2>picture {
+.section2 > picture {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -831,23 +822,15 @@ body {
 /* --- section 3 ------ */
 .section3 {
     position: relative;
-    font-size: clamp(4px, 0.520833vw, 20px);
-    margin-top: -4.7em;
+    margin-top: -30px;
     width: 100%;
     aspect-ratio: 1920 / 1640;
     background-image: url("./../../images/bg/bg-giay-vang.webp");
     background-position: center top;
-<<<<<<< Updated upstream
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    padding: 0;
-    overflow: visible;
-=======
     background-size: cover;
     background-repeat: repeat-y;
     padding-top: clamp(4em, 3.5vw, 7em);
     padding-bottom: 5%;
->>>>>>> Stashed changes
 }
 
 .sec3-wrapper,
@@ -881,12 +864,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 1.9em;
-    width: 73.4em;
-    max-width: 90%;
-    margin: -3.8em auto 0;
+    justify-content: center;
+    gap: 1.5em;
+    width: 100%;
+    max-width: 73.4em;
+    margin: 0 auto;
     z-index: 5;
+    position: absolute;
+    top: -107px;
 }
 
 .btn-join-top {
@@ -993,12 +978,8 @@ body {
     font-size: 1em;
     position: relative;
     width: 100%;
-<<<<<<< Updated upstream
-    margin: -10.3em auto 0;
-=======
     max-width: 1230px;
     margin: 0 auto;
->>>>>>> Stashed changes
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1017,20 +998,14 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     position: absolute;
-<<<<<<< Updated upstream
-    top: 17.4em;
-    left: 50%;
-    transform: translateX(-50%);
-=======
     top: -164px;
->>>>>>> Stashed changes
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 5.9em;
-    gap: 0.95em;
+    padding-top: 5.5em;
+    gap: 0.8em;
     text-align: center;
     margin: 0;
 }
@@ -1060,19 +1035,7 @@ body {
     position: relative;
     z-index: 1;
     margin: 0 auto;
-<<<<<<< Updated upstream
-    width: 127.9em;
-    max-width: 100%;
-    aspect-ratio: 1279 / 1391;
-    transform: translateX(-2.55em);
-    background-image: url("./../../images/bg/bg3-content.webp");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center top;
-    padding: 34.1em 0 0 2.9em;
-=======
     width: 100%;
->>>>>>> Stashed changes
     border: none;
     box-sizing: border-box;
 }
@@ -1788,7 +1751,7 @@ body.modal-open-body {
     position: relative;
     font-size: 1rem;
     width: 100%;
-    aspect-ratio: 1920 / 1227;
+    aspect-ratio: 1920 / 1345;
     min-height: 980px;
     background-image: url("./../../images/register/bg-register.webp");
     background-repeat: no-repeat;
@@ -2062,16 +2025,17 @@ body.modal-open-body {
 }
 
 .alert_info_desc {
-    width: 86%;
-    height: 70%;
+    width: 75%;
     font-size: clamp(10px, 0.8vw, 13.5px);
-    line-height: 1.35;
+    line-height: 1.5;
     color: #e02438;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     text-align: center;
+    padding: 15px 10px;
+    margin-top: 0;
 }
 
 .alert_info_desc strong {
@@ -2212,4 +2176,34 @@ body.modal-open-body {
     background: #4b5563;
     box-shadow: 0 0 12px rgba(75, 85, 99, 0.5);
     transform: translateY(-1px);
+}
+
+.d-none {
+    display: none!important;
+}
+
+.login-username label,
+.login-pass label {
+    color: #e53935;
+}
+
+.agree-item .text {
+    font-size: 18px;
+}
+
+.btn-register>span {
+    font-size: 35px;
+}
+
+#register-form .btn-register {
+    margin-bottom: 20px;
+}
+
+#register-form h3 {
+    font-size: 18px;
+}
+
+
+#register-form .alert_info_desc {
+    font-size: 18px;
 }
