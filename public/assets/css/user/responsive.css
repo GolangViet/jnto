@@ -1,4 +1,4 @@
-/* 
+/*
 * <576:     xs
 * 576-768:  sm
 * 768-992:  md
@@ -71,10 +71,13 @@
         height: 3.8vw;
     }
 
+<<<<<<< Updated upstream
     .header-wrapper:has(.user-menu-dropdown) .titles {
         left: 36%;
     }
 
+=======
+>>>>>>> Stashed changes
     .logo-japan img {
         height: 100%;
     }
@@ -483,6 +486,30 @@
         padding: 1em 0;
     }
 
+<<<<<<< Updated upstream
+=======
+    .section2-contents {
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-position: 0.65em 0;
+        height: 40em;
+    }
+
+    .section2_title {
+        margin-bottom: 0;
+        top: 13em;
+    }
+
+    .section2-box {
+        top: 38em;
+    }
+
+    .section2_title>h2 {
+        font-size: clamp(12px, 1.6vw, 2em);
+    }
+
+>>>>>>> Stashed changes
     .login-footer {
         bottom: -17%;
     }
@@ -869,8 +896,100 @@
     }
 }
 
+/* ===== Index page: desktop-first max-width responsive scaling ===== */
+@media (max-width: 1400px) {
+    .sec3-wrapper {
+        max-width: 1200px;
+    }
+
+    .sec3-title {
+        width: 480px;
+        margin: 0;
+        padding-top: 5rem;
+        top: -150px;
+    }
+
+    .sec3-contents {
+        padding: 3rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .sec3-wrapper {
+        max-width: 990px;
+    }
+
+    .sec3-cta-group {
+        max-width: 620px;
+        margin-bottom: 4rem;
+    }
+
+    .sec3-title {
+        width: 420px;
+        margin: 0 auto -6.5rem;
+        padding-top: 5.5rem;
+    }
+
+    .sec3-title>h2 {
+        font-size: 3rem;
+    }
+
+    .sec3-title>h3 {
+        font-size: 2.4rem;
+    }
+
+    .sec3-contents {
+        padding: 0 3rem;
+    }
+
+    .sec3-awards-container {
+        margin-top: 380px;
+    }
+}
+
+@media (max-width: 991px) {
+    .sec3-wrapper {
+        max-width: 760px;
+    }
+
+    .sec3-cta-group {
+        max-width: 520px;
+        margin-bottom: 3.5rem;
+    }
+
+    .sec3-title {
+        width: 360px;
+        margin: 0 auto -5.5rem;
+        padding-top: 4.8rem;
+    }
+
+    .sec3-title>h2 {
+        font-size: 2.6rem;
+    }
+
+    .sec3-title>h3 {
+        font-size: 2rem;
+    }
+
+    .sec3-awards-container {
+        margin-top: 352px;
+    }
+
+    .sec3-contents {
+        padding: 0 3rem;
+    }
+
+    .sec3-cta-group {
+        top: -55px;
+    }
+}
+
 /* ===== Index page: section 3 mobile alignment ===== */
 @media (max-width: 768px) {
+    .sec3-cta-group {
+        top: 14rem;
+    }
+
     .section3 {
         font-size: 1vw;
         width: 100%;
@@ -914,7 +1033,11 @@
         background-position: center;
         background-repeat: no-repeat;
         position: absolute;
+<<<<<<< Updated upstream
         top: 6.02vw;
+=======
+        top: -155px;
+>>>>>>> Stashed changes
         left: 50%;
         transform: translateX(-50%);
         z-index: 6;
@@ -944,6 +1067,7 @@
 
     .sec3-contents {
         width: 90.46vw;
+<<<<<<< Updated upstream
         max-width: none;
         aspect-ratio: 977 / 2988;
         min-height: 0;
@@ -955,6 +1079,8 @@
         background-position: center top;
         background-size: 100% 100%;
         background-repeat: no-repeat;
+=======
+>>>>>>> Stashed changes
     }
 
     .sec3-awards {
@@ -1034,4 +1160,100 @@
         width: 45%;
         height: 2px;
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    .container.sec3-wrapper::after {
+        background-image: url(./../../images/bg/bg3-content-mobile.webp);
+        background-repeat: no-repeat;
+        background-size: 98% 95%;
+        background-position: center bottom;
+    }
+
+    .sec3-cta-group {
+        top: -40px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .section3 {
+        margin-top: -4px;
+        aspect-ratio: 1080 / 2000;
+    }
+
+    .sec3-contents {
+        padding: 0 0 65px;
+    }
+
+    .sec3-awards-container {
+        margin: 365px auto 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .section2 {
+        margin-top: -12px;
+    }
+
+    .section3 {
+        margin-top: -4px;
+        aspect-ratio: 1080 / 2000;
+    }
+
+    .sec3-contents {
+        padding: 0 40px 0;
+    }
+
+    .sec3-cta-group {
+        top: -22px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .sec3-awards-container {
+        margin: 260px auto 0;
+    }
+
+    .sec3-title {
+        top: -112px;
+    }
+
+    .container.sec3-wrapper::after {
+        background-size: 90% 95%;
+    }
+}
+
+@media (max-width: 391.98px) {
+    .section2 {
+        margin-top: -12px;
+    }
+
+    .section3 {
+        margin-top: -4px;
+        aspect-ratio: 1080 / 2000;
+    }
+
+    .sec3-contents {
+        padding: 0 0 40px;
+    }
+
+    .sec3-cta-group {
+        top: -22px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .sec3-awards-container {
+        margin: 18rem auto 0;
+    }
+
+    .sec3-title {
+        top: -75px;
+    }
+
+    .container.sec3-wrapper::after {
+        background-size: 90% 95%;
+    }
+}
+>>>>>>> Stashed changes

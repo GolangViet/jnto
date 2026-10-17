@@ -594,7 +594,7 @@ body {
 
 .section2_title {
     position: absolute;
-    top: 11.7em;
+    top: 15.7em;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -656,7 +656,7 @@ body {
 .section2-box {
     font-size: 1em;
     position: absolute;
-    top: 35.8em;
+    top: 45em;
     left: 50%;
     transform: translateX(-50%);
     width: 144.1em;
@@ -837,10 +837,17 @@ body {
     aspect-ratio: 1920 / 1640;
     background-image: url("./../../images/bg/bg-giay-vang.webp");
     background-position: center top;
+<<<<<<< Updated upstream
     background-size: 100% 100%;
     background-repeat: no-repeat;
     padding: 0;
     overflow: visible;
+=======
+    background-size: cover;
+    background-repeat: repeat-y;
+    padding-top: clamp(4em, 3.5vw, 7em);
+    padding-bottom: 5%;
+>>>>>>> Stashed changes
 }
 
 .sec3-wrapper,
@@ -856,10 +863,21 @@ body {
     align-items: center;
 }
 
+.container.sec3-wrapper::after {
+    position: absolute;
+    content: "";
+    background-image: url('./../../images/bg/bg3-content.webp');
+    background-repeat: no-repeat;
+    background-size: 98% 95%;
+    background-position: center bottom;
+    width: 100%;
+    max-width: 1490px;
+    height: 100%;
+}
+
 /* 1. Cụm nút CTA dời từ Section 2 lên top Section 3 */
 .sec3-cta-group {
     font-size: 1em;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -975,10 +993,16 @@ body {
     font-size: 1em;
     position: relative;
     width: 100%;
+<<<<<<< Updated upstream
     margin: -10.3em auto 0;
+=======
+    max-width: 1230px;
+    margin: 0 auto;
+>>>>>>> Stashed changes
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 410px;
 }
 
 /* Nút Cơ Cấu Giải Thưởng: nằm chính giữa và đè lên khung cuộn giấy */
@@ -993,9 +1017,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     position: absolute;
+<<<<<<< Updated upstream
     top: 17.4em;
     left: 50%;
     transform: translateX(-50%);
+=======
+    top: -164px;
+>>>>>>> Stashed changes
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1032,6 +1060,7 @@ body {
     position: relative;
     z-index: 1;
     margin: 0 auto;
+<<<<<<< Updated upstream
     width: 127.9em;
     max-width: 100%;
     aspect-ratio: 1279 / 1391;
@@ -1041,6 +1070,9 @@ body {
     background-size: 100% 100%;
     background-position: center top;
     padding: 34.1em 0 0 2.9em;
+=======
+    width: 100%;
+>>>>>>> Stashed changes
     border: none;
     box-sizing: border-box;
 }
@@ -1051,8 +1083,7 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     gap: 0.6em;
-    width: 124.3em;
-    margin: 0 0 3.2em 0;
+    margin: 0 0 2.2em 0;
 }
 
 .sec3-award-img {
@@ -1067,17 +1098,6 @@ body {
     width: 100%;
 }
 
-.sec3-awards>.sec3-award-picture:first-child {
-    width: 64.3em;
-    flex: 0 0 64.3em;
-}
-
-.sec3-awards>.sec3-award-picture:last-child {
-    width: 59.4em;
-    flex: 0 0 59.4em;
-    margin-top: 2em;
-}
-
 .sec3-award-picture>.sec3-award-img {
     display: block;
     width: 100%;
@@ -1085,17 +1105,19 @@ body {
 
 .sec3-footer {
     font-size: 1em;
-    width: 112.2em;
-    margin: 0 0 0 7.9em;
-    padding: 1.7em 0 0 3.3em;
+    padding: 0 100px;
     border-top: none;
-    background-image: url("./../../images/linexanh.webp");
-    background-repeat: no-repeat;
-    background-position: left top;
-    background-size: 111.5em 1px;
+    margin-bottom: 55px;
 }
 
-.sec3-footer>p {
+.sec3-footer div {
+    padding-top: 1.7em;
+    background-image: url('./../../images/linexanh.webp');
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+.sec3-footer p {
     font-size: 1.8em;
     font-weight: 500;
     color: #1749a4;

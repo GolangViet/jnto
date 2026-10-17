@@ -82,12 +82,14 @@
                     </picture>
                 </div>
                 <div class="sec3-footer">
-                    <p>
-                        *Vé máy bay được áp dụng với điểm đến Hokkaido và vé Have Fun Pass được áp dụng với điểm đến Hokkaido và Chugoku. Cả hai vé không được chuyển nhượng, trao đổi hoặc quy đổi thành tiền mặt dưới bất kỳ hình thức nào.
-                    </p>
-                    <p>
-                        *Voucher Traveloka áp dụng cho tất cả các dịch vụ trên Traveloka đối với điểm đến Nhật Bản và có thể sử dụng đồng thời với các ưu đãi khác.
-                    </p>
+                    <div>
+                        <p>
+                            *Vé máy bay được áp dụng với điểm đến Hokkaido và vé Have Fun Pass được áp dụng với điểm đến Hokkaido và Chugoku. Cả hai vé không được chuyển nhượng, trao đổi hoặc quy đổi thành tiền mặt dưới bất kỳ hình thức nào.
+                        </p>
+                        <p>
+                            *Voucher Traveloka áp dụng cho tất cả các dịch vụ trên Traveloka đối với điểm đến Nhật Bản và có thể sử dụng đồng thời với các ưu đãi khác.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
