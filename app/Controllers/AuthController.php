@@ -87,10 +87,11 @@ final class AuthController extends Controller
         }
 
         app()->session()->put('user', [
-            'id'    => $user['id'] ?? '',
-            'name'  => $user['name'] ?? '',
-            'email' => $user['email'] ?? '',
-            'role'  => $user['role'] ?? 'user',
+            'id'       => $user['id'] ?? '',
+            'username' => $user['username'] ?? '',
+            'name'     => $user['name'] ?? '',
+            'email'    => $user['email'] ?? '',
+            'role'     => $user['role'] ?? 'user',
         ]);
 
         $fromSurvey = ($request->input('from') ?? $request->query('from') ?? $_GET['from'] ?? '') === 'survey';
@@ -171,10 +172,11 @@ final class AuthController extends Controller
         $user = $this->userService->findByUsername($username);
         if ($user) {
             app()->session()->put('user', [
-                'id'    => $user['id'] ?? '',
-                'name'  => $user['name'] ?? '',
-                'email' => $user['email'] ?? '',
-                'role'  => $user['role'] ?? 'user',
+                'id'       => $user['id'] ?? '',
+                'username' => $user['username'] ?? $username,
+                'name'     => $user['name'] ?? '',
+                'email'    => $user['email'] ?? '',
+                'role'     => $user['role'] ?? 'user',
             ]);
         }
 
@@ -233,10 +235,11 @@ final class AuthController extends Controller
         }
 
         app()->session()->put('user', [
-            'id' => $user['id'],
-            'name' => $user['name'],
-            'email' => $user['email'],
-            'role' => 'admin',
+            'id'       => $user['id'],
+            'username' => $user['username'] ?? '',
+            'name'     => $user['name'],
+            'email'    => $user['email'],
+            'role'     => 'admin',
         ]);
 
         $this->redirect('/admin/dashboard');

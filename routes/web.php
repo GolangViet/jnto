@@ -101,6 +101,7 @@ $router->post('/api/admin/quizzes/{quizId}/questions/reorder', [AdminQuestionCon
 
 // End-User take survey
 $router->get('/take-survey', [TakeSurveyController::class, 'detailSurvey']);
+$router->post('/api/survey/sync', [TakeSurveyController::class, 'apiSyncSurvey'], [AuthMiddleware::class]);
 $router->get('/take-questions', [TakeSurveyController::class, 'detailQuestions'], [AuthMiddleware::class]);
 $router->get('/confirm-post', [TakeSurveyController::class, 'confirmPost'], [AuthMiddleware::class]);
 $router->post('/submit-post', [TakeSurveyController::class, 'submitPost'], [AuthMiddleware::class]);
