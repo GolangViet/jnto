@@ -95,7 +95,7 @@
         <div class="container">
             <div class="footer-wrapper">
                 <div class="footer_socials">
-                    <h3 class="footer_socials_title"><span>JNTO - Cơ quan Xúc tiến Du Lịch Nhật Bản</span></h3>
+                    <h3 class="footer_socials_title"><span>JNTO - Cơ quan Xúc tiến Du lịch Nhật Bản</span></h3>
                     <ul class="footer_social">
                         <li>
                             <a class="footer_social_item" href="https://www.facebook.com/camnhannhatban" title="Fanpage" target="_blank">
@@ -118,13 +118,22 @@
                     <h3 class="footer_sponsor_title"><span>Nhà tài trợ</span></h3>
                     <div class="footer_sponser_brands">
                         <a href="https://www.vietnamairlines.com/dk/vi/lotusmiles" title="Vietnam Arilines" target="_blank">
-                            <img src="<?= assets('images/brand-1.webp') ?>" alt="Vietnam Arilines">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="<?= assets('images/footer/logo-jal-mobile.png') ?>">
+                                <img src="<?= assets('images/footer/logo-jal.png') ?>" alt="Japan Airlines">
+                            </picture>
                         </a>
                         <a target="_blank" href="https://travelcontentsapp.com/en/" title="Travel">
-                            <img src="<?= assets('images/brand-2.webp') ?>" alt="Travel contents logo">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="<?= assets('images/footer/logo-travel-contents-mobile.png') ?>">
+                                <img src="<?= assets('images/footer/logo-travel-contents.png') ?>" alt="Travel contents logo">
+                            </picture>
                         </a>
                         <a target="_blank" href="https://www.traveloka.com/vi-vn/destination/country/japan-20001756?funnel_source=Merchandising.vacation.TravelGuides_LandingPage-web-VN-DLP&funnel_id=M_1_b41683d458b3ed10096e416ad64ee41bff455f79_0_22728a3bdc820eeec027b382e039b800007ce70f&internal_source=true&cur=VND" title="Traveloka">
-                            <img src="<?= assets('images/brand-3.webp') ?>" alt="Traveloka logo">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="<?= assets('images/footer/logo-traveloka-mobile.png') ?>">
+                                <img src="<?= assets('images/footer/logo-traveloka.png') ?>" alt="Traveloka logo">
+                            </picture>
                         </a>
 
                     </div>

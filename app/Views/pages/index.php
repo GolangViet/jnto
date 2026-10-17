@@ -7,7 +7,7 @@
     <div class="container section2_wrapper">
         <div class="section2_title">
             <h2>Cùng Cơ quan Xúc tiến Du lịch Nhật Bản (JNTO) tham gia <br>
-                thử thách <strong>“NHẬT BẢN: VẺ ĐẸP VÔ TẬN, ĐI ĐỂ TRỞ VỀ"</strong> <br>
+                thử thách <strong>“NHẬT BẢN: VẺ ĐẸP VÔ TẬN, ĐI ĐỂ TRỞ VỀ”</strong> <br>
                 trên trang chiến dịch để nhận vô số phần quà giá trị.
             </h2>
             <div class="sec2-line-top">
@@ -35,12 +35,12 @@
                     <div class="sec2-time_title2"><span>ĐỐI TƯỢNG THAM GIA</span></div>
                     <ul class="sec2_info2">
                         <li>
-                            <p class="sec2-copy-desktop">Là công dân Việt Nam, từ đủ 18 tuổi<br> trở lên, đang sinh sống trên lãnh thổ<br> Việt Nam</p>
-                            <p class="sec2-copy-mobile">Là công dân Việt Nam, từ đủ 18 tuổi trở lên,<br>đang sinh sống trên lãnh thổ Việt Nam.</p>
+                            <p class="sec2-copy-desktop">Là công dân Việt Nam, từ đủ 18 tuổi<br> trở lên, đang sinh sống trên lãnh thổ<br> Việt Nam.</p>
+                            <p class="sec2-copy-mobile">Là công dân Việt Nam, từ đủ 18 tuổi<br>trở lên, đang sinh sống trên lãnh thổ<br>Việt Nam.</p>
                         </li>
                         <li>
-                            <p class="sec2-copy-desktop">Bằng việc tham gia, người chơi xác nhận<br> đã đọc, hiểu rõ và đồng ý với các<br> quy định tại Thể lệ này.</p>
-                            <p class="sec2-copy-mobile">Bằng việc tham gia, người chơi xác nhận<br>đã đọc, hiểu rõ và đồng ý với các quy định<br>tại Thể lệ này.</p>
+                            <p class="sec2-copy-desktop">Bằng việc tham gia, người chơi xác nhận<br> đã đọc, hiểu rõ và đồng ý với các quy<br> định tại Thể lệ này.</p>
+                            <p class="sec2-copy-mobile">Bằng việc tham gia, người chơi xác nhận<br>đã đọc, hiểu rõ và đồng ý với các quy<br>định tại Thể lệ này.</p>
                         </li>
                     </ul>
                 </div>
@@ -68,11 +68,14 @@
         <div class="sec3-awards-container">
             <div class="sec3-title">
                 <h2>CƠ CẤU GIẢI THƯỞNG</h2>
-                <h3>50 phần quà hấp dẫn</h3>
+                <h3>50 PHẦN QUÀ HẤP DẪN</h3>
             </div>
             <div class="sec3-contents">
                 <div class="sec3-awards">
-                    <img class="sec3-award-img" src="<?= assets('images/giai-nhat.webp') ?>" alt="giải thưởng 1">
+                    <picture class="sec3-award-picture">
+                        <source media="(max-width: 768px)" srcset="<?= assets('images/giai-nhat-mobile.webp') ?>">
+                        <img class="sec3-award-img" src="<?= assets('images/giai-nhat.webp') ?>" alt="giải thưởng 1">
+                    </picture>
                     <picture class="sec3-award-picture">
                         <source media="(max-width: 768px)" srcset="<?= assets('images/giai-hai-ba-bon-mobile.webp') ?>">
                         <img class="sec3-award-img" src="<?= assets('images/giai-hai-ba-bon.webp') ?>" alt="giải nhì, giải ba và giải khuyến khích">

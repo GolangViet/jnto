@@ -1,0 +1,87 @@
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - img "logo Campaign nhật bản" [ref=f1e5]
+      - generic [ref=f1e6]:
+        - img "logo jed" [ref=f1e7]
+        - img "logo jnto" [ref=f1e8]
+      - generic [ref=f1e9]:
+        - img "icon hoa" [ref=f1e11]
+        - heading "VẺ ĐẸP VÔ TẬN ĐI ĐỂ TRỞ VỀ" [level=1] [ref=f1e12]
+        - img "icon hoa" [ref=f1e14]
+  - img "banner" [ref=f1e17]
+  - generic [ref=f1e18]:
+    - generic:
+      - img "bg2"
+    - generic [ref=f1e19]:
+      - heading [level=2] [ref=f1e21]:
+        - text: Cùng Cơ quan Xúc tiến Du lịch Nhật Bản (JNTO) tham gia thử thách
+        - strong [ref=f1e22]: "“NHẬT BẢN: VẺ ĐẸP VÔ TẬN, ĐI ĐỂ TRỞ VỀ”"
+        - text: trên trang chiến dịch để nhận vô số phần quà giá trị.
+      - generic [ref=f1e26]:
+        - generic [ref=f1e27]:
+          - generic [ref=f1e28]: THỜI GIAN
+          - generic [ref=f1e30]:
+            - heading "05/11 - 27/12/2026" [level=4] [ref=f1e31]
+            - heading "Thời gian công bố kết quả:" [level=5] [ref=f1e32]
+            - heading "25/01/2027" [level=4] [ref=f1e33]
+            - paragraph [ref=f1e34]: "*Danh sách trúng thưởng sẽ được công bố trên Fanpage JNTO"
+        - generic [ref=f1e35]:
+          - generic [ref=f1e36]: ĐỐI TƯỢNG THAM GIA
+          - list [ref=f1e38]:
+            - listitem [ref=f1e39]:
+              - paragraph [ref=f1e40]: Là công dân Việt Nam, từ đủ 18 tuổi trở lên, đang sinh sống trên lãnh thổ Việt Nam.
+            - listitem [ref=f1e41]:
+              - paragraph [ref=f1e42]: Bằng việc tham gia, người chơi xác nhận đã đọc, hiểu rõ và đồng ý với các quy định tại Thể lệ này.
+  - generic [ref=f1e44]:
+    - generic [ref=f1e45]:
+      - link "THAM GIA NGAY" [ref=f1e46]:
+        - /url: page3.html
+      - generic [ref=f1e49]:
+        - strong [ref=f1e50]: CÁCH THỨC THAM GIA
+        - generic [ref=f1e51]: Tìm hiểu thêm tại đây
+    - generic [ref=f1e52]:
+      - generic [ref=f1e53]:
+        - heading "CƠ CẤU GIẢI THƯỞNG" [level=2] [ref=f1e54]
+        - heading "50 PHẦN QUÀ HẤP DẪN" [level=3] [ref=f1e55]
+      - generic [ref=f1e56]:
+        - generic [ref=f1e57]:
+          - img "giải thưởng 1" [ref=f1e59]
+          - img "giải nhì, giải ba và giải khuyến khích" [ref=f1e61]
+        - generic [ref=f1e62]:
+          - paragraph [ref=f1e63]: "*Vé máy bay được áp dụng với điểm đến Hokkaido và vé Have Fun Pass được áp dụng với điểm đến Hokkaido và Chugoku. Cả hai vé không được chuyển nhượng, trao đổi hoặc quy đổi thành tiền mặt dưới bất kỳ hình thức nào."
+          - paragraph [ref=f1e64]: "*Voucher Traveloka áp dụng cho tất cả các dịch vụ trên Traveloka đối với điểm đến Nhật Bản và có thể sử dụng đồng thời với các ưu đãi khác."
+  - contentinfo [ref=f1e65]:
+    - generic [ref=f1e66]:
+      - generic [ref=f1e67]:
+        - generic [ref=f1e68]:
+          - heading "JNTO - Cơ quan Xúc tiến Du lịch Nhật Bản" [level=3] [ref=f1e69]
+          - list [ref=f1e70]:
+            - listitem [ref=f1e71]:
+              - link "Fanpage" [ref=f1e72]:
+                - /url: https://www.facebook.com/camnhannhatban
+            - listitem [ref=f1e73]:
+              - link "instagram" [ref=f1e74]:
+                - /url: https://www.instagram.com/visitjapan_vn
+            - listitem [ref=f1e75]:
+              - link "youtube" [ref=f1e76]:
+                - /url: https://www.youtube.com/user/visitjapan/featured
+        - generic [ref=f1e77]:
+          - heading "Nhà tài trợ" [level=3] [ref=f1e78]
+          - generic [ref=f1e80]:
+            - link [ref=f1e81]:
+              - /url: https://www.vietnamairlines.com/dk/vi/lotusmiles
+              - img "Japan Airlines" [ref=f1e83]
+            - link [ref=f1e84]:
+              - /url: https://travelcontentsapp.com/en/
+              - img "Travel contents logo" [ref=f1e86]
+            - link [ref=f1e87]:
+              - /url: https://www.traveloka.com/vi-vn/destination/country/japan-20001756?funnel_source=Merchandising.vacation.TravelGuides_LandingPage-web-VN-DLP&funnel_id=M_1_b41683d458b3ed10096e416ad64ee41bff455f79_0_22728a3bdc820eeec027b382e039b800007ce70f&internal_source=true&cur=VND
+              - img "Traveloka logo" [ref=f1e89]
+      - list [ref=f1e91]:
+        - listitem [ref=f1e92]:
+          - link "Chính sách Quyền riêng tư" [ref=f1e93]:
+            - /url: https://www.japan.travel/vi/vn/privacy-policy
+        - listitem [ref=f1e94]:
+          - link "Chính sách Cookie" [ref=f1e95]:
+            - /url: https://www.japan.travel/vi/vn/cookie-policy
