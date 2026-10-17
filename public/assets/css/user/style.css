@@ -63,8 +63,11 @@ body {
     height: 100%;
 }
 
-.logo-japan>img {
+.logo-japan>img,
+.logo-japan>a,
+.logo-japan>a>img {
     height: 100%;
+    display: block;
 }
 
 .header-right {
@@ -79,8 +82,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(12px, 1.5vw, 2em);
-    height: 100%;
+    gap: 2em;
+    height: clamp(30px, 4vw, 5em);
 }
 
 .logos>img {
@@ -512,6 +515,10 @@ body {
         height: clamp(6.5em, 4.95vw, 9.5em);
     }
 
+    .header-right {
+        height: clamp(3em, 2.604vw, 5em);
+    }
+
     .logos {
         height: clamp(3em, 2.604vw, 5em);
         gap: clamp(3em, 2.604vw, 5em);
@@ -822,16 +829,16 @@ body {
 /* --- section 3 ------ */
 .section3 {
     position: relative;
-    margin-top: -30px;
+    font-size: clamp(4px, 0.520833vw, 20px);
+    margin-top: -4.7em;
     width: 100%;
     aspect-ratio: 1920 / 1640;
     background-image: url("./../../images/bg/bg-giay-vang.webp");
     background-position: center top;
-    background-size: cover;
-    background-repeat: repeat-y;
-    padding-top: clamp(4em, 3.5vw, 7em);
-    padding-bottom: 5%;
-    /* overflow: hidden; */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 0;
+    overflow: visible;
 }
 
 .sec3-wrapper,
@@ -854,14 +861,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1.5em;
-    width: 100%;
-    max-width: 73.4em;
-    margin: 0 auto;
+    justify-content: flex-start;
+    gap: 1.9em;
+    width: 73.4em;
+    max-width: 90%;
+    margin: -3.8em auto 0;
     z-index: 5;
-    position: absolute;
-    top: -107px;
 }
 
 .btn-join-top {
@@ -968,8 +973,7 @@ body {
     font-size: 1em;
     position: relative;
     width: 100%;
-    max-width: 127.9em;
-    margin: 145px auto 0;
+    margin: -10.3em auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -986,16 +990,17 @@ body {
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    margin: 0 auto -8.5em; /* Kéo đè lên viền trên của bg3-content.webp */
     position: absolute;
-    top: 125px;
+    top: 17.4em;
+    left: 50%;
+    transform: translateX(-50%);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 5.5em;
-    gap: 0.8em;
+    padding-top: 5.9em;
+    gap: 0.95em;
     text-align: center;
     margin: 0;
 }
@@ -1025,14 +1030,15 @@ body {
     position: relative;
     z-index: 1;
     margin: 0 auto;
-    width: 100%;
-    /*max-width: 127.9em;*/
-    /*aspect-ratio: 1279 / 1391;*/
+    width: 127.9em;
+    max-width: 100%;
+    aspect-ratio: 1279 / 1391;
+    transform: translateX(-2.55em);
     background-image: url("./../../images/bg/bg3-content.webp");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center top;
-    padding: 31em 15em 10em 15em; /* Chừa 14em bên trên cho nút sec3-title đè lên */
+    padding: 34.1em 0 0 2.9em;
     border: none;
     box-sizing: border-box;
 }
