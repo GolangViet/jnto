@@ -74,7 +74,7 @@
     .header-wrapper:has(.user-menu-dropdown) .titles {
         left: 36%;
     }
-    
+
     .logo-japan img {
         height: 100%;
     }
@@ -193,10 +193,12 @@
         font-size: 2.56vw;
     }
 
-    .footer_sponser_brands {
-        height: 68.98%;
-        padding: 0 2.04vw 0 3.33vw;
-        gap: 3.5vw;
+    .footer-wrapper {
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+        gap: 3em;
+        flex-direction: column;
     }
 
     .footer_sponser_brands>a:nth-child(1) {
@@ -207,18 +209,23 @@
         width: 21.85vw;
     }
 
-    .footer_sponser_brands>a:nth-child(3) {
-        width: 15.37vw;
-        transform: translateY(-0.6vw);
+    .footer_socials_title>span {
+        font-size: clamp(14px, 3.3vw, 2.5em);
     }
 
-    .footer-private {
-        width: 100%;
-        margin: 3.24vw 0 0;
-        padding-top: 1.85vw;
-        background-image: url("./../../images/footer/line-mobile.png");
-        background-size: 100% 1px;
+    .footer_social {
+        justify-content: center;
+        align-items: center;
     }
+
+    .footer_social_item {
+        font-size: 8px;
+    }
+
+    /* .footer_sponsors {
+        width: 85%;
+        margin: auto;
+    } */
 
     .footer_links a {
         font-size: 2.22vw;
@@ -399,7 +406,7 @@
         background-image: url("./../../images/register/icon-checkpoint-mobile.webp");
     }
 
-    .agree-item input:checked + .checkmark {
+    .agree-item input:checked+.checkmark {
         background-image: url("./../../images/register/icon-mark-mobile.webp");
     }
 

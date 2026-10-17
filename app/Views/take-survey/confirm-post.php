@@ -17,7 +17,7 @@
         <img src="<?= assets('images/page-4/box-chugoku.webp') ?>" alt="">
     </a>
 
-    <a class="region-card region-card--hokkaido"
+    <a class="region-card region-card--hokuriku"
        href="https://www.japan.travel/vi/destinations/hokkaido/hokkaido/"
        target="_blank" rel="noopener noreferrer"
        aria-label="Tìm hiểu về vùng Hokkaido">
