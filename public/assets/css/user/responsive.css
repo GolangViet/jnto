@@ -194,6 +194,7 @@
         align-items: center;
         justify-content: center;
         gap: 3em;
+        flex-direction: column;
     }
 
     .footer>.container {
@@ -210,16 +211,17 @@
 
     .footer_social {
         justify-content: center;
+        align-items: center;
     }
 
     .footer_social_item {
         font-size: 8px;
     }
 
-    .footer_sponsors {
+    /* .footer_sponsors {
         width: 85%;
         margin: auto;
-    }
+    } */
 
     .footer_links a {
         font-size: 2.22vw;
