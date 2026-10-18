@@ -63,8 +63,11 @@ body {
     height: 100%;
 }
 
-.logo-japan>img {
+.logo-japan>img,
+.logo-japan>a,
+.logo-japan>a>img {
     height: 100%;
+    display: block;
 }
 
 .header-right {
@@ -79,8 +82,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(12px, 1.5vw, 2em);
-    height: 100%;
+    gap: 2em;
+    height: clamp(30px, 4vw, 5em);
 }
 
 .logos>img {
@@ -226,6 +229,7 @@ body {
         opacity: 0;
         transform: translateY(-6px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -269,6 +273,7 @@ body {
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -512,6 +517,10 @@ body {
         height: clamp(6.5em, 4.95vw, 9.5em);
     }
 
+    .header-right {
+        height: clamp(3em, 2.604vw, 5em);
+    }
+
     .logos {
         height: clamp(3em, 2.604vw, 5em);
         gap: clamp(3em, 2.604vw, 5em);
@@ -553,7 +562,7 @@ body {
     font-size: clamp(4px, 0.520833vw, 20px);
 }
 
-.section2 > picture {
+.section2>picture {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -585,7 +594,7 @@ body {
 
 .section2_title {
     position: absolute;
-    top: 15.7em;
+    top: 11.7em;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -647,7 +656,7 @@ body {
 .section2-box {
     font-size: 1em;
     position: absolute;
-    top: 45em;
+    top: 35.8em;
     left: 50%;
     transform: translateX(-50%);
     width: 144.1em;
@@ -822,15 +831,16 @@ body {
 /* --- section 3 ------ */
 .section3 {
     position: relative;
-    margin-top: -30px;
+    font-size: clamp(4px, 0.520833vw, 20px);
+    margin-top: -4.7em;
     width: 100%;
     aspect-ratio: 1920 / 1640;
     background-image: url("./../../images/bg/bg-giay-vang.webp");
     background-position: center top;
-    background-size: cover;
-    background-repeat: repeat-y;
-    padding-top: clamp(4em, 3.5vw, 7em);
-    padding-bottom: 5%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 0;
+    overflow: visible;
 }
 
 .sec3-wrapper,
@@ -846,32 +856,19 @@ body {
     align-items: center;
 }
 
-.container.sec3-wrapper::after {
-    position: absolute;
-    content: "";
-    background-image: url('./../../images/bg/bg3-content.webp');
-    background-repeat: no-repeat;
-    background-size: 98% 95%;
-    background-position: center bottom;
-    width: 100%;
-    max-width: 1490px;
-    height: 100%;
-}
-
 /* 1. Cụm nút CTA dời từ Section 2 lên top Section 3 */
 .sec3-cta-group {
     font-size: 1em;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1.5em;
-    width: 100%;
-    max-width: 73.4em;
-    margin: 0 auto;
+    justify-content: flex-start;
+    gap: 1.9em;
+    width: 73.4em;
+    max-width: 90%;
+    margin: -3.8em auto 0;
     z-index: 5;
-    position: absolute;
-    top: -107px;
 }
 
 .btn-join-top {
@@ -978,12 +975,10 @@ body {
     font-size: 1em;
     position: relative;
     width: 100%;
-    max-width: 1230px;
-    margin: 0 auto;
+    margin: -10.3em auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 410px;
 }
 
 /* Nút Cơ Cấu Giải Thưởng: nằm chính giữa và đè lên khung cuộn giấy */
@@ -998,14 +993,16 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     position: absolute;
-    top: -164px;
+    top: 17.4em;
+    left: 50%;
+    transform: translateX(-50%);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 5.5em;
-    gap: 0.8em;
+    padding-top: 5.9em;
+    gap: 0.95em;
     text-align: center;
     margin: 0;
 }
@@ -1035,7 +1032,15 @@ body {
     position: relative;
     z-index: 1;
     margin: 0 auto;
-    width: 100%;
+    width: 127.9em;
+    max-width: 100%;
+    aspect-ratio: 1279 / 1391;
+    transform: translateX(-2.55em);
+    background-image: url("./../../images/bg/bg3-content.webp");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center top;
+    padding: 34.1em 0 0 2.9em;
     border: none;
     box-sizing: border-box;
 }
@@ -1046,7 +1051,8 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     gap: 0.6em;
-    margin: 0 0 2.2em 0;
+    width: 124.3em;
+    margin: 0 0 3.2em 0;
 }
 
 .sec3-award-img {
@@ -1061,6 +1067,17 @@ body {
     width: 100%;
 }
 
+.sec3-awards>.sec3-award-picture:first-child {
+    width: 64.3em;
+    flex: 0 0 64.3em;
+}
+
+.sec3-awards>.sec3-award-picture:last-child {
+    width: 59.4em;
+    flex: 0 0 59.4em;
+    margin-top: 2em;
+}
+
 .sec3-award-picture>.sec3-award-img {
     display: block;
     width: 100%;
@@ -1068,19 +1085,17 @@ body {
 
 .sec3-footer {
     font-size: 1em;
-    padding: 0 100px;
+    width: 112.2em;
+    margin: 0 0 0 7.9em;
+    padding: 1.7em 0 0 3.3em;
     border-top: none;
-    margin-bottom: 55px;
-}
-
-.sec3-footer div {
-    padding-top: 1.7em;
-    background-image: url('./../../images/linexanh.webp');
+    background-image: url("./../../images/linexanh.webp");
     background-repeat: no-repeat;
-    background-position: center top;
+    background-position: left top;
+    background-size: 111.5em 1px;
 }
 
-.sec3-footer p {
+.sec3-footer>p {
     font-size: 1.8em;
     font-weight: 500;
     color: #1749a4;
@@ -1751,7 +1766,7 @@ body.modal-open-body {
     position: relative;
     font-size: 1rem;
     width: 100%;
-    aspect-ratio: 1920 / 1345;
+    aspect-ratio: 1920 / 1227;
     min-height: 980px;
     background-image: url("./../../images/register/bg-register.webp");
     background-repeat: no-repeat;
@@ -2025,17 +2040,16 @@ body.modal-open-body {
 }
 
 .alert_info_desc {
-    width: 75%;
+    width: 86%;
+    height: 70%;
     font-size: clamp(10px, 0.8vw, 13.5px);
-    line-height: 1.5;
+    line-height: 1.35;
     color: #e02438;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     text-align: center;
-    padding: 15px 10px;
-    margin-top: 0;
 }
 
 .alert_info_desc strong {
@@ -2176,34 +2190,4 @@ body.modal-open-body {
     background: #4b5563;
     box-shadow: 0 0 12px rgba(75, 85, 99, 0.5);
     transform: translateY(-1px);
-}
-
-.d-none {
-    display: none!important;
-}
-
-.login-username label,
-.login-pass label {
-    color: #e53935;
-}
-
-.agree-item .text {
-    font-size: 18px;
-}
-
-.btn-register>span {
-    font-size: 35px;
-}
-
-#register-form .btn-register {
-    margin-bottom: 20px;
-}
-
-#register-form h3 {
-    font-size: 18px;
-}
-
-
-#register-form .alert_info_desc {
-    font-size: 18px;
 }
