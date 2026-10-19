@@ -7,8 +7,7 @@
         <?= csrf_field() ?>
         <div class="login-error" id="login-error" role="alert" aria-live="polite" hidden>
             <p class="login-error-text">
-                <span class="login-error-line">Tên đăng nhập/ Mật khẩu không đúng.</span><br>
-                Vui lòng thử lại.
+                <span class="login-error-line">Tên đăng nhập/ Mật khẩu không đúng.<br>Vui lòng thử lại.</span>
             </p>
             <button type="button" class="login-error-close" id="login-error-close" aria-label="Đóng thông báo">
                 <img src="<?= assets('images/login/icon-close.webp') ?>" alt="Đóng" class="login-error-close-img">

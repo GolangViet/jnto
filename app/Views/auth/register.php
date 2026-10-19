@@ -61,14 +61,14 @@
 
             <button type="submit" class="btn-register"><span>ĐĂNG KÝ</span></button>
             <h3>Bạn đã có tài khoản? <a href="<?= url('login') ?>" title="Đăng nhập">Đăng nhập</a></h3>
-
-            <div class="alert_info">
-                <h3 class="alert_info_title">LƯU Ý</h3>
-                <p class="alert_info_desc"><span>*Người tham gia <strong>vui lòng ghi nhớ thông tin tài khoản đã đăng ký.</strong> Trong trường hợp quên tài khoản hoặc mật khẩu, người tham gia sẽ cần <strong>đăng ký tài khoản mới</strong> và thực hiện các bước tham gia chương trình lại từ đầu.</span>
-                </p>
-            </div>
         </div>
     </form>
+
+    <div class="alert_info">
+        <h3 class="alert_info_title">LƯU Ý</h3>
+        <p class="alert_info_desc"><span>*Người tham gia <strong>vui lòng ghi nhớ thông tin tài khoản đã đăng ký.</strong> Trong trường hợp quên tài khoản hoặc mật khẩu, người tham gia sẽ cần đăng ký tài khoản mới và thực hiện các bước tham gia chương trình lại từ đầu.</span>
+        </p>
+    </div>
 </section>
 
 <div class="modal terms-modal" id="terms-modal" role="dialog" aria-modal="true" aria-label="Điều kiện và Điều khoản">

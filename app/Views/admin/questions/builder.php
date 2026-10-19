@@ -55,6 +55,112 @@
     opacity: 1;
     transform: translateX(-50%) translateY(-2px);
 }
+
+/* Delete Confirmation Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 16px;
+    animation: fadeInModal 0.15s ease-out;
+}
+
+.modal-dialog {
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    animation: scaleUpModal 0.15s ease-out;
+}
+
+.modal-content-wrapper {
+    padding: 24px;
+}
+
+.modal-icon-title-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.modal-danger-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fee2e2;
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.modal-text-content {
+    flex: 1;
+}
+
+.modal-title {
+    margin: 0 0 6px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.modal-description {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.4;
+}
+
+.modal-question-quote {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #374151;
+    word-break: break-word;
+    font-style: italic;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 24px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+@keyframes scaleUpModal {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 </style>
 
 <div style="margin-bottom: 24px; animation: fadeIn 0.3s ease-out;">
@@ -188,6 +294,30 @@
     </div>
 </div>
 
+<!-- Modal: Delete Confirmation -->
+<div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+    <div class="modal-dialog">
+        <div class="modal-content-wrapper">
+            <div class="modal-icon-title-wrap">
+                <div class="modal-danger-icon">
+                    <svg style="width: 24px; height: 24px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </div>
+                <div class="modal-text-content">
+                    <h3 class="modal-title" id="delete-modal-title">Delete Question</h3>
+                    <p class="modal-description">Are you sure you want to delete this question? This action cannot be undone.</p>
+                    <div id="delete-modal-question-preview" class="modal-question-quote" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" onclick="closeDeleteModal()" class="btn" style="background: #ffffff; color: #374151; border: 1px solid #d1d5db;">Cancel</button>
+            <button type="button" id="confirm-delete-btn" onclick="executeDeleteQuestion()" class="btn danger" style="background: #dc2626;">Delete Question</button>
+        </div>
+    </div>
+</div>
+
 <script>
 const quizId = <?= (int)$quiz['id'] ?>;
 let questions = [];
@@ -276,7 +406,7 @@ function renderQuestionsList() {
             </div>
             <div style="display: flex; gap: 6px;">
                 <button type="button" onclick="loadQuestionIntoEditor(${q.id})" class="btn" style="background: #e5e7eb; color: #4b5563; padding: 4px 8px; font-size: 0.75rem;">Edit</button>
-                <button type="button" onclick="deleteQuestion(${q.id})" class="btn danger" style="padding: 4px 8px; font-size: 0.75rem;">Del</button>
+                <button type="button" onclick="openDeleteModal(${q.id}, event)" class="btn danger" style="padding: 4px 8px; font-size: 0.75rem;">Del</button>
             </div>
         `;
         questionsList.appendChild(li);
@@ -633,15 +763,91 @@ async function saveAndAddAnother() {
     }
 }
 
-async function deleteActiveQuestion() {
-    const id = editIdInput.value;
-    if (!id) return;
+let targetQuestionIdToDelete = null;
 
-    if (confirm('Are you sure you want to delete this question?')) {
-        await deleteQuestion(parseInt(id));
-        clearFormForNewQuestion();
+function openDeleteModal(id, event) {
+    if (event) {
+        event.stopPropagation();
+    }
+    targetQuestionIdToDelete = id;
+    
+    const modal = document.getElementById('delete-modal');
+    const previewEl = document.getElementById('delete-modal-question-preview');
+    const q = questions.find(item => item.id === id);
+
+    if (previewEl) {
+        if (q && q.question_text) {
+            previewEl.textContent = `"${q.question_text}"`;
+            previewEl.style.display = 'block';
+        } else {
+            previewEl.textContent = '';
+            previewEl.style.display = 'none';
+        }
+    }
+
+    if (modal) {
+        modal.style.display = 'flex';
     }
 }
+
+function closeDeleteModal() {
+    targetQuestionIdToDelete = null;
+    const modal = document.getElementById('delete-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+async function executeDeleteQuestion() {
+    if (!targetQuestionIdToDelete) return;
+
+    const id = targetQuestionIdToDelete;
+    const confirmBtn = document.getElementById('confirm-delete-btn');
+    if (confirmBtn) {
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'Deleting...';
+    }
+
+    try {
+        await deleteQuestion(id);
+        if (editIdInput && editIdInput.value == id) {
+            clearFormForNewQuestion();
+        }
+    } finally {
+        if (confirmBtn) {
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = 'Delete Question';
+        }
+        closeDeleteModal();
+    }
+}
+
+function deleteActiveQuestion() {
+    const id = editIdInput.value;
+    if (!id) return;
+    openDeleteModal(parseInt(id));
+}
+
+// Close delete modal on Escape or backdrop click
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('delete-modal');
+        if (modal && modal.style.display === 'flex') {
+            closeDeleteModal();
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const deleteModal = document.getElementById('delete-modal');
+    if (deleteModal) {
+        deleteModal.addEventListener('click', (e) => {
+            if (e.target === deleteModal) {
+                closeDeleteModal();
+            }
+        });
+    }
+});
 
 async function deleteQuestion(id) {
     try {
