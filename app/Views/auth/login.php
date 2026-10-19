@@ -1,4 +1,4 @@
-<div id="survey-save-notice" class="message-container info" style="display: none; background-color: #e8f4fd; color: #0d47a1; border: 1px solid #bbdefb; margin: 12px auto; max-width: 580px; border-radius: 8px; padding: 12px 16px; font-size: 14px; text-align: center;">
+<div id="survey-save-notice" class="message-container info d-none" style="display: none!important; background-color: #e8f4fd; color: #0d47a1; border: 1px solid #bbdefb; margin: 12px auto; max-width: 580px; border-radius: 8px; padding: 12px 16px; font-size: 14px; text-align: center;">
     <span>🎉 Bạn đã hoàn thành khảo sát! Vui lòng đăng nhập (hoặc <a href="<?= url('register') ?>" style="color: #0d47a1; text-decoration: underline; font-weight: bold;">đăng ký</a>) để lưu kết quả và tiếp tục.</span>
 </div>
 
@@ -7,8 +7,7 @@
         <?= csrf_field() ?>
         <div class="login-error" id="login-error" role="alert" aria-live="polite" hidden>
             <p class="login-error-text">
-                <span class="login-error-line">Tên đăng nhập/ Mật khẩu không đúng.</span><br>
-                Vui lòng thử lại.
+                <span class="login-error-line">Tên đăng nhập/ Mật khẩu không đúng.<br>Vui lòng thử lại.</span>
             </p>
             <button type="button" class="login-error-close" id="login-error-close" aria-label="Đóng thông báo">
                 <img src="<?= assets('images/login/icon-close.webp') ?>" alt="Đóng" class="login-error-close-img">

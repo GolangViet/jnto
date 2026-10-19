@@ -174,11 +174,8 @@
                 <div class="footer_sponsors">
                     <h3 class="footer_sponsor_title"><span>Nhà tài trợ</span></h3>
                     <div class="footer_sponser_brands">
-                        <a href="https://www.vietnamairlines.com/dk/vi/lotusmiles" title="Vietnam Arilines" target="_blank">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="<?= assets('images/footer/logo-jal-mobile.png') ?>">
-                                <img src="<?= assets('images/footer/logo-jal.png') ?>" alt="Japan Airlines">
-                            </picture>
+                        <a href="https://www.jal.co.jp/vn/vn/" title="Japan Airlines" target="_blank">
+                            <img src="<?= assets('images/brand-4.png') ?>" alt="Japan Airlines">
                         </a>
                         <a target="_blank" href="https://travelcontentsapp.com/en/" title="Travel">
                             <picture>
