@@ -1772,7 +1772,6 @@ body.modal-open-body {
     align-items: center;
     justify-content: center;
     padding: clamp(20px, 3vw, 50px) 0;
-    overflow: hidden;
 }
 
 .registers {
