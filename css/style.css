@@ -738,7 +738,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
-    padding: 4.8em 2em 1em;
+    padding: 5.3em 2em 1em;
     text-align: center;
     pointer-events: auto;
 }
@@ -920,6 +920,7 @@ body {
     z-index: 5;
     cursor: pointer;
     margin: 0 auto;
+    transition: transform 0.2s ease;
 }
 
 .btn-cta_link {
@@ -959,14 +960,7 @@ body {
 }
 
 .btn-cta:hover {
-    background-image: url("../img/btn-cta-h.webp");
-}
-
-.btn-cta:hover>.btn-cta_link,
-.btn-cta:hover>.btn-cta_link>strong,
-.btn-cta:hover>.btn-cta_link>span,
-.btn-cta:hover>.btn-cta_link>span>u {
-    color: var(--white);
+    transform: scale(1.02);
 }
 
 /* 2. Khung giải thưởng với nút Cơ Cấu Giải Thưởng đè lên bg3-content.webp */
@@ -1084,17 +1078,18 @@ body {
 
 .sec3-footer {
     font-size: 1em;
-    width: 112.2em;
+    width: 103.5em;
     margin: 0 0 0 7.9em;
-    padding: 1.7em 0 0 3.3em;
+    padding: 1.7em 1.5em 0 3.3em;
     border-top: none;
     background-image: url("../img/linexanh.webp");
     background-repeat: no-repeat;
     background-position: left top;
-    background-size: 111.5em 1px;
+    background-size: 103.5em 1px;
 }
 
-.sec3-footer>p {
+.sec3-footer>p,
+.sec3-footer p {
     font-size: 1.8em;
     font-weight: 500;
     color: #1749a4;

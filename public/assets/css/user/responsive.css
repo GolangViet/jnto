@@ -522,7 +522,7 @@
         height: auto;
         aspect-ratio: 1080 / 1525;
         overflow: visible;
-        margin-top: 0;
+        margin-top: -3.06vw;
     }
 
     .section2>picture {
@@ -675,6 +675,7 @@
         aspect-ratio: 414 / 64;
         height: 5.93vw;
         background-image: url("./../../images/tag-doituongthamgia.webp");
+        z-index: 2;
     }
 
     .sec2-time_title>span,
@@ -704,7 +705,7 @@
         aspect-ratio: 615 / 330;
         height: 30.56vw;
         background-image: url("./../../images/box-thoigian.webp");
-        padding: 4.8vw 1.5vw 1vw;
+        padding: 5.8vw 1.5vw 1vw;
         box-sizing: border-box;
         text-align: center;
     }
@@ -751,13 +752,14 @@
 
     .sec2_info2 {
         width: 60.0vw;
-        top: 56.11vw;
+        top: 52.5vw;
         aspect-ratio: 648 / 320;
         height: 29.63vw;
         background-image: url("./../../images/box-doituongthamgia-mobile.webp");
-        padding: 5.5vw 3.2vw 1vw 4.2vw;
+        padding: 6.8vw 3.2vw 1vw 4.2vw;
         box-sizing: border-box;
         list-style: none;
+        z-index: 1;
     }
 
     .sec2_info2>li {
@@ -833,7 +835,6 @@
         top: auto;
         bottom: auto;
         left: auto;
-        transform: none;
         margin: 0 auto;
     }
 
@@ -914,7 +915,7 @@
         background-position: center;
         background-repeat: no-repeat;
         position: absolute;
-        top: 6.02vw;
+        top: 13.70vw;
         left: 50%;
         transform: translateX(-50%);
         z-index: 6;
@@ -947,7 +948,7 @@
         max-width: none;
         aspect-ratio: 977 / 2988;
         min-height: 0;
-        padding: 24.26vw 0 0 0;
+        padding: 32.20vw 0 0 0;
         overflow: visible;
         margin: 0 auto;
         transform: none;
@@ -983,7 +984,7 @@
     .sec3-footer {
         width: 65.93vw;
         margin: 0 auto;
-        padding: 1.67vw 0 0 0;
+        padding: 2.31vw 0 0 0;
         border-top: none;
         background-image: url("./../../images/linexanh-mobile.webp");
         background-repeat: no-repeat;
@@ -991,7 +992,8 @@
         background-size: 65.93vw 2px;
     }
 
-    .sec3-footer>p {
+    .sec3-footer>p,
+    .sec3-footer p {
         margin: 0 0 1.9vw;
         font-size: 2.31vw;
         font-weight: 500;
