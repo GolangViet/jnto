@@ -148,8 +148,8 @@
     cursor: pointer;
 }
 
-.survey-choice > input[type="radio"],
-.survey-choice > input[type="checkbox"] {
+.survey-choice>input[type="radio"],
+.survey-choice>input[type="checkbox"] {
     font-size: inherit;
     width: 1.2em;
     min-width: 1.2em;
@@ -164,7 +164,7 @@
     cursor: pointer;
 }
 
-.survey-choice > span {
+.survey-choice>span {
     display: block;
     line-height: 1.25;
 }
@@ -173,11 +173,11 @@
     white-space: nowrap;
 }
 
-.survey-choice > input:checked {
+.survey-choice>input:checked {
     background-image: url("./../../images/form/icon-mark.webp");
 }
 
-.survey-choice > input:focus-visible {
+.survey-choice>input:focus-visible {
     outline: 2px solid #ea2b6d;
     outline-offset: 2px;
 }
@@ -186,12 +186,12 @@
     align-items: center;
 }
 
-.survey-choice--other > input[type="radio"],
-.survey-choice--other > input[type="checkbox"] {
+.survey-choice--other>input[type="radio"],
+.survey-choice--other>input[type="checkbox"] {
     margin-top: 0;
 }
 
-.survey-choice--other > span {
+.survey-choice--other>span {
     white-space: nowrap;
 }
 
@@ -202,7 +202,7 @@
     padding: 0 0.3em;
     border: 0;
     border-radius: 0;
-    background: transparent url("./../../images/form/linehong.webp") left bottom / 100% 2px no-repeat;
+    background: transparent url("./../../images/form/linehong.webp") left bottom / 100% 1px no-repeat;
     color: inherit;
     font: inherit;
 }
@@ -230,7 +230,7 @@
     white-space: nowrap;
 }
 
-.survey-button > span {
+.survey-button>span {
     font-size: 1em;
     line-height: 1;
 }
@@ -333,8 +333,7 @@
         font-size: 1.1em;
     }
 
-    .survey-question legend
-    {
+    .survey-question legend {
         margin-bottom: 1.1em;
     }
 
@@ -344,8 +343,8 @@
         margin: 0 0 1.2em;
     }
 
-    .survey-choice > input[type="radio"],
-    .survey-choice > input[type="checkbox"] {
+    .survey-choice>input[type="radio"],
+    .survey-choice>input[type="checkbox"] {
         width: 1.3em;
         min-width: 1.3em;
         height: 1.3em;
@@ -353,8 +352,8 @@
         margin-top: -0.025em;
     }
 
-    .survey-choice--other > input[type="radio"],
-    .survey-choice--other > input[type="checkbox"] {
+    .survey-choice--other>input[type="radio"],
+    .survey-choice--other>input[type="checkbox"] {
         margin-top: 0;
     }
 
@@ -378,6 +377,7 @@
     .survey-form {
         font-size: 2.75vw;
     }
+
     .survey-section {
         padding-right: 4px;
         padding-left: 4px;
