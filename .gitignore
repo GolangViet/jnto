@@ -6,6 +6,7 @@
 vendor
 workflows
 docs
+.playwright-mcp/
 docker/postgres/postgres-data
 AGENTS.md
 screenshot*.png
