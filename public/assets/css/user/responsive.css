@@ -334,12 +334,12 @@
         width: 100%;
         height: auto;
         min-height: 0;
-        aspect-ratio: 1091 / 1592;
+        aspect-ratio: auto;
         background-image: url("./../../images/register/bg-register-m.webp");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        padding: 4vw 0 6vw;
+        padding: 18vw 0 10vw;
     }
 
     #register-form .alert_info_desc {
@@ -434,6 +434,7 @@
         aspect-ratio: 789 / 267;
         background-image: url("./../../images/register/box-luuy-mobile.webp");
         margin-top: clamp(10px, 2.2vw, 18px);
+        max-width: 650px;
     }
 
     .alert_info_title {
@@ -446,6 +447,8 @@
         height: 72%;
         font-size: clamp(8.5px, 2.4vw, 2.2em);
         line-height: 1.25;
+        padding: 0 35px;
+        padding-top: 20px;
     }
 
 }
@@ -1096,6 +1099,10 @@
 
     .section-login {
         aspect-ratio: 1080 / 1300;
+    }
+
+    .section-register {
+        padding: 24vw 0 10vw;
     }
 }
 
