@@ -1950,7 +1950,7 @@ body.modal-open-body {
 .btn-register {
     border: none;
     aspect-ratio: 406 / 88;
-    width: clamp(200px, 21.1vw, 406px);
+    width: clamp(200px, 60%, 406px);
     background-image: url("./../../images/register/button-dangky.webp");
     background-repeat: no-repeat;
     background-position: center;
@@ -2190,7 +2190,7 @@ body.modal-open-body {
 }
 
 .d-none {
-    display: none!important;
+    display: none !important;
 }
 
 .login-username label,

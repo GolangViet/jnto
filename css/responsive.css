@@ -404,14 +404,14 @@
     }
 
     .btn-register {
-        width: clamp(180px, 55%, 260px);
+        width: clamp(180px, 60%, 300px);
         aspect-ratio: 406 / 88;
         background-image: url("../img/register/button-dangky-mobile.webp");
         margin-top: clamp(8px, 1.8vw, 14px);
     }
 
     .btn-register>span {
-        font-size: clamp(13px, 3.6vw, 18px);
+        font-size: clamp(13px, 3.6vw, 24px);
     }
 
     .frm-footer>h3 {
@@ -1026,5 +1026,25 @@
     .modal-close::after {
         width: 45%;
         height: 2px;
+    }
+}
+
+@media (max-width: 320px) {
+    .frm-box {
+        width: 90%;
+        aspect-ratio: 783 / 585;
+        background-image: url(/img/register/box-dangky-mobile.webp);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+    }
+
+    .alert_info {
+        width: 100%;
+        /* height: 125px; */
+        aspect-ratio: 789 / 267;
+        background-image: url(/img/register/box-luuy-mobile.webp);
+        margin-top: clamp(10px, 2.2vw, 18px);
+        max-width: 650px;
     }
 }
