@@ -130,7 +130,7 @@
     <main>
         <section class="banner">
             <picture>
-                <source media="(max-width: 768px)" srcset="<?= assets('images/banner-m.webp') ?>">
+                <source media="(max-width: 768px)" srcset="<?= asset_with_version('images/banner-m.webp') ?>">
                 <img class="banner_img" src="<?= assets('images/banner.webp') ?>" alt="banner">
             </picture>
         </section>
