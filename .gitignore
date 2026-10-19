@@ -1,5 +1,12 @@
 .env
 .idea
 .vscode
+.playwright-mcp
+.agents
 vendor
+workflows
+docs
 docker/postgres/postgres-data
+AGENTS.md
+screenshot*.png
+verified_*.png

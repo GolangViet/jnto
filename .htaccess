@@ -1,0 +1,23 @@
+DirectoryIndex public/index.php
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block hidden files
+    RewriteRule (^|/)\. - [F,L]
+
+    # Block internal source directories
+    RewriteRule ^(?:app|core|vendor|storage|config|database|tests)(?:/|$) - [F,L,NC]
+
+    # /assets/... -> /public/assets/...
+    RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+    # Serve existing files/directories
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Everything else -> public/index.php
+    RewriteRule ^ public/index.php [QSA,L]
+</IfModule>

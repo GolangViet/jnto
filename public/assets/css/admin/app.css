@@ -1,0 +1,77 @@
+:root { font-family: Arial, sans-serif; color: #1f2937; background: #f3f4f6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #2563eb; text-decoration: none; }
+/*.container { width: min(100% - 32px, 1000px); margin: 0 auto; }*/
+header { background: #111827; color: white; padding: 18px 0; }
+header a { color: white; }
+nav { display: flex; justify-content: space-between; align-items: center; }
+main { padding: 32px 0; }
+.card { position: relative; background: white; padding: 24px; border-radius: 14px; box-shadow: 0 8px 25px rgba(0,0,0,.06); margin-bottom: 20px; }
+.grid { display: grid; gap: 20px; }
+.btn { display: inline-block; border: 0; border-radius: 8px; padding: 10px 16px; background: #2563eb; color: white; cursor: pointer; }
+.btn-danger { background: #dc2626; }
+.btn-secondary { background: #4b5563; }
+label { display: block; font-weight: 700; margin-bottom: 6px; }
+input, textarea, select { width: 100%; padding: 11px; border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 16px; }
+textarea { min-height: 180px; resize: vertical; }
+table { width: 100%; border-collapse: collapse; background: white; }
+th, td { padding: 12px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+.actions { display: flex; gap: 8px; align-items: center; }
+.actions form { margin: 0; }
+.error { color: #b91c1c; margin-bottom: 12px; }
+.meta { color: #6b7280; font-size: 14px; }
+.container,
+.container-fluid,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl,
+.container-xxl {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.d-none {
+    display: none;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Extra extra large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}

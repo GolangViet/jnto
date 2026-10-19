@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  # Nginx
+  web:
+    image: nginx:stable-alpine
+    restart: unless-stopped
+    container_name: jnto-web-container
+    ports:
+      - '$WEB_PORT_CONTAINER_EXPOSE:80'
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    environment:
+      ENABLE_FASTCGI_PARAM_NGINX_HTTPS: $ENABLE_FASTCGI_PARAM_NGINX_HTTPS
+    depends_on:
+      - app
+      - db
+    networks:
+      - app-jnto-network
+
+  # PHP
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    restart: unless-stopped
+    container_name: jnto-app-container
+    ports:
+      - '$APP_PORT_CONTAINER_EXPOSE:9000'
+    volumes:
+      - ./:/var/www
+      - ./docker/php/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
+    networks:
+      - app-jnto-network
+
+  # DB
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    container_name: jnto-db-container
+    ports:
+      - '$DB_PORT_CONTAINER_EXPOSE:5432'
+    environment:
+      POSTGRES_USER: $DB_USERNAME
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_DATABASE
+      POSTGRES_PORT: $DB_PORT
+      POSTGRES_HOST: $DB_HOST
+      POSTGRES_SSLMODE: disable
+    volumes:
+      - ./docker/postgres/postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-jnto-network
+
+networks:
+  app-jnto-network:
+

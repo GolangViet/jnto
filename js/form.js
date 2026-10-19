@@ -15,6 +15,7 @@
     };
 
     function populateOptions(selector, template, namePrefix) {
+        if (!template) return;
         document.querySelectorAll(selector).forEach(function (container, index) {
             const content = template.content.cloneNode(true);
             content.querySelectorAll('input:not(.survey-other-input)').forEach(function (input) {
@@ -62,11 +63,37 @@
             return;
         }
 
-        const selectedExperience = form.querySelector('input[name="travel_experience"]:checked');
-        showPanel(selectedExperience.dataset.surveyTarget);
+        const selectedExperience = form.querySelector('input[name="travel_experience"]:checked') || form.querySelector('input[data-travel-status]:checked');
+        if (selectedExperience) {
+            showPanel(selectedExperience.dataset.travelStatus);
+            showPanel(selectedExperience.dataset.surveyTarget);
+        }
+    });
+
+    form.querySelectorAll('[data-survey-prev]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            showPanel(button.dataset.surveyPrev);
+        });
+    });
+
+    form.addEventListener('input', function (event) {
+        if (event.target && event.target.classList.contains('survey-other-input')) {
+            const choice = event.target.closest('.survey-choice');
+            if (choice) {
+                const checkable = choice.querySelector('input[type="radio"], input[type="checkbox"]');
+                if (checkable && !checkable.checked) {
+                    checkable.checked = true;
+                    checkable.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        }
     });
 
     form.addEventListener('submit', function (event) {
+        if (form.dataset.dynamic === 'true') {
+            return;
+        }
         event.preventDefault();
+        window.location.href = `${window.APP_URL}/take-questions`;
     });
 })();
