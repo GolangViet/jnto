@@ -689,7 +689,7 @@
 
     .sec2-time_title {
         width: 23.61vw;
-        top: 10.28vw;
+        top: 12.28vw;
         aspect-ratio: 255 / 56;
         height: 5.19vw;
         background-image: url("./../../images/tag-thoigian.webp");
@@ -706,7 +706,7 @@
 
     .sec2-time_title>span,
     .sec2-time_title2>span {
-        font-size: 3.1vw;
+        font-size: 2.9vw;
         font-weight: 700;
         color: var(--white);
         line-height: 1;
@@ -902,7 +902,7 @@
         font-size: 1vw;
         width: 100%;
         aspect-ratio: 1080 / 3239;
-        margin-top: 0;
+        margin-top: -3px;
         padding: 0;
         background-image: url("./../../images/bg/bg-giay-vang-mobile.webp");
         background-size: 100% 100%;
