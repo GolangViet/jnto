@@ -147,7 +147,7 @@
     <img class="knowledge-arrow" src="<?= assets('images/page-4/section-3/mui-ten.webp') ?>" alt="" />
 </section>
 
-<section class="open-question-section" aria-labelledby="open-question-title">
+<section class="open-question-section custom-css" aria-labelledby="open-question-title">
     <form class="open-question-form" id="open-question-form" action="#" method="post" novalidate>
         <h2 class="open-question-title" id="open-question-title">
             <span>CÂU HỎI MỞ</span>
@@ -157,6 +157,7 @@
             <?php if ($mainOpenId): ?>
                 <?php
                 $openCount = 1;
+                $hasMultipleOpen = count($openQuestions) > 1;
                 foreach ($openQuestions as $q):
                     $savedAns = null;
                     foreach ($openSavedAnswers as $ans) {
@@ -169,9 +170,11 @@
                     $savedOptionIds = $savedAns['selected_option_ids'] ?? [];
                     $savedCustomTexts = $savedAns['option_custom_texts'] ?? [];
                     ?>
-                    <div class="open-question" role="group" data-question-id="<?= (int)$q['id'] ?>" data-question-type="<?= e($q['type']) ?>" data-quiz-type="open" aria-labelledby="open-question-<?= (int)$q['id'] ?>">
+                    <div class="open-question <?= $hasMultipleOpen ? 'open-question--multiple' : 'open-question--single' ?>" role="group" data-question-id="<?= (int)$q['id'] ?>" data-question-type="<?= e($q['type']) ?>" data-quiz-type="open" aria-labelledby="open-question-<?= (int)$q['id'] ?>">
                         <p class="open-question__heading" id="open-question-<?= (int)$q['id'] ?>">
-                            <span class="open-question__number"><?= $openCount++ ?>.</span>
+                            <?php if ($hasMultipleOpen): ?>
+                                <span class="open-question__number"><?= $openCount++ ?>.</span>
+                            <?php endif; ?>
                             <span class="open-question__copy"><?= e($q['question_text']) ?></span>
                         </p>
 
@@ -278,7 +281,7 @@
     </form>
 </section>
 
-<section class="page4-next-section" aria-label="Tiếp tục">
+<section class="page4-next-section custom-css" aria-label="Tiếp tục">
     <?php if ($mainQuizId || $mainOpenId): ?>
         <button class="page4-next-button" id="dynamic-next-button" type="button">
             <span>TIẾP THEO</span>
