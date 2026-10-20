@@ -316,7 +316,7 @@
     appearance: none;
     border: 0;
     border-radius: 50%;
-    background: #fff;
+    background: #c8e3ff;
 }
 
 .knowledge-choice > input:checked {
@@ -639,7 +639,7 @@
     align-items: flex-start;
     justify-content: center;
     margin: 0 auto;
-    padding-top: 6.4em;
+    padding-top: 11em;
     background: url("./../../images/page-4/section-5/bg-giay.webp") center / 100% 100% no-repeat;
     font-size: 1rem;
     margin-top: -55px;
@@ -728,6 +728,10 @@
         margin: 0 0 1.2em;
         font-size: 0.95em;
         line-height: 1.25;
+    }
+
+    .open-question.open-question--single .open-question-choice {
+        line-height: 2.25;
     }
 
     .open-question-choice > span {
