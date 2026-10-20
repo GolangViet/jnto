@@ -1021,7 +1021,7 @@
     .sec3-footer>p,
     .sec3-footer p {
         margin: 0 0 1.9vw;
-        font-size: 2.31vw;
+        font-size: 2.2vw;
         font-weight: 500;
         color: #1749a4;
         line-height: 1.3;
@@ -1073,13 +1073,13 @@
         padding: 17em 12.8em 24em;
     }
 
-    .page4-next-section.custom-css  {
+    .page4-next-section.custom-css {
         text-align: center;
         align-items: center;
         justify-content: center;
     }
 
-    .open-question-choice > span {
+    .open-question-choice>span {
         font-size: 0.65em;
     }
 
@@ -1142,7 +1142,7 @@
         padding: 18em 12.8em 25em;
     }
 
-    .page4-next-section.custom-css  {
+    .page4-next-section.custom-css {
         text-align: center;
         align-items: center;
         justify-content: center;
