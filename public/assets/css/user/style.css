@@ -1761,8 +1761,8 @@ body.modal-open-body {
     position: relative;
     font-size: 1rem;
     width: 100%;
-    aspect-ratio: 1920 / 1227;
-    min-height: 980px;
+    aspect-ratio: 1920 / 1350;
+    min-height: 1350px;
     background-image: url("./../../images/register/bg-register.webp");
     background-repeat: no-repeat;
     background-position: center top;
@@ -1799,7 +1799,7 @@ body.modal-open-body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.4em 0;
+    padding: 0.4em 2.5rem;
     filter: drop-shadow(0 4px 10px rgba(180, 50, 70, 0.15));
 }
 
@@ -1810,7 +1810,7 @@ body.modal-open-body {
 .reg-error-text {
     margin: 0;
     color: #f25384;
-    font-size: clamp(10px, 0.85vw, 18px);
+    font-size: 1.3rem;
     font-weight: 700;
     line-height: 1.35;
     text-align: center;
@@ -1870,7 +1870,7 @@ body.modal-open-body {
 }
 
 .label-sub {
-    font-size: clamp(10px, 0.75vw, 13px);
+    font-size: 1rem;
     color: #f25384;
     font-weight: 600;
     font-style: italic;
@@ -2037,15 +2037,15 @@ body.modal-open-body {
     line-height: 1.35;
     color: #e02438;
     font-size: 1.8rem;
-    line-height: normal;
+    line-height: 1.7;
     color: #f25384;
     display: flex;
     padding-top: 41px;
     align-items: flex-start;
     justify-content: center;
     text-align: center;
-    padding: 0 115px;
-    padding-top: 25px;
+    padding: 0;
+    padding-top: 30px;
     flex: 1;
 }
 
@@ -2204,7 +2204,7 @@ body.modal-open-body {
 }
 
 .agree-item .text {
-    font-size: 18px;
+    font-size: 1.9rem;
 }
 
 .btn-register>span {
