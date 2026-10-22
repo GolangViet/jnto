@@ -1790,7 +1790,7 @@ body.modal-open-body {
     left: 50%;
     bottom: calc(100% + clamp(12px, 1.5vw, 24px));
     transform: translateX(-50%);
-    width: clamp(260px, 20vw, 365px);
+    width: 407px;
     aspect-ratio: 365 / 91;
     background-image: url("./../../images/register/box-error.webp");
     background-repeat: no-repeat;
@@ -1799,7 +1799,7 @@ body.modal-open-body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.4em 2.5rem;
+    padding: 0.4em 2.1rem;
     filter: drop-shadow(0 4px 10px rgba(180, 50, 70, 0.15));
 }
 

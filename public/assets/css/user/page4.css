@@ -522,7 +522,7 @@
     aspect-ratio: 403 / 108;
     position: absolute;
     z-index: 2;
-    top: -2em;
+    top: 1.4em;
     left: calc(50% - 1.7em);
     display: flex;
     align-items: center;
@@ -702,7 +702,7 @@
 
     .open-question-title {
         width: 45.3em;
-        top: -3em;
+        top: -1em;
         left: calc(50% - 1.7em);
     }
 
