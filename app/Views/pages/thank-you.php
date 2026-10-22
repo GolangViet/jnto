@@ -25,7 +25,7 @@
         <a class="success-banner-link" href="https://www.vietnamairlines.com/dk/vi/lotusmiles/enroll-new"
            target="_blank" rel="noopener noreferrer"
            aria-label="Đăng ký Lotusmiles của Vietnam Airlines">
-            <img src="<?= assets('images/page-6/banner-vna.webp') ?>" alt="Vietnam Airlines tăng tần suất kết nối Việt Nam và Nhật Bản">
+            <img src="<?= assets('images/page-6/banner-jal.webp') ?>" alt="Vietnam Airlines tăng tần suất kết nối Việt Nam và Nhật Bản">
         </a>
 
         <a class="success-banner-link" href="https://travelcontentsapp.com/en/"
