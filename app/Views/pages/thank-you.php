@@ -43,25 +43,25 @@
 
     <div class="region-swiper" aria-label="Danh sách các vùng tại Nhật Bản">
         <div class="region-swiper__track">
-            <a class="region-swiper__slide" href="https://www.traveloka.com/vi-vn/explore/destination/japanese-scenery-in-chugoku-castles-shrines-and-sand-dunes/1009988"
+            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/chugoku/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Chugoku">
                 <img src="<?= assets('images/page-6/section-3/box-chugoku.webp') ?>" alt="Phong cảnh vùng Chugoku">
                 <strong>CHUGOKU</strong>
             </a>
 
-            <a class="region-swiper__slide" href="https://www.traveloka.com/vi-vn/explore/destination/kyushu-food-road-trip-7-days-of-japans-best-flavours/1009989"
+            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/kyushu/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Kyushu">
                 <img src="<?= assets('images/page-6/section-3/box-kyushu.webp') ?>" alt="Văn hóa vùng Kyushu">
                 <strong>KYUSHU</strong>
             </a>
 
-            <a class="region-swiper__slide" href="https://www.traveloka.com/vi-vn/explore/destination/hokkaido-weather-guide-best-time-to-visit/1009987"
+            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/hokkaido/hokkaido/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Hokkaido">
                 <img src="<?= assets('images/page-6/section-3/box-hokkaido.webp') ?>" alt="Phong cảnh vùng Hokkaido">
                 <strong>HOKKAIDO</strong>
             </a>
 
-            <a class="region-swiper__slide" href="https://www.traveloka.com/vi-vn/explore/destination/chubu-japan-best-family-trips-to-legoland-ghibli-and-more/1009990"
+            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/tokai/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Chubu">
                 <img src="<?= assets('images/page-6/section-3/box-chubu.webp') ?>" alt="Phong cảnh vùng Chubu">
                 <strong>CHUBU</strong>
