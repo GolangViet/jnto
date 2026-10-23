@@ -16,7 +16,7 @@
 
             <p class="success-result">
                 Hãy nhớ check kết quả được công bố trên<br>
-                Fanpage JNTO <strong>ngày 20/10</strong> nhé!
+                Fanpage JNTO <strong>ngày 25/01</strong> nhé!
             </p>
         </div>
     </div>
@@ -43,25 +43,25 @@
 
     <div class="region-swiper" aria-label="Danh sách các vùng tại Nhật Bản">
         <div class="region-swiper__track">
-            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/chugoku/"
+            <a class="region-swiper__slide" href="https://www.japan.travel/vi/destinations/chugoku/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Chugoku">
                 <img src="<?= assets('images/page-6/section-3/box-chugoku.webp') ?>" alt="Phong cảnh vùng Chugoku">
                 <strong>CHUGOKU</strong>
             </a>
 
-            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/kyushu/"
+            <a class="region-swiper__slide" href="https://www.japan.travel/vi/destinations/kyushu/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Kyushu">
                 <img src="<?= assets('images/page-6/section-3/box-kyushu.webp') ?>" alt="Văn hóa vùng Kyushu">
                 <strong>KYUSHU</strong>
             </a>
 
-            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/hokkaido/hokkaido/"
+            <a class="region-swiper__slide" href="https://www.japan.travel/vi/destinations/hokkaido/hokkaido/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Hokkaido">
                 <img src="<?= assets('images/page-6/section-3/box-hokkaido.webp') ?>" alt="Phong cảnh vùng Hokkaido">
                 <strong>HOKKAIDO</strong>
             </a>
 
-            <a class="region-swiper__slide" href="Hyperlink: https://www.japan.travel/vi/destinations/tokai/"
+            <a class="region-swiper__slide" href="https://www.japan.travel/vi/destinations/tokai/"
                target="_blank" rel="noopener noreferrer" aria-label="Khám phá vùng Chubu">
                 <img src="<?= assets('images/page-6/section-3/box-chubu.webp') ?>" alt="Phong cảnh vùng Chubu">
                 <strong>CHUBU</strong>

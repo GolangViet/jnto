@@ -81,11 +81,21 @@
 }
 
 .note-description {
-    padding-left: 1em;
+    padding-left: 2.2em;
+    position: relative;
     color: #317fcb;
     font-size: 2.5em;
     line-height: 1.4444;
     padding-right: 2.5em;
+}
+
+.note-description:before {
+    top: 0;
+    left: calc(1.5em - 10px);
+    position: absolute;
+    content: "**";
+    color: #317fcb;
+    font-weight: bold;
 }
 
 .facebook-tag {
@@ -391,10 +401,13 @@
     }
 
     .note-description {
-        padding-left: 1em;
         font-size: 2.8em;
         line-height: 1.45;
         padding-right: 0;
+    }
+
+    .note-description:before {
+        left: calc(1.5em - 10px);
     }
 
     .d-mobile {

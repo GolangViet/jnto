@@ -67,12 +67,15 @@
                     <span>YÊU CẦU</span>
                 </h3>
                 <ul>
-                    <li><strong>Chọn một vùng</strong> (Chugoku hoặc Hokkaido) để trả lời.</li>
-                    <li>Người tham gia được <strong>khuyến khích tham khảo nội dung trên trang web</strong> khi chuẩn bị câu trả lời.</li>
-                    <li>Người tham gia cần <strong>đính kèm các thẻ hashtagb</strong> được chỉ định khi đăng bài lên Facebook.</li>
-                    <li>Bài dự thi phải <strong>hiển thị ở chế độ Công khai</strong> đến khi chương trình kết thúc. Tài khoản Facebook bật Profile Lock sẽ không đủ điều kiện tham gia.</li>
+                    <li><b>Chọn một vùng</b> (Chugoku hoặc Hokkaido) để trả lời.</li>
+                    <li>Người tham gia được <b>khuyến khích tham khảo nội dung trên trang web</b> khi chuẩn bị câu trả lời.</li>
+                    <li>Người tham gia cần <b>đính kèm các thẻ hashtag</b> được chỉ định khi đăng bài lên Facebook.</li>
+                    <li>Bài dự thi phải <b>hiển thị ở chế độ Công khai</b> đến khi chương trình kết thúc. Tài khoản Facebook bật Profile Lock sẽ không đủ điều kiện tham gia.</li>
                 </ul>
-                <div class="note-description"><b>**</b> Khuyến khích Like và follow Fanpage JNTO <span class="d-mobile"><b><u>Cảm nhận Nhật Bản</u></b> và share bài viết chính thức chương trình.</span></div>
+                <div class="note-description">
+                    Khuyến khích Like và follow Fanpage JNTO
+                    <span class="d-mobile ps-1-mobile"><b><u>Cảm nhận Nhật Bản</u></b> và share bài viết chính thức của chương trình.</span>
+                </div>
             </section>
         </div>
 
