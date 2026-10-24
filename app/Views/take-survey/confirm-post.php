@@ -74,7 +74,10 @@
                 </ul>
                 <div class="note-description">
                     Khuyến khích Like và follow Fanpage JNTO
-                    <span class="d-mobile ps-1-mobile"><b><u>Cảm nhận Nhật Bản</u></b> và share bài viết chính thức của chương trình.</span>
+                    <span class="d-mobile ps-1-mobile">
+                        <a href="https://www.facebook.com/share/1J9rdZTM91/?mibextid=wwXIfr" target="_blank"><u><b>Cảm nhận Nhật Bản</u></b></a>
+                        và share bài viết chính thức của chương trình.
+                    </span>
                 </div>
             </section>
         </div>

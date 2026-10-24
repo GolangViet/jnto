@@ -77,14 +77,8 @@
                     <img src="<?= assets('images/jnto-logo.png') ?>" alt="logo jnto">
                 </div>
                 <?php if ($currentUser): ?>
-                    <div class="header-divider" aria-hidden="true"></div>
                     <div class="user-menu-dropdown" id="userMenuDropdown">
                         <button type="button" class="user-menu-trigger" id="userMenuTrigger" aria-label="Menu tài khoản" aria-expanded="false" aria-haspopup="true">
-                            <span class="user-avatar-circle">
-                                <svg class="user-avatar-svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-                                </svg>
-                            </span>
                             <svg class="user-menu-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
@@ -97,7 +91,6 @@
                                 </svg>
                                 <span>Tài khoản</span>
                             </button>
-                            <div class="dropdown-card-divider"></div>
                             <form id="header-logout-form" action="<?= url('logout') ?>" method="POST" style="display: none;">
                                 <?= csrf_field() ?>
                             </form>

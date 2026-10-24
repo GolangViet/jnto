@@ -58,7 +58,8 @@
     }
 
     .header-right:has(.user-menu-dropdown) {
-        height: 5.5vw;
+        height: 3.8vw;
+        /* padding-right: 5.5vw; */
     }
 
     .logos {
@@ -67,12 +68,12 @@
     }
 
     .header-right:has(.user-menu-dropdown)>.logos {
-        gap: 2.2vw;
+        gap: 3.6vw;
         height: 3.8vw;
     }
 
     .header-wrapper:has(.user-menu-dropdown) .titles {
-        left: 36%;
+        left: 46%;
     }
 
     .logo-japan img {
@@ -90,15 +91,16 @@
         min-height: 26px;
     }
 
-    .user-menu-chevron {
-        width: 2.4vw;
-        height: 2.4vw;
-        min-width: 10px;
-        min-height: 10px;
+    .user-menu-dropdown {
+        right: 10px;
     }
 
     .user-dropdown-card {
         min-width: 135px;
+    }
+
+    .dropdown-item {
+        padding: 9px 12px;
     }
 
     /* section 2 handled below in section 2 mobile alignment */
@@ -492,6 +494,15 @@
 
     #register-form h3 {
         font-size: 1em;
+    }
+
+    .user-menu-dropdown {
+        right: 3px;
+    }
+
+    .user-menu-chevron {
+        width: 15px;
+        height: 15px;
     }
 }
 
@@ -1148,6 +1159,9 @@
         justify-content: center;
     }
 
+    .user-menu-dropdown {
+        right: 1px;
+    }
 }
 
 @media (max-width: 480px) {}

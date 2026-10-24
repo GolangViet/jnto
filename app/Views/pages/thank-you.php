@@ -22,9 +22,12 @@
     </div>
 
     <div class="success-banners">
-        <a class="success-banner-link" href="https://www.vietnamairlines.com/dk/vi/lotusmiles/enroll-new"
-           target="_blank" rel="noopener noreferrer"
-           aria-label="Đăng ký Lotusmiles của Vietnam Airlines">
+        <a
+            class="success-banner-link"
+            href="https://www.jal.co.jp/vn/vn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Đăng ký Lotusmiles của Vietnam Airlines">
             <img src="<?= assets('images/page-6/banner-jal.webp') ?>" alt="Vietnam Airlines tăng tần suất kết nối Việt Nam và Nhật Bản">
         </a>
 
