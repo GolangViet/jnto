@@ -62,7 +62,7 @@ final class TakeSurveyController extends Controller
                 $savedAnswers = $this->attemptService->getAttemptAnswers($attemptId);
             }
 
-            $questions = $this->questionService->getQuestionsForQuiz((int) $mainSurveyId);
+            $questions = $this->questionService->getQuestionsForQuiz((int) $mainSurveyId, 'active');
             foreach ($questions as &$question) {
                 $details = $this->questionService->getQuestionById((int) $question['id']);
                 $options = $details['options'] ?? [];
@@ -134,7 +134,7 @@ final class TakeSurveyController extends Controller
                     $quizFinished = true;
                 }
 
-                $questions = $this->questionService->getQuestionsForQuiz((int) $mainQuizId);
+                $questions = $this->questionService->getQuestionsForQuiz((int) $mainQuizId, 'active');
                 foreach ($questions as &$question) {
                     $details = $this->questionService->getQuestionById((int) $question['id']);
                     $options = $details['options'] ?? [];
@@ -159,7 +159,7 @@ final class TakeSurveyController extends Controller
                     $openFinished = true;
                 }
 
-                $questions = $this->questionService->getQuestionsForQuiz((int) $mainOpenId);
+                $questions = $this->questionService->getQuestionsForQuiz((int) $mainOpenId, 'active');
                 foreach ($questions as &$question) {
                     $details = $this->questionService->getQuestionById((int) $question['id']);
                     $options = $details['options'] ?? [];

@@ -160,6 +160,13 @@ final class QuestionController extends Controller
             }
         }
 
+        if (isset($data['status'])) {
+            $allowedStatuses = ['active', 'inactive', 'delete'];
+            if (!in_array($data['status'], $allowedStatuses, true)) {
+                $errors['status'][] = 'Status must be one of: ' . implode(', ', $allowedStatuses);
+            }
+        }
+
         // Validate choice options
         if (in_array($type, ['single_choice', 'multiple_choice', 'true_false'], true)) {
             $options = $data['options'] ?? [];

@@ -214,7 +214,7 @@ final class QuizAttemptService
         $db->beginTransaction();
 
         try {
-            $questions = $this->questionRepository->getQuestionsForQuiz((int) $attempt['quiz_id']);
+            $questions = $this->questionRepository->getQuestionsForQuiz((int) $attempt['quiz_id'], 'active');
             $savedAnswers = $this->attemptRepository->getAttemptAnswers($attemptId);
             
             $answersMap = [];

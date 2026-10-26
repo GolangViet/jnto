@@ -16,9 +16,14 @@ final class QuestionService
         $this->questionRepository = new QuestionRepository();
     }
 
-    public function getQuestionsForQuiz(int $quizId): array
+    public function getQuestionsForQuiz(int $quizId, ?string $status = null): array
     {
-        return $this->questionRepository->getQuestionsForQuiz($quizId);
+        return $this->questionRepository->getQuestionsForQuiz($quizId, $status);
+    }
+
+    public function softDeleteQuestion(int $id): bool
+    {
+        return $this->questionRepository->softDelete($id);
     }
 
     public function getQuestionById(int $id): ?array

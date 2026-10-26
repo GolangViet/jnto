@@ -100,7 +100,7 @@ final class QuizRepository extends BaseRepository
         $db = Database::connection();
         // A quiz is active/published if status = 'published' AND (start_at IS NULL OR start_at <= NOW()) AND (end_at IS NULL OR end_at >= NOW())
         $sql = "SELECT q.*, 
-                (SELECT COUNT(*) FROM cms.questions WHERE quiz_id = q.id) as questions_count
+                (SELECT COUNT(*) FROM cms.questions WHERE quiz_id = q.id AND status = 'active') as questions_count
                 FROM cms.quizzes q
                 WHERE q.status = 'published'
                 AND (q.start_at IS NULL OR q.start_at <= CURRENT_TIMESTAMP)
@@ -118,7 +118,7 @@ final class QuizRepository extends BaseRepository
     {
         $db = Database::connection();
         $sql = "SELECT q.*,
-                (SELECT COUNT(*) FROM cms.questions WHERE quiz_id = q.id) as questions_count,
+                (SELECT COUNT(*) FROM cms.questions WHERE quiz_id = q.id AND status != 'delete') as questions_count,
                 (SELECT COUNT(*) FROM cms.quiz_attempts WHERE quiz_id = q.id) as attempts_count
                 FROM cms.quizzes q
                 ORDER BY q.id DESC";
