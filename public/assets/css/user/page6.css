@@ -20,12 +20,12 @@
 .success-section {
     width: 192rem;
     max-width: 100%;
-    aspect-ratio: 1920 / 1047;
+    aspect-ratio: 1920 / 1110;
     position: relative;
     margin: 0 auto;
     overflow: hidden;
     background: url("./../../images/page-6/bg-giay.webp") center / 100% 100% no-repeat;
-    color: #682913;
+    color: #ee5886;
     font-size: 1rem;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .success-result {
-    color: #d12b18;
+    color: #317fcb;
     font-size: 3.1em;
     font-weight: 500;
     line-height: 1.35;
@@ -148,9 +148,8 @@
     margin: 0 auto;
     padding: 4.8em 0 4em;
     overflow: hidden;
-    border-top: 0.7em solid #d8a069;
     background: #fff;
-    color: #cf2e1f;
+    color: #3f90e2;
     font-size: 1rem;
 }
 

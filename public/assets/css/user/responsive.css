@@ -1,4 +1,4 @@
-/* 
+/*
 * <576:     xs
 * 576-768:  sm
 * 768-992:  md
@@ -58,7 +58,8 @@
     }
 
     .header-right:has(.user-menu-dropdown) {
-        height: 5.5vw;
+        height: 3.8vw;
+        /* padding-right: 5.5vw; */
     }
 
     .logos {
@@ -67,12 +68,12 @@
     }
 
     .header-right:has(.user-menu-dropdown)>.logos {
-        gap: 2.2vw;
+        gap: 3.6vw;
         height: 3.8vw;
     }
 
     .header-wrapper:has(.user-menu-dropdown) .titles {
-        left: 36%;
+        left: 46%;
     }
 
     .logo-japan img {
@@ -90,15 +91,16 @@
         min-height: 26px;
     }
 
-    .user-menu-chevron {
-        width: 2.4vw;
-        height: 2.4vw;
-        min-width: 10px;
-        min-height: 10px;
+    .user-menu-dropdown {
+        right: 10px;
     }
 
     .user-dropdown-card {
         min-width: 135px;
+    }
+
+    .dropdown-item {
+        padding: 9px 12px;
     }
 
     /* section 2 handled below in section 2 mobile alignment */
@@ -334,12 +336,16 @@
         width: 100%;
         height: auto;
         min-height: 0;
-        aspect-ratio: 1091 / 1592;
+        aspect-ratio: auto;
         background-image: url("./../../images/register/bg-register-m.webp");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        padding: 4vw 0 6vw;
+        padding: 18vw 0 10vw;
+    }
+
+    #register-form .alert_info_desc {
+        font-size: 1em;
     }
 
     .registers {
@@ -382,12 +388,12 @@
 
     .frm-wrapper {
         width: 84%;
-        top: 57%;
-        gap: clamp(8px, 2.2vw, 16px);
+        /*top: 57%;*/
+        /*gap: clamp(8px, 2.2vw, 16px);*/
     }
 
     .label-sub {
-        font-size: clamp(8.5px, 2.2vw, 12px);
+        font-size: clamp(6.5px, 2.2vw, 12px);
     }
 
     .agree-box {
@@ -401,8 +407,8 @@
     }
 
     .checkmark {
-        width: clamp(18px, 5vw, 24px);
-        height: clamp(18px, 5vw, 24px);
+        width: clamp(14px, 5vw, 20px);
+        height: clamp(13px, 5vw, 20px);
         background-image: url("./../../images/register/icon-checkpoint-mobile.webp");
     }
 
@@ -411,14 +417,14 @@
     }
 
     .btn-register {
-        width: clamp(180px, 55%, 260px);
+        width: clamp(180px, 60%, 300px);
         aspect-ratio: 406 / 88;
         background-image: url("./../../images/register/button-dangky-mobile.webp");
         margin-top: clamp(8px, 1.8vw, 14px);
     }
 
     .btn-register>span {
-        font-size: clamp(13px, 3.6vw, 18px);
+        font-size: clamp(13px, 3.6vw, 24px);
     }
 
     .frm-footer>h3 {
@@ -430,6 +436,7 @@
         aspect-ratio: 789 / 267;
         background-image: url("./../../images/register/box-luuy-mobile.webp");
         margin-top: clamp(10px, 2.2vw, 18px);
+        max-width: 650px;
     }
 
     .alert_info_title {
@@ -438,16 +445,26 @@
     }
 
     .alert_info_desc {
-        width: 88%;
+        width: 95%;
         height: 72%;
-        font-size: clamp(8.5px, 2.4vw, 12px);
+        font-size: clamp(8.5px, 2.4vw, 2.2em);
         line-height: 1.25;
+        padding: 0 35px;
+        padding-top: 20px;
     }
 
 }
 
 @media (max-width: 576px) {
+
     /* section 2 handled below in section 2 mobile alignment */
+    .login-label {
+        font-size: 1rem;
+    }
+
+    .label-sub {
+        font-size: 0.8rem;
+    }
 
     .btn-join-now {
         width: 62%;
@@ -460,7 +477,7 @@
 
     /* ----- login ----- */
     .login {
-        width: 92%;
+        max-width: 350px;
     }
 
     .login-box {
@@ -468,9 +485,25 @@
     }
 
     .frm-wrapper {
-        width: 65%;
+        width: 85%;
     }
 
+    .agree-item .text {
+        font-size: 1em;
+    }
+
+    #register-form h3 {
+        font-size: 1em;
+    }
+
+    .user-menu-dropdown {
+        right: 3px;
+    }
+
+    .user-menu-chevron {
+        width: 15px;
+        height: 15px;
+    }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1199px) {
@@ -493,6 +526,10 @@
 
     .pass_eye {
         width: 6em;
+    }
+
+    .alert_info_desc {
+        font-size: 2.3rem;
     }
 }
 
@@ -522,7 +559,7 @@
         height: auto;
         aspect-ratio: 1080 / 1525;
         overflow: visible;
-        margin-top: 0;
+        margin-top: -3.06vw;
     }
 
     .section2>picture {
@@ -663,7 +700,7 @@
 
     .sec2-time_title {
         width: 23.61vw;
-        top: 10.28vw;
+        top: 12.28vw;
         aspect-ratio: 255 / 56;
         height: 5.19vw;
         background-image: url("./../../images/tag-thoigian.webp");
@@ -675,11 +712,12 @@
         aspect-ratio: 414 / 64;
         height: 5.93vw;
         background-image: url("./../../images/tag-doituongthamgia.webp");
+        z-index: 2;
     }
 
     .sec2-time_title>span,
     .sec2-time_title2>span {
-        font-size: 3.1vw;
+        font-size: 2.9vw;
         font-weight: 700;
         color: var(--white);
         line-height: 1;
@@ -704,7 +742,7 @@
         aspect-ratio: 615 / 330;
         height: 30.56vw;
         background-image: url("./../../images/box-thoigian.webp");
-        padding: 4.8vw 1.5vw 1vw;
+        padding: 5.8vw 1.5vw 1vw;
         box-sizing: border-box;
         text-align: center;
     }
@@ -751,13 +789,14 @@
 
     .sec2_info2 {
         width: 60.0vw;
-        top: 56.11vw;
+        top: 52.5vw;
         aspect-ratio: 648 / 320;
         height: 29.63vw;
         background-image: url("./../../images/box-doituongthamgia-mobile.webp");
-        padding: 5.5vw 3.2vw 1vw 4.2vw;
+        padding: 6.8vw 3.2vw 1vw 4.2vw;
         box-sizing: border-box;
         list-style: none;
+        z-index: 1;
     }
 
     .sec2_info2>li {
@@ -833,7 +872,6 @@
         top: auto;
         bottom: auto;
         left: auto;
-        transform: none;
         margin: 0 auto;
     }
 
@@ -875,7 +913,7 @@
         font-size: 1vw;
         width: 100%;
         aspect-ratio: 1080 / 3239;
-        margin-top: 0;
+        margin-top: -3px;
         padding: 0;
         background-image: url("./../../images/bg/bg-giay-vang-mobile.webp");
         background-size: 100% 100%;
@@ -914,7 +952,7 @@
         background-position: center;
         background-repeat: no-repeat;
         position: absolute;
-        top: 6.02vw;
+        top: 13.70vw;
         left: 50%;
         transform: translateX(-50%);
         z-index: 6;
@@ -947,7 +985,7 @@
         max-width: none;
         aspect-ratio: 977 / 2988;
         min-height: 0;
-        padding: 24.26vw 0 0 0;
+        padding: 32.20vw 0 0 0;
         overflow: visible;
         margin: 0 auto;
         transform: none;
@@ -983,17 +1021,18 @@
     .sec3-footer {
         width: 65.93vw;
         margin: 0 auto;
-        padding: 1.67vw 0 0 0;
+        padding: 2.31vw 0 0 0;
         border-top: none;
         background-image: url("./../../images/linexanh-mobile.webp");
         background-repeat: no-repeat;
         background-position: center top;
-        background-size: 65.93vw 2px;
+        background-size: 65.93vw 1px;
     }
 
-    .sec3-footer>p {
+    .sec3-footer>p,
+    .sec3-footer p {
         margin: 0 0 1.9vw;
-        font-size: 2.31vw;
+        font-size: 2.2vw;
         font-weight: 500;
         color: #1749a4;
         line-height: 1.3;
@@ -1033,5 +1072,107 @@
     .modal-close::after {
         width: 45%;
         height: 2px;
+    }
+
+    .open-question-section.custom-css {
+        aspect-ratio: 1080 / 1200;
+    }
+
+    .open-question-section .open-question-form {
+        aspect-ratio: initial;
+        margin-top: 17.3em;
+        padding: 17em 12.8em 24em;
+    }
+
+    .page4-next-section.custom-css {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .open-question-choice>span {
+        font-size: 0.65em;
+    }
+
+    .open-question__copy {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .registers {
+        max-width: 350px;
+    }
+
+    .frm-box {
+        max-width: 350px;
+    }
+
+    #register-form h3 {
+        margin-bottom: 15px;
+    }
+
+    #register-form .btn-register {
+        margin-bottom: 5px;
+        margin-top: 20px;
+    }
+
+    .alert_info {
+        max-width: 350px;
+    }
+
+    .alert_info_title {
+        height: 25%;
+        padding-top: 5px;
+        max-height: 41px;
+    }
+
+    .alert_info_desc {
+        padding: 0 20px;
+        width: auto;
+        height: auto;
+        font-size: 1.1rem;
+        line-height: normal;
+    }
+
+    .section-login {
+        aspect-ratio: 1080 / 1300;
+    }
+
+    .section-register {
+        padding: 24vw 0 10vw;
+    }
+
+    .open-question-section.custom-css {
+        aspect-ratio: 1080 / 890;
+    }
+
+    .open-question-section .open-question-form {
+        aspect-ratio: initial;
+        margin-top: 17.3em;
+        padding: 18em 12.8em 25em;
+    }
+
+    .page4-next-section.custom-css {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-menu-dropdown {
+        right: 1px;
+    }
+}
+
+@media (max-width: 480px) {}
+
+@media (max-width: 320px) {
+    .alert_info {
+        width: 100%;
+        height: 123px;
+        aspect-ratio: 789 / 267;
+        background-image: url(./../../images/register/box-luuy-mobile.webp);
+        margin-top: clamp(10px, 2.2vw, 18px);
+        max-width: 650px;
     }
 }

@@ -19,16 +19,17 @@
 
 .banner {
     z-index: 3;
+    display: none;
 }
 
 .region-map {
     width: 192em;
     max-width: 100%;
-    aspect-ratio: 1920 / 1084;
+    aspect-ratio: 1920 / 1060;
     position: relative;
     margin: 0 auto;
     overflow: hidden;
-    background: url("./../../images/page-4/bg-map-2.webp") center / 122% 122% no-repeat;
+    background: url("./../../images/page-4/bg-map-2.webp") center / 100% 100% no-repeat;
     color: #713017;
     font-size: 1rem;
     z-index: 2;
@@ -37,7 +38,7 @@
 .region-map__guide {
     width: 50.4em;
     position: absolute;
-    top: 26.25em;
+    top: 13.25em;
     text-align: center;
     left: 33rem;
 }
@@ -53,7 +54,7 @@
     left: 50%;
     margin: 0.45em 0 0.65em;
     transform: translateX(-50%);
-    color: #713017;
+    color: #000;
     font-size: 1.8em;
     font-weight: 500;
     line-height: 1.4;
@@ -87,13 +88,13 @@
 }
 
 .region-card--kyushu {
-    top: 40em;
-    left: 31.8em;
+    top: 34%;
+    left: 21%;
 }
 
 .region-card--hokuriku {
-    top: 38em;
-    right: 32em;
+    top: 38%;
+    right: 22%;
 }
 
 .region-card--tokai {
@@ -263,7 +264,7 @@
 
 .knowledge-quiz-list {
     position: relative;
-    margin: 3.9em 5.9em 0 5.1em;
+    margin: 3.9em 3.1em 0 3.1em;
 }
 
 .knowledge-question {
@@ -280,7 +281,7 @@
     align-items: flex-start;
     gap: 0.55em;
     margin-bottom: 0.45em;
-    color: #7b351b;
+    color: #3681cc;
     font-size: 1em;
     font-weight: 650;
     line-height: 1.25;
@@ -301,7 +302,7 @@
     align-items: flex-start;
     gap: 0.8em;
     margin: 0 0 0.45em 2.1em;
-    color: #7b351b;
+    color: #3681cc;
     font-size: 1em;
     line-height: 1.2;
 }
@@ -315,11 +316,11 @@
     appearance: none;
     border: 0;
     border-radius: 50%;
-    background: #fff;
+    background: #c8e3ff;
 }
 
 .knowledge-choice > input:checked {
-    background: #f12613 url("./../../images/form/mark-stick.png") center / 100% 100% no-repeat;
+    background: #e14374 url("./../../images/form/mark-hong.webp") center / 100% 100% no-repeat;
 }
 
 .knowledge-choice > input:focus-visible {
@@ -369,7 +370,7 @@
     padding: 0.55em 0.7em;
     border: 0;
     border-radius: 0.5em;
-    background-color: #faf2e7;
+    background-color: #fff;
     color: #7b351b;
     font: inherit;
     line-height: 1.3;
@@ -435,7 +436,7 @@
     }
 
     .knowledge-question {
-        margin-bottom: 1.25em;
+        margin-bottom: 2.25em;
         font-size: 2.8em;
     }
 
@@ -469,7 +470,7 @@
     }
 
     .knowledge-essay-list {
-        margin: 9em 0 0;
+        margin: 12.5em 0 0;
     }
 
     .knowledge-essay {
@@ -512,7 +513,7 @@
     aspect-ratio: 1357 / 683;
     position: relative;
     margin: 0;
-    padding: 12.4em 27.5em 0;
+    padding: 17.4em 27.5em 0;
     background: url("./../../images/page-4/section-4/box-text-1-2.webp") center / 100% 100% no-repeat;
 }
 
@@ -521,7 +522,7 @@
     aspect-ratio: 403 / 108;
     position: absolute;
     z-index: 2;
-    top: -2em;
+    top: 1.4em;
     left: calc(50% - 1.7em);
     display: flex;
     align-items: center;
@@ -538,9 +539,9 @@
 
 .open-question-title > span {
     position: relative;
-    left: 0.425em;
-    top: 0.225em;
-    font-size: 4em;
+    left: 0.025em;
+    top: 0.125em;
+    font-size: 4.5em;
 }
 
 .open-question-list {
@@ -554,6 +555,10 @@
     font-size: 2.4em;
 }
 
+.open-question.open-question--single .open-question-choice {
+    margin: 0 0 0.45em 0;
+}
+
 .open-question + .open-question {
     margin-top: 1.25em;
 }
@@ -564,7 +569,7 @@
     align-items: flex-start;
     gap: 0.55em;
     margin: 0 0 0.45em;
-    color: #7b351b;
+    color: #ee5987;
     font-size: 1em;
     font-weight: 650;
     line-height: 1.25;
@@ -585,7 +590,7 @@
     align-items: flex-start;
     gap: 0.8em;
     margin: 0 0 0.45em 2.1em;
-    color: #7b351b;
+    color: #ee5987;
     font-size: 0.95em;
     line-height: 1.2;
 }
@@ -599,11 +604,11 @@
     appearance: none;
     border: 0;
     border-radius: 50%;
-    background: #fff;
+    background: #ffe6f3;
 }
 
 .open-question-choice > input:checked {
-    background: #f12613 url("./../../images/form/mark-stick.png") center / 100% 100% no-repeat;
+    background: #e14374 url("./../../images/form/mark-hong.webp") center / 100% 100% no-repeat;
 }
 
 .open-question-choice > input:focus-visible {
@@ -634,7 +639,7 @@
     align-items: flex-start;
     justify-content: center;
     margin: 0 auto;
-    padding-top: 6.4em;
+    padding-top: 11em;
     background: url("./../../images/page-4/section-5/bg-giay.webp") center / 100% 100% no-repeat;
     font-size: 1rem;
     margin-top: -55px;
@@ -671,6 +676,18 @@
     line-height: 1;
 }
 
+@media screen and (min-width: 1440px) {
+    .region-card--kyushu {
+        top: 34%;
+        left: 21%;
+    }
+
+    .region-card--hokuriku {
+        top: 38%;
+        right: 21%;
+    }
+}
+
 @media (max-width: 1919px) {
     .open-question-section,
     .page4-next-section {
@@ -697,7 +714,7 @@
 
     .open-question-title {
         width: 45.3em;
-        top: -3em;
+        top: -1em;
         left: calc(50% - 1.7em);
     }
 
@@ -723,6 +740,10 @@
         margin: 0 0 1.2em;
         font-size: 0.95em;
         line-height: 1.25;
+    }
+
+    .open-question.open-question--single .open-question-choice {
+        line-height: 2.25;
     }
 
     .open-question-choice > span {

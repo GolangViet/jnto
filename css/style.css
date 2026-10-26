@@ -74,8 +74,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: clamp(12px, 1.5vw, 24px);
     height: clamp(30px, 4vw, 5em);
+}
+
+.header-right:has(.user-menu-dropdown) {
+    padding-right: clamp(28px, 2.5vw, 36px);
 }
 
 .logos {
@@ -98,26 +101,31 @@ body {
 }
 
 .user-menu-dropdown {
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
+    z-index: 50;
 }
 
 .user-menu-trigger {
     background: transparent;
     border: none;
-    padding: 3px;
+    padding: 6px;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
     cursor: pointer;
     border-radius: 9999px;
     outline: none;
-    transition: opacity 0.2s ease, transform 0.15s ease;
+    transition: opacity 0.2s ease, background-color 0.15s ease;
 }
 
 .user-menu-trigger:hover {
     opacity: 0.85;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .user-avatar-circle {
@@ -140,8 +148,8 @@ body {
 }
 
 .user-menu-chevron {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     color: #4b5563;
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
@@ -738,7 +746,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
-    padding: 4.8em 2em 1em;
+    padding: 5.3em 2em 1em;
     text-align: center;
     pointer-events: auto;
 }
@@ -920,6 +928,7 @@ body {
     z-index: 5;
     cursor: pointer;
     margin: 0 auto;
+    transition: transform 0.2s ease;
 }
 
 .btn-cta_link {
@@ -959,14 +968,7 @@ body {
 }
 
 .btn-cta:hover {
-    background-image: url("../img/btn-cta-h.webp");
-}
-
-.btn-cta:hover>.btn-cta_link,
-.btn-cta:hover>.btn-cta_link>strong,
-.btn-cta:hover>.btn-cta_link>span,
-.btn-cta:hover>.btn-cta_link>span>u {
-    color: var(--white);
+    transform: scale(1.02);
 }
 
 /* 2. Khung giải thưởng với nút Cơ Cấu Giải Thưởng đè lên bg3-content.webp */
@@ -1084,17 +1086,18 @@ body {
 
 .sec3-footer {
     font-size: 1em;
-    width: 112.2em;
+    width: 103.5em;
     margin: 0 0 0 7.9em;
-    padding: 1.7em 0 0 3.3em;
+    padding: 1.7em 1.5em 0 3.3em;
     border-top: none;
     background-image: url("../img/linexanh.webp");
     background-repeat: no-repeat;
     background-position: left top;
-    background-size: 111.5em 1px;
+    background-size: 103.5em 1px;
 }
 
-.sec3-footer>p {
+.sec3-footer>p,
+.sec3-footer p {
     font-size: 1.8em;
     font-weight: 500;
     color: #1749a4;

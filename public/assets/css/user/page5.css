@@ -60,19 +60,13 @@
     margin: 0 auto;
 }
 
-.facebook-intro p {
-    margin: 1em 0 0;
-    color: #74351e;
+.facebook-intro .header-note {
+    margin: 1em auto 0;
+    color: #ee5d89;
     font-size: 2.5em;
     font-weight: 450;
     line-height: 1.3332;
-}
-
-.facebook-intro p + p {
-    margin-top: 0;
-}
-
-.facebook-intro p:last-of-type {
+    max-width: 890px;
     margin-bottom: 1.4em;
 }
 
@@ -81,9 +75,27 @@
     aspect-ratio: 1244 / 324;
     position: relative;
     margin: 6.5em auto 0;
-    padding: 7em 7em 2.5em;
+    padding: 7em 17.2em 2.5em;
     background: url("./../../images/page-5/box-cauhoi.webp") center / 100% 100% no-repeat;
     text-align: center;
+}
+
+.note-description {
+    padding-left: 2.2em;
+    position: relative;
+    color: #317fcb;
+    font-size: 2.5em;
+    line-height: 1.4444;
+    padding-right: 2.5em;
+}
+
+.note-description:before {
+    top: 0;
+    left: calc(1.5em - 10px);
+    position: absolute;
+    content: "**";
+    color: #317fcb;
+    font-weight: bold;
 }
 
 .facebook-tag {
@@ -117,7 +129,7 @@
 
 .facebook-question > p {
     margin: 0;
-    color: #152b79;
+    color: #ee5d89;
     font-family: "Myriad Pro", "Montserrat", sans-serif;
     font-size: 2.5em;
     font-weight: 400;
@@ -135,7 +147,7 @@
 
 .facebook-hashtag-row > strong {
     flex: 0 0 auto;
-    color: #15308a;
+    color: #ee5d89;
     font-size: 2.2em;
 }
 
@@ -146,10 +158,10 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    border: 0.2em solid #5674c5;
+    border: 0.2em solid #ee5d89;
     border-radius: 1.8em;
     background: #fff;
-    color: #17358f;
+    color: #ee5d89;
 }
 
 .facebook-hashtag-box > span {
@@ -169,7 +181,7 @@
     justify-content: center;
     padding: 0;
     border: 0;
-    border-left: 0.2em solid #5674c5;
+    border-left: 0.2em solid #ee5886;
     border-radius: 1.8em 0 0 1.8em;
     background: #f1f7fb;
     font: inherit;
@@ -200,7 +212,8 @@
 .facebook-requirements ul {
     margin: 0;
     padding-left: 2em;
-    color: #5a240d;
+    padding-right: 2.5em;
+    color: #317fcb;
     font-size: 2.5em;
     line-height: 1.4444;
     list-style: disc outside;
@@ -227,17 +240,17 @@
     height: 100%;
     display: block;
     padding: 0 3em;
-    border: 0.15em solid #17358f;
+    border: 0.15em solid #ee5d89;
     border-radius: 3.4em;
     background: rgba(255, 255, 255, 0.88);
-    color: #17358f;
+    color: #ee5d89;
     font: inherit;
     font-size: 2.4em;
     text-align: center;
 }
 
 .facebook-link-field input::placeholder {
-    color: #17358f;
+    color: #ee5d89;
     opacity: 1;
 }
 
@@ -254,14 +267,14 @@
     margin: 5.5em auto 0;
     padding: 0 0 0.08em;
     border: 0;
-    background: transparent url("./../../images/page-4/section-5/button-tieptheo-vang.webp") center / 100% 100% no-repeat;
+    background: transparent url("./../../images/page-5/button-nopbai.webp") center / 100% 100% no-repeat;
     color: #fff;
     font: inherit;
 }
 
 .facebook-submit-button:hover,
 .facebook-submit-button:focus-visible {
-    background-image: url("./../../images/page-4/section-5/button-tieptheo-xanh.webp");
+    background-image: url("./../../images/page-5/button-nopbai.webp");
     color: #fff;
 }
 
@@ -378,12 +391,27 @@
 
     .facebook-requirements ul {
         padding-left: 2em;
+        padding-right: 0;
         font-size: 2.8em;
         line-height: 1.45;
     }
 
     .facebook-requirements li + li {
         margin-top: 0.35em;
+    }
+
+    .note-description {
+        font-size: 2.8em;
+        line-height: 1.45;
+        padding-right: 0;
+    }
+
+    .note-description:before {
+        left: calc(1.5em - 10px);
+    }
+
+    .d-mobile {
+        display: block;
     }
 
     .facebook-link-field {

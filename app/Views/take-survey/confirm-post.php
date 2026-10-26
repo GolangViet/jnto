@@ -35,15 +35,9 @@
 
             <div class="facebook-intro">
                 <img src="<?= assets('images/page-5/line-decor.webp') ?>" alt="">
-                <p>
-                    Người tham gia đăng tải một bài viết trên trang Facebook cá nhân,<br>
-                    chia sẻ cảm nghĩ về du lịch Nhật Bản thông qua việc trả lời câu hỏi<br>
-                    yêu cầu của chương trình.
-                </p>
-                <p>
-                    Sau đó, người tham gia vui lòng sao chép đường dẫn (link)<br>
-                    của bài viết và dán vào ô bên dưới.
-                </p>
+                <div class="header-note">
+                    Người tham gia đăng tải một bài viết trên trang Facebook cá nhân, chia sẻ cảm nghĩ về du lịch <span class="d-mobile">Nhật Bản thông qua việc trả lời câu hỏi</span> <span class="d-mobile">yêu cầu của chương trình. <span class="d-mobile">Sau đó, người tham gia vui lòng sao chép đường dẫn (link) của bài viết và dán vào ô bên dưới.</span>
+                </div>
                 <img src="<?= assets('images/page-5/line-decor.webp') ?>" alt="">
             </div>
 
@@ -52,15 +46,13 @@
                     <span>CÂU HỎI</span>
                 </h3>
                 <p>
-                    Dựa trên 2 câu hỏi mở bạn đã chọn ở trang trước (về sở thích và phong cách<br>
-                    du lịch của bạn), hãy chọn một điểm đến tại Chubu hoặc Kyushu và chia sẻ lý do bạn<br>
-                    muốn đến đó, bạn muốn đi cùng ai và trải nghiệm những gì.
+                    Dựa trên câu hỏi mở bạn đã chọn ở trang trước, hãy chọn một điểm đến tại Chugoku hoặc <span class="d-mobile">Hokkaido và chia sẻ lý do bạn muốn đến đó,</span> <span class="d-mobile">bạn muốn đi cùng ai và trải nghiệm những gì.</span>
                 </p>
 
                 <div class="facebook-hashtag-row">
                     <strong>Hashtags:</strong>
                     <div class="facebook-hashtag-box">
-                        <span id="facebook-hashtags">#visitJP_Chubu #visitJP_Kyushu #nhatban_vedepvotan</span>
+                        <span id="facebook-hashtags">#visitJP_Chugoku #visitJP_Hokkaido #nhatban_vedepvotan</span>
                         <button class="facebook-copy-button" type="button"
                                 data-copy-target="facebook-hashtags"
                                 aria-label="Sao chép hashtag">
@@ -75,12 +67,18 @@
                     <span>YÊU CẦU</span>
                 </h3>
                 <ul>
-                    <li><strong>Like và follow</strong> Fanpage JNTO <a href="https://www.facebook.com/share/1DDuphAmqn/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Cảm nhận Nhật Bản</a>.</li>
-                    <li><strong>Chọn một vùng</strong> (Chubu hoặc Kyushu) để trả lời.</li>
-                    <li>Người tham gia được khuyến khích tham khảo <strong>nội dung trên trang web</strong> khi chuẩn bị câu trả lời.</li>
-                    <li>Người tham gia cần <strong>đính kèm các thẻ hashtag</strong> được chỉ định khi đăng bài lên Facebook.</li>
-                    <li>Bài dự thi phải hiển thị ở <strong>chế độ Công khai</strong> đến khi chương trình kết thúc. Tài khoản Facebook bật Profile Lock sẽ không đủ điều kiện tham gia.</li>
+                    <li><b>Chọn một vùng</b> (Chugoku hoặc Hokkaido) để trả lời.</li>
+                    <li>Người tham gia được <b>khuyến khích tham khảo nội dung trên trang web</b> khi chuẩn bị câu trả lời.</li>
+                    <li>Người tham gia cần <b>đính kèm các thẻ hashtag</b> được chỉ định khi đăng bài lên Facebook.</li>
+                    <li>Bài dự thi phải <b>hiển thị ở chế độ Công khai</b> đến khi chương trình kết thúc. Tài khoản Facebook bật Profile Lock sẽ không đủ điều kiện tham gia.</li>
                 </ul>
+                <div class="note-description">
+                    Khuyến khích Like và follow Fanpage JNTO
+                    <span class="d-mobile ps-1-mobile">
+                        <a href="https://www.facebook.com/share/1J9rdZTM91/?mibextid=wwXIfr" target="_blank"><u><b>Cảm nhận Nhật Bản</u></b></a>
+                        và share bài viết chính thức của chương trình.
+                    </span>
+                </div>
             </section>
         </div>
 

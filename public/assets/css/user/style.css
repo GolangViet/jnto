@@ -74,7 +74,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: clamp(12px, 1.5vw, 24px);
     height: clamp(30px, 4vw, 5em);
 }
 
@@ -98,26 +97,30 @@ body {
 }
 
 .user-menu-dropdown {
-    position: relative;
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
+    z-index: 50;
 }
 
 .user-menu-trigger {
     background: transparent;
     border: none;
-    padding: 3px;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
     cursor: pointer;
     border-radius: 9999px;
     outline: none;
-    transition: opacity 0.2s ease, transform 0.15s ease;
+    transition: opacity 0.2s ease, background-color 0.15s ease;
 }
 
 .user-menu-trigger:hover {
     opacity: 0.85;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .user-avatar-circle {
@@ -140,8 +143,8 @@ body {
 }
 
 .user-menu-chevron {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     color: #4b5563;
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
@@ -739,7 +742,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
-    padding: 4.8em 2em 1em;
+    padding: 5.3em 2em 1em;
     text-align: center;
     pointer-events: auto;
 }
@@ -921,6 +924,7 @@ body {
     z-index: 5;
     cursor: pointer;
     margin: 0 auto;
+    transition: transform 0.2s ease;
 }
 
 .btn-cta_link {
@@ -960,14 +964,7 @@ body {
 }
 
 .btn-cta:hover {
-    background-image: url("./../../images/btn-cta-h.webp");
-}
-
-.btn-cta:hover>.btn-cta_link,
-.btn-cta:hover>.btn-cta_link>strong,
-.btn-cta:hover>.btn-cta_link>span,
-.btn-cta:hover>.btn-cta_link>span>u {
-    color: var(--white);
+    transform: scale(1.02);
 }
 
 /* 2. Khung giải thưởng với nút Cơ Cấu Giải Thưởng đè lên bg3-content.webp */
@@ -1085,18 +1082,19 @@ body {
 
 .sec3-footer {
     font-size: 1em;
-    width: 112.2em;
+    width: 103.5em;
     margin: 0 0 0 7.9em;
-    padding: 1.7em 0 0 3.3em;
+    padding: 1.7em 1.5em 0 3.3em;
     border-top: none;
     background-image: url("./../../images/linexanh.webp");
     background-repeat: no-repeat;
     background-position: left top;
-    background-size: 111.5em 1px;
+    background-size: 103.5em 1px;
 }
 
-.sec3-footer>p {
-    font-size: 1.8em;
+.sec3-footer>p,
+.sec3-footer p {
+    font-size: 1.7em;
     font-weight: 500;
     color: #1749a4;
     line-height: 1.28;
@@ -1197,7 +1195,7 @@ body {
     font-size: 1em;
     padding: 1.5em 0 0;
     margin: 3em auto 0;
-    padding-top: 2.5em;
+    padding-top: 1em;
     color: #152b79;
     font-weight: 500;
     line-height: 1.2;
@@ -1213,7 +1211,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1.15em;
-    padding-top: 2.9em;
+    padding-top: 1em;
     margin-left: -0.5em;
 }
 
@@ -1613,7 +1611,7 @@ body.modal-open-body {
 
 .login-label {
     display: block;
-    font-size: clamp(13px, 1.1vw, 18px);
+    font-size: 1.8rem;
     color: #234381;
     font-weight: 700;
     margin-bottom: 0.3em;
@@ -1766,8 +1764,8 @@ body.modal-open-body {
     position: relative;
     font-size: 1rem;
     width: 100%;
-    aspect-ratio: 1920 / 1227;
-    min-height: 980px;
+    aspect-ratio: 1920 / 1350;
+    min-height: 1350px;
     background-image: url("./../../images/register/bg-register.webp");
     background-repeat: no-repeat;
     background-position: center top;
@@ -1777,13 +1775,12 @@ body.modal-open-body {
     align-items: center;
     justify-content: center;
     padding: clamp(20px, 3vw, 50px) 0;
-    overflow: hidden;
 }
 
 .registers {
     position: relative;
-    width: clamp(340px, 33vw, 634px);
-    margin: auto;
+    max-width: 634px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1796,7 +1793,7 @@ body.modal-open-body {
     left: 50%;
     bottom: calc(100% + clamp(12px, 1.5vw, 24px));
     transform: translateX(-50%);
-    width: clamp(260px, 20vw, 365px);
+    width: 407px;
     aspect-ratio: 365 / 91;
     background-image: url("./../../images/register/box-error.webp");
     background-repeat: no-repeat;
@@ -1805,7 +1802,7 @@ body.modal-open-body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.4em 2.2em 0.4em 0.8em;
+    padding: 0.4em 2.1rem;
     filter: drop-shadow(0 4px 10px rgba(180, 50, 70, 0.15));
 }
 
@@ -1815,15 +1812,11 @@ body.modal-open-body {
 
 .reg-error-text {
     margin: 0;
-    color: #c42127;
-    font-size: clamp(10px, 0.85vw, 14px);
+    color: #f25384;
+    font-size: 1.3rem;
     font-weight: 700;
     line-height: 1.35;
     text-align: center;
-}
-
-.reg-error-line {
-    white-space: nowrap;
 }
 
 .reg-error-close {
@@ -1880,8 +1873,8 @@ body.modal-open-body {
 }
 
 .label-sub {
-    font-size: clamp(10px, 0.75vw, 13px);
-    color: #e53935;
+    font-size: 1rem;
+    color: #f25384;
     font-weight: 600;
     font-style: italic;
     margin-left: 0.3em;
@@ -1960,7 +1953,7 @@ body.modal-open-body {
 .btn-register {
     border: none;
     aspect-ratio: 406 / 88;
-    width: clamp(200px, 21.1vw, 406px);
+    width: clamp(200px, 60%, 406px);
     background-image: url("./../../images/register/button-dangky.webp");
     background-repeat: no-repeat;
     background-position: center;
@@ -2013,7 +2006,8 @@ body.modal-open-body {
 
 .alert_info {
     position: relative;
-    width: clamp(340px, 41vw, 789px);
+    max-width: 789px;
+    width: 100%;
     aspect-ratio: 789 / 233;
     background-image: url("./../../images/register/box-luuy.webp");
     background-repeat: no-repeat;
@@ -2026,17 +2020,17 @@ body.modal-open-body {
 }
 
 .alert_info_title {
-    width: 100%;
-    height: 30%;
     text-align: center;
-    font-size: clamp(12px, 1.2vw, 18px);
+    font-size: 3.5rem;
     font-weight: 800;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
-    letter-spacing: 0.05em;
+    padding-top: 17px;
+    max-height: 69px;
+    flex: 1;
 }
 
 .alert_info_desc {
@@ -2045,11 +2039,17 @@ body.modal-open-body {
     font-size: clamp(10px, 0.8vw, 13.5px);
     line-height: 1.35;
     color: #e02438;
+    font-size: 1.8rem;
+    line-height: 1.7;
+    color: #f25384;
     display: flex;
-    align-items: center;
+    padding-top: 41px;
+    align-items: flex-start;
     justify-content: center;
-    margin: auto;
     text-align: center;
+    padding: 0;
+    padding-top: 30px;
+    flex: 1;
 }
 
 .alert_info_desc strong {
@@ -2190,4 +2190,34 @@ body.modal-open-body {
     background: #4b5563;
     box-shadow: 0 0 12px rgba(75, 85, 99, 0.5);
     transform: translateY(-1px);
+}
+
+.d-none {
+    display: none !important;
+}
+
+.login-username label,
+.login-pass label {
+    color: #f25384;
+}
+
+.login .login-username label,
+.login .login-pass label {
+    color: #4285eb;
+}
+
+.agree-item .text {
+    font-size: 1.9rem;
+}
+
+.btn-register>span {
+    font-size: 35px;
+}
+
+#register-form .btn-register {
+    margin-bottom: 10px;
+}
+
+#register-form h3 {
+    font-size: 18px;
 }
