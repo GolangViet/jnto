@@ -244,12 +244,20 @@
                     <textarea id="q-explanation" rows="2" placeholder="Explain why the correct answer is right..." style="margin-top: 4px; margin-bottom: 0;"></textarea>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
-                    <div style="display: flex; align-items: center; height: 100%;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; align-items: end;">
+                    <div style="display: flex; align-items: center; height: 42px;">
                         <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
                             <input type="checkbox" id="q-required" checked style="width: auto; margin: 0;">
                             Required question
                         </label>
+                    </div>
+                    <div>
+                        <label for="q-status" style="font-weight: 600; color: #374151; font-size: 0.9rem;">Status</label>
+                        <select id="q-status" style="margin-top: 4px; margin-bottom: 0;">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="delete">Delete</option>
+                        </select>
                     </div>
                     <div>
                         <label for="q-display-order" style="font-weight: 600; color: #374151; font-size: 0.9rem;">Display Order</label>
@@ -335,6 +343,7 @@ const qScore = document.getElementById('q-score');
 const qText = document.getElementById('q-text');
 const qExplanation = document.getElementById('q-explanation');
 const qRequired = document.getElementById('q-required');
+const qStatus = document.getElementById('q-status');
 const qDisplayOrder = document.getElementById('q-display-order');
 const qNotes = document.getElementById('q-notes');
 
@@ -396,11 +405,28 @@ function renderQuestionsList() {
         let typeLabel = q.type.replace('_', ' ');
         typeLabel = typeLabel.charAt(0).toUpperCase() + typeLabel.slice(1);
 
+        let statusBadge = '';
+        const qStatusVal = q.status || 'active';
+        if (qStatusVal === 'active') {
+            statusBadge = '<span style="background: #def7ec; color: #03543f; font-size: 0.7rem; font-weight: 600; padding: 2px 6px; border-radius: 4px;">Active</span>';
+        } else if (qStatusVal === 'inactive') {
+            statusBadge = '<span style="background: #f3f4f6; color: #6b7280; font-size: 0.7rem; font-weight: 600; padding: 2px 6px; border-radius: 4px;">Inactive</span>';
+            li.style.opacity = '0.75';
+            li.style.background = '#f9fafb';
+        } else if (qStatusVal === 'delete') {
+            statusBadge = '<span style="background: #fde8e8; color: #9b1c1c; font-size: 0.7rem; font-weight: 600; padding: 2px 6px; border-radius: 4px;">Delete</span>';
+            li.style.opacity = '0.55';
+            li.style.background = '#fef2f2';
+        }
+
         li.innerHTML = `
             <div style="display: flex; align-items: center; gap: 8px; width: calc(100% - 80px);" onclick="loadQuestionIntoEditor(${q.id})">
                 <span class="muted" style="cursor: grab;">☰</span>
                 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    <div style="font-weight: 600; color: #111827; font-size: 0.9rem;">${index + 1}. ${escapeHtml(q.question_text)}</div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <div style="font-weight: 600; color: #111827; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis;">${index + 1}. ${escapeHtml(q.question_text)}</div>
+                        ${statusBadge}
+                    </div>
                     <div class="muted" style="font-size: 0.75rem;">${typeLabel} • Score: ${parseFloat(q.score)}</div>
                 </div>
             </div>
@@ -611,6 +637,7 @@ async function loadQuestionIntoEditor(id) {
         qText.value = q.question_text;
         qExplanation.value = q.explanation || '';
         qRequired.checked = q.is_required ? true : false;
+        qStatus.value = q.status || 'active';
         qDisplayOrder.value = q.display_order;
         qNotes.value = q.notes || '';
 
@@ -648,6 +675,7 @@ function clearFormForNewQuestion() {
     qText.value = '';
     qExplanation.value = '';
     qRequired.checked = true;
+    qStatus.value = 'active';
     qNotes.value = '';
 
     // Auto increment display order based on current list length
@@ -671,6 +699,7 @@ async function saveQuestion(event) {
         question_text: qText.value,
         explanation: qExplanation.value,
         is_required: qRequired.checked ? 1 : 0,
+        status: qStatus.value || 'active',
         display_order: parseInt(qDisplayOrder.value),
         notes: qNotes.value,
         options: [],

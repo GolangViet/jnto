@@ -21,11 +21,16 @@ final class QuestionRepository extends BaseRepository
      * @param int $quizId
      * @return array
      */
-    public function getQuestionsForQuiz(int $quizId): array
+    public function getQuestionsForQuiz(int $quizId, ?string $status = null): array
     {
         $db = Database::connection();
-        $stmt = $db->prepare("SELECT * FROM cms.questions WHERE quiz_id = :quiz_id ORDER BY display_order ASC, id ASC");
-        $stmt->execute(['quiz_id' => $quizId]);
+        if ($status !== null) {
+            $stmt = $db->prepare("SELECT * FROM cms.questions WHERE quiz_id = :quiz_id AND status = :status ORDER BY display_order ASC, id ASC");
+            $stmt->execute(['quiz_id' => $quizId, 'status' => $status]);
+        } else {
+            $stmt = $db->prepare("SELECT * FROM cms.questions WHERE quiz_id = :quiz_id ORDER BY display_order ASC, id ASC");
+            $stmt->execute(['quiz_id' => $quizId]);
+        }
         return $stmt->fetchAll();
     }
 
@@ -39,9 +44,9 @@ final class QuestionRepository extends BaseRepository
     {
         $db = Database::connection();
         $sql = "INSERT INTO cms.questions (
-            quiz_id, type, question_text, explanation, score, is_required, display_order, notes
+            quiz_id, type, question_text, explanation, score, is_required, display_order, notes, status
         ) VALUES (
-            :quiz_id, :type, :question_text, :explanation, :score, :is_required, :display_order, :notes
+            :quiz_id, :type, :question_text, :explanation, :score, :is_required, :display_order, :notes, :status
         ) RETURNING id";
 
         $stmt = $db->prepare($sql);
@@ -54,6 +59,7 @@ final class QuestionRepository extends BaseRepository
             'is_required' => (isset($data['is_required']) ? filter_var($data['is_required'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'display_order' => isset($data['display_order']) ? (int) $data['display_order'] : 0,
             'notes' => $data['notes'] ?? null,
+            'status' => $data['status'] ?? Question::STATUS_ACTIVE,
         ]);
 
         return (int) $stmt->fetchColumn();
@@ -77,6 +83,7 @@ final class QuestionRepository extends BaseRepository
             is_required = :is_required,
             display_order = :display_order,
             notes = :notes,
+            status = :status,
             updated_at = CURRENT_TIMESTAMP
             WHERE id = :id";
 
@@ -90,6 +97,23 @@ final class QuestionRepository extends BaseRepository
             'is_required' => (isset($data['is_required']) ? filter_var($data['is_required'], FILTER_VALIDATE_BOOL) : true) ? 1 : 0,
             'display_order' => isset($data['display_order']) ? (int) $data['display_order'] : 0,
             'notes' => $data['notes'] ?? null,
+            'status' => $data['status'] ?? Question::STATUS_ACTIVE,
+        ]);
+    }
+
+    /**
+     * Soft delete a question record by setting status to delete.
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function softDelete(int $id): bool
+    {
+        $db = Database::connection();
+        $stmt = $db->prepare("UPDATE cms.questions SET status = :status, updated_at = CURRENT_TIMESTAMP WHERE id = :id");
+        return $stmt->execute([
+            'id' => $id,
+            'status' => Question::STATUS_DELETE,
         ]);
     }
 

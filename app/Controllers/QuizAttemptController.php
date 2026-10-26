@@ -45,7 +45,7 @@ final class QuizAttemptController extends Controller
             return 'Quiz not found or not published.';
         }
 
-        $questions = $this->questionService->getQuestionsForQuiz($quizId);
+        $questions = $this->questionService->getQuestionsForQuiz($quizId, 'active');
 
         return $this->view('quiz/show', [
             'quiz' => $quiz,
@@ -116,7 +116,7 @@ final class QuizAttemptController extends Controller
             }
         }
 
-        $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id']);
+        $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id'], 'active');
         foreach ($questions as &$question) {
             $details = $this->questionService->getQuestionById((int) $question['id']);
             // STRIP is_correct to prevent inspect element cheating!
@@ -185,7 +185,7 @@ final class QuizAttemptController extends Controller
         $savedAnswers = [];
 
         if (filter_var($attempt['show_result'] ?? true, FILTER_VALIDATE_BOOL)) {
-            $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id']);
+            $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id'], 'active');
             $savedAnswers = $this->attemptService->getAttemptAnswers($id);
             
             // Map saved answers by question id
@@ -310,7 +310,7 @@ final class QuizAttemptController extends Controller
             app()->response()->json(['message' => 'Unauthorized.'], 403);
         }
 
-        $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id']);
+        $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id'], 'active');
         foreach ($questions as &$question) {
             $details = $this->questionService->getQuestionById((int) $question['id']);
             
@@ -390,7 +390,7 @@ final class QuizAttemptController extends Controller
         ];
 
         if (filter_var($attempt['show_result'] ?? true, FILTER_VALIDATE_BOOL)) {
-            $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id']);
+            $questions = $this->questionService->getQuestionsForQuiz((int) $attempt['quiz_id'], 'active');
             $savedAnswers = $this->attemptService->getAttemptAnswers($id);
             
             $answersMap = [];
