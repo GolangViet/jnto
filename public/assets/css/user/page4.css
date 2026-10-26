@@ -25,11 +25,11 @@
 .region-map {
     width: 192em;
     max-width: 100%;
-    aspect-ratio: 1920 / 1084;
+    aspect-ratio: 1920 / 1060;
     position: relative;
     margin: 0 auto;
     overflow: hidden;
-    background: url("./../../images/page-4/bg-map-2.webp") center / 122% 122% no-repeat;
+    background: url("./../../images/page-4/bg-map-2.webp") center / 100% 100% no-repeat;
     color: #713017;
     font-size: 1rem;
     z-index: 2;
@@ -88,13 +88,13 @@
 }
 
 .region-card--kyushu {
-    top: 40em;
-    left: 31.8em;
+    top: 34%;
+    left: 21%;
 }
 
 .region-card--hokuriku {
-    top: 38em;
-    right: 32em;
+    top: 38%;
+    right: 22%;
 }
 
 .region-card--tokai {
@@ -674,6 +674,18 @@
     font-size: 5em;
     font-weight: 700;
     line-height: 1;
+}
+
+@media screen and (min-width: 1440px) {
+    .region-card--kyushu {
+        top: 34%;
+        left: 21%;
+    }
+
+    .region-card--hokuriku {
+        top: 38%;
+        right: 21%;
+    }
 }
 
 @media (max-width: 1919px) {
