@@ -81,12 +81,12 @@
                                 'buttonHtml' => 'Actions <svg style="width: 12px; height: 12px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>',
                                 'buttonStyle' => 'background: #4f46e5; font-size: 0.8rem; padding: 6px 12px; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;',
                                 'items' => [
-                                    ['type' => 'link', 'text' => 'Questions', 'url' => "/admin/quizzes/{$quiz['id']}/questions"],
-                                    ['type' => 'link', 'text' => 'Edit Settings', 'url' => "/admin/quizzes/{$quiz['id']}/edit"],
+                                    ['type' => 'link', 'text' => 'Questions', 'url' => url("admin/quizzes/{$quiz['id']}/questions")],
+                                    ['type' => 'link', 'text' => 'Edit Settings', 'url' => url("admin/quizzes/{$quiz['id']}/edit")],
                                     ['type' => 'button', 'text' => ($status === 'published' ? 'Deactivate' : 'Publish'), 'onclick' => "publishToggle({$quiz['id']})", 'id' => "pub-btn-{$quiz['id']}"],
                                     ['type' => 'button', 'text' => 'Duplicate', 'onclick' => "duplicateQuiz({$quiz['id']})"],
                                     ['type' => 'divider'],
-                                    ['type' => 'form', 'text' => 'Delete', 'action' => "/admin/quizzes/{$quiz['id']}", 'method' => 'DELETE', 'confirm' => 'Are you sure you want to delete this quiz? all questions and attempts will be deleted permanently!', 'style' => 'color: #dc2626; font-weight: 600;']
+                                    ['type' => 'form', 'text' => 'Delete', 'action' => url("admin/quizzes/{$quiz['id']}"), 'method' => 'DELETE', 'confirm' => 'Are you sure you want to delete this quiz? all questions and attempts will be deleted permanently!', 'style' => 'color: #dc2626; font-weight: 600;']
                                 ]
                             ]);
                             ?>
