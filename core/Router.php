@@ -10,6 +10,7 @@ use RuntimeException;
 final class Router
 {
     private array $routes = [];
+    private array $globalMiddleware = [];
 
     /**
      * Router constructor.
@@ -21,6 +22,17 @@ final class Router
         private readonly Request $request,
         private readonly Response $response
     ) {}
+
+    /**
+     * Register a global middleware to run before all requests.
+     *
+     * @param string $middlewareClass Middleware class name.
+     * @return void
+     */
+    public function use(string $middlewareClass): void
+    {
+        $this->globalMiddleware[] = $middlewareClass;
+    }
 
     /**
      * Register a GET route.
@@ -104,6 +116,13 @@ final class Router
      */
     public function dispatch(): void
     {
+        foreach ($this->globalMiddleware as $middlewareClass) {
+            $middleware = new $middlewareClass();
+            if (!$middleware->handle($this->request, $this->response)) {
+                return;
+            }
+        }
+
         $method = $this->request->method();
         $path = $this->request->path();
 

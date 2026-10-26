@@ -8,9 +8,11 @@ use App\Controllers\PostController;
 use App\Middleware\AdminMiddleware;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
+use App\Middleware\MaintenanceMiddleware;
 use App\Middleware\SurveyCheckMiddleware;
 
 $router = app()->router();
+$router->use(MaintenanceMiddleware::class);
 
 $router->get('/', [HomeController::class, 'index'], [SurveyCheckMiddleware::class]);
 

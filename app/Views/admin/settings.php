@@ -64,6 +64,37 @@
             </div>
         </div>
 
+        <div style="margin-bottom: 24px; padding: 18px; border-radius: 8px; border: 1px solid <?= !empty($settings['maintenance_mode']) && $settings['maintenance_mode'] === '1' ? '#fca5a5; background: #fff5f5;' : '#e5e7eb; background: #f9fafb;' ?>">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <div>
+                    <label for="maintenance_mode" style="font-weight: 700; color: #111827; font-size: 1rem; margin-bottom: 2px; display: inline-flex; align-items: center; gap: 8px;">
+                        <span>Maintenance Mode</span>
+                        <?php if (!empty($settings['maintenance_mode']) && $settings['maintenance_mode'] === '1'): ?>
+                            <span style="display: inline-block; padding: 2px 8px; font-size: 0.75rem; font-weight: 600; color: #991b1b; background: #fee2e2; border-radius: 9999px; border: 1px solid #f87171;">ACTIVE (SITE OFFLINE)</span>
+                        <?php else: ?>
+                            <span style="display: inline-block; padding: 2px 8px; font-size: 0.75rem; font-weight: 600; color: #065f46; background: #d1fae5; border-radius: 9999px; border: 1px solid #6ee7b7;">INACTIVE (LIVE)</span>
+                        <?php endif; ?>
+                    </label>
+                    <span class="muted" style="display: block; font-size: 0.85rem;">When enabled, all public-facing pages show a maintenance page to visitors.</span>
+                </div>
+                <div>
+                    <label style="position: relative; display: inline-flex; align-items: center; cursor: pointer; user-select: none;">
+                        <input type="checkbox" id="maintenance_mode" name="maintenance_mode" value="1" <?= !empty($settings['maintenance_mode']) && $settings['maintenance_mode'] === '1' ? 'checked' : '' ?> style="width: 20px; height: 20px; cursor: pointer; accent-color: #dc2626;">
+                    </label>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <label for="maintenance_message" style="font-weight: 600; color: #374151; font-size: 0.9rem; display: block; margin-bottom: 6px;">Maintenance Page Custom Content (HTML / CSS supported)</label>
+                <textarea id="maintenance_message" name="maintenance_message" rows="5" placeholder="Leave empty to show the default announcement card, or enter custom HTML / <style> CSS to completely override the maintenance page content..." style="margin-bottom: 6px; font-size: 0.88rem; font-family: monospace; line-height: 1.5;"><?= e($settings['maintenance_message'] ?? '') ?></textarea>
+                <span class="muted" style="display: block; font-size: 0.8rem; color: #6b7280;">Supports raw HTML &amp; <code>&lt;style&gt;</code> tags to customize styling. If left empty, the standard JNTO announcement card will be displayed as normal.</span>
+            </div>
+
+            <div style="margin-top: 12px; padding: 10px 12px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 0.82rem; color: #1e40af;">
+                <strong>Notice:</strong> The Admin Panel (<code style="background: #dbeafe; padding: 1px 4px; border-radius: 3px;">/admin/*</code>) and logged-in administrator accounts will always remain accessible so you can manage the site and disable maintenance mode when ready.
+            </div>
+        </div>
+
         <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 20px; display: flex; justify-content: flex-end;">
             <button type="submit" class="btn" style="background: #4f46e5; display: inline-flex; align-items: center; gap: 6px;">
                 <svg style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">

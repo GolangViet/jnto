@@ -63,6 +63,11 @@ final class SettingController extends Controller
         }
         $this->settingRepository->setSetting('leaderboard_visible_quizzes', $visibleQuizzesValue);
 
+        $maintenanceMode = ($request->input('maintenance_mode') === '1' || $request->input('maintenance_mode') === 'on') ? '1' : '0';
+        $maintenanceMessage = trim((string) $request->input('maintenance_message', ''));
+        $this->settingRepository->setSetting('maintenance_mode', $maintenanceMode);
+        $this->settingRepository->setSetting('maintenance_message', $maintenanceMessage);
+
         app()->session()->flash('success', 'Settings updated successfully.');
         $this->redirect('/admin/settings');
     }
