@@ -79,5 +79,25 @@ final class User extends Model
 
         return $stmt->execute($data + ['id' => $id]);
     }
+
+    /**
+     * Delete multiple users by their primary keys.
+     *
+     * @param array<int> $ids
+     * @return int Number of deleted rows.
+     */
+    public function deleteByIds(array $ids): int
+    {
+        $ids = array_values(array_unique(array_filter(array_map('intval', $ids), fn($id) => $id > 0)));
+        if (empty($ids)) {
+            return 0;
+        }
+
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+        $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE id IN ($placeholders)");
+        $stmt->execute($ids);
+
+        return $stmt->rowCount();
+    }
 }
 

@@ -31,21 +31,31 @@ final class UserController extends Controller
         $role = trim((string)$request->input('role', ''));
         $facebookPost = trim((string)$request->input('facebook_post', ''));
         $page = $request->input('page') ? max(1, (int)$request->input('page')) : 1;
-        $perPage = 15;
+        $rawPerPage = (int)$request->input('per_page', 15);
+        $allowedPerPage = [15, 25, 50, 100];
+        $perPage = in_array($rawPerPage, $allowedPerPage, true) ? $rawPerPage : 15;
 
         $filters = [
             'search' => $search,
             'role' => $role,
             'facebook_post' => $facebookPost,
+            'per_page' => $perPage,
         ];
 
         $result = $this->userService->getPaginatedUsers($filters, $page, $perPage);
         $totalPages = (int)ceil($result['total'] / $perPage);
 
+        // If current page is beyond total pages after deletions, adjust to the last available page
+        if ($page > 1 && empty($result['items']) && $result['total'] > 0) {
+            $page = max(1, $totalPages);
+            $result = $this->userService->getPaginatedUsers($filters, $page, $perPage);
+        }
+
         return $this->view('admin/users/index', [
             'users' => $result['items'],
             'total' => $result['total'],
             'page' => $page,
+            'perPage' => $perPage,
             'totalPages' => $totalPages,
             'filters' => $filters,
         ]);
@@ -237,12 +247,13 @@ final class UserController extends Controller
     public function destroy(string $id): never
     {
         $userId = (int) $id;
-        Csrf::verify(app()->request());
+        $request = app()->request();
+        Csrf::verify($request);
 
         $currentUser = app()->session()->get('user');
         if ($currentUser && (int) $currentUser['id'] === $userId) {
             app()->session()->flash('error', 'You cannot delete your own account.');
-            $this->redirect('/admin/users');
+            $this->redirect($this->getRedirectUrlWithFilters($request));
         }
 
         $deleted = $this->userService->deleteUser($userId);
@@ -250,9 +261,109 @@ final class UserController extends Controller
         if (!$deleted) {
             app()->session()->flash('error', 'Could not delete user. Please try again.');
         } else {
-            app()->session()->flash('success', 'User deleted successfully.');
+            app()->session()->flash('success', 'User and related data deleted successfully.');
         }
 
-        $this->redirect('/admin/users');
+        $this->redirect($this->getRedirectUrlWithFilters($request));
+    }
+
+    /**
+     * Web Page Action: Bulk delete users with related data.
+     */
+    public function bulkDestroy(): never
+    {
+        $request = app()->request();
+        Csrf::verify($request);
+
+        $rawIds = $request->input('user_ids');
+        if (!is_array($rawIds)) {
+            $rawIds = $rawIds !== null && $rawIds !== '' ? explode(',', (string) $rawIds) : [];
+        }
+
+        $userIds = array_values(array_unique(array_filter(array_map('intval', $rawIds), fn($id) => $id > 0)));
+
+        if (empty($userIds)) {
+            if ($request->expectsJson()) {
+                app()->response()->json(['success' => false, 'message' => 'Please select at least one user to delete.'], 422);
+            }
+            app()->session()->flash('error', 'Please select at least one user to delete.');
+            $this->redirect($this->getRedirectUrlWithFilters($request));
+        }
+
+        $currentUser = app()->session()->get('user');
+        $currentUserId = $currentUser ? (int) $currentUser['id'] : 0;
+
+        $hasSelf = in_array($currentUserId, $userIds, true);
+        if ($hasSelf) {
+            $userIds = array_values(array_diff($userIds, [$currentUserId]));
+            if (empty($userIds)) {
+                if ($request->expectsJson()) {
+                    app()->response()->json(['success' => false, 'message' => 'You cannot delete your own account.'], 403);
+                }
+                app()->session()->flash('error', 'You cannot delete your own account.');
+                $this->redirect($this->getRedirectUrlWithFilters($request));
+            }
+        }
+
+        try {
+            $deletedCount = $this->userService->bulkDeleteUsers($userIds);
+
+            $message = "{$deletedCount} user(s) and their related data deleted successfully.";
+            if ($hasSelf) {
+                $message .= ' (Your own account was skipped).';
+            }
+
+            if ($request->expectsJson()) {
+                app()->response()->json([
+                    'success' => true,
+                    'message' => $message,
+                    'deleted_count' => $deletedCount,
+                ]);
+            }
+
+            app()->session()->flash('success', $message);
+        } catch (\Throwable $e) {
+            if ($request->expectsJson()) {
+                app()->response()->json(['success' => false, 'message' => 'Could not delete users: ' . $e->getMessage()], 500);
+            }
+            app()->session()->flash('error', 'Could not delete users. Please try again.');
+        }
+
+        $this->redirect($this->getRedirectUrlWithFilters($request));
+    }
+
+    /**
+     * Build redirect URL for admin users preserving query parameters.
+     */
+    private function getRedirectUrlWithFilters(\Core\Request $request): string
+    {
+        $redirectParams = [];
+
+        $search = trim((string)$request->input('search', ''));
+        if ($search !== '') {
+            $redirectParams['search'] = $search;
+        }
+
+        $role = trim((string)$request->input('role', ''));
+        if ($role !== '') {
+            $redirectParams['role'] = $role;
+        }
+
+        $facebookPost = trim((string)$request->input('facebook_post', ''));
+        if ($facebookPost !== '') {
+            $redirectParams['facebook_post'] = $facebookPost;
+        }
+
+        $perPage = (int)$request->input('per_page', 0);
+        if (in_array($perPage, [15, 25, 50, 100], true)) {
+            $redirectParams['per_page'] = $perPage;
+        }
+
+        $page = (int)$request->input('page', 1);
+        if ($page > 1) {
+            $redirectParams['page'] = $page;
+        }
+
+        return '/admin/users' . (!empty($redirectParams) ? '?' . http_build_query($redirectParams) : '');
     }
 }

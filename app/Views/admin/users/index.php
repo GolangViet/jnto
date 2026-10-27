@@ -64,6 +64,15 @@
                 <option value="no" <?= ($filters['facebook_post'] ?? '') === 'no' ? 'selected' : '' ?>>No Post</option>
             </select>
         </div>
+        <div style="flex: 1; min-width: 110px;">
+            <label for="per_page" style="font-size: 0.85rem; color: #4b5563; font-weight: bold; display: block; margin-bottom: 4px;">Per Page</label>
+            <select id="per_page" name="per_page" style="margin-bottom: 0;" onchange="this.form.submit()">
+                <option value="15" <?= ($filters['per_page'] ?? 15) == 15 ? 'selected' : '' ?>>15 items</option>
+                <option value="25" <?= ($filters['per_page'] ?? 15) == 25 ? 'selected' : '' ?>>25 items</option>
+                <option value="50" <?= ($filters['per_page'] ?? 15) == 50 ? 'selected' : '' ?>>50 items</option>
+                <option value="100" <?= ($filters['per_page'] ?? 15) == 100 ? 'selected' : '' ?>>100 items</option>
+            </select>
+        </div>
         <div style="display: flex; gap: 8px;">
             <button type="submit" class="btn">Filter</button>
             <a href="<?= url('admin/users') ?>" class="btn" style="background: #9ca3af; text-decoration: none; color: #fff;">Clear</a>
@@ -71,10 +80,36 @@
     </form>
 </div>
 
+<?php
+$currentUserId = (int)(app()->session()->get('user')['id'] ?? 0);
+?>
 <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button type="button" id="bulkDeleteBtn" class="btn danger" disabled style="opacity: 0.5; cursor: not-allowed; font-size: 0.85rem; padding: 7px 12px; display: inline-flex; align-items: center; gap: 6px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                Delete Selected (<span id="selectedCountText">0</span>)
+            </button>
+            <span id="selectionSummary" style="font-size: 0.85rem; color: #64748b;">No users selected</span>
+        </div>
+    </div>
+
+    <form id="bulkDeleteForm" method="post" action="<?= url('admin/users/bulk-delete') ?>" style="display: none;">
+        <?= csrf_field() ?>
+        <input type="hidden" name="search" value="<?= e($filters['search'] ?? '') ?>">
+        <input type="hidden" name="role" value="<?= e($filters['role'] ?? '') ?>">
+        <input type="hidden" name="facebook_post" value="<?= e($filters['facebook_post'] ?? '') ?>">
+        <input type="hidden" name="per_page" value="<?= (int)($filters['per_page'] ?? 15) ?>">
+        <input type="hidden" name="page" value="<?= (int)($page ?? 1) ?>">
+        <div id="bulkDeleteInputs"></div>
+    </form>
+
     <table>
         <thead>
             <tr>
+                <th style="width: 36px; text-align: center;">
+                    <input type="checkbox" id="selectAllUsers" title="Select all users on this page" style="width: 16px; height: 16px; margin: 0; cursor: pointer;">
+                </th>
                 <th>ID</th>
                 <th>Username</th>
                 <th>Name</th>
@@ -88,11 +123,19 @@
         <tbody>
             <?php if (empty($users)): ?>
                 <tr>
-                    <td colspan="8" style="text-align: center; color: #6b7280; padding: 24px;">No users found matching the criteria.</td>
+                    <td colspan="9" style="text-align: center; color: #6b7280; padding: 24px;">No users found matching the criteria.</td>
                 </tr>
             <?php else: ?>
                 <?php foreach ($users as $u): ?>
-                    <tr>
+                    <?php $isSelf = ((int)$u['id'] === $currentUserId); ?>
+                    <tr class="user-row" id="user-row-<?= (int)$u['id'] ?>">
+                        <td style="text-align: center; vertical-align: middle;">
+                            <?php if ($isSelf): ?>
+                                <input type="checkbox" disabled title="You cannot delete your own account" style="width: 16px; height: 16px; margin: 0; cursor: not-allowed; opacity: 0.4;">
+                            <?php else: ?>
+                                <input type="checkbox" class="user-select-chk" value="<?= (int)$u['id'] ?>" style="width: 16px; height: 16px; margin: 0; cursor: pointer;">
+                            <?php endif; ?>
+                        </td>
                         <td><?= (int)$u['id'] ?></td>
                         <td class="copyable-cell" style="max-width: 150px;" data-copy-text="<?= e($u['username']) ?>" title="<?= e($u['username']) ?>">
                             <span class="cell-text"><?= e($u['username']) ?></span>
@@ -135,7 +178,12 @@
                             <form method="post" action="<?= url('admin/users/' . (int)$u['id']) ?>" style="display:inline">
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn danger" onclick="return confirm('Delete this user?')">Delete</button>
+                                <input type="hidden" name="search" value="<?= e($filters['search'] ?? '') ?>">
+                                <input type="hidden" name="role" value="<?= e($filters['role'] ?? '') ?>">
+                                <input type="hidden" name="facebook_post" value="<?= e($filters['facebook_post'] ?? '') ?>">
+                                <input type="hidden" name="per_page" value="<?= (int)($filters['per_page'] ?? 15) ?>">
+                                <input type="hidden" name="page" value="<?= (int)($page ?? 1) ?>">
+                                <button class="btn danger" onclick="return confirm('Delete this user and their related data?')">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -148,7 +196,7 @@
     <?php if ($totalPages > 1): ?>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0; flex-wrap: wrap; gap: 12px;">
             <div style="color: #64748b; font-size: 0.85rem;">
-                Showing Page <strong><?= $page ?></strong> of <strong><?= $totalPages ?></strong> (Total <strong><?= $total ?></strong> users)
+                Showing Page <strong><?= $page ?></strong> of <strong><?= $totalPages ?></strong> (Total <strong><?= $total ?></strong> users, <strong><?= (int)($perPage ?? 15) ?></strong> per page)
             </div>
             <div style="display: flex; gap: 6px; align-items: center;">
                 <?php 
@@ -196,6 +244,10 @@
                 <?php endif; ?>
             </div>
         </div>
+    <?php elseif ($total > 0): ?>
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.85rem;">
+            Total <strong><?= $total ?></strong> users (<strong><?= (int)($perPage ?? 15) ?></strong> per page)
+        </div>
     <?php endif; ?>
 </div>
 
@@ -224,4 +276,101 @@ function copyToClipboard(btn) {
         console.error('Failed to copy: ', err);
     });
 }
+
+// Bulk Delete Logic
+document.addEventListener('DOMContentLoaded', function() {
+    const selectAll = document.getElementById('selectAllUsers');
+    const userCheckboxes = document.querySelectorAll('.user-select-chk');
+    const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+    const selectedCountText = document.getElementById('selectedCountText');
+    const selectionSummary = document.getElementById('selectionSummary');
+    const bulkDeleteForm = document.getElementById('bulkDeleteForm');
+    const bulkDeleteInputs = document.getElementById('bulkDeleteInputs');
+
+    function updateSelectionState() {
+        const checkedBoxes = Array.from(userCheckboxes).filter(cb => cb.checked);
+        const count = checkedBoxes.length;
+        const totalEnabled = userCheckboxes.length;
+
+        if (selectedCountText) {
+            selectedCountText.textContent = count;
+        }
+
+        if (bulkDeleteBtn && selectionSummary) {
+            if (count > 0) {
+                bulkDeleteBtn.disabled = false;
+                bulkDeleteBtn.style.opacity = '1';
+                bulkDeleteBtn.style.cursor = 'pointer';
+                selectionSummary.textContent = count + ' user' + (count > 1 ? 's' : '') + ' selected';
+            } else {
+                bulkDeleteBtn.disabled = true;
+                bulkDeleteBtn.style.opacity = '0.5';
+                bulkDeleteBtn.style.cursor = 'not-allowed';
+                selectionSummary.textContent = 'No users selected';
+            }
+        }
+
+        if (selectAll && totalEnabled > 0) {
+            if (count === totalEnabled) {
+                selectAll.checked = true;
+                selectAll.indeterminate = false;
+            } else if (count > 0) {
+                selectAll.checked = false;
+                selectAll.indeterminate = true;
+            } else {
+                selectAll.checked = false;
+                selectAll.indeterminate = false;
+            }
+        }
+
+        userCheckboxes.forEach(cb => {
+            const row = document.getElementById('user-row-' + cb.value);
+            if (row) {
+                if (cb.checked) {
+                    row.style.backgroundColor = '#fef2f2';
+                } else {
+                    row.style.backgroundColor = '';
+                }
+            }
+        });
+    }
+
+    if (selectAll) {
+        selectAll.addEventListener('change', function() {
+            const isChecked = this.checked;
+            userCheckboxes.forEach(cb => {
+                cb.checked = isChecked;
+            });
+            updateSelectionState();
+        });
+    }
+
+    userCheckboxes.forEach(cb => {
+        cb.addEventListener('change', updateSelectionState);
+    });
+
+    if (bulkDeleteBtn) {
+        bulkDeleteBtn.addEventListener('click', function() {
+            const checkedBoxes = Array.from(userCheckboxes).filter(cb => cb.checked);
+            if (checkedBoxes.length === 0) return;
+
+            const count = checkedBoxes.length;
+            const confirmMsg = `Are you sure you want to delete ${count} user(s) and ALL their related data (quiz attempts, answers, and facebook posts)?\n\nThis action cannot be undone.`;
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+
+            bulkDeleteInputs.innerHTML = '';
+            checkedBoxes.forEach(cb => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'user_ids[]';
+                input.value = cb.value;
+                bulkDeleteInputs.appendChild(input);
+            });
+
+            bulkDeleteForm.submit();
+        });
+    }
+});
 </script>

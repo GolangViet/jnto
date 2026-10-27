@@ -93,14 +93,25 @@ final class UserService
     }
 
     /**
-     * Delete a user.
+     * Delete a user along with related data.
      *
      * @param int $id User ID.
      * @return bool True on success, false on failure.
      */
     public function deleteUser(int $id): bool
     {
-        return $this->userRepository->delete($id);
+        return $this->userRepository->deleteWithRelatedData($id);
+    }
+
+    /**
+     * Bulk delete users along with related data.
+     *
+     * @param array<int> $userIds Array of user IDs.
+     * @return int Number of users deleted.
+     */
+    public function bulkDeleteUsers(array $userIds): int
+    {
+        return $this->userRepository->bulkDeleteWithRelatedData($userIds);
     }
 
     /**

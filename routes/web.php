@@ -73,6 +73,7 @@ $router->post('/admin/users', [AdminUserController::class, 'store'], [AuthMiddle
 $router->get('/admin/users/{id}/edit', [AdminUserController::class, 'edit'], [AuthMiddleware::class, AdminMiddleware::class]);
 $router->put('/admin/users/{id}', [AdminUserController::class, 'update'], [AuthMiddleware::class, AdminMiddleware::class]);
 $router->delete('/admin/users/{id}', [AdminUserController::class, 'destroy'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->post('/admin/users/bulk-delete', [AdminUserController::class, 'bulkDestroy'], [AuthMiddleware::class, AdminMiddleware::class]);
 
 
 // Admin Quiz HTML Routes

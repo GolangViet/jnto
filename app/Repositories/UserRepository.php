@@ -157,6 +157,67 @@ final class UserRepository extends BaseRepository
             'total' => $totalCount,
         ];
     }
+
+    /**
+     * Delete multiple users and all their related data within a database transaction.
+     * Related data includes:
+     * - cms.user_facebook_posts (user_id)
+     * - cms.quiz_attempts (user_id) -> cascades to answers & answer options
+     * - cms.quizzes (created_by disassociated to NULL)
+     *
+     * @param array<int> $userIds
+     * @return int Number of users deleted
+     * @throws \Throwable
+     */
+    public function bulkDeleteWithRelatedData(array $userIds): int
+    {
+        $userIds = array_values(array_unique(array_filter(array_map('intval', $userIds), fn($id) => $id > 0)));
+        if (empty($userIds)) {
+            return 0;
+        }
+
+        $db = \Core\Database::connection();
+        $placeholders = implode(',', array_fill(0, count($userIds), '?'));
+
+        $db->beginTransaction();
+        try {
+            // 1. Delete user facebook posts
+            $stmtFp = $db->prepare("DELETE FROM cms.user_facebook_posts WHERE user_id IN ($placeholders)");
+            $stmtFp->execute($userIds);
+
+            // 2. Delete quiz attempts (cascades to answers and options)
+            $stmtAttempts = $db->prepare("DELETE FROM cms.quiz_attempts WHERE user_id IN ($placeholders)");
+            $stmtAttempts->execute($userIds);
+
+            // 3. Clear quiz creator references so quizzes are not orphaned or deleted
+            $stmtQuizzes = $db->prepare("UPDATE cms.quizzes SET created_by = NULL WHERE created_by IN ($placeholders)");
+            $stmtQuizzes->execute($userIds);
+
+            // 4. Delete the users
+            $stmtUsers = $db->prepare("DELETE FROM cms.users WHERE id IN ($placeholders)");
+            $stmtUsers->execute($userIds);
+            $deletedCount = $stmtUsers->rowCount();
+
+            $db->commit();
+            return $deletedCount;
+        } catch (\Throwable $e) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Delete a single user and their related data.
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function deleteWithRelatedData(int $id): bool
+    {
+        return $this->bulkDeleteWithRelatedData([$id]) > 0;
+    }
 }
 
 
