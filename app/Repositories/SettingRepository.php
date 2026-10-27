@@ -47,9 +47,13 @@ final class SettingRepository extends BaseRepository
                     value = EXCLUDED.value,
                     updated_at = EXCLUDED.updated_at";
         $stmt = $db->prepare($sql);
-        return $stmt->execute([
+        $result = $stmt->execute([
             'key' => $key,
             'value' => $value,
         ]);
+        if ($result && function_exists('setting')) {
+            setting($key, null, true);
+        }
+        return $result;
     }
 }

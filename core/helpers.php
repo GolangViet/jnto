@@ -35,10 +35,10 @@ function config(string $key, mixed $default = null): mixed
  * @param mixed|null $default
  * @return mixed
  */
-function setting(string $key, mixed $default = null): mixed
+function setting(string $key, mixed $default = null, bool $reload = false): mixed
 {
     static $settings = null;
-    if ($settings === null) {
+    if ($settings === null || $reload) {
         $settings = [];
         try {
             $db = \Core\Database::connection();

@@ -42,11 +42,8 @@ final class MaintenanceMiddleware
             return true;
         }
 
-        // Set HTTP 503 Service Unavailable and retry after 1 hour header
-        $response->status(503);
-        if (!headers_sent()) {
-            header('Retry-After: 3600');
-        }
+        // Do not return HTTP status 503; serve maintenance content with standard HTTP 200
+        $response->status(200);
 
         $rawMessage = (string) setting('maintenance_message', '');
         $hasCustomContent = trim($rawMessage) !== '';
@@ -57,7 +54,7 @@ final class MaintenanceMiddleware
                 'success' => false,
                 'message' => $apiMessage,
                 'maintenance' => true,
-            ], 503);
+            ], 200);
         }
 
         try {

@@ -141,5 +141,27 @@ it('Renders custom HTML/CSS content when provided or falls back to default card'
     expect(str_contains($renderedDefault, 'Theo dõi Fanpage JNTO'))->toBeTrue();
 });
 
+it('Does not return HTTP status 503 when maintenance mode is enabled', function() {
+    $middleware = new \App\Middleware\MaintenanceMiddleware();
+    $request = app()->request();
+    $response = app()->response();
+    
+    $repo = new \App\Repositories\SettingRepository();
+    $repo->setSetting('maintenance_mode', '1');
+    
+    $_SERVER['REQUEST_URI'] = '/';
+    $_SERVER['REQUEST_METHOD'] = 'GET';
+    
+    ob_start();
+    $result = $middleware->handle($request, $response);
+    ob_end_clean();
+    
+    expect($result)->toBeFalse();
+    expect(http_response_code())->toBe(200);
+    
+    // Clean up
+    $repo->setSetting('maintenance_mode', '0');
+});
+
 echo "\n" . green("Validation completed.") . "\n";
 echo "Passed: " . green((string)$testsPassed) . " | Failed: " . ($testsFailed > 0 ? red((string)$testsFailed) : green("0")) . "\n\n";

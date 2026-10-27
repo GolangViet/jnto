@@ -299,8 +299,8 @@
                     <div class="info-value">Bảo trì theo lịch trình</div>
                 </div>
                 <div class="info-card">
-                    <div class="info-label">HTTP Code</div>
-                    <div class="info-value">503 Service Unavailable</div>
+                    <div class="info-label">Hệ thống</div>
+                    <div class="info-value">Đang tạm ngưng phục vụ</div>
                 </div>
             </div>
 
