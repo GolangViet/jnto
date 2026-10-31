@@ -52,6 +52,7 @@ use App\Controllers\Admin\SettingController as AdminSettingController;
 use App\Controllers\Admin\UserController as AdminUserController;
 use App\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Controllers\Admin\QuizAttemptController as AdminQuizAttemptController;
+use App\Controllers\Admin\SurveyController as AdminSurveyController;
 use App\Controllers\QuizAttemptController;
 use App\Controllers\TakeSurveyController;
 
@@ -59,8 +60,19 @@ use App\Controllers\TakeSurveyController;
 $router->get('/admin/dashboard', [AdminDashboardController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
 $router->get('/admin/dashboard/export-leaderboard', [AdminDashboardController::class, 'exportLeaderboard'], [AuthMiddleware::class, AdminMiddleware::class]);
 
-// Admin Quiz Attempt Route
+// Admin Survey Management Routes
+$router->get('/admin/surveys', [AdminSurveyController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->get('/admin/surveys/export', [AdminSurveyController::class, 'exportCsv'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->get('/admin/surveys/user/{id}', [AdminSurveyController::class, 'showUserAttempt'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->delete('/admin/surveys/user/{id}', [AdminSurveyController::class, 'destroyUserAttempt'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->get('/admin/surveys/guest/{id}', [AdminSurveyController::class, 'showGuestSubmission'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->delete('/admin/surveys/guest/{id}', [AdminSurveyController::class, 'destroyGuestSubmission'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->post('/admin/surveys/bulk-delete', [AdminSurveyController::class, 'bulkDestroy'], [AuthMiddleware::class, AdminMiddleware::class]);
+
+// Admin Quiz Attempt Routes
 $router->get('/admin/quiz-attempts/{id}', [AdminQuizAttemptController::class, 'show'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->delete('/admin/quiz-attempts/{id}', [AdminQuizAttemptController::class, 'destroy'], [AuthMiddleware::class, AdminMiddleware::class]);
+$router->post('/admin/quiz-attempts/bulk-delete', [AdminQuizAttemptController::class, 'bulkDestroy'], [AuthMiddleware::class, AdminMiddleware::class]);
 
 // Admin Settings Routes
 $router->get('/admin/settings', [AdminSettingController::class, 'index'], [AuthMiddleware::class, AdminMiddleware::class]);
@@ -105,6 +117,7 @@ $router->post('/api/admin/quizzes/{quizId}/questions/reorder', [AdminQuestionCon
 // End-User take survey
 $router->get('/take-survey', [TakeSurveyController::class, 'detailSurvey']);
 $router->post('/api/survey/sync', [TakeSurveyController::class, 'apiSyncSurvey'], [AuthMiddleware::class]);
+$router->post('/api/survey/guest-submit', [TakeSurveyController::class, 'apiSubmitGuestSurvey']);
 $router->get('/take-questions', [TakeSurveyController::class, 'detailQuestions'], [AuthMiddleware::class]);
 $router->get('/confirm-post', [TakeSurveyController::class, 'confirmPost'], [AuthMiddleware::class]);
 $router->post('/submit-post', [TakeSurveyController::class, 'submitPost'], [AuthMiddleware::class]);

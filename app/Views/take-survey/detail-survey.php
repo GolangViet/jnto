@@ -231,6 +231,7 @@ if (!function_exists('renderDynamicQuestions')) {
 <script>
 (function() {
     const attemptId = <?= isset($attempt['id']) ? (int)$attempt['id'] : 'null' ?>;
+    const mainSurveyQuizId = <?= !empty($mainSurveyId) ? (int)$mainSurveyId : 'null' ?>;
     const isLoggedIn = <?= !empty($user) ? 'true' : 'false' ?>;
     const STORAGE_KEY = 'jnto_survey_data';
 
@@ -610,11 +611,12 @@ if (!function_exists('renderDynamicQuestions')) {
         // Collect all answers
         const allAnswers = collectAllAnswers();
         const selectedExp = form.querySelector('input[name="travel_experience"]:checked') || form.querySelector('input[data-survey-target]:checked');
+        const travelStatus = selectedExp?.dataset?.surveyTarget || null;
         const stored = {
             answers: allAnswers,
-            travel_status: selectedExp?.dataset?.surveyTarget || null,
+            travel_status: travelStatus,
             status: 'done',
-            pending_sync: !isLoggedIn,
+            pending_sync: false,
             saved_at: new Date().toISOString(),
             completed_at: new Date().toISOString()
         };
@@ -623,10 +625,43 @@ if (!function_exists('renderDynamicQuestions')) {
         } catch (e) {}
         setStoredData(stored);
 
-        // If guest (not logged in): redirect to register/login
+        // If guest (not logged in): save to server staging table via API then redirect
         if (!isLoggedIn) {
-            window.location.href = `${window.APP_URL}/register?from=survey`;
-            return;
+            createOverlay('Đang lưu kết quả khảo sát của bạn...');
+            try {
+                const response = await fetch(`${window.APP_URL}/api/survey/guest-submit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        quiz_id: mainSurveyQuizId,
+                        travel_status: travelStatus,
+                        answers: allAnswers
+                    })
+                });
+
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    try {
+                        stored.pending_sync = false;
+                        setStoredData(stored);
+                    } catch (e) {}
+
+                    window.location.href = data.redirect || `${window.APP_URL}/register?from=survey`;
+                    return;
+                } else {
+                    removeOverlay();
+                    alert(data.message || 'Không thể lưu kết quả khảo sát. Vui lòng thử lại.');
+                    return;
+                }
+            } catch (err) {
+                removeOverlay();
+                console.error('Failed to submit guest survey:', err);
+                alert('Có lỗi xảy ra khi lưu kết quả khảo sát. Vui lòng thử lại.');
+                return;
+            }
         }
 
         // If logged in: submit the attempt

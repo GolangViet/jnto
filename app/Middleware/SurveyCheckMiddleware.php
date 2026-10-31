@@ -36,7 +36,7 @@ final class SurveyCheckMiddleware
         $path = $request->path();
 
         // Check if accessing home, survey pages or logout to prevent loops
-        if ($path === '/' || $path === '/take-survey' || $path === '/take-questions' || $path === '/confirm-post' || $path === '/logout' || $path === '/thank-you' || $path === '/api/survey/sync') {
+        if ($path === '/' || $path === '/take-survey' || $path === '/take-questions' || $path === '/confirm-post' || $path === '/logout' || $path === '/thank-you' || $path === '/api/survey/sync' || $path === '/api/survey/guest-submit') {
             return true;
         }
 

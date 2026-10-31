@@ -8,14 +8,17 @@ use Core\Controller;
 use Core\Csrf;
 use Core\Validator;
 use App\Services\UserService;
+use App\Services\GuestSurveyService;
 
 final class AuthController extends Controller
 {
     private UserService $userService;
+    private GuestSurveyService $guestSurveyService;
 
     public function __construct()
     {
         $this->userService = new UserService();
+        $this->guestSurveyService = new GuestSurveyService();
     }
 
     /**
@@ -94,8 +97,20 @@ final class AuthController extends Controller
             'role'     => $user['role'] ?? 'user',
         ]);
 
-        $fromSurvey = ($request->input('from') ?? $request->query('from') ?? $_GET['from'] ?? '') === 'survey';
-        $redirectUrl = $fromSurvey ? url('take-survey') : url('/');
+        $guestToken = $request->input('guest_token') ?? $request->query('guest_token') ?? $_GET['guest_token'] ?? null;
+        $claimed = false;
+        if (!empty($user['id'])) {
+            $claimed = $this->guestSurveyService->claimGuestSubmissionForUser((int) $user['id'], $guestToken);
+        }
+
+        $fromSurvey = ($request->input('from') ?? $request->query('from') ?? $_GET['from'] ?? '') === 'survey' || $claimed;
+        if ($claimed) {
+            $redirectUrl = url('take-questions');
+        } elseif ($fromSurvey) {
+            $redirectUrl = url('take-survey');
+        } else {
+            $redirectUrl = url('/');
+        }
 
         if ($isJson) {
             app()->response()->json(['success' => true, 'redirect' => $redirectUrl]);
@@ -182,8 +197,20 @@ final class AuthController extends Controller
 
         app()->session()->flash('success', 'Đăng ký tài khoản thành công!');
 
-        $fromSurvey = ($request->input('from') ?? $request->query('from')) === 'survey';
-        $redirectUrl = $fromSurvey ? url('take-survey') : url('/');
+        $guestToken = $request->input('guest_token') ?? $request->query('guest_token') ?? $_GET['guest_token'] ?? null;
+        $claimed = false;
+        if (!empty($user['id'])) {
+            $claimed = $this->guestSurveyService->claimGuestSubmissionForUser((int) $user['id'], $guestToken);
+        }
+
+        $fromSurvey = ($request->input('from') ?? $request->query('from')) === 'survey' || $claimed;
+        if ($claimed) {
+            $redirectUrl = url('take-questions');
+        } elseif ($fromSurvey) {
+            $redirectUrl = url('take-survey');
+        } else {
+            $redirectUrl = url('/');
+        }
 
         if ($isJson) {
             app()->response()->json([

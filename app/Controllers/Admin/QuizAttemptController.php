@@ -94,4 +94,58 @@ final class QuizAttemptController extends Controller
             'questions' => $visibleQuestions,
         ]);
     }
+
+    /**
+     * Delete a single quiz attempt and its answers.
+     */
+    public function destroy(string $id): never
+    {
+        $request = app()->request();
+        \Core\Csrf::verify($request);
+
+        $attemptId = (int) $id;
+        $this->attemptService->deleteAttempt($attemptId);
+
+        app()->session()->flash('success', 'Đã xóa lượt làm bài và toàn bộ câu trả lời.');
+        $this->redirect('/admin/dashboard');
+    }
+
+    /**
+     * Bulk delete quiz attempts and all their answers.
+     */
+    public function bulkDestroy(): never
+    {
+        $request = app()->request();
+        \Core\Csrf::verify($request);
+
+        $rawIds = $request->input('attempt_ids') ?? [];
+        if (!is_array($rawIds)) {
+            $rawIds = $rawIds !== '' ? explode(',', (string) $rawIds) : [];
+        }
+
+        $attemptIds = array_values(array_unique(array_filter(array_map('intval', $rawIds), fn($id) => $id > 0)));
+
+        if (empty($attemptIds)) {
+            if ($request->expectsJson()) {
+                app()->response()->json(['success' => false, 'message' => 'Vui lòng chọn ít nhất một lượt làm bài.'], 422);
+            }
+            app()->session()->flash('error', 'Vui lòng chọn ít nhất một lượt làm bài để xóa.');
+            $this->redirect('/admin/dashboard');
+        }
+
+        $deletedCount = $this->attemptService->bulkDeleteAttempts($attemptIds);
+
+        $message = "Đã xóa {$deletedCount} lượt làm bài và toàn bộ câu trả lời liên quan.";
+        if ($request->expectsJson()) {
+            app()->response()->json([
+                'success' => true,
+                'message' => $message,
+                'deleted_count' => $deletedCount,
+            ]);
+        }
+
+        app()->session()->flash('success', $message);
+        $this->redirect('/admin/dashboard');
+    }
 }
+

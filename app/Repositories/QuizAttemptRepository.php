@@ -266,5 +266,175 @@ final class QuizAttemptRepository extends BaseRepository
         $stmt->execute(['user_id' => $userId]);
         return $stmt->fetchAll() ?: [];
     }
+
+    /**
+     * Get paginated survey attempts with user information and answers count.
+     *
+     * @param int $quizId
+     * @param string|null $search
+     * @param string|null $startDate
+     * @param string|null $endDate
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
+    public function getSurveyAttempts(
+        int $quizId,
+        ?string $search = null,
+        ?string $startDate = null,
+        ?string $endDate = null,
+        int $limit = 20,
+        int $offset = 0
+    ): array {
+        $db = Database::connection();
+        $conditions = ["qa.quiz_id = :quiz_id"];
+        $params = ['quiz_id' => $quizId];
+
+        if ($search !== null && $search !== '') {
+            $conditions[] = "(u.name ILIKE :search OR u.email ILIKE :search OR u.username ILIKE :search)";
+            $params['search'] = '%' . $search . '%';
+        }
+
+        if ($startDate !== null && $startDate !== '') {
+            $conditions[] = "COALESCE(qa.submitted_at, qa.created_at) >= :start_date";
+            $params['start_date'] = $startDate . ' 00:00:00';
+        }
+
+        if ($endDate !== null && $endDate !== '') {
+            $conditions[] = "COALESCE(qa.submitted_at, qa.created_at) <= :end_date";
+            $params['end_date'] = $endDate . ' 23:59:59';
+        }
+
+        $whereClause = implode(' AND ', $conditions);
+        $sql = "SELECT qa.*, q.title as quiz_title,
+                       u.name as user_name, u.email as user_email, u.username as user_username,
+                       (SELECT COUNT(*) FROM cms.quiz_attempt_answers WHERE attempt_id = qa.id) as answers_count,
+                       (
+                           SELECT qo.option_text
+                           FROM cms.quiz_attempt_answers qaa_sub
+                           JOIN cms.quiz_attempt_answer_options qaa_opt ON qaa_opt.attempt_answer_id = qaa_sub.id
+                           JOIN cms.question_options qo ON qo.id = qaa_opt.option_id
+                           WHERE qaa_sub.attempt_id = qa.id 
+                             AND EXISTS (SELECT 1 FROM cms.option_related_questions orq WHERE orq.option_id = qo.id)
+                           LIMIT 1
+                       ) as travel_status
+                FROM cms.quiz_attempts qa
+                LEFT JOIN cms.users u ON qa.user_id = u.id
+                LEFT JOIN cms.quizzes q ON qa.quiz_id = q.id
+                WHERE {$whereClause}
+                ORDER BY COALESCE(qa.submitted_at, qa.created_at) DESC, qa.id DESC
+                LIMIT :limit OFFSET :offset";
+
+        $stmt = $db->prepare($sql);
+        foreach ($params as $k => $v) {
+            $stmt->bindValue($k, $v);
+        }
+        $stmt->bindValue('limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindValue('offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll() ?: [];
+    }
+
+    /**
+     * Count survey attempts matching filters.
+     *
+     * @param int $quizId
+     * @param string|null $search
+     * @param string|null $startDate
+     * @param string|null $endDate
+     * @return int
+     */
+    public function countSurveyAttempts(
+        int $quizId,
+        ?string $search = null,
+        ?string $startDate = null,
+        ?string $endDate = null
+    ): int {
+        $db = Database::connection();
+        $conditions = ["qa.quiz_id = :quiz_id"];
+        $params = ['quiz_id' => $quizId];
+
+        if ($search !== null && $search !== '') {
+            $conditions[] = "(u.name ILIKE :search OR u.email ILIKE :search OR u.username ILIKE :search)";
+            $params['search'] = '%' . $search . '%';
+        }
+
+        if ($startDate !== null && $startDate !== '') {
+            $conditions[] = "COALESCE(qa.submitted_at, qa.created_at) >= :start_date";
+            $params['start_date'] = $startDate . ' 00:00:00';
+        }
+
+        if ($endDate !== null && $endDate !== '') {
+            $conditions[] = "COALESCE(qa.submitted_at, qa.created_at) <= :end_date";
+            $params['end_date'] = $endDate . ' 23:59:59';
+        }
+
+        $whereClause = implode(' AND ', $conditions);
+        $sql = "SELECT COUNT(*)
+                FROM cms.quiz_attempts qa
+                LEFT JOIN cms.users u ON qa.user_id = u.id
+                WHERE {$whereClause}";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        return (int) $stmt->fetchColumn();
+    }
+
+    /**
+     * Delete a single quiz attempt by ID.
+     * Cascades to answers and options in database.
+     *
+     * @param int $attemptId
+     * @return bool
+     */
+    public function deleteAttempt(int $attemptId): bool
+    {
+        $db = Database::connection();
+        $stmt = $db->prepare("DELETE FROM cms.quiz_attempts WHERE id = :id");
+        return $stmt->execute(['id' => $attemptId]);
+    }
+
+    /**
+     * Bulk delete quiz attempts by IDs.
+     * Cascades to attempt answers and answer options.
+     *
+     * @param array $attemptIds
+     * @return int Number of deleted attempts
+     */
+    public function bulkDeleteAttempts(array $attemptIds): int
+    {
+        $cleanIds = array_values(array_unique(array_filter(array_map('intval', $attemptIds), fn($id) => $id > 0)));
+        if (empty($cleanIds)) {
+            return 0;
+        }
+
+        $db = Database::connection();
+        $placeholders = implode(',', array_fill(0, count($cleanIds), '?'));
+        $stmt = $db->prepare("DELETE FROM cms.quiz_attempts WHERE id IN ($placeholders)");
+        $stmt->execute($cleanIds);
+        return $stmt->rowCount();
+    }
+
+    /**
+     * Bulk delete specific quiz attempt answers by IDs.
+     * Cascades to answer options in database.
+     *
+     * @param array $answerIds
+     * @return int Number of deleted answers
+     */
+    public function bulkDeleteAttemptAnswers(array $answerIds): int
+    {
+        $cleanIds = array_values(array_unique(array_filter(array_map('intval', $answerIds), fn($id) => $id > 0)));
+        if (empty($cleanIds)) {
+            return 0;
+        }
+
+        $db = Database::connection();
+        $placeholders = implode(',', array_fill(0, count($cleanIds), '?'));
+        $stmt = $db->prepare("DELETE FROM cms.quiz_attempt_answers WHERE id IN ($placeholders)");
+        $stmt->execute($cleanIds);
+        return $stmt->rowCount();
+    }
 }
 

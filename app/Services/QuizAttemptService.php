@@ -346,4 +346,38 @@ final class QuizAttemptService
             throw $e;
         }
     }
+
+    /**
+     * Delete a single quiz attempt and its answers.
+     *
+     * @param int $attemptId
+     * @return bool
+     */
+    public function deleteAttempt(int $attemptId): bool
+    {
+        return $this->attemptRepository->deleteAttempt($attemptId);
+    }
+
+    /**
+     * Bulk delete quiz attempts and all their answers.
+     *
+     * @param array $attemptIds
+     * @return int Number of deleted attempts
+     */
+    public function bulkDeleteAttempts(array $attemptIds): int
+    {
+        return $this->attemptRepository->bulkDeleteAttempts($attemptIds);
+    }
+
+    /**
+     * Bulk delete specific quiz attempt answers.
+     *
+     * @param array $answerIds
+     * @return int Number of deleted answers
+     */
+    public function bulkDeleteAttemptAnswers(array $answerIds): int
+    {
+        return $this->attemptRepository->bulkDeleteAttemptAnswers($answerIds);
+    }
 }
+

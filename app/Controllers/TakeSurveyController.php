@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Services\QuizAttemptService;
 use App\Services\QuestionService;
+use App\Services\GuestSurveyService;
 use App\Repositories\UserFacebookPostRepository;
 use Core\Controller;
 use Core\Csrf;
@@ -14,12 +15,14 @@ final class TakeSurveyController extends Controller
 {
     private QuizAttemptService $attemptService;
     private QuestionService $questionService;
+    private GuestSurveyService $guestSurveyService;
     private UserFacebookPostRepository $facebookPostRepository;
 
     public function __construct()
     {
         $this->attemptService = new QuizAttemptService();
         $this->questionService = new QuestionService();
+        $this->guestSurveyService = new GuestSurveyService();
         $this->facebookPostRepository = new UserFacebookPostRepository();
     }
 
@@ -361,6 +364,74 @@ final class TakeSurveyController extends Controller
                 'success' => false,
                 'message' => $e->getMessage(),
             ], 400);
+        }
+    }
+
+    /**
+     * API Endpoint to save guest survey answers into the temporary staging table.
+     */
+    public function apiSubmitGuestSurvey(): never
+    {
+        $payload = app()->request()->all();
+        $mainSurveyId = (int) ($payload['quiz_id'] ?? setting('main_survey_quiz_id') ?? 0);
+        $travelStatus = $payload['travel_status'] ?? null;
+        $answers = $payload['answers'] ?? [];
+
+        if ($mainSurveyId <= 0) {
+            app()->response()->json([
+                'success' => false,
+                'message' => 'Cấu hình khảo sát không hợp lệ.',
+            ], 400);
+        }
+
+        if (empty($answers) || !is_array($answers)) {
+            app()->response()->json([
+                'success' => false,
+                'message' => 'Dữ liệu câu trả lời không được để trống.',
+            ], 422);
+        }
+
+        // If user is already logged in, directly create attempt and submit
+        $user = app()->session()->get('user');
+        if ($user) {
+            $userId = (int) $user['id'];
+            try {
+                if (!$this->isSurveyCompleted($userId)) {
+                    $attemptId = $this->attemptService->startAttempt($mainSurveyId, $userId);
+                    foreach ($answers as $ans) {
+                        if (is_array($ans) && !empty($ans['question_id'])) {
+                            $this->attemptService->saveAnswer($attemptId, $userId, $ans);
+                        }
+                    }
+                    $this->attemptService->submitAttempt($attemptId, $userId);
+                }
+
+                app()->response()->json([
+                    'success' => true,
+                    'redirect' => url('take-questions'),
+                ]);
+            } catch (\Throwable $e) {
+                app()->response()->json([
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                ], 400);
+            }
+        }
+
+        try {
+            $token = $this->guestSurveyService->saveGuestSubmission($mainSurveyId, $travelStatus, $answers);
+
+            app()->response()->json([
+                'success' => true,
+                'message' => 'Lưu kết quả khảo sát tạm thời thành công.',
+                'guest_token' => $token,
+                'redirect' => url('register') . '?from=survey&guest_token=' . urlencode($token),
+            ]);
+        } catch (\Throwable $e) {
+            app()->response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra khi lưu khảo sát: ' . $e->getMessage(),
+            ], 500);
         }
     }
 

@@ -77,7 +77,8 @@
             _token: csrfToken,
             username: usernameInput ? usernameInput.value : '',
             password: passwordInput ? passwordInput.value : '',
-            from: urlParams.get('from') || ''
+            from: urlParams.get('from') || '',
+            guest_token: urlParams.get('guest_token') || ''
         };
 
         const submitBtn = form.querySelector('.btn-login');

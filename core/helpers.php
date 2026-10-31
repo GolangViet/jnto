@@ -82,6 +82,10 @@ function e(?string $value): string
  */
 function url(string $path = ''): string
 {
+    if (preg_match('#^https?://#i', $path)) {
+        return $path;
+    }
+
     return rtrim((string) config('app.url'), '/') . '/' . ltrim($path, '/');
 
     static $base = null;

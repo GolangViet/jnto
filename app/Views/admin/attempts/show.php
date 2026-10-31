@@ -2,14 +2,23 @@
 $isPassed = filter_var($attempt['passed'] ?? false, FILTER_VALIDATE_BOOL);
 $isSurvey = (int)$attempt['quiz_id'] === (int)setting('main_survey_quiz_id');
 ?>
-<div style="margin-bottom: 24px;">
-    <a href="javascript:history.back()" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
-        <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        Go Back
-    </a>
-    <h1 style="margin: 8px 0 0; font-size: 2rem; font-weight: 700; color: #111827;">Attempt Details</h1>
+<div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+        <a href="javascript:history.back()" style="text-decoration: none; color: #4f46e5; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem;">
+            <svg style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Go Back
+        </a>
+        <h1 style="margin: 8px 0 0; font-size: 2rem; font-weight: 700; color: #111827;">Attempt Details</h1>
+    </div>
+    <form action="<?= url('admin/quiz-attempts/' . (int)$attempt['id']) ?>" method="post" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa lượt làm bài này cùng toàn bộ câu trả lời?')">
+        <input type="hidden" name="_method" value="DELETE">
+        <?= csrf_field() ?>
+        <button type="submit" class="btn danger" style="padding: 8px 14px; font-size: 0.85rem;">
+            Delete Attempt
+        </button>
+    </form>
 </div>
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">

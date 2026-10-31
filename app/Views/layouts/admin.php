@@ -29,6 +29,7 @@
                 <?php if ($user = app()->session()->get('user')): ?>
                     <a href="<?= url('admin/dashboard') ?>" style="margin-left: 14px; font-weight: bold; color: #60a5fa;">Dashboard</a>
                     <a class="d-none" href="<?= url('admin/posts') ?>">Manage Posts</a>
+                    <a href="<?= url('admin/surveys') ?>" style="margin-left: 14px;">Manage Surveys</a>
                     <a href="<?= url('admin/quizzes') ?>" style="margin-left: 14px;">Manage Quizzes</a>
                     <a href="<?= url('admin/settings') ?>" style="margin-left: 14px;">Manage Settings</a>
                     <a href="<?= url('admin/users') ?>" style="margin-left: 14px;">Manage Users</a>
