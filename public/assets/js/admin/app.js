@@ -28,13 +28,48 @@ function toggleDropdown(event, id) {
     }
 }
 
+/**
+ * Toggle mobile admin navigation collapse.
+ */
+function toggleAdminNav() {
+    const collapse = document.getElementById('admin-nav-collapse');
+    const toggleBtn = document.getElementById('admin-nav-toggle');
+    if (!collapse || !toggleBtn) return;
+
+    const isOpen = collapse.classList.toggle('is-open');
+    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+    const iconMenu = toggleBtn.querySelector('.icon-menu');
+    const iconClose = toggleBtn.querySelector('.icon-close');
+    if (iconMenu && iconClose) {
+        iconMenu.style.display = isOpen ? 'none' : 'block';
+        iconClose.style.display = isOpen ? 'block' : 'none';
+    }
+}
+
 // Global initialization when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', () => {
+    // Close dropdowns and mobile nav when clicking outside
+    document.addEventListener('click', (e) => {
         document.querySelectorAll('.dropdown-menu').forEach(el => {
             el.style.display = 'none';
         });
+
+        const navbar = document.querySelector('.admin-navbar');
+        const collapse = document.getElementById('admin-nav-collapse');
+        const toggleBtn = document.getElementById('admin-nav-toggle');
+        if (navbar && collapse && toggleBtn && collapse.classList.contains('is-open')) {
+            if (!navbar.contains(e.target)) {
+                collapse.classList.remove('is-open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                const iconMenu = toggleBtn.querySelector('.icon-menu');
+                const iconClose = toggleBtn.querySelector('.icon-close');
+                if (iconMenu && iconClose) {
+                    iconMenu.style.display = 'block';
+                    iconClose.style.display = 'none';
+                }
+            }
+        }
     });
 
     // Auto-dismiss alert notification banners after 4 seconds

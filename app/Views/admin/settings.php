@@ -3,7 +3,7 @@
     <p class="muted" style="margin: 4px 0 0;">Configure global settings, main survey, and quiz question sets.</p>
 </div>
 
-<div class="card" style="animation: fadeIn 0.4s ease-out; padding: 28px; max-width: 650px;">
+<div class="card" style="animation: fadeIn 0.4s ease-out; padding: 28px; max-width: 768px; margin: 0 auto;">
     <form action="<?= url('/admin/settings') ?>" method="post">
         <?= csrf_field() ?>
 

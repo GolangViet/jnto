@@ -60,7 +60,9 @@ final class SurveyController extends Controller
         }
 
         $page = max(1, (int) ($request->input('page') ?? 1));
-        $perPage = 20;
+        $rawPerPage = (int) ($request->input('per_page') ?? 20);
+        $allowedPerPage = [15, 20, 25, 50, 100];
+        $perPage = in_array($rawPerPage, $allowedPerPage, true) ? $rawPerPage : 20;
         $offset = ($page - 1) * $perPage;
 
         // Statistics counts
@@ -136,6 +138,7 @@ final class SurveyController extends Controller
             'search' => $search,
             'startDate' => $startDate,
             'endDate' => $endDate,
+            'perPage' => $perPage,
             'page' => $page,
             'totalPages' => $totalPages,
             'totalItems' => $totalItems,
@@ -394,7 +397,7 @@ final class SurveyController extends Controller
     private function getRedirectUrlWithFilters($request): string
     {
         $params = [];
-        foreach (['quiz_id', 'type', 'search', 'start_date', 'end_date', 'page'] as $key) {
+        foreach (['quiz_id', 'type', 'search', 'start_date', 'end_date', 'per_page', 'page'] as $key) {
             $val = $request->input($key);
             if ($val !== null && $val !== '') {
                 $params[$key] = $val;
