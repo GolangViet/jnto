@@ -5,9 +5,11 @@
  * @var string $id Unique identifier for the dropdown
  * @var string $buttonHtml HTML/Text content for the button
  * @var string $buttonStyle Inline styles for the button
+ * @var string $buttonClass Additional CSS classes for the button
  * @var array $items Array of items:
- *   - 'type' => 'link'|'button'|'form'|'divider'
+ *   - 'type' => 'link'|'button'|'form'|'divider'|'header'
  *   - 'text' => string (display text)
+ *   - 'html' => string (raw html for header)
  *   - 'url' => string (for links)
  *   - 'onclick' => string (for button clicks)
  *   - 'action' => string (for forms)
@@ -18,13 +20,17 @@
  */
 ?>
 <div class="dropdown" style="position: relative; display: inline-block;">
-    <button onclick="toggleDropdown(event, '<?= e($id) ?>')" class="btn" style="<?= $buttonStyle ?? '' ?>">
+    <button onclick="toggleDropdown(event, '<?= e($id) ?>')" class="btn <?= e($buttonClass ?? '') ?>" style="<?= $buttonStyle ?? '' ?>">
         <?= $buttonHtml ?>
     </button>
-    <div id="dropdown-<?= e($id) ?>" class="dropdown-menu" style="display: none; position: absolute; right: 0; margin-top: 4px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); min-width: 160px; z-index: 50; padding: 4px 0; text-align: left;">
+    <div id="dropdown-<?= e($id) ?>" class="dropdown-menu" onclick="event.stopPropagation()" style="display: none; position: absolute; right: 0; margin-top: 4px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); min-width: 160px; z-index: 50; padding: 4px 0; text-align: left;">
         <?php foreach ($items as $item): ?>
             <?php if (($item['type'] ?? 'link') === 'divider'): ?>
                 <div style="border-top: 1px solid #e5e7eb; margin: 4px 0;"></div>
+            <?php elseif (($item['type'] ?? 'link') === 'header'): ?>
+                <div style="padding: 8px 16px; font-size: 0.85rem; color: #6b7280; <?= $item['style'] ?? '' ?>">
+                    <?= $item['html'] ?? e($item['text'] ?? '') ?>
+                </div>
             <?php elseif (($item['type'] ?? 'link') === 'link'): ?>
                 <a href="<?= e($item['url']) ?>" 
                    target="<?= e($item['target'] ?? '_self') ?>"

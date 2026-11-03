@@ -73,6 +73,17 @@
             <input type="date" id="end_date" name="end_date" value="<?= e($endDate) ?>" style="margin-bottom: 0;">
         </div>
 
+        <div style="flex: 1; min-width: 110px;">
+            <label for="per_page" style="font-size: 0.85rem; color: #4b5563; font-weight: bold; display: block; margin-bottom: 4px;">Per Page</label>
+            <select id="per_page" name="per_page" style="margin-bottom: 0;" onchange="this.form.submit()">
+                <option value="15" <?= ($perPage ?? 20) == 15 ? 'selected' : '' ?>>15 items</option>
+                <option value="20" <?= ($perPage ?? 20) == 20 ? 'selected' : '' ?>>20 items</option>
+                <option value="25" <?= ($perPage ?? 20) == 25 ? 'selected' : '' ?>>25 items</option>
+                <option value="50" <?= ($perPage ?? 20) == 50 ? 'selected' : '' ?>>50 items</option>
+                <option value="100" <?= ($perPage ?? 20) == 100 ? 'selected' : '' ?>>100 items</option>
+            </select>
+        </div>
+
         <div style="display: flex; gap: 8px;">
             <button type="submit" class="btn">Filter</button>
             <a href="<?= url('admin/surveys') ?>?quiz_id=<?= (int)$selectedQuizId ?>" class="btn" style="background: #9ca3af; text-decoration: none; color: #fff;">Reset</a>
@@ -110,6 +121,7 @@
         <input type="hidden" name="search" value="<?= e($search) ?>">
         <input type="hidden" name="start_date" value="<?= e($startDate) ?>">
         <input type="hidden" name="end_date" value="<?= e($endDate) ?>">
+        <input type="hidden" name="per_page" value="<?= (int)($perPage ?? 20) ?>">
         <input type="hidden" name="page" value="<?= (int)$page ?>">
         <div id="bulkDeleteInputs"></div>
     </form>
@@ -246,39 +258,68 @@
         </table>
     </div>
 
-    <!-- Pagination -->
+    <!-- Pagination Footer -->
     <?php if ($totalPages > 1): ?>
-        <div style="padding: 16px 20px; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #fff;">
-            <div style="font-size: 0.85rem; color: #6b7280;">
-                Showing page <strong><?= $page ?></strong> of <strong><?= $totalPages ?></strong>
+        <div style="padding: 16px 20px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background: #fff; flex-wrap: wrap; gap: 12px;">
+            <div style="color: #64748b; font-size: 0.85rem;">
+                Showing Page <strong><?= $page ?></strong> of <strong><?= $totalPages ?></strong> (Total <strong><?= number_format($totalItems) ?></strong> records, <strong><?= (int)($perPage ?? 20) ?></strong> per page)
             </div>
-            <div style="display: flex; gap: 6px;">
-                <?php
-                $queryParams = [
-                    'quiz_id' => $selectedQuizId,
-                    'type' => $type,
-                    'search' => $search,
-                    'start_date' => $startDate,
-                    'end_date' => $endDate,
-                ];
+            <div style="display: flex; gap: 6px; align-items: center;">
+                <?php 
+                    $buildUrl = function($p) use ($selectedQuizId, $type, $search, $startDate, $endDate, $perPage) {
+                        $params = [
+                            'quiz_id' => $selectedQuizId,
+                            'type' => $type !== 'all' ? $type : null,
+                            'search' => $search !== '' ? $search : null,
+                            'start_date' => $startDate !== '' ? $startDate : null,
+                            'end_date' => $endDate !== '' ? $endDate : null,
+                            'per_page' => $perPage,
+                            'page' => $p > 1 ? $p : null,
+                        ];
+                        return url('admin/surveys?' . http_build_query(array_filter($params, fn($v) => $v !== null && $v !== '')));
+                    };
                 ?>
                 <?php if ($page > 1): ?>
-                    <a href="<?= url('admin/surveys') ?>?<?= http_build_query(array_merge($queryParams, ['page' => $page - 1])) ?>"
-                       class="btn" style="background: #e5e7eb; color: #374151; padding: 6px 12px; font-size: 0.82rem;">&laquo; Previous</a>
+                    <a href="<?= $buildUrl($page - 1) ?>" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">Previous</a>
                 <?php endif; ?>
 
-                <?php for ($p = max(1, $page - 2); $p <= min($totalPages, $page + 2); $p++): ?>
-                    <a href="<?= url('admin/surveys') ?>?<?= http_build_query(array_merge($queryParams, ['page' => $p])) ?>"
-                       class="btn" style="<?= $p === $page ? 'background: #2563eb; color: #fff;' : 'background: #f3f4f6; color: #374151;' ?> padding: 6px 12px; font-size: 0.82rem;">
-                        <?= $p ?>
-                    </a>
+                <?php 
+                $start = max(1, $page - 2);
+                $end = min($totalPages, $page + 2);
+                
+                if ($start > 1) {
+                    echo '<a href="' . $buildUrl(1) . '" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; min-width: 32px; box-sizing: border-box;" onmouseover="this.style.background=\'#f8fafc\'" onmouseout="this.style.background=\'#fff\'">1</a>';
+                    if ($start > 2) {
+                        echo '<span style="color: #94a3b8; padding: 0 4px;">...</span>';
+                    }
+                }
+
+                for ($i = $start; $i <= $end; $i++): 
+                ?>
+                    <?php if ($i === $page): ?>
+                        <span style="background: #4f46e5; color: #fff; padding: 6px 12px; font-size: 0.85rem; font-weight: 600; border-radius: 6px; border: 1px solid #4f46e5; display: inline-flex; align-items: center; justify-content: center; min-width: 32px; box-sizing: border-box;"><?= $i ?></span>
+                    <?php else: ?>
+                        <a href="<?= $buildUrl($i) ?>" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; min-width: 32px; box-sizing: border-box;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'"><?= $i ?></a>
+                    <?php endif; ?>
                 <?php endfor; ?>
 
+                <?php 
+                if ($end < $totalPages) {
+                    if ($end < $totalPages - 1) {
+                        echo '<span style="color: #94a3b8; padding: 0 4px;">...</span>';
+                    }
+                    echo '<a href="' . $buildUrl($totalPages) . '" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; min-width: 32px; box-sizing: border-box;" onmouseover="this.style.background=\'#f8fafc\'" onmouseout="this.style.background=\'#fff\'">' . $totalPages . '</a>';
+                }
+                ?>
+
                 <?php if ($page < $totalPages): ?>
-                    <a href="<?= url('admin/surveys') ?>?<?= http_build_query(array_merge($queryParams, ['page' => $page + 1])) ?>"
-                       class="btn" style="background: #e5e7eb; color: #374151; padding: 6px 12px; font-size: 0.82rem;">Next &raquo;</a>
+                    <a href="<?= $buildUrl($page + 1) ?>" class="btn" style="background: #fff; border: 1px solid #cbd5e1; color: #475569; padding: 6px 12px; font-size: 0.85rem; font-weight: 500; border-radius: 6px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">Next</a>
                 <?php endif; ?>
             </div>
+        </div>
+    <?php elseif ($totalItems > 0): ?>
+        <div style="padding: 16px 20px; border-top: 1px solid #e2e8f0; background: #fff; color: #64748b; font-size: 0.85rem;">
+            Total <strong><?= number_format($totalItems) ?></strong> records (<strong><?= (int)($perPage ?? 20) ?></strong> per page)
         </div>
     <?php endif; ?>
 </div>
