@@ -1,4 +1,4 @@
-<?php push_style(assets('css/user/page4.css')); ?>
+<?php push_style(asset_with_version('css/user/page4.css')); ?>
 
 <section class="region-map" aria-labelledby="region-map-title">
     <h2 class="visually-hidden" id="region-map-title">Khám phá các vùng của Nhật Bản</h2>
