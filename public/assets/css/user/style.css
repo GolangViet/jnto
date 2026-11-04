@@ -37,7 +37,7 @@ body {
     html.site-custom-cursor-enabled body *,
     html.site-custom-cursor-enabled body *::before,
     html.site-custom-cursor-enabled body *::after {
-        cursor: url("./../../images/form/transparent-cursor.svg") 0 0, none !important;
+        cursor: url("./../../images/form/JNTO-mouse-winter-R1.png") 0 0, none !important;
     }
 
     .site-custom-cursor {
